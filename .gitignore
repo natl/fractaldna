@@ -1,3 +1,15 @@
+# Blender files and outputs
+*.blend*
+*.jpg
+*.pdf
+*.png
+*.mpg
+*.mp4
+*.mpeg
+*.avi
+*.m4v
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
