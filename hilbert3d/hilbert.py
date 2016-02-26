@@ -136,6 +136,18 @@ def generatePath(lstring, n=2, distance=10.):
 
 class Voxel(object):
     """
+    Position, rotation and form of a DNA voxel.
+
+    Members:
+    psi, theta, phi: Euler rotations about the X, Y and Z axes
+                     (XYZ rotation order)
+
+    type: code corresponding to geometrical shape
+    pos: XYZ position
+
+    Methods:
+    toText: Print a textual representation of the voxel as
+            KIND POS_X POS_Y POS_Z EUL_PSI EUL_THETA EUL_PHI
     """
     types = {'straight': 1, 'straighttwist': 2, 'turn': 3, 'turntwist': 4}
     types_inverse = {v: k for (k, v) in types.items()}
@@ -148,6 +160,10 @@ class Voxel(object):
 
     def __init__(self, pos, inHeading, inPrincipal, outHeading, outPrincipal):
         """
+        Voxel(pos, inHeading, inPrincipal, outHeading, outPrincipal)
+
+        Identifies the form of the DNA voxel that corresponds to specified
+        input and output vectors.
         """
         # Clean and vet input
         pos = np.around(pos, decimals=8)
