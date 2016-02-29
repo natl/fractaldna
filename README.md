@@ -1,4 +1,5 @@
-# fractaldna
+fractaldna
+---
 Python routines for generating simple models of DNA
 
 Modelling DNA geometries computationally can be done very crudely based on

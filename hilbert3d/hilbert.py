@@ -1,5 +1,7 @@
 from __future__ import division, print_function, unicode_literals
 import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
 
 # interpret F as DrawForward(10);
 # interpret + as Yaw(90);
@@ -232,6 +234,9 @@ class VoxelisedFractal(object):
         """
         self.fractal = []
 
+    def __len__(self):
+        return self.fractal.__len__()
+
     def toText(self):
         """
         """
@@ -239,6 +244,37 @@ class VoxelisedFractal(object):
         for voxel in self.fractal:
             output += voxel.toText()
         return output
+
+    def toPlot(self, refine=0, batch=False):
+        """
+        fig = toPlot(refine=0, batch=False)
+        Create a matplotlib figure instance of this fractal
+
+        kwargs
+        ---
+        refine: points to plot in between voxels (more points = clearer path)
+        batch: True to suppress automatic display of the figure
+        """
+        pts = [vox.pos for vox in self.fractal]
+
+        refinedpts = []
+        for ii in range(0, len(pts)-1):
+            refinedpts.append(pts[ii])
+            step = (pts[ii+1] - pts[ii])/(refine+1)
+            for jj in range(1, refine+1):
+                refinedpts.append(pts[ii] + step*jj)
+        refinedpts.append(pts[len(pts)-1])
+
+        pts = np.array(refinedpts)
+
+        fig = plt.figure()
+        ax = fig.add_subplot(111, projection='3d')
+        ax.scatter(pts[:, 0], pts[:, 1], pts[:, 2])
+
+        if batch is not True:
+            fig.show()
+
+        return fig
 
     @staticmethod
     def makeVoxel(prevVoxel, currpos, nextpos):
