@@ -100,7 +100,7 @@ class TestFractalCreation(unittest.TestCase):
         """
         seeds = [h.P]  # , h.B, h.C, h.D, h.X]
         for seed in seeds:
-            self.check_from_seed(seed, 5)
+            self.check_from_seed(seed, 4)
         return None
 
 

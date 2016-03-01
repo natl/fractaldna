@@ -97,14 +97,15 @@ def getEulerAngles(rotmatrix):
 def iterate(inString):
     """
     """
-    outString = ""
+    outString = []
+    append = outString.append
     for char in inString:
         if char in d:
-            outString += d[char]
+            append(d[char])
         else:
-            outString += char
+            append(char)
 
-    return outString
+    return "".join(outString)
 
 
 def generatePath(lstring, n=2, distance=10.):
