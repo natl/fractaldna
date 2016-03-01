@@ -3,14 +3,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
-# interpret F as DrawForward(10);
+# interpret F as DrawForward(1);
 # interpret + as Yaw(90);
 # interpret - as Yaw(-90);
 # interpret n as Pitch(90);
 # interpret & as Pitch(-90);
 # interpret > as Roll(90);
 # interpret < as Roll(-90);
-# turn around by 180 deg around pitch axis
+# interpret | as Yaw(180);
 
 A = r"B-F+CFC+F-D&FnD-F+&&CFC+F+B<<"
 B = r"A&FnCFBnFnDnn-F-Dn|FnB|FCnFnA<<"
@@ -19,15 +19,17 @@ D = r"|CFB-F+B|FA&FnA&&FB-F+B|FC<<"
 
 X = r"n<XFn<XFX-Fn>>XFX&F+>>XFX-F>X->"
 
-# This Peano works infinitely
+# This Peano works infinitely - maybe not! but goes to at least n=3 iterations
 P = r"P>>FP>>FP>>+F+P>>FP>>FP>>+F+P>>FP>>FP>>&F&P>>FP>>FP>>+F+P>>FP>>FP>>+F+P>>FP>>FP>>&F&P>>FP>>FP>>+F+P>>FP>>FP>>+F+P>>FP>>FP"
 
+#these Peanos do not work
 # Y = r"FF-F-FF+F+FFnFn+FF-F-FF+F+FF&F&+FF-F-FF+F+FF"  # Peano bottom to top
 T = r"TFUFT+F+UFTFU-F-TFUFTnFn-ZFYFZ+F+YFZFY-F-ZFYFZ&F&-TFUFT+F+UFTFU-F-TFUFT"
 U = T[::-1]
 Y = r"YFZFY-F-ZFYFZ+F+YFZFYnFn+UFTFU-F-TFUFT+F+UFTFU&F&+YFZFY-F-ZFYFZ+F+YFZFY"
 Z = Y[::-1]
 
+# This guy needs dome testing
 # R = r"RFRFR-F-RFRFR+F+RFRFRnFn+RFRFR-F-RFRFR+F+RFRFR&F&+RFRFR-F-RFRFR+F+RFRFR<<"
 R = r"R>>FR>>FR>>+F+R>>FR>>FR>>+F+R>>FR>>FRnFn>>-R>>FR>>FR>>-F-R>>FR>>FR>>-F-R>>FR>>FRnFn>>+R>>FR>>FR>>+F+R>>FR>>FR>>+F+R>>FR>>FR"
 
