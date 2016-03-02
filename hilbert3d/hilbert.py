@@ -244,9 +244,8 @@ class VoxelisedFractal(object):
         """
         """
         output = "#KIND POS_X POS_Y POS_Z EUL_PSI EUL_THETA EUL_PHI\n"
-        for voxel in self.fractal:
-            output += voxel.toText()
-        return output
+        text = [output] + [voxel.toText() for voxel in self.fractal]
+        return "".join(text)
 
     def toPlot(self, refine=0, batch=False):
         """
