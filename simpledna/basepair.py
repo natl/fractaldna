@@ -6,13 +6,24 @@ Define base pairs in a DNA chain
 from __future__ import division, unicode_literals, print_function
 
 import molecules
+import dnapositions as dpos
 import numpy as np
 from copy import deepcopy
 from rotations import eulerMatrix
 
-PHOSPHATE_POS = np.array([2, 2, 2], dtype=float)  # Angstrom
-SUGAR_POS = np.array([2, 0, 0], dtype=float)  # Angstrom
-BASEPAIR_POS = np.array([1, 0, 0], dtype=float)  # Angstrom
+# Positions in Angstroms
+PHOSPHATE_POS =\
+    dpos.MoleculeFromAtoms.from_cylindrical(dpos.PHOSPHATE).find_center()
+SUGAR_POS =\
+    dpos.MoleculeFromAtoms.from_cylindrical(dpos.DEOXYRIBOSE).find_center()
+GUANINE_POS =\
+    dpos.MoleculeFromAtoms.from_cylindrical(dpos.GUANINE).find_center()
+ADENINE_POS =\
+    dpos.MoleculeFromAtoms.from_cylindrical(dpos.ADENINE).find_center()
+THYMINE_POS =\
+    dpos.MoleculeFromAtoms.from_cylindrical(dpos.THYMINE).find_center()
+CYTOSINE_POS =\
+    dpos.MoleculeFromAtoms.from_cylindrical(dpos.CYTOSINE).find_center()
 
 
 class BasePair(object):
@@ -46,34 +57,47 @@ class BasePair(object):
         rotation = deepcopy(rotation)
 
         leftPhosphateRot = np.zeros(3)
-        leftPhosphatePos = -1*PHOSPHATE_POS
+        leftPhosphatePos = -1 * PHOSPHATE_POS
         self.leftPhosphate = molecules.Triphosphate(strand=0, chain=chain,
                                                     position=leftPhosphatePos,
                                                     rotation=leftPhosphateRot)
         leftSugarRot = np.zeros(3)
-        leftSugarPos = -1*SUGAR_POS
+        leftSugarPos = -1 * SUGAR_POS
         self.leftSugar = molecules.DNASugar(strand=0, chain=chain,
                                             position=leftSugarPos,
                                             rotation=leftSugarRot)
 
-        leftBasePairRot = np.zeros(3)
-        leftBasePairPos = -1*BASEPAIR_POS
-
         rightPhosphateRot = np.zeros(3)
-        rightPhosphatePos = +1*PHOSPHATE_POS
+        rightPhosphatePos = +1 * PHOSPHATE_POS
         self.rightPhosphate = \
             molecules.Triphosphate(strand=1, chain=chain,
                                    position=rightPhosphatePos,
                                    rotation=rightPhosphateRot)
 
         rightSugarRot = np.zeros(3)
-        rightSugarPos = +1*SUGAR_POS
+        rightSugarPos = +1 * SUGAR_POS
         self.rightSugar = molecules.DNASugar(strand=1, chain=chain,
                                              position=rightSugarPos,
                                              rotation=rightSugarRot)
 
+        if base == "G":
+            leftpos = GUANINE_POS
+            rightpos = CYTOSINE_POS
+        elif base == "C":
+            leftpos = CYTOSINE_POS
+            rightpos = GUANINE_POS
+        elif base == "T":
+            leftpos = ADENINE_POS
+            rightpos = THYMINE_POS
+        elif base == "A":
+            leftpos = THYMINE_POS
+            rightpos = ADENINE_POS
+
+        leftBasePairRot = np.zeros(3)
+        leftBasePairPos = -1 * leftpos
+
         rightBasePairRot = np.zeros(3)
-        rightBasePairPos = +1*BASEPAIR_POS
+        rightBasePairPos = +1 * rightpos
 
         bases = self.pairings[base]
         self.leftBasePair = bases[0](strand=0, chain=chain,
@@ -130,12 +154,11 @@ class BasePair(object):
         """
         Return a description of the molecules in the base pair as text
         """
-        output = ""
+        output = []
         for molecule in self.moleculeDict.itervalues():
-            output += molecule.toText(seperator=seperator)
-            output += "\n"
+            output.append(molecule.toText(seperator=seperator))
 
-        return output
+        return "".join(output)
 
     def __getitem__(self, key):
         return self.moleculeDict[key]

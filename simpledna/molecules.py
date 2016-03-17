@@ -7,15 +7,16 @@ from __future__ import division, unicode_literals, print_function
 
 import numpy as np
 from copy import deepcopy
+import dnapositions as dpos
 
-# Physical parameters
-GUANINE_RADIUS = 1  # Angstrom
-ADENINE_RADIUS = 1  # Angstrom
-THYMINE_RADIUS = 1  # Angstrom
-CYTOSINE_RADIUS = 1  # Angstrom
+# Physical parameters, all in Angstrom
+GUANINE_SIZE = dpos.MoleculeFromAtoms(dpos.GUANINE).find_half_lengths()
+ADENINE_SIZE = dpos.MoleculeFromAtoms(dpos.ADENINE).find_half_lengths()
+THYMINE_SIZE = dpos.MoleculeFromAtoms(dpos.THYMINE).find_half_lengths()
+CYTOSINE_SIZE = dpos.MoleculeFromAtoms(dpos.CYTOSINE).find_half_lengths()
 
-SUGAR_RADIUS = 1  # Angstrom
-PHOSPHATE_RADIUS = 1  # Angstrom
+SUGAR_RADIUS = dpos.MoleculeFromAtoms(dpos.DEOXYRIBOSE).find_radius()
+PHOSPHATE_RADIUS = dpos.MoleculeFromAtoms(dpos.PHOSPHATE).find_radius()
 
 
 class Molecule(object):
@@ -40,8 +41,8 @@ class Molecule(object):
             rotation:   3-vector of euler angles (radians) for molecule
                         rotation relative to the global xyz axis
         """
-        if type(dimensions) in [int, float]:
-            self.dimensions = np.array([deepcopy(dimensions)]*3)
+        if type(dimensions) in [int, float, np.float64]:
+            self.dimensions = np.array([deepcopy(dimensions)] * 3)
         else:
             assert len(dimensions) == 3, 'Position is invalid'
             self.dimensions = deepcopy(dimensions)
@@ -67,11 +68,11 @@ class Molecule(object):
         Molecule.toText(seperator=" ")
         Return a text description of the molecule
         """
-        return seperator.join([self.name, self.shape, int(self.chain),
-                               int(self.strand),
+        return seperator.join([self.name, self.shape, str(self.chain),
+                               str(self.strand),
                                " ".join(map(str, self.dimensions)),
                                " ".join(map(str, self.position)),
-                               " ".join(map(str, self.rotation))])
+                               " ".join(map(str, self.rotation))]) + "\n"
 
 
 # Define some standard molecules
@@ -82,12 +83,11 @@ class Guanine(Molecule):
 
     def __init__(self, strand=-1, chain=-1, position=np.zeros(3),
                  rotation=np.zeros(3)):
-        super(Guanine, self).__init__("Guanine", "sphere", GUANINE_RADIUS,
+        super(Guanine, self).__init__("Guanine", "ellipse", GUANINE_SIZE,
                                       strand=strand, chain=chain,
                                       position=position, rotation=rotation)
 
 
-# Define some standard molecules
 class Adenine(Molecule):
     """
     Adenine molecule
@@ -95,12 +95,11 @@ class Adenine(Molecule):
 
     def __init__(self, strand=-1, chain=-1, position=np.zeros(3),
                  rotation=np.zeros(3)):
-        super(Adenine, self).__init__("Adenine", "sphere", ADENINE_RADIUS,
+        super(Adenine, self).__init__("Adenine", "ellipse", ADENINE_SIZE,
                                       strand=strand, chain=chain,
                                       position=position, rotation=rotation)
 
 
-# Define some standard molecules
 class Thymine(Molecule):
     """
     Thymine molecule
@@ -108,12 +107,11 @@ class Thymine(Molecule):
 
     def __init__(self, strand=-1, chain=-1, position=np.zeros(3),
                  rotation=np.zeros(3)):
-        super(Thymine, self).__init__("Thymine", "sphere", THYMINE_RADIUS,
+        super(Thymine, self).__init__("Thymine", "ellipse", THYMINE_SIZE,
                                       strand=strand, chain=chain,
                                       position=position, rotation=rotation)
 
 
-# Define some standard molecules
 class Cytosine(Molecule):
     """
     Cytosine molecule
@@ -121,12 +119,11 @@ class Cytosine(Molecule):
 
     def __init__(self, strand=-1, chain=-1, position=np.zeros(3),
                  rotation=np.zeros(3)):
-        super(Cytosine, self).__init__("Cytosine", "sphere", CYTOSINE_RADIUS,
+        super(Cytosine, self).__init__("Cytosine", "ellipse", CYTOSINE_SIZE,
                                        strand=strand, chain=chain,
                                        position=position, rotation=rotation)
 
 
-# Define some standard molecules
 class DNASugar(Molecule):
     """
     DNASugar molecule
@@ -139,7 +136,6 @@ class DNASugar(Molecule):
                                        position=position, rotation=rotation)
 
 
-# Define some standard molecules
 class Triphosphate(Molecule):
     """
     Triphosphate molecule
