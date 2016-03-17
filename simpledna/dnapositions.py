@@ -75,10 +75,25 @@ THYMINE = {"N1": np.array([4.63,  76.6, 0.42]),
 # Van der Waals radius of varius elements in Angstrom.
 # From Bondi (1964), J. Phys. Chem.; and
 # Kammeyer & Whitman (1972), J. Chem. Phys.
-RADIUS = {"H": 1.2, "C": 1.7, "O": 1.4, "N": 1.5, "P": 1.9, "Me": 2.1}
+RADIUS = {"H": 1.2,
+          "C": 1.7,
+          "O": 1.4,
+          "N": 1.5,
+          "P": 1.9,
+          "Me": 2.1}
 
-COLORS = {"H": "white", "C": "grey", "O": "red", "N": "skyblue",
-          "P": "goldenrod", "Me": "grey"}
+COLORS = {"H": "white",
+          "C": "grey",
+          "O": "red",
+          "N": "skyblue",
+          "P": "goldenrod",
+          "Me": "grey",
+          "PHOSPHATE": "yellow",
+          "DEOXYRIBOSE": "black",
+          "ADENINE": "orange",
+          "GUANINE": "green",
+          "CYTOSINE": "red",
+          "THYMINE": "blue"}
 
 LETTERS = re.compile("[A-Za-z]+")
 
@@ -96,48 +111,17 @@ def opposite_pair(base):
         return None
 
 
-class DoubleStrand(object):
-    def __init__(self):
-        sequence = [THYMINE, GUANINE, ADENINE, CYTOSINE, THYMINE]*2
-        self.atoms = {}
-        for ii in range(len(sequence)):
-            for (k, v) in sequence[ii].items():
-                x = v[0]
-                y = v[1] + 36 * ii
-                z = v[2] + 3.4 * ii
-                self.atoms[k + "_LEFTBP" + str(ii)] = np.array([x, y, z])
-
-            for (k, v) in DEOXYRIBOSE.items():
-                x = v[0]
-                y = v[1] + 36 * ii
-                z = v[2] + 3.4 * ii
-                self.atoms[k + "_LEFTDO" + str(ii)] = np.array([x, y, z])
-
-            for (k, v) in PHOSPHATE.items():
-                x = v[0]
-                y = v[1] + 36 * ii
-                z = v[2] + 3.4 * ii
-                self.atoms[k + "_LEFTPO" + str(ii)] = np.array([x, y, z])
-
-            for (k, v) in opposite_pair(sequence[ii]).items():
-                x = v[0]
-                y = -v[1] + 36 * ii
-                z = -v[2] + 3.4 * ii
-                self.atoms[k + "_RIGHTBP" + str(ii)] = np.array([x, y, z])
-
-            for (k, v) in DEOXYRIBOSE.items():
-                x = v[0]
-                y = -v[1] + 36 * ii
-                z = -v[2] + 3.4 * ii
-                self.atoms[k + "_RIGHTDO" + str(ii)] = np.array([x, y, z])
-
-            for (k, v) in PHOSPHATE.items():
-                x = v[0]
-                y = -v[1] + 36 * ii
-                z = -v[2] + 3.4 * ii
-                self.atoms[k + "_RIGHTPO" + str(ii)] = np.array([x, y, z])
-
-        return None
+def base_name(base):
+        if base == THYMINE:
+            return "THYMINE"
+        elif base == ADENINE:
+            return "ADENINE"
+        elif base == GUANINE:
+            return "GUANINE"
+        elif base == CYTOSINE:
+            return "CYTOSINE"
+        else:
+            return None
 
 
 class MoleculeFromAtoms(object):
@@ -224,8 +208,10 @@ class MoleculeFromAtoms(object):
         for (atom, pos) in self.atoms.items():
             a = LETTERS.match(atom).group()
             if a not in atomsets:
-                atomsets[a] = {"radius": RADIUS[a], "positions": [],
-                               "color": COLORS[a]}
+                rad = RADIUS[a] if a in RADIUS else 2
+                col = COLORS[a] if a in COLORS else "blue"
+                atomsets[a] = {"radius": rad, "positions": [],
+                               "color": col}
             atomsets[a]["positions"].append(pos)
 
         fig = plt.figure()
@@ -247,3 +233,90 @@ class MoleculeFromAtoms(object):
         returns number of atoms
         """
         return self.atoms.__len__()
+
+
+class DoubleStrand(object):
+    """
+    Double strand of DNA (for testing)
+    """
+    def __init__(self):
+        sequence = [THYMINE, GUANINE, ADENINE, CYTOSINE, THYMINE] * 2
+        self.atoms = {}
+        for ii in range(len(sequence)):
+            for (k, v) in sequence[ii].items():
+                x = v[0]
+                y = v[1] + 36 * ii
+                z = v[2] + 3.4 * ii
+                self.atoms[k + "_LEFTBP" + str(ii)] = np.array([x, y, z])
+
+            for (k, v) in DEOXYRIBOSE.items():
+                x = v[0]
+                y = v[1] + 36 * ii
+                z = v[2] + 3.4 * ii
+                self.atoms[k + "_LEFTDO" + str(ii)] = np.array([x, y, z])
+
+            for (k, v) in PHOSPHATE.items():
+                x = v[0]
+                y = v[1] + 36 * ii
+                z = v[2] + 3.4 * ii
+                self.atoms[k + "_LEFTPO" + str(ii)] = np.array([x, y, z])
+
+            for (k, v) in opposite_pair(sequence[ii]).items():
+                x = v[0]
+                y = -v[1] + 36 * ii
+                z = -v[2] + 3.4 * ii
+                self.atoms[k + "_RIGHTBP" + str(ii)] = np.array([x, y, z])
+
+            for (k, v) in DEOXYRIBOSE.items():
+                x = v[0]
+                y = -v[1] + 36 * ii
+                z = -v[2] + 3.4 * ii
+                self.atoms[k + "_RIGHTDO" + str(ii)] = np.array([x, y, z])
+
+            for (k, v) in PHOSPHATE.items():
+                x = v[0]
+                y = -v[1] + 36 * ii
+                z = -v[2] + 3.4 * ii
+                self.atoms[k + "_RIGHTPO" + str(ii)] = np.array([x, y, z])
+
+        return None
+
+
+class DoubleStrandMolecules(object):
+    """
+    Double strand of DNA (for testing)
+    """
+    def __init__(self):
+        sequence = [THYMINE, GUANINE, ADENINE, CYTOSINE, THYMINE] * 2
+        self.atoms = {}
+        for ii in range(len(sequence)):
+            # left
+            bp = sequence[ii]
+            name = base_name(bp)
+
+            c = MoleculeFromAtoms(bp).find_center()
+            self.atoms[name + "_LEFT" + str(ii)] = self.shift(c, ii)
+            c = MoleculeFromAtoms(DEOXYRIBOSE).find_center()
+            self.atoms["DEOXYRIBOSE_LEFT" + str(ii)] = self.shift(c, ii)
+            c = MoleculeFromAtoms(PHOSPHATE).find_center()
+            self.atoms["PHOSPHATE_LEFT" + str(ii)] = self.shift(c, ii)
+
+            # right
+            bp = opposite_pair(bp)
+            name = base_name(bp)
+            c = MoleculeFromAtoms(bp).find_center()
+            self.atoms[name + "_RIGHT" + str(ii)] = self.shift(c, ii, inv=True)
+            c = MoleculeFromAtoms(DEOXYRIBOSE).find_center()
+            self.atoms["DEOXYRIBOSE_RIGHT" + str(ii)] = self.shift(c, ii, inv=True)
+            c = MoleculeFromAtoms(PHOSPHATE).find_center()
+            self.atoms["PHOSPHATE_RIGHT" + str(ii)] = self.shift(c, ii, inv=True)
+
+        return None
+
+    @staticmethod
+    def shift(v, ii, inv=False):
+        sign = -1 if inv is True else 1
+        x = v[0]
+        y = sign * v[1] + 36 * ii
+        z = sign * v[2] + 3.4 * ii
+        return np.array([x, y, z])
