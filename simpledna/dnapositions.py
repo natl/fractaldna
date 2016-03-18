@@ -203,6 +203,9 @@ class MoleculeFromAtoms(object):
 
     def to_plot(self):
         """
+        fig = MoleculeFromAtoms.to_plot()
+
+        Returns a matplotlib figure instance of the molecule.
         """
         atomsets = {}
         for (atom, pos) in self.atoms.items():
@@ -307,9 +310,11 @@ class DoubleStrandMolecules(object):
             c = MoleculeFromAtoms(bp).find_center()
             self.atoms[name + "_RIGHT" + str(ii)] = self.shift(c, ii, inv=True)
             c = MoleculeFromAtoms(DEOXYRIBOSE).find_center()
-            self.atoms["DEOXYRIBOSE_RIGHT" + str(ii)] = self.shift(c, ii, inv=True)
+            self.atoms["DEOXYRIBOSE_RIGHT" + str(ii)] = self.shift(c, ii,
+                                                                   inv=True)
             c = MoleculeFromAtoms(PHOSPHATE).find_center()
-            self.atoms["PHOSPHATE_RIGHT" + str(ii)] = self.shift(c, ii, inv=True)
+            self.atoms["PHOSPHATE_RIGHT" + str(ii)] = self.shift(c, ii,
+                                                                 inv=True)
 
         return None
 
