@@ -238,13 +238,24 @@ class MoleculeFromAtoms(object):
         return self.atoms.__len__()
 
 
-class DoubleStrand(object):
+class MoleculeDictionary(object):
+    """
+    Base class for test molecules
+    """
+    def __init__(self):
+        self.atoms = {}
+
+    def items(self):
+        return self.atoms.items()
+
+
+class DoubleStrand(MoleculeDictionary):
     """
     Double strand of DNA (for testing)
     """
     def __init__(self):
+        super(DoubleStrand, self).__init__()
         sequence = [THYMINE, GUANINE, ADENINE, CYTOSINE, THYMINE] * 2
-        self.atoms = {}
         for ii in range(len(sequence)):
             for (k, v) in sequence[ii].items():
                 x = v[0]
@@ -285,13 +296,13 @@ class DoubleStrand(object):
         return None
 
 
-class DoubleStrandMolecules(object):
+class DoubleStrandMolecules(MoleculeDictionary):
     """
     Double strand of DNA (for testing)
     """
     def __init__(self):
+        super(DoubleStrandMolecules, self).__init__()
         sequence = [THYMINE, GUANINE, ADENINE, CYTOSINE, THYMINE] * 2
-        self.atoms = {}
         for ii in range(len(sequence)):
             # left
             bp = sequence[ii]

@@ -87,17 +87,19 @@ class DNAChain(object):
                 mol.position[2] = neworigin[2] + newframe[2]
         return chain
 
-    def toText(self, seperator=" "):
+    def to_text(self, seperator=" "):
         """
         Return a description of the molecules in the chain as text
         """
-        output = []
+        key = "# NAME SHAPE CHAIN_ID STRAND_ID SIZE_X SIZE_Y SIZE_Z POS_X " +\
+              "POS_Y POS_Z ROT_X ROT_Y ROT_Z\n"
+        output = [key]
         for pair in self.basepairs:
             output.append(pair.toText(seperator=seperator))
-            
+
         return "".join(output)
 
-    def toFigure(self):
+    def to_plot(self):
         """
         Return a matplotlib.Figure instance with molecules plotted
         """
@@ -254,7 +256,7 @@ class FourStrandDNAChain(DNAChain):
             separation: separation of each strand from the center in angstroms
         """
         super(FourStrandDNAChain, self).__init__(genome)
-        self.duplicateDNA(separation)
+        self.makeFourStrands(separation)
 
     def makeFourStrands(self, separation):
         translation_y = np.array([0., separation / 2., 0.], dtype=float)
@@ -271,11 +273,11 @@ class FourStrandDNAChain(DNAChain):
             bp.translate(-1 * translation_y)
             bp.setNewChain(1)
 
-        for bp in self.basepairs_chain0:
+        for bp in self.basepairs_chain2:
             bp.translate(translation_x)
             bp.setNewChain(2)
 
-        for bp in self.basepairs_chain1:
+        for bp in self.basepairs_chain3:
             bp.translate(-1 * translation_x)
             bp.setNewChain(3)
 
