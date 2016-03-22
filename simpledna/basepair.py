@@ -10,6 +10,7 @@ import dnapositions as dpos
 import numpy as np
 from copy import deepcopy
 from rotations import eulerMatrix
+from collections import OrderedDict
 
 # Positions in Angstroms
 PHOSPHATE_POS =\
@@ -57,41 +58,41 @@ class BasePair(object):
         rotation = deepcopy(rotation)
 
         leftPhosphateRot = np.zeros(3)
-        leftPhosphatePos = -1 * PHOSPHATE_POS
+        leftPhosphatePos = -1 * deepcopy(PHOSPHATE_POS)
         self.leftPhosphate = molecules.Triphosphate(strand=0, chain=chain,
                                                     position=leftPhosphatePos,
                                                     rotation=leftPhosphateRot)
         leftSugarRot = np.zeros(3)
-        leftSugarPos = -1 * SUGAR_POS
+        leftSugarPos = -1 * deepcopy(SUGAR_POS)
         self.leftSugar = molecules.DNASugar(strand=0, chain=chain,
                                             position=leftSugarPos,
                                             rotation=leftSugarRot)
 
         rightPhosphateRot = np.zeros(3)
-        rightPhosphatePos = +1 * PHOSPHATE_POS
+        rightPhosphatePos = +1 * deepcopy(PHOSPHATE_POS)
         self.rightPhosphate = \
             molecules.Triphosphate(strand=1, chain=chain,
                                    position=rightPhosphatePos,
                                    rotation=rightPhosphateRot)
 
         rightSugarRot = np.zeros(3)
-        rightSugarPos = +1 * SUGAR_POS
+        rightSugarPos = +1 * deepcopy(SUGAR_POS)
         self.rightSugar = molecules.DNASugar(strand=1, chain=chain,
                                              position=rightSugarPos,
                                              rotation=rightSugarRot)
 
         if base == "G":
-            leftpos = GUANINE_POS
-            rightpos = CYTOSINE_POS
+            leftpos = deepcopy(GUANINE_POS)
+            rightpos = deepcopy(CYTOSINE_POS)
         elif base == "C":
-            leftpos = CYTOSINE_POS
-            rightpos = GUANINE_POS
+            leftpos = deepcopy(CYTOSINE_POS)
+            rightpos = deepcopy(GUANINE_POS)
         elif base == "T":
-            leftpos = ADENINE_POS
-            rightpos = THYMINE_POS
+            leftpos = deepcopy(ADENINE_POS)
+            rightpos = deepcopy(THYMINE_POS)
         elif base == "A":
-            leftpos = THYMINE_POS
-            rightpos = ADENINE_POS
+            leftpos = deepcopy(THYMINE_POS)
+            rightpos = deepcopy(ADENINE_POS)
 
         leftBasePairRot = np.zeros(3)
         leftBasePairPos = -1 * leftpos
@@ -110,7 +111,8 @@ class BasePair(object):
                           self.leftBasePair, self.rightPhosphate,
                           self.rightSugar, self.rightBasePair]
 
-        self.moleculeDict = dict(zip(self.moleculeNames, self.molecules))
+        self.moleculeDict =\
+            OrderedDict(zip(self.moleculeNames, self.molecules))
 
         self.rotate(rotation)
         self.translate(position)

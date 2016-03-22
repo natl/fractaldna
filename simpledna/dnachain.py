@@ -12,7 +12,7 @@ from mpl_toolkits.mplot3d import Axes3D  # NOQA
 from copy import deepcopy
 
 
-BP_separation = 34  # Angstrom
+BP_SEPARATION = 34  # Angstrom
 BP_ROTATION = 36. / 180. * np.pi  # degrees
 
 
@@ -31,19 +31,19 @@ class DNAChain(object):
     def makeFromGenome(genome):
         chain = []
         position = np.array([0, 0, 0], dtype=float)
-        rotation = np.array([0, 0, BP_ROTATION], dtype=float)
+        rotation = np.array([0, 0, 0], dtype=float)
         for char in genome:
             print("Appending " + char)
             chain.append(
                 basepair.BasePair(char, chain=0, position=position,
                                   rotation=rotation))
-            position += np.array([0., 0., BP_separation])
+            position += np.array([0., 0., BP_SEPARATION])
             rotation += np.array([0., 0., BP_ROTATION])
         return chain
 
     @staticmethod
     def turnChain(chain):
-        zmax = len(chain) * BP_separation
+        zmax = len(chain) * BP_SEPARATION
         radius = 2. * zmax / np.pi
         for pair in chain:
             for (name, mol) in pair.iterMolecules():
@@ -64,7 +64,7 @@ class DNAChain(object):
 
     @staticmethod
     def turnAndTwistChain(chain):
-        zmax = len(chain) * BP_separation
+        zmax = len(chain) * BP_SEPARATION
         radius = 2. * zmax / np.pi
         for pair in chain:
             for (name, mol) in pair.iterMolecules():
@@ -144,7 +144,7 @@ class TurnedDNAChain(DNAChain):
         self.turnDNA()
 
     def turnDNA(self):
-        zmax = len(self.basepairs_chain0) * BP_separation
+        zmax = len(self.basepairs_chain0) * BP_SEPARATION
         radius = 2. * zmax / np.pi
         for pair in self.basepairs:
             for (name, mol) in pair.iterMolecules():
@@ -176,7 +176,7 @@ class TurnedTwistedDNAChain(DNAChain):
         self.turnAndTwistDNA()
 
     def turnAndTwistDNA(self):
-        zmax = len(self.basepairs_chain0) * BP_separation
+        zmax = len(self.basepairs_chain0) * BP_SEPARATION
         radius = 2. * zmax / np.pi
         for pair in self.basepairs:
             for (name, mol) in pair.iterMolecules():
@@ -306,7 +306,7 @@ class FourStrandTurnedDNAChain(DNAChain):
             transform = self.turnAndTwistChain
         else:
             transform = self.turnChain
-        radiusMiddleChain = len(self.basepairs_chain0) * BP_separation
+        radiusMiddleChain = len(self.basepairs_chain0) * BP_SEPARATION
         radiusInnerChain = (radiusMiddleChain - separation)
         radiusOuterChain = (radiusMiddleChain + separation)
 

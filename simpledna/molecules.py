@@ -10,13 +10,19 @@ from copy import deepcopy
 import dnapositions as dpos
 
 # Physical parameters, all in Angstrom
-GUANINE_SIZE = dpos.MoleculeFromAtoms(dpos.GUANINE).find_half_lengths()
-ADENINE_SIZE = dpos.MoleculeFromAtoms(dpos.ADENINE).find_half_lengths()
-THYMINE_SIZE = dpos.MoleculeFromAtoms(dpos.THYMINE).find_half_lengths()
-CYTOSINE_SIZE = dpos.MoleculeFromAtoms(dpos.CYTOSINE).find_half_lengths()
+GUANINE_SIZE = dpos.MoleculeFromAtoms.from_cylindrical(dpos.GUANINE)\
+    .find_half_lengths()
+ADENINE_SIZE = dpos.MoleculeFromAtoms.from_cylindrical(dpos.ADENINE)\
+    .find_half_lengths()
+THYMINE_SIZE = dpos.MoleculeFromAtoms.from_cylindrical(dpos.THYMINE)\
+    .find_half_lengths()
+CYTOSINE_SIZE = dpos.MoleculeFromAtoms.from_cylindrical(dpos.CYTOSINE)\
+    .find_half_lengths()
 
-SUGAR_RADIUS = dpos.MoleculeFromAtoms(dpos.DEOXYRIBOSE).find_radius()
-PHOSPHATE_RADIUS = dpos.MoleculeFromAtoms(dpos.PHOSPHATE).find_radius()
+SUGAR_RADIUS = dpos.MoleculeFromAtoms.from_cylindrical(dpos.DEOXYRIBOSE)\
+    .find_radius()
+PHOSPHATE_RADIUS = dpos.MoleculeFromAtoms.from_cylindrical(dpos.PHOSPHATE)\
+    .find_radius()
 
 
 class Molecule(object):
@@ -51,8 +57,8 @@ class Molecule(object):
         self.name = deepcopy(name)
         self.position = deepcopy(position)
         self.rotation = deepcopy(rotation)
-        self.strand = -1
-        self.chain = -1
+        self.strand = strand
+        self.chain = chain
 
     def translate(self, translation):
         """
