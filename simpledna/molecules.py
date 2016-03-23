@@ -27,7 +27,7 @@ PHOSPHATE_RADIUS = dpos.MoleculeFromAtoms.from_cylindrical(dpos.PHOSPHATE)\
 
 class Molecule(object):
     def __init__(self, name, shape, dimensions, strand=-1, chain=-1,
-                 position=np.zeros(3), rotation=np.zeros(3)):
+                 position=np.zeros(3), rotation=np.zeros(3), index=0):
         """
         Molecule(name, shape, dimensions, strand=-1, chain=-1,
                  position=np.zeros(3), rotation=np.zeros(3)):
@@ -46,6 +46,7 @@ class Molecule(object):
             position:   3-vector for molecule position relative to global axis
             rotation:   3-vector of euler angles (radians) for molecule
                         rotation relative to the global xyz axis
+            index:      index of base pair along chain
         """
         if type(dimensions) in [int, float, np.float64]:
             self.dimensions = np.array([deepcopy(dimensions)] * 3)
@@ -59,6 +60,7 @@ class Molecule(object):
         self.rotation = deepcopy(rotation)
         self.strand = strand
         self.chain = chain
+        self.index = index
 
     def translate(self, translation):
         """
@@ -75,7 +77,7 @@ class Molecule(object):
         Return a text description of the molecule
         """
         return seperator.join([self.name, self.shape, str(self.chain),
-                               str(self.strand),
+                               str(self.strand), str(self.index),
                                " ".join(map(str, self.dimensions)),
                                " ".join(map(str, self.position)),
                                " ".join(map(str, self.rotation))]) + "\n"
@@ -88,10 +90,11 @@ class Guanine(Molecule):
     """
 
     def __init__(self, strand=-1, chain=-1, position=np.zeros(3),
-                 rotation=np.zeros(3)):
+                 rotation=np.zeros(3), index=0):
         super(Guanine, self).__init__("Guanine", "ellipse", GUANINE_SIZE,
                                       strand=strand, chain=chain,
-                                      position=position, rotation=rotation)
+                                      position=position, rotation=rotation,
+                                      index=index)
 
 
 class Adenine(Molecule):
@@ -100,10 +103,11 @@ class Adenine(Molecule):
     """
 
     def __init__(self, strand=-1, chain=-1, position=np.zeros(3),
-                 rotation=np.zeros(3)):
+                 rotation=np.zeros(3), index=0):
         super(Adenine, self).__init__("Adenine", "ellipse", ADENINE_SIZE,
                                       strand=strand, chain=chain,
-                                      position=position, rotation=rotation)
+                                      position=position, rotation=rotation,
+                                      index=index)
 
 
 class Thymine(Molecule):
@@ -112,10 +116,11 @@ class Thymine(Molecule):
     """
 
     def __init__(self, strand=-1, chain=-1, position=np.zeros(3),
-                 rotation=np.zeros(3)):
+                 rotation=np.zeros(3), index=0):
         super(Thymine, self).__init__("Thymine", "ellipse", THYMINE_SIZE,
                                       strand=strand, chain=chain,
-                                      position=position, rotation=rotation)
+                                      position=position, rotation=rotation,
+                                      index=index)
 
 
 class Cytosine(Molecule):
@@ -124,10 +129,11 @@ class Cytosine(Molecule):
     """
 
     def __init__(self, strand=-1, chain=-1, position=np.zeros(3),
-                 rotation=np.zeros(3)):
+                 rotation=np.zeros(3), index=0):
         super(Cytosine, self).__init__("Cytosine", "ellipse", CYTOSINE_SIZE,
                                        strand=strand, chain=chain,
-                                       position=position, rotation=rotation)
+                                       position=position, rotation=rotation,
+                                       index=index)
 
 
 class DNASugar(Molecule):
@@ -136,10 +142,11 @@ class DNASugar(Molecule):
     """
 
     def __init__(self, strand=-1, chain=-1, position=np.zeros(3),
-                 rotation=np.zeros(3)):
+                 rotation=np.zeros(3), index=0):
         super(DNASugar, self).__init__("DNASugar", "sphere", SUGAR_RADIUS,
                                        strand=strand, chain=chain,
-                                       position=position, rotation=rotation)
+                                       position=position, rotation=rotation,
+                                       index=index)
 
 
 class Triphosphate(Molecule):
@@ -148,9 +155,9 @@ class Triphosphate(Molecule):
     """
 
     def __init__(self, strand=-1, chain=-1, position=np.zeros(3),
-                 rotation=np.zeros(3)):
+                 rotation=np.zeros(3), index=0):
         super(Triphosphate, self).__init__("Triphosphate", "sphere",
                                            PHOSPHATE_RADIUS,
                                            strand=strand, chain=chain,
                                            position=position,
-                                           rotation=rotation)
+                                           rotation=rotation, index=index)

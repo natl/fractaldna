@@ -39,7 +39,7 @@ class BasePair(object):
                      "rightPhosphate", "rightSugar", "rightBasePair"]
 
     def __init__(self, base, chain=-1, position=np.zeros(3),
-                 rotation=np.zeros(3)):
+                 rotation=np.zeros(3), index=0):
         """
         BasePair(base, chain=-1, position=np.zeros(3), rotation=np.zeros(3))
 
@@ -52,6 +52,7 @@ class BasePair(object):
             chain:    int to indicate the id of the current DNA macromolecule
             position: position of base pair relative to (0, 0, 0)
             rotation: rotation euler angles of base pair relative to local xyz
+            index:    index of base pair in chain
         """
         assert base in ["G", "A", "T", "C"], "base must be either G, A, T, C"
         position = deepcopy(position)
@@ -61,25 +62,29 @@ class BasePair(object):
         leftPhosphatePos = -1 * deepcopy(PHOSPHATE_POS)
         self.leftPhosphate = molecules.Triphosphate(strand=0, chain=chain,
                                                     position=leftPhosphatePos,
-                                                    rotation=leftPhosphateRot)
+                                                    rotation=leftPhosphateRot,
+                                                    index=index)
         leftSugarRot = np.zeros(3)
         leftSugarPos = -1 * deepcopy(SUGAR_POS)
         self.leftSugar = molecules.DNASugar(strand=0, chain=chain,
                                             position=leftSugarPos,
-                                            rotation=leftSugarRot)
+                                            rotation=leftSugarRot,
+                                            index=index)
 
         rightPhosphateRot = np.zeros(3)
         rightPhosphatePos = +1 * deepcopy(PHOSPHATE_POS)
         self.rightPhosphate = \
             molecules.Triphosphate(strand=1, chain=chain,
                                    position=rightPhosphatePos,
-                                   rotation=rightPhosphateRot)
+                                   rotation=rightPhosphateRot,
+                                   index=index)
 
         rightSugarRot = np.zeros(3)
         rightSugarPos = +1 * deepcopy(SUGAR_POS)
         self.rightSugar = molecules.DNASugar(strand=1, chain=chain,
                                              position=rightSugarPos,
-                                             rotation=rightSugarRot)
+                                             rotation=rightSugarRot,
+                                             index=index)
 
         if base == "G":
             leftpos = deepcopy(GUANINE_POS)
@@ -103,10 +108,12 @@ class BasePair(object):
         bases = self.pairings[base]
         self.leftBasePair = bases[0](strand=0, chain=chain,
                                      position=leftBasePairPos,
-                                     rotation=leftBasePairRot)
+                                     rotation=leftBasePairRot,
+                                     index=index)
         self.rightBasePair = bases[1](strand=1, chain=chain,
                                       position=rightBasePairPos,
-                                      rotation=rightBasePairRot)
+                                      rotation=rightBasePairRot,
+                                      index=index)
         self.molecules = [self.leftPhosphate, self.leftSugar,
                           self.leftBasePair, self.rightPhosphate,
                           self.rightSugar, self.rightBasePair]

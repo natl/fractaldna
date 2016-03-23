@@ -32,13 +32,15 @@ class DNAChain(object):
         chain = []
         position = np.array([0, 0, 0], dtype=float)
         rotation = np.array([0, 0, 0], dtype=float)
+        index = 0
         for char in genome:
             print("Appending " + char)
             chain.append(
                 basepair.BasePair(char, chain=0, position=position,
-                                  rotation=rotation))
+                                  rotation=rotation, index=index))
             position += np.array([0., 0., BP_SEPARATION])
             rotation += np.array([0., 0., BP_ROTATION])
+            index += 1
         return chain
 
     @staticmethod
@@ -91,7 +93,8 @@ class DNAChain(object):
         """
         Return a description of the molecules in the chain as text
         """
-        key = "# NAME SHAPE CHAIN_ID STRAND_ID SIZE_X SIZE_Y SIZE_Z POS_X " +\
+        key = "# NAME SHAPE CHAIN_ID STRAND_ID BP_INDEX " +\
+              "SIZE_X SIZE_Y SIZE_Z POS_X " +\
               "POS_Y POS_Z ROT_X ROT_Y ROT_Z\n"
         output = [key]
         for pair in self.basepairs:
