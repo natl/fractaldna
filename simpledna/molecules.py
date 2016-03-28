@@ -11,18 +11,18 @@ import dnapositions as dpos
 
 # Physical parameters, all in Angstrom
 GUANINE_SIZE = dpos.MoleculeFromAtoms.from_cylindrical(dpos.GUANINE)\
-    .find_half_lengths()
+    .find_equivalent_half_lengths()
 ADENINE_SIZE = dpos.MoleculeFromAtoms.from_cylindrical(dpos.ADENINE)\
-    .find_half_lengths()
+    .find_equivalent_half_lengths()
 THYMINE_SIZE = dpos.MoleculeFromAtoms.from_cylindrical(dpos.THYMINE)\
-    .find_half_lengths()
+    .find_equivalent_half_lengths()
 CYTOSINE_SIZE = dpos.MoleculeFromAtoms.from_cylindrical(dpos.CYTOSINE)\
-    .find_half_lengths()
+    .find_equivalent_half_lengths()
 
 SUGAR_RADIUS = dpos.MoleculeFromAtoms.from_cylindrical(dpos.DEOXYRIBOSE)\
-    .find_radius()
+    .find_equivalent_radius()
 PHOSPHATE_RADIUS = dpos.MoleculeFromAtoms.from_cylindrical(dpos.PHOSPHATE)\
-    .find_radius()
+    .find_equivalent_radius()
 
 
 class Molecule(object):
@@ -71,7 +71,7 @@ class Molecule(object):
         self.position = self.position + translation
         return None
 
-    def toText(self, seperator=" "):
+    def to_text(self, seperator=" "):
         """
         Molecule.toText(seperator=" ")
         Return a text description of the molecule

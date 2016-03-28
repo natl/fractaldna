@@ -5,10 +5,12 @@ Specification of DNA molecules in a variety of co-ordinate systems
 """
 from __future__ import division, unicode_literals, print_function
 from copy import deepcopy
+from itertools import combinations
 import numpy as np
 import re
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
+import pdb
 
 # Start by specifying the molecules in cylindrical co-ords
 # From Arnott and Hukins, 1972, Biochem and Biophys Res Comms, 47, 6, p1504.
@@ -124,6 +126,202 @@ def base_name(base):
             return None
 
 
+def overlap_volume(pos1, pos2, r1, r2):
+    """
+    overlap_volume(pos1, pos2, r1, r2)
+
+    Calculate the overlap volume of two spheres of radius r1, r2, at positions
+        pos1, pos2
+    """
+    d = sum((pos1 - pos2) ** 2) ** 0.5
+    # check they overlap
+    if d >= (r1 + r2):
+        return 0
+    # check if one entirely holds the other
+    if r1 > (d + r2):  # 2 is entirely contained in one
+        return 4. / 3. * np.pi * r2 ** 3
+    if r2 > (d + r1):  # 1 is entirely contained in one
+        return 4. / 3. * np.pi * r1 ** 3
+
+    vol = (np.pi * (r1 + r2 - d) ** 2 * (d ** 2 + (2 * d * r1 - 3 * r1 ** 2 +
+                                                   2 * d * r2 - 3 * r2 ** 2)
+                                         + 6 * r1 * r2)) / (12 * d)
+    return vol
+
+
+def get_p_values(a, b, c, alpha, beta, gamma):
+    """
+    Helper function for triple_overlap_volume
+    """
+    t2 = (a + b + c) * (-a + b + c) * (a - b + c) * (a + b - c)
+    tabg2 = ((a + beta + gamma) * (-a + beta + gamma) *
+             (a - beta + gamma) * (a + beta - gamma))
+
+    t = t2 ** 0.5
+    tabg = tabg2 ** 0.5
+
+    a2 = a ** 2
+    b2 = b ** 2
+    c2 = c ** 2
+
+    alpha2 = alpha ** 2
+    beta2 = beta ** 2
+    gamma2 = gamma ** 2
+
+    p1 = ((b2 - c2 + beta2 - gamma2) ** 2 + (t - tabg) ** 2) / (4 * a2) - alpha2  # NOQA
+    p2 = ((b2 - c2 + beta2 - gamma2) ** 2 + (t + tabg) ** 2) / (4 * a2) - alpha2  # NOQA
+
+    return p1, p2
+
+
+def atanpi(val):
+    theta = np.arctan(val)
+    if theta < 0:
+        theta += np.pi
+    return theta
+
+
+def triple_overlap_volume(pos1, pos2, pos3, r1, r2, r3):
+    """
+    triple_overlap_volume(pos1, pos2, pos3, r1, r2, r3)
+
+    Calculate volume overlapped by 3 spheres
+    From Gibson and Scheraga (1987)
+    """
+    a = sum((pos3 - pos2) ** 2) ** 0.5
+    b = sum((pos3 - pos1) ** 2) ** 0.5
+    c = sum((pos2 - pos1) ** 2) ** 0.5
+    if not ((a <= (r3 + r2)) and (b <= (r3 + r1)) and (c <= (r2 + r1))):
+        return 0
+
+    # Check if one sphere entirely contains another
+    if (r1 > (b + r3)) or (r1 > (c + r2)):  # Circle 1 encloses circle 2/3
+        vol = overlap_volume(pos2, pos3, r2, r3)
+        return vol
+    elif (r2 > (a + r3)) or (r2 > (c + r1)):  # Circle 2 encloses circle 1/3
+        vol = overlap_volume(pos1, pos3, r1, r3)
+        return vol
+    elif (r3 > (b + r1)) or (r3 > (a + r2)):  # Circle 3 encloses circle 1/2
+        vol = overlap_volume(pos1, pos2, r1, r2)
+        return vol
+
+    if (r1 > b) and (r2 > a):  # Circle C is enclosed by both others
+        print("Warning:: Circle C is interior to A and B")
+    if (r1 > c) and (r3 > a):  # Circle B is enclosed by both others
+        print("Warning:: Circle B is interior to A and C")
+    if (r2 > c) and (r3 > b):  # Circle A is enclosed by both others
+        print("Warning:: Circle A is interior to B and C")
+
+    alpha = r1
+    beta = r2
+    gamma = r3
+
+    a2 = a ** 2
+    b2 = b ** 2
+    c2 = c ** 2
+
+    alpha2 = alpha ** 2
+    beta2 = beta ** 2
+    gamma2 = gamma ** 2
+
+    eps1 = (beta2 - gamma2) / a2
+    eps2 = (gamma2 - alpha2) / b2
+    eps3 = (alpha2 - beta2) / c2
+
+    w2 = ((alpha2 * a2 + beta2 * b2 + gamma2 * c2) * (a2 + b2 + c2) -
+          2 * (alpha2 * a2 ** 2 + beta2 * b2 ** 2 + gamma2 * c2 ** 2) +
+          (a2 * b2 * c2) * (eps1 * eps2 + eps2 * eps3 + eps3 * eps1 - 1))
+
+    if w2 > 0:
+        w = w2 ** 0.5
+        q1 = a * (b2 + c2 - a2 + beta2  + gamma2 - 2. * alpha2 + eps1 * (b2 - c2))  # NOQA
+        q2 = b * (c2 + a2 - b2 + gamma2 + alpha2 - 2. * beta2  + eps2 * (c2 - a2))  # NOQA
+        q3 = c * (a2 + b2 - c2 + alpha2 + beta2  - 2. * gamma2 + eps3 * (a2 - b2))  # NOQA
+
+        alpha3 = alpha ** 3.
+        beta3 = beta ** 3.
+        gamma3 = gamma ** 3.
+        aw = a * w
+        bw = b * w
+        cw = c * w
+
+        vol = (w / 6. - a / 2. * (beta2  + gamma2 - a2 * (1. / 6. - eps1 ** 2 / 2.)) * atanpi(2 * w / q1)
+                      - b / 2. * (gamma2 + alpha2 - b2 * (1. / 6. - eps2 ** 2 / 2.)) * atanpi(2 * w / q2)
+                      - c / 2. * (alpha2 + beta2  - c2 * (1. / 6. - eps3 ** 2 / 2.)) * atanpi(2 * w / q3)
+                      + (2. / 3.) * alpha3 * (atanpi(bw / (alpha * q2) * (1 - eps2)) + atanpi(cw / (alpha * q3) * (1 + eps3)))
+                      + (2. / 3.) * beta3  * (atanpi(cw / (beta  * q3) * (1 - eps3)) + atanpi(aw / (beta  * q1) * (1 + eps1)))
+                      + (2. / 3.) * gamma3 * (atanpi(aw / (gamma * q1) * (1 - eps1)) + atanpi(bw / (gamma * q2) * (1 + eps2))))  # NOQA
+
+    elif (w2 < 0):
+        p1, p2 = get_p_values(a, b, c, alpha, beta, gamma)
+        p3, p4 = get_p_values(b, c, a, beta, gamma, alpha)
+        p5, p6 = get_p_values(c, a, b, gamma, alpha, beta)
+
+        if (p3 > 0) and (p5 > 0):
+            if (p1 > 0):
+                vol = 0
+            if (p1 < 0):
+                vol = overlap_volume(pos2, pos3, r2, r3)
+        elif (p1 > 0) and (p5 > 0):  # fill out...
+            if (p3 > 0):
+                vol = 0
+            if (p3 < 0):
+                vol = overlap_volume(pos1, pos3, r1, r3)
+        elif (p1 > 0) and (p3 > 0):
+            if (p5 > 0):
+                vol = 0
+            if (p5 < 0):
+                vol = overlap_volume(pos1, pos2, r1, r2)
+        elif (p1 > 0) and (p3 < 0) and (p5 < 0):  # NOQA
+            vol = (overlap_volume(pos1, pos2, r1, r2) +
+                   overlap_volume(pos1, pos3, r1, r3) -
+                   4. / 3. * np.pi * r1 ** 3.)
+        elif (p1 < 0) and (p3 > 0) and (p5 < 0):  # NOQA
+            vol = (overlap_volume(pos1, pos2, r1, r2) +
+                   overlap_volume(pos2, pos3, r2, r3) -
+                   4. / 3. * np.pi * r2 ** 3.)
+        elif (p1 < 0) and (p3 < 0) and (p5 > 0):  # NOQA
+            vol = (overlap_volume(pos1, pos3, r1, r3) +
+                   overlap_volume(pos2, pos3, r2, r3) -
+                   4. / 3. * np.pi * r3 ** 3.)
+        else:
+            print("Unknown case???")
+            pdb.set_trace()
+            vol = np.nan
+    else:
+        vol = 0
+    if vol < 0:
+        pdb.set_trace()
+    return vol
+
+
+def mc_triple_volume(p1, p2, p3, r1, r2, r3, n=1e5):
+    # Generate points inside the box containing smallest circle
+    # as this is a constraint
+    rs = [r1, r2, r3]
+    if r1 == min(rs):
+        centres = p1
+        ranges = 2 * np.ones([3]) * r1
+    elif r2 == min(rs):
+        centres = p2
+        ranges = 2 * np.ones([3]) * r2
+    elif r3 == min(rs):
+        centres = p3
+        ranges = 2 * np.ones([3]) * r3
+
+    in_overlap = 0.
+    in_circle = lambda p, c, r: sum((p - c) ** 2.) ** 0.5 < r
+    for ii in xrange(int(n)):
+        position = (np.random.random(3) - 0.5) * ranges + centres
+        in1 = in_circle(position, p1, r1)
+        in2 = in_circle(position, p2, r2)
+        in3 = in_circle(position, p3, r3)
+        if in1 and in2 and in3:
+            in_overlap += 1
+    vol_total = np.product(ranges)
+    return vol_total * in_overlap / n
+
+
 class MoleculeFromAtoms(object):
     def __init__(self, atoms):
         """
@@ -156,12 +354,15 @@ class MoleculeFromAtoms(object):
         """
         c = MoleculeFromAtoms.find_center()
 
-        Find the center of the atoms that constitute this molecule
+        Find the barycenter of the atoms that constitute this molecule
         """
         c = np.zeros([3])
-        for pos in self.atoms.values():
-            c += pos
-        return c / len(self)
+        denom = 0
+        for (atom, pos) in self.atoms.items():
+            r = RADIUS[LETTERS.match(atom).group()]
+            c += pos * r
+            denom += r
+        return c / denom
 
     def find_half_lengths(self):
         """
@@ -185,6 +386,18 @@ class MoleculeFromAtoms(object):
         min_extents = np.min(extents, axis=0)
         return 0.5 * (max_extents - min_extents)
 
+    def find_equivalent_half_lengths(self):
+        """
+        l = MoleculeFromAtoms.find_equivalent_half_lengths()
+
+        Find the half lengths scaled to give a volume equal to what the
+        constituent molecules occupy
+        """
+        half_lengths = self.find_half_lengths()
+        max_volume = 4. / 3. * np.pi * np.product(half_lengths)
+        equiv_volume = 4. / 3. * np.pi * self.find_equivalent_radius() ** 3.
+        return half_lengths * (equiv_volume / max_volume) ** (1. / 3.)
+
     def find_radius(self):
         """
         r = MoleculeFromAtoms.find_radius()
@@ -200,6 +413,33 @@ class MoleculeFromAtoms(object):
             radii.append(rad)
 
         return np.max(radii)
+
+    def find_equivalent_radius(self):
+        """
+        r = MoleculeFromAtoms.find_equivalent_radius()
+
+        Return the radius that yields the same volume occupied by all atoms
+        """
+        vol = 0
+        for (atom, pos) in self.atoms.items():
+            rad = RADIUS[LETTERS.match(atom).group()]
+            vol += 4. / 3. * np.pi * rad ** 3
+        print(vol)
+        # subtract double overlaps
+        for ((a1, p1), (a2, p2)) in combinations(self.atoms.items(), 2):
+            r1 = RADIUS[LETTERS.match(a1).group()]
+            r2 = RADIUS[LETTERS.match(a2).group()]
+            vol -= overlap_volume(p1, p2, r1, r2)
+        print(vol)
+        for ((a1, p1), (a2, p2), (a3, p3)) in\
+                combinations(self.atoms.items(), 3):
+            # pdb.set_trace()
+            r1 = RADIUS[LETTERS.match(a1).group()]
+            r2 = RADIUS[LETTERS.match(a2).group()]
+            r3 = RADIUS[LETTERS.match(a3).group()]
+            vol += triple_overlap_volume(p1, p2, p3, r1, r2, r3)
+        print(vol)
+        return (vol * 3. / 4. / np.pi) ** (1. / 3.)
 
     def to_plot(self):
         """

@@ -12,8 +12,8 @@ from mpl_toolkits.mplot3d import Axes3D  # NOQA
 from copy import deepcopy
 
 
-BP_SEPARATION = 34  # Angstrom
-BP_ROTATION = 36. / 180. * np.pi  # degrees
+BP_SEPARATION = 3.32  # Angstrom
+BP_ROTATION = 34.3 / 180. * np.pi  # degrees
 
 
 class DNAChain(object):
@@ -98,7 +98,7 @@ class DNAChain(object):
               "POS_Y POS_Z ROT_X ROT_Y ROT_Z\n"
         output = [key]
         for pair in self.basepairs:
-            output.append(pair.toText(seperator=seperator))
+            output.append(pair.to_text(seperator=seperator))
 
         return "".join(output)
 
@@ -130,6 +130,55 @@ class DNAChain(object):
         ax.scatter(triphosphates[0], triphosphates[1], triphosphates[2], c="y",
                    s=20)
         ax.scatter(sugars[0], sugars[1], sugars[2], c="r", s=20)
+
+        return fig
+
+    def to_surface_plot(self):
+        """
+        Plot the surfaces of each molecule in the chain.
+        Avoid this with large chains, this assumes each molecule is an ellipse
+        """
+
+        def ellipse_xyz(center, extent):
+            [a, b, c] = extent
+            u, v = np.mgrid[0:2*np.pi:20j, 0:np.pi:10j]
+            x = a * np.cos(u) * np.sin(v) + center[0]
+            y = b * np.sin(u) * np.sin(v) + center[1]
+            z = c * np.cos(v) + center[2]
+
+            return x, y, z
+
+        sugars = []
+        triphosphates = []
+        bases = []
+        bps = ["guanine", "adenine", "thymine", "cytosine"]
+        for pair in self.basepairs:
+            for (name, molecule) in pair.iterMolecules():
+                if molecule.name.lower() == "dnasugar":
+                    sugars.append((molecule.position, molecule.dimensions,
+                                   molecule.rotation))
+                elif molecule.name.lower() == "triphosphate":
+                    triphosphates.append((molecule.position,
+                                          molecule.dimensions,
+                                          molecule.rotation))
+                elif molecule.name.lower() in bps:
+                    bases.append((molecule.position, molecule.dimensions,
+                                  molecule.rotation))
+
+        fig = plt.figure()
+        ax = fig.add_subplot(111, projection='3d')
+        for base in bases:
+            x, y, z = ellipse_xyz(base[0], base[1])
+            ax.plot_wireframe(x, y, z, color="0.6")
+
+        for phosphate in triphosphates:
+            x, y, z = ellipse_xyz(phosphate[0], phosphate[1])
+            ax.plot_wireframe(x, y, z, color="y")
+
+        for sugar in sugars:
+            x, y, z = ellipse_xyz(sugar[0], sugar[1])
+            ax.plot_wireframe(x, y, z, color="r")
+
 
         return fig
 

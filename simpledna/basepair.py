@@ -159,13 +159,13 @@ class BasePair(object):
 
         return None
 
-    def toText(self, seperator=" "):
+    def to_text(self, seperator=" "):
         """
         Return a description of the molecules in the base pair as text
         """
         output = []
         for molecule in self.moleculeDict.itervalues():
-            output.append(molecule.toText(seperator=seperator))
+            output.append(molecule.to_text(seperator=seperator))
 
         return "".join(output)
 
