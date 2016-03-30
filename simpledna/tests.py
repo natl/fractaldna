@@ -8,31 +8,6 @@ import dnapositions
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D  # NOQA
-import pdb
-
-
-def triple_sphere_plot(p1, p2, p3, r1, r2, r3):
-    """
-    """
-
-    fig = plt.figure()
-    ax = fig.add_subplot(111, projection='3d')
-    for (r, p, c) in zip([r1, r2, r3], [p1, p2, p3], ['r', 'g', 'b']):
-        x, y, z = ellipse_xyz(p, np.ones([3]) * r)
-        ax.plot_wireframe(x, y, z, color=c)
-    fig.show()
-
-    return fig
-
-
-def ellipse_xyz(center, extent):
-    [a, b, c] = extent
-    u, v = np.mgrid[0:2 * np.pi:40j, 0:np.pi:20j]
-    x = a * np.cos(u) * np.sin(v) + center[0]
-    y = b * np.sin(u) * np.sin(v) + center[1]
-    z = c * np.cos(v) + center[2]
-
-    return x, y, z
 
 
 class TestDNACreation(unittest.TestCase):
@@ -46,7 +21,7 @@ class TestDNACreation(unittest.TestCase):
         self.assertEqual(len(x.basepairs), len(genome),
                          "Genome is incorrect length")
         nMolecules = sum([len(bp.molecules) for bp in x.basepairs])
-        self.assertEqual(nMolecules, len(genome)*6,
+        self.assertEqual(nMolecules, len(genome) * 6,
                          "Incorrect number of molecules")
 
 
@@ -55,7 +30,7 @@ class TestBasePairs(unittest.TestCase):
     """
     def test_basepair_creation_rotation_translation(self):
         translation = np.array([1, 2, 3])
-        rotation = np.array([0.5, 0.25, 1])*np.pi
+        rotation = np.array([0.5, 0.25, 1]) * np.pi
         bp1 = basepair.BasePair("G")
         bp2 = basepair.BasePair("G", position=translation,
                                 rotation=rotation)

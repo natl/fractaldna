@@ -161,6 +161,7 @@ class BasePair(object):
 
     def to_text(self, seperator=" "):
         """
+        BasePair.to_text(self, seperator=" ")
         Return a description of the molecules in the base pair as text
         """
         output = []
