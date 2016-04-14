@@ -89,6 +89,28 @@ class DNAChain(object):
                 mol.position[2] = neworigin[2] + newframe[2]
         return chain
 
+    def center_in_z(self):
+        """
+        DNAChain.center_in_z()
+        Center the molecule around the z=0 plane
+        """
+        minz = 0
+        maxz = 0
+        for bp in self.basepairs:
+            for (name, mol) in bp.iterMolecules():
+                if mol.position[2] < minz:
+                    minz = mol.position[2]
+                elif mol.position[2] > maxz:
+                    maxz = mol.position[2]
+
+        ztrans = (minz - maxz)/2. - minz
+        translation = np.array([0., 0., ztrans])
+
+        for bp in self.basepairs:
+            bp.translate(translation)
+
+        return None
+
     def to_text(self, seperator=" "):
         """
         Return a description of the molecules in the chain as text
@@ -178,7 +200,6 @@ class DNAChain(object):
         for sugar in sugars:
             x, y, z = ellipse_xyz(sugar[0], sugar[1])
             ax.plot_wireframe(x, y, z, color="r")
-
 
         return fig
 
