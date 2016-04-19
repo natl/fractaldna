@@ -13,7 +13,7 @@ from copy import deepcopy
 
 
 BP_SEPARATION = 3.32  # Angstrom
-BP_ROTATION = 34.3 / 180. * np.pi  # degrees
+BP_ROTATION = 36 / 180. * np.pi  # degrees
 
 
 class DNAChain(object):

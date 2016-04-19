@@ -331,21 +331,27 @@ class MoleculeFromAtoms(object):
         self.atoms = deepcopy(atoms)
 
     @classmethod
-    def from_cylindrical(cls, atoms):
+    def from_cylindrical(cls, atoms, inverse=False):
         """
-        MoleculeFromAtoms.from_cylindrical(atoms)
+        MoleculeFromAtoms.from_cylindrical(atoms, inverse=False)
         Make a MoleculeFromAtoms instance from a list of atoms in cylindrical
         coords (r, theta phi)
+
+        kwargs:
+        ---
+        inverse (default False): Set to True to generate a dyadically related
+                                 base pair (negates theta and z)
 
         Note:
         Theta is in degrees
         """
         cylindrical = deepcopy(atoms)
         cartesian = {}
+        sgn = 1 if inverse is False else -1
         for (name, pos) in cylindrical.items():
-            z = pos[2]
-            y = pos[0] * np.sin(np.pi * pos[1] / 180.)
-            x = pos[0] * np.cos(np.pi * pos[1] / 180.)
+            z = sgn * pos[2]
+            y = pos[0] * np.sin(sgn * np.pi * pos[1] / 180.)
+            x = pos[0] * np.cos(sgn * np.pi * pos[1] / 180.)
             cartesian[name] = np.array([x, y, z])
 
         return cls(cartesian)

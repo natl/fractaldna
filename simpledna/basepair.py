@@ -27,6 +27,26 @@ CYTOSINE_POS =\
     dpos.MoleculeFromAtoms.from_cylindrical(dpos.CYTOSINE).find_center()
 
 
+PHOSPHATE_POS_OPP =\
+    dpos.MoleculeFromAtoms.from_cylindrical(dpos.PHOSPHATE,
+                                            inverse=True).find_center()
+SUGAR_POS_OPP =\
+    dpos.MoleculeFromAtoms.from_cylindrical(dpos.DEOXYRIBOSE,
+                                            inverse=True).find_center()
+GUANINE_POS_OPP =\
+    dpos.MoleculeFromAtoms.from_cylindrical(dpos.GUANINE,
+                                            inverse=True).find_center()
+ADENINE_POS_OPP =\
+    dpos.MoleculeFromAtoms.from_cylindrical(dpos.ADENINE,
+                                            inverse=True).find_center()
+THYMINE_POS_OPP =\
+    dpos.MoleculeFromAtoms.from_cylindrical(dpos.THYMINE,
+                                            inverse=True).find_center()
+CYTOSINE_POS_OPP =\
+    dpos.MoleculeFromAtoms.from_cylindrical(dpos.CYTOSINE,
+                                            inverse=True).find_center()
+
+
 class BasePair(object):
     """
     Defines a base pair
@@ -59,20 +79,20 @@ class BasePair(object):
         rotation = deepcopy(rotation)
 
         leftPhosphateRot = np.zeros(3)
-        leftPhosphatePos = -1 * deepcopy(PHOSPHATE_POS)
+        leftPhosphatePos = deepcopy(PHOSPHATE_POS)
         self.leftPhosphate = molecules.Triphosphate(strand=0, chain=chain,
                                                     position=leftPhosphatePos,
                                                     rotation=leftPhosphateRot,
                                                     index=index)
         leftSugarRot = np.zeros(3)
-        leftSugarPos = -1 * deepcopy(SUGAR_POS)
+        leftSugarPos = deepcopy(SUGAR_POS)
         self.leftSugar = molecules.DNASugar(strand=0, chain=chain,
                                             position=leftSugarPos,
                                             rotation=leftSugarRot,
                                             index=index)
 
         rightPhosphateRot = np.zeros(3)
-        rightPhosphatePos = +1 * deepcopy(PHOSPHATE_POS)
+        rightPhosphatePos = deepcopy(PHOSPHATE_POS_OPP)
         self.rightPhosphate = \
             molecules.Triphosphate(strand=1, chain=chain,
                                    position=rightPhosphatePos,
@@ -80,7 +100,7 @@ class BasePair(object):
                                    index=index)
 
         rightSugarRot = np.zeros(3)
-        rightSugarPos = +1 * deepcopy(SUGAR_POS)
+        rightSugarPos = deepcopy(SUGAR_POS_OPP)
         self.rightSugar = molecules.DNASugar(strand=1, chain=chain,
                                              position=rightSugarPos,
                                              rotation=rightSugarRot,
@@ -88,22 +108,22 @@ class BasePair(object):
 
         if base == "G":
             leftpos = deepcopy(GUANINE_POS)
-            rightpos = deepcopy(CYTOSINE_POS)
+            rightpos = deepcopy(CYTOSINE_POS_OPP)
         elif base == "C":
             leftpos = deepcopy(CYTOSINE_POS)
-            rightpos = deepcopy(GUANINE_POS)
+            rightpos = deepcopy(GUANINE_POS_OPP)
         elif base == "T":
             leftpos = deepcopy(ADENINE_POS)
-            rightpos = deepcopy(THYMINE_POS)
+            rightpos = deepcopy(THYMINE_POS_OPP)
         elif base == "A":
             leftpos = deepcopy(THYMINE_POS)
-            rightpos = deepcopy(ADENINE_POS)
+            rightpos = deepcopy(ADENINE_POS_OPP)
 
         leftBasePairRot = np.zeros(3)
-        leftBasePairPos = -1 * leftpos
+        leftBasePairPos = leftpos
 
         rightBasePairRot = np.zeros(3)
-        rightBasePairPos = +1 * rightpos
+        rightBasePairPos = rightpos
 
         bases = self.pairings[base]
         self.leftBasePair = bases[0](strand=0, chain=chain,
