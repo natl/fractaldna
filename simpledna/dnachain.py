@@ -11,6 +11,7 @@ import rotations as r
 from mpl_toolkits.mplot3d import Axes3D  # NOQA
 from copy import deepcopy
 
+import rotations as rot
 
 BP_SEPARATION = 3.32  # Angstrom
 BP_ROTATION = 36 / 180. * np.pi  # degrees
@@ -26,6 +27,7 @@ class DNAChain(object):
         """
         self.basepairs_chain0 = self.makeFromGenome(genome)
         self.basepairs = self.basepairs_chain0
+        self.center_in_z()
 
     @staticmethod
     def makeFromGenome(genome):
@@ -45,40 +47,61 @@ class DNAChain(object):
 
     @staticmethod
     def turnChain(chain):
-        zmax = len(chain) * BP_SEPARATION
-        radius = 2. * zmax / np.pi
+        zmax = 0
+        zmin = 0
+        for pair in chain:
+            for (name, mol) in pair.iterMolecules():
+                if mol.position[2] < zmin:
+                    zmin = mol.position[2]
+                elif mol.position[2] > zmax:
+                    zmax = mol.position[2]
+
+        zrange = zmax - zmin
+        radius = 2. * zrange / np.pi
+
         for pair in chain:
             for (name, mol) in pair.iterMolecules():
                 # Translation of the frame - new center position
-                theta = np.pi / 2. * mol.position[2] / zmax
+                theta = np.pi / 2. * (mol.position[2] - zmin) / zrange
                 neworigin = np.array([radius * (1 - np.cos(theta)),
                                       0.,
                                       radius * np.sin(theta)])
                 # rotation of the frame
                 oldframe = np.array([mol.position[0], mol.position[1], 0])
-                yrotation = np.pi / 2. * mol.position[2] / zmax
+                yrotation = np.pi / 2. * (mol.position[2] - zmin) / zrange
 
                 newframe = np.dot(r.roty(yrotation), oldframe)
                 mol.position[0] = neworigin[0] + newframe[0]
                 mol.position[1] = neworigin[1] + newframe[1]
                 mol.position[2] = neworigin[2] + newframe[2]
+                mol.rotate(np.array([0, yrotation, 0]))
         return chain
 
     @staticmethod
     def turnAndTwistChain(chain):
-        zmax = len(chain) * BP_SEPARATION
-        radius = 2. * zmax / np.pi
+        zmax = 0
+        zmin = 0
+        for pair in chain:
+            for (name, mol) in pair.iterMolecules():
+                if mol.position[2] < zmin:
+                    zmin = mol.position[2]
+                elif mol.position[2] > zmax:
+                    zmax = mol.position[2]
+
+        zrange = zmax - zmin
+        radius = 2. * zrange / np.pi
+
         for pair in chain:
             for (name, mol) in pair.iterMolecules():
                 # Translation of the frame - new center position
-                theta = np.pi / 2. * mol.position[2] / zmax
+                theta = np.pi / 2. * (mol.position[2] - zmin) / zrange
                 neworigin = np.array([radius * (1 - np.cos(theta)),
                                       0.,
                                       radius * np.sin(theta)])
                 # rotation of the frame
                 oldframe = np.array([mol.position[0], mol.position[1], 0])
-                yang = np.pi / 2. * mol.position[2] / zmax
-                xang = np.pi / 2. * mol.position[2] / zmax
+                yang = np.pi / 2. * (mol.position[2] - zmin) / zrange
+                xang = np.pi / 2. * (mol.position[2] - zmin) / zrange
 
                 print(mol.position[2])
 
@@ -87,6 +110,7 @@ class DNAChain(object):
                 mol.position[0] = neworigin[0] + newframe[0]
                 mol.position[1] = neworigin[1] + newframe[1]
                 mol.position[2] = neworigin[2] + newframe[2]
+                mol.rotate(np.array([xang, yang, 0]))
         return chain
 
     def center_in_z(self):
@@ -161,13 +185,20 @@ class DNAChain(object):
         Avoid this with large chains, this assumes each molecule is an ellipse
         """
 
-        def ellipse_xyz(center, extent):
+        def ellipse_xyz(center, extent, rotation=np.zeros([3])):
+            rmatrix = rot.eulerMatrix(*rotation)
             [a, b, c] = extent
             u, v = np.mgrid[0:2*np.pi:20j, 0:np.pi:10j]
             x = a * np.cos(u) * np.sin(v) + center[0]
             y = b * np.sin(u) * np.sin(v) + center[1]
             z = c * np.cos(v) + center[2]
-
+            for ii in range(0, len(x)):
+                for jj in range(0, len(x[ii])):
+                    row = np.array([x[ii][jj], y[ii][jj], z[ii][jj]]) - center
+                    xp, yp, zp = np.dot(rmatrix, row.transpose())
+                    x[ii][jj] = xp + center[0]
+                    y[ii][jj] = yp + center[1]
+                    z[ii][jj] = zp + center[2]
             return x, y, z
 
         sugars = []
@@ -190,15 +221,16 @@ class DNAChain(object):
         fig = plt.figure()
         ax = fig.add_subplot(111, projection='3d')
         for base in bases:
-            x, y, z = ellipse_xyz(base[0], base[1])
+            x, y, z = ellipse_xyz(base[0], base[1], rotation=base[2])
             ax.plot_wireframe(x, y, z, color="0.6")
 
         for phosphate in triphosphates:
-            x, y, z = ellipse_xyz(phosphate[0], phosphate[1])
+            x, y, z = ellipse_xyz(phosphate[0], phosphate[1],
+                                  rotation=phosphate[2])
             ax.plot_wireframe(x, y, z, color="y")
 
         for sugar in sugars:
-            x, y, z = ellipse_xyz(sugar[0], sugar[1])
+            x, y, z = ellipse_xyz(sugar[0], sugar[1], rotation=sugar[2])
             ax.plot_wireframe(x, y, z, color="r")
 
         return fig
@@ -217,23 +249,8 @@ class TurnedDNAChain(DNAChain):
         self.turnDNA()
 
     def turnDNA(self):
-        zmax = len(self.basepairs_chain0) * BP_SEPARATION
-        radius = 2. * zmax / np.pi
-        for pair in self.basepairs:
-            for (name, mol) in pair.iterMolecules():
-                # Translation of the frame - new center position
-                theta = np.pi / 2. * mol.position[2] / zmax
-                neworigin = np.array([radius * (1 - np.cos(theta)),
-                                      0.,
-                                      radius * np.sin(theta)])
-                # rotation of the frame
-                oldframe = np.array([mol.position[0], mol.position[1], 0])
-                yrotation = np.pi / 2. * mol.position[2] / zmax
-
-                newframe = np.dot(r.roty(yrotation), oldframe)
-                mol.position[0] = neworigin[0] + newframe[0]
-                mol.position[1] = neworigin[1] + newframe[1]
-                mol.position[2] = neworigin[2] + newframe[2]
+        self.basepairs = DNAChain.turnChain(self.basepairs)
+        return None
 
 
 class TurnedTwistedDNAChain(DNAChain):
@@ -249,27 +266,8 @@ class TurnedTwistedDNAChain(DNAChain):
         self.turnAndTwistDNA()
 
     def turnAndTwistDNA(self):
-        zmax = len(self.basepairs_chain0) * BP_SEPARATION
-        radius = 2. * zmax / np.pi
-        for pair in self.basepairs:
-            for (name, mol) in pair.iterMolecules():
-                # Translation of the frame - new center position
-                theta = np.pi / 2. * mol.position[2] / zmax
-                neworigin = np.array([radius * (1 - np.cos(theta)),
-                                      0.,
-                                      radius * np.sin(theta)])
-                # rotation of the frame
-                oldframe = np.array([mol.position[0], mol.position[1], 0])
-                yang = np.pi / 2. * mol.position[2] / zmax
-                xang = np.pi / 2. * mol.position[2] / zmax
-
-                print(mol.position[2])
-
-                newframe = np.dot(r.rotx(xang), np.dot(r.roty(yang), oldframe))
-
-                mol.position[0] = neworigin[0] + newframe[0]
-                mol.position[1] = neworigin[1] + newframe[1]
-                mol.position[2] = neworigin[2] + newframe[2]
+        self.basepairs = DNAChain.turnAndTwistChain(self.basepairs)
+        return None
 
 
 class DoubleDNAChain(DNAChain):

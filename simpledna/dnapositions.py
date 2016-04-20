@@ -245,11 +245,11 @@ def triple_overlap_volume(pos1, pos2, pos3, r1, r2, r3):
         bw = b * w
         cw = c * w
 
-        vol = (w / 6. - a / 2. * (beta2  + gamma2 - a2 * (1. / 6. - eps1 ** 2 / 2.)) * atanpi(2 * w / q1)
-                      - b / 2. * (gamma2 + alpha2 - b2 * (1. / 6. - eps2 ** 2 / 2.)) * atanpi(2 * w / q2)
-                      - c / 2. * (alpha2 + beta2  - c2 * (1. / 6. - eps3 ** 2 / 2.)) * atanpi(2 * w / q3)
-                      + (2. / 3.) * alpha3 * (atanpi(bw / (alpha * q2) * (1 - eps2)) + atanpi(cw / (alpha * q3) * (1 + eps3)))
-                      + (2. / 3.) * beta3  * (atanpi(cw / (beta  * q3) * (1 - eps3)) + atanpi(aw / (beta  * q1) * (1 + eps1)))
+        vol = (w / 6. - a / 2. * (beta2  + gamma2 - a2 * (1. / 6. - eps1 ** 2 / 2.)) * atanpi(2 * w / q1)   # NOQA
+                      - b / 2. * (gamma2 + alpha2 - b2 * (1. / 6. - eps2 ** 2 / 2.)) * atanpi(2 * w / q2)   # NOQA
+                      - c / 2. * (alpha2 + beta2  - c2 * (1. / 6. - eps3 ** 2 / 2.)) * atanpi(2 * w / q3)   # NOQA
+                      + (2. / 3.) * alpha3 * (atanpi(bw / (alpha * q2) * (1 - eps2)) + atanpi(cw / (alpha * q3) * (1 + eps3)))   # NOQA
+                      + (2. / 3.) * beta3  * (atanpi(cw / (beta  * q3) * (1 - eps3)) + atanpi(aw / (beta  * q1) * (1 + eps1)))   # NOQA
                       + (2. / 3.) * gamma3 * (atanpi(aw / (gamma * q1) * (1 - eps1)) + atanpi(bw / (gamma * q2) * (1 + eps2))))  # NOQA
 
     elif (w2 < 0):
@@ -349,7 +349,7 @@ class MoleculeFromAtoms(object):
         cartesian = {}
         sgn = 1 if inverse is False else -1
         for (name, pos) in cylindrical.items():
-            z = sgn * pos[2]
+            z = sgn * pos[2]   # NOQA
             y = pos[0] * np.sin(sgn * np.pi * pos[1] / 180.)
             x = pos[0] * np.cos(sgn * np.pi * pos[1] / 180.)
             cartesian[name] = np.array([x, y, z])

@@ -8,6 +8,7 @@ from __future__ import division, unicode_literals, print_function
 import numpy as np
 from copy import deepcopy
 import dnapositions as dpos
+import rotations as rot
 
 # Physical parameters, all in Angstrom
 GUANINE_SIZE = dpos.MoleculeFromAtoms.from_cylindrical(dpos.GUANINE)\
@@ -18,6 +19,11 @@ THYMINE_SIZE = dpos.MoleculeFromAtoms.from_cylindrical(dpos.THYMINE)\
     .find_equivalent_half_lengths()
 CYTOSINE_SIZE = dpos.MoleculeFromAtoms.from_cylindrical(dpos.CYTOSINE)\
     .find_equivalent_half_lengths()
+
+GUANINE_SIZE[2] = 0.1*GUANINE_SIZE[2]
+ADENINE_SIZE[2] = 0.1*ADENINE_SIZE[2]
+THYMINE_SIZE[2] = 0.1*THYMINE_SIZE[2]
+CYTOSINE_SIZE[2] = 0.1*CYTOSINE_SIZE[2]
 
 SUGAR_RADIUS = dpos.MoleculeFromAtoms.from_cylindrical(dpos.DEOXYRIBOSE)\
     .find_equivalent_radius()
@@ -69,6 +75,18 @@ class Molecule(object):
         Translate the molecule by (x, y, z)
         """
         self.position = self.position + translation
+        return None
+
+    def rotate(self, rotation):
+        """
+        Molecule.rotate(rotation)
+
+        Rotate molecule by [X_angle, Y_angle, Z_angle]
+        """
+        assert len(rotation) == 3, "Rotation array must be length-3"
+        oldrotation = rot.eulerMatrix(*self.rotation)
+        newrotation = rot.eulerMatrix(*rotation)
+        self.rotation = rot.getEulerAngles(np.dot(newrotation, oldrotation))
         return None
 
     def to_text(self, seperator=" "):

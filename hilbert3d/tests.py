@@ -478,6 +478,7 @@ class TestEulerAngleGeneration(unittest.TestCase):
 
 class TestTextOutput(unittest.TestCase):
     types_inverse = {v: k for (k, v) in h.Voxel.types.iteritems()}
+
     def test_straightPath(self):
         s = 'F'*10
         frac = h.VoxelisedFractal.fromLString(s)

@@ -26,3 +26,24 @@ def rotx(angle):
 
 def eulerMatrix(angx, angy, angz):
     return np.dot(rotz(angz), np.dot(roty(angy), rotx(angx)))
+
+
+def getEulerAngles(rotmatrix):
+    """
+    """
+    sintheta = rotmatrix[2, 0]
+    if abs(sintheta) != 1:
+        theta = -np.arcsin(rotmatrix[2, 0])
+        costheta = np.cos(theta)
+        psi = np.arctan2(rotmatrix[2, 1]/costheta, rotmatrix[2, 2]/costheta)
+        phi = np.arctan2(rotmatrix[1, 0]/costheta, rotmatrix[0, 0]/costheta)
+    else:
+        phi = 0
+        if sintheta < 0:  # Positive case
+            theta = np.pi/2.
+            psi = phi + np.arctan2(rotmatrix[0, 1], rotmatrix[0, 2])
+        else:
+            theta = -np.pi/2.
+            psi = -phi + np.arctan2(-rotmatrix[0, 1], -rotmatrix[0, 2])
+
+    return np.array([psi, theta, phi])

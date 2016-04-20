@@ -164,9 +164,19 @@ class BasePair(object):
         rmatrix = eulerMatrix(rotation[0], rotation[1], rotation[2])
         for molecule in self.moleculeDict.itervalues():
             molecule.position = np.dot(rmatrix, molecule.position)
-            molecule.rotation += rotation
+            molecule.rotate(rotation)
 
         return None
+
+    def getCenter(self):
+        """
+        basepair.getCenter()
+
+        Get the geometric center of the base-pair
+        (non-weighted average molecule position)
+        """
+        positions = [mol.position for mol in self.moleculeDict.values()]
+        return np.mean(np.array(positions), axis=1)
 
     def setNewChain(self, chainIdx):
         """
