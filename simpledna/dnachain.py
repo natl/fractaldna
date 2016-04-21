@@ -65,7 +65,7 @@ class DNAChain(object):
                 theta = np.pi / 2. * (mol.position[2] - zmin) / zrange
                 neworigin = np.array([radius * (1 - np.cos(theta)),
                                       0.,
-                                      radius * np.sin(theta)])
+                                      radius * np.sin(theta) - radius])
                 # rotation of the frame
                 oldframe = np.array([mol.position[0], mol.position[1], 0])
                 yrotation = np.pi / 2. * (mol.position[2] - zmin) / zrange
@@ -97,7 +97,7 @@ class DNAChain(object):
                 theta = np.pi / 2. * (mol.position[2] - zmin) / zrange
                 neworigin = np.array([radius * (1 - np.cos(theta)),
                                       0.,
-                                      radius * np.sin(theta)])
+                                      radius * np.sin(theta) - radius])
                 # rotation of the frame
                 oldframe = np.array([mol.position[0], mol.position[1], 0])
                 yang = np.pi / 2. * (mol.position[2] - zmin) / zrange

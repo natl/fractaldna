@@ -6,8 +6,8 @@ import basepair
 import dnapositions
 
 import numpy as np
-import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D  # NOQA
+import rotations as rots
 
 
 class TestDNACreation(unittest.TestCase):
@@ -94,6 +94,24 @@ class TestPositions(unittest.TestCase):
         self.assertEqual(v, 0.5737, "Volume differs to " +
                          "paper, got {}".format(v))
         return None
+
+
+class TestRotationModule(unittest.TestCase):
+    def test_recoverEulerAngles(self):
+        for ii in range(100):
+            angles = np.pi*(np.random.random(3) - 0.5)
+            oldpsi = angles[0]
+            oldtheta = angles[1]
+            oldphi = angles[2]
+
+            rmatrix = rots.eulerMatrix(oldpsi, oldtheta, oldphi)
+            [newpsi, newtheta, newphi] = rots.getEulerAngles(rmatrix)
+            newangles = np.around(np.array([newpsi, newtheta, newphi]), 8)
+            oldangles = np.around(np.array([oldpsi, oldtheta, oldphi]), 8)
+
+            self.assertTrue((newangles == oldangles).all(),
+                            "Euler angles not recovered for: " + str(oldangles)
+                            + "Instead, I got: " + str(newangles))
 
 
 if __name__ == '__main__':
