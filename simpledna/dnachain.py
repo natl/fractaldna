@@ -372,14 +372,15 @@ class FourStrandTurnedDNAChain(DNAChain):
         """
         DNAChain.__init__(self, genome)
         translation_y = np.array([0., separation / 2., 0.], dtype=float)
-        translation_x = np.array([separation / 2., 0., 0.], dtype=float)
+        translation_x = np.array([separation / 2., 0., -separation / 2.],
+                                 dtype=float)
         if twist is True:
             transform = self.turnAndTwistChain
         else:
             transform = self.turnChain
-        radiusMiddleChain = len(self.basepairs_chain0) * BP_SEPARATION
-        radiusInnerChain = (radiusMiddleChain - separation)
-        radiusOuterChain = (radiusMiddleChain + separation)
+        radiusMiddleChain = len(self.basepairs_chain0) * BP_SEPARATION * 2 / np.pi
+        radiusInnerChain = (radiusMiddleChain - separation / 2.)
+        radiusOuterChain = (radiusMiddleChain + separation / 2.)
 
         self.basepairs_chain1 = deepcopy(self.basepairs_chain0)
 
@@ -391,7 +392,9 @@ class FourStrandTurnedDNAChain(DNAChain):
                                           radiusMiddleChain))
 
         genome_chain2 = genome[:chain2Length]
+        self.basepairs_chain2 = DNAChain(genome_chain2).basepairs_chain0
         genome_chain3 = longGenome[:chain3Length]
+        self.basepairs_chain3 = DNAChain(genome_chain3).basepairs_chain0
         # pdb.set_trace()
 
         self.basepairs_chain0 = transform(self.basepairs_chain0)
@@ -404,12 +407,12 @@ class FourStrandTurnedDNAChain(DNAChain):
             bp.translate(-1 * translation_y)
             bp.setNewChain(1)
 
-        self.basepairs_chain2 = transform(self.makeFromGenome(genome_chain2))
+        self.basepairs_chain2 = transform(self.basepairs_chain2)
         for bp in self.basepairs_chain2:
             bp.translate(translation_x)
             bp.setNewChain(2)
 
-        self.basepairs_chain3 = transform(self.makeFromGenome(genome_chain3))
+        self.basepairs_chain3 = transform(self.basepairs_chain3)
         for bp in self.basepairs_chain3:
             bp.translate(-1 * translation_x)
             bp.setNewChain(3)
