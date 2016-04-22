@@ -378,11 +378,12 @@ class FourStrandTurnedDNAChain(DNAChain):
             transform = self.turnAndTwistChain
         else:
             transform = self.turnChain
-        radiusMiddleChain = len(self.basepairs_chain0) * BP_SEPARATION * 2 / np.pi
+        radiusMiddleChain =\
+            len(self.basepairs_chain0) * BP_SEPARATION * 2 / np.pi
         radiusInnerChain = (radiusMiddleChain - separation / 2.)
         radiusOuterChain = (radiusMiddleChain + separation / 2.)
 
-        self.basepairs_chain1 = deepcopy(self.basepairs_chain0)
+        self.basepairs_chain1 = DNAChain(genome, chain=1).basepairs
 
         chain2Length = \
             int(np.floor(radiusInnerChain / radiusMiddleChain * len(genome)))
@@ -392,9 +393,9 @@ class FourStrandTurnedDNAChain(DNAChain):
                                           radiusMiddleChain))
 
         genome_chain2 = genome[:chain2Length]
-        self.basepairs_chain2 = DNAChain(genome_chain2).basepairs_chain0
+        self.basepairs_chain2 = DNAChain(genome_chain2, chain=2).basepairs
         genome_chain3 = longGenome[:chain3Length]
-        self.basepairs_chain3 = DNAChain(genome_chain3).basepairs_chain0
+        self.basepairs_chain3 = DNAChain(genome_chain3, chain=3).basepairs
         # pdb.set_trace()
 
         self.basepairs_chain0 = transform(self.basepairs_chain0)
