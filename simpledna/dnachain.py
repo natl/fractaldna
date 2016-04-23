@@ -401,22 +401,18 @@ class FourStrandTurnedDNAChain(DNAChain):
         self.basepairs_chain0 = transform(self.basepairs_chain0)
         for bp in self.basepairs_chain0:
             bp.translate(translation_y)
-            bp.setNewChain(0)
 
         self.basepairs_chain1 = transform(self.basepairs_chain1)
         for bp in self.basepairs_chain1:
             bp.translate(-1 * translation_y)
-            bp.setNewChain(1)
 
         self.basepairs_chain2 = transform(self.basepairs_chain2)
         for bp in self.basepairs_chain2:
             bp.translate(translation_x)
-            bp.setNewChain(2)
 
         self.basepairs_chain3 = transform(self.basepairs_chain3)
         for bp in self.basepairs_chain3:
             bp.translate(-1 * translation_x)
-            bp.setNewChain(3)
 
         self.basepairs = self.basepairs_chain0 + self.basepairs_chain1 + \
             self.basepairs_chain2 + self.basepairs_chain3
