@@ -20,9 +20,9 @@ D = r"|CFB-F+B|FA&FnA&&FB-F+B|FC<<"
 X = r"n<XFn<XFX-Fn>>XFX&F+>>XFX-F>X->"
 
 # This Peano works infinitely - maybe not! but goes to at least n=3 iterations
-P = r"P>>FP>>FP>>+F+P>>FP>>FP>>+F+P>>FP>>FP>>&F&P>>FP>>FP>>+F+P>>FP>>FP>>+F+P>>FP>>FP>>&F&P>>FP>>FP>>+F+P>>FP>>FP>>+F+P>>FP>>FP"
+P = r"P>>FP>>FP>>+F+P>>FP>>FP>>+F+P>>FP>>FP>>&F&P>>FP>>FP>>+F+P>>FP>>FP>>+F+P>>FP>>FP>>&F&P>>FP>>FP>>+F+P>>FP>>FP>>+F+P>>FP>>FP"  # NOQA
 
-#these Peanos do not work
+# These Peanos do not work
 # Y = r"FF-F-FF+F+FFnFn+FF-F-FF+F+FF&F&+FF-F-FF+F+FF"  # Peano bottom to top
 T = r"TFUFT+F+UFTFU-F-TFUFTnFn-ZFYFZ+F+YFZFY-F-ZFYFZ&F&-TFUFT+F+UFTFU-F-TFUFT"
 U = T[::-1]
@@ -30,8 +30,8 @@ Y = r"YFZFY-F-ZFYFZ+F+YFZFYnFn+UFTFU-F-TFUFT+F+UFTFU&F&+YFZFY-F-ZFYFZ+F+YFZFY"
 Z = Y[::-1]
 
 # This guy needs dome testing
-# R = r"RFRFR-F-RFRFR+F+RFRFRnFn+RFRFR-F-RFRFR+F+RFRFR&F&+RFRFR-F-RFRFR+F+RFRFR<<"
-R = r"R>>FR>>FR>>+F+R>>FR>>FR>>+F+R>>FR>>FRnFn>>-R>>FR>>FR>>-F-R>>FR>>FR>>-F-R>>FR>>FRnFn>>+R>>FR>>FR>>+F+R>>FR>>FR>>+F+R>>FR>>FR"
+# R = r"RFRFR-F-RFRFR+F+RFRFRnFn+RFRFR-F-RFRFR+F+RFRFR&F&+RFRFR-F-RFRFR+F+RFRFR<<"  # NOQA
+R = r"R>>FR>>FR>>+F+R>>FR>>FR>>+F+R>>FR>>FRnFn>>-R>>FR>>FR>>-F-R>>FR>>FR>>-F-R>>FR>>FRnFn>>+R>>FR>>FR>>+F+R>>FR>>FR>>+F+R>>FR>>FR"  # NOQA
 
 d = {"A": A, "B": B, "C": C, "D": D, "X": X, "P": P, "Y": Y, "Z": Z, "T": T,
      "U": U, "R": R}
@@ -240,14 +240,15 @@ class VoxelisedFractal(object):
     def __len__(self):
         return self.fractal.__len__()
 
-    def toText(self):
+    def to_text(self):
         """
         """
-        output = "#KIND POS_X POS_Y POS_Z EUL_PSI EUL_THETA EUL_PHI\n"
-        text = [output] + [voxel.toText() for voxel in self.fractal]
+        output = "#IDX KIND POS_X POS_Y POS_Z EUL_PSI EUL_THETA EUL_PHI\n"
+        text = [output] + [" ".join([str(idx), voxel.toText()])
+                           for idx, voxel in enumerate(self.fractal)]
         return "".join(text)
 
-    def toPlot(self, refine=0, batch=False):
+    def to_plot(self, refine=0, batch=False):
         """
         fig = toPlot(refine=0, batch=False)
         Create a matplotlib figure instance of this fractal
