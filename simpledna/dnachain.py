@@ -19,31 +19,31 @@ BP_ROTATION = 36 / 180. * np.pi  # degrees
 
 class DNAChain(object):
 
-    def __init__(self, genome):
+    def __init__(self, genome, chain=0):
         """
         DNAChain(genome)
 
         Construct a DNA chain from a genome of GATC
         """
-        self.basepairs_chain0 = self.makeFromGenome(genome)
+        self.basepairs_chain0 = self.makeFromGenome(genome, chain=chain)
         self.basepairs = self.basepairs_chain0
         self.center_in_z()
 
     @staticmethod
-    def makeFromGenome(genome):
-        chain = []
+    def makeFromGenome(genome, chain=0):
+        dnachain = []
         position = np.array([0, 0, 0], dtype=float)
         rotation = np.array([0, 0, 0], dtype=float)
         index = 0
         for char in genome:
             print("Appending " + char)
-            chain.append(
-                basepair.BasePair(char, chain=0, position=position,
+            dnachain.append(
+                basepair.BasePair(char, chain=chain, position=position,
                                   rotation=rotation, index=index))
             position += np.array([0., 0., BP_SEPARATION])
             rotation += np.array([0., 0., BP_ROTATION])
             index += 1
-        return chain
+        return dnachain
 
     @staticmethod
     def turnChain(chain):
