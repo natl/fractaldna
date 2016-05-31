@@ -19,7 +19,7 @@ def makeFractal(n=1, s="X"):
 def blenderifyFractal(vf):
     """
     """
-    imgdir = "/Users/nlampe/OneDrive/Doctorate/bacdna/hilbert3d/img/"
+    imgdir = "/Users/nlampe/OneDrive/Doctorate/fractaldna/hilbert3d/img/"
     filepaths = [imgdir+"dnaturn.blend",
                  imgdir+"dnastraight.blend",
                  imgdir+"dnaturntwist.blend"]
