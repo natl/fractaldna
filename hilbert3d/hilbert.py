@@ -279,6 +279,29 @@ class VoxelisedFractal(object):
 
         return fig
 
+    def center_fractal(self):
+        """Center the fractal around (x, y, z) = (0, 0, 0)
+        """
+        minvals = np.array([np.inf, np.inf, np.inf])
+        maxvals = np.array([-np.inf, -np.inf, -np.inf])
+
+        #identify max/min values
+        for voxel in self.fractal:
+            for (ii, (minv, v, maxv)) in\
+                    enumerate(zip(minvals, voxel.pos, maxvals)):
+                if v < minv:
+                    minvals[ii] = v
+                elif v > maxv:
+                    maxvals[ii] = v
+
+        # transform
+        transform = - minvals - (maxvals - minvals)/2.
+        for voxel in self.fractal:
+            oldpos = voxel.pos
+            voxel.pos = oldpos + transform
+
+        return None
+
     @staticmethod
     def makeVoxel(prevVoxel, currpos, nextpos):
         # clean and vet output
@@ -345,3 +368,6 @@ class VoxelisedFractal(object):
         # print "Path Length: ", len(vf.fractal)
 
         return vf
+
+    def __len__(self):
+        return self.fractal.__len__()
