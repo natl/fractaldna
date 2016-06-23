@@ -361,7 +361,9 @@ class FourStrandTurnedDNAChain(DNAChain):
         """
         FourStrandTurnedDNAChain(genome, separation)
 
-        Construct four DNA chains that turn 90 degrees
+        Construct four DNA chains that turn 90 degrees.
+
+        Chain indices are assigned anticlockwise starting from the +y strand.
 
         args:
             genome: string of GATC specifying genome order
@@ -383,7 +385,7 @@ class FourStrandTurnedDNAChain(DNAChain):
         radiusInnerChain = (radiusMiddleChain - separation / 2.)
         radiusOuterChain = (radiusMiddleChain + separation / 2.)
 
-        self.basepairs_chain1 = DNAChain(genome, chain=1).basepairs
+        self.basepairs_chain2 = DNAChain(genome, chain=2).basepairs
 
         chain2Length = \
             int(np.floor(radiusInnerChain / radiusMiddleChain * len(genome)))
@@ -393,9 +395,9 @@ class FourStrandTurnedDNAChain(DNAChain):
                                           radiusMiddleChain))
 
         genome_chain2 = genome[:chain2Length]
-        self.basepairs_chain2 = DNAChain(genome_chain2, chain=2).basepairs
+        self.basepairs_chain3 = DNAChain(genome_chain2, chain=3).basepairs
         genome_chain3 = longGenome[:chain3Length]
-        self.basepairs_chain3 = DNAChain(genome_chain3, chain=3).basepairs
+        self.basepairs_chain1 = DNAChain(genome_chain3, chain=1).basepairs
         # pdb.set_trace()
 
         self.basepairs_chain0 = transform(self.basepairs_chain0)
@@ -404,15 +406,15 @@ class FourStrandTurnedDNAChain(DNAChain):
 
         self.basepairs_chain1 = transform(self.basepairs_chain1)
         for bp in self.basepairs_chain1:
-            bp.translate(-1 * translation_y)
+            bp.translate(-1 * translation_x)
 
         self.basepairs_chain2 = transform(self.basepairs_chain2)
         for bp in self.basepairs_chain2:
-            bp.translate(translation_x)
+            bp.translate(-1 * translation_y)
 
         self.basepairs_chain3 = transform(self.basepairs_chain3)
         for bp in self.basepairs_chain3:
-            bp.translate(-1 * translation_x)
+            bp.translate(translation_x)
 
         self.basepairs = self.basepairs_chain0 + self.basepairs_chain1 + \
             self.basepairs_chain2 + self.basepairs_chain3
