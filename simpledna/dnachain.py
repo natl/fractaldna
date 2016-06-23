@@ -3,18 +3,17 @@ Class description of a DNA chain built of base pairs
 """
 from __future__ import division, unicode_literals, print_function
 
-import basepair
-
 import numpy as np
 import matplotlib.pyplot as plt
-import rotations as r
 from mpl_toolkits.mplot3d import Axes3D  # NOQA
 from copy import deepcopy
 
-import rotations as rot
+from utils import rotations as r
+from utils import basepair
+from utils import BP_ROTATION, BP_SEPARATION
 
 BP_SEPARATION = 3.32  # Angstrom
-BP_ROTATION = 36 / 180. * np.pi  # degrees
+BP_ROTATION = 34.3 / 180. * np.pi  # degrees
 
 
 class DNAChain(object):
@@ -158,9 +157,9 @@ class DNAChain(object):
         bps = ["guanine", "adenine", "thymine", "cytosine"]
         for pair in self.basepairs:
             for (name, molecule) in pair.iterMolecules():
-                if molecule.name.lower() == "dnasugar":
+                if molecule.name.lower() == "sugar":
                     sugars.append(molecule.position)
-                elif molecule.name.lower() == "triphosphate":
+                elif molecule.name.lower() == "phosphate":
                     triphosphates.append(molecule.position)
                 elif molecule.name.lower() in bps:
                     bases.append(molecule.position)
@@ -186,7 +185,7 @@ class DNAChain(object):
         """
 
         def ellipse_xyz(center, extent, rotation=np.zeros([3])):
-            rmatrix = rot.eulerMatrix(*rotation)
+            rmatrix = r.eulerMatrix(*rotation)
             [a, b, c] = extent
             u, v = np.mgrid[0:2*np.pi:20j, 0:np.pi:10j]
             x = a * np.cos(u) * np.sin(v) + center[0]
@@ -207,10 +206,10 @@ class DNAChain(object):
         bps = ["guanine", "adenine", "thymine", "cytosine"]
         for pair in self.basepairs:
             for (name, molecule) in pair.iterMolecules():
-                if molecule.name.lower() == "dnasugar":
+                if molecule.name.lower() == "sugar":
                     sugars.append((molecule.position, molecule.dimensions,
                                    molecule.rotation))
-                elif molecule.name.lower() == "triphosphate":
+                elif molecule.name.lower() == "phosphate":
                     triphosphates.append((molecule.position,
                                           molecule.dimensions,
                                           molecule.rotation))
@@ -341,15 +340,15 @@ class FourStrandDNAChain(DNAChain):
             bp.setNewChain(0)
 
         for bp in self.basepairs_chain1:
-            bp.translate(-1 * translation_y)
+            bp.translate(-1 * translation_x)
             bp.setNewChain(1)
 
         for bp in self.basepairs_chain2:
-            bp.translate(translation_x)
+            bp.translate(-1 * translation_y)
             bp.setNewChain(2)
 
         for bp in self.basepairs_chain3:
-            bp.translate(-1 * translation_x)
+            bp.translate(1 * translation_x)
             bp.setNewChain(3)
 
         self.basepairs = self.basepairs_chain0 + self.basepairs_chain1 + \
