@@ -40,6 +40,7 @@ def assemble_geometry(infile, outfile, filepath, placement_dict):
 
         placement_dict contains key/value pairs for:
             (kindname, (blendfile, groupname))
+            kindname is the name the group has in the input placement file
             blendfile should have an absolute path
             groupname is the name of the desired group in the the blendfile
     """
@@ -75,7 +76,8 @@ def assemble_geometry(infile, outfile, filepath, placement_dict):
             data_to.groups = data_from.groups
 
     for (ii, (kind, pos, rot)) in enumerate(zip(names, positions, rotations)):
-        bpy.ops.object.group_instance_add(group=placement_dict[kind][1],
+        groupname = placement_dict[kind][1]
+        bpy.ops.object.group_instance_add(group=groupname,
                                           location=pos,
                                           rotation=rot)
 
