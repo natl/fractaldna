@@ -187,6 +187,17 @@ def triple_overlap_volume(pos1, pos2, pos3, r1, r2, r3):
 
     Calculate volume overlapped by 3 spheres
     From Gibson and Scheraga (1987)
+
+    Note:
+    There are cases where this formula doesn't work properly, not documented
+    in the paper by Gibson and Scheraga.This corresponds to the case where
+    the center of one circle lies between the line joining the point of
+    intersection of the three cricles, and the line between the center of the
+    two other circles.
+
+    This geometry rarely arises for chemical species, but if negative volumes
+    start appearing, or other quantities that seem unlikely, a Monte Carlo
+    integration can be used (provided in this package).
     """
     a = sum((pos3 - pos2) ** 2) ** 0.5
     b = sum((pos3 - pos1) ** 2) ** 0.5
@@ -206,11 +217,11 @@ def triple_overlap_volume(pos1, pos2, pos3, r1, r2, r3):
         return vol
 
     if (r1 > b) and (r2 > a):  # Circle C is enclosed by both others
-        print("Warning:: Circle C is interior to A and B")
+        print("Warning:: Circle C's center is interior to A and B")
     if (r1 > c) and (r3 > a):  # Circle B is enclosed by both others
-        print("Warning:: Circle B is interior to A and C")
+        print("Warning:: Circle B's center is interior to A and C")
     if (r2 > c) and (r3 > b):  # Circle A is enclosed by both others
-        print("Warning:: Circle A is interior to B and C")
+        print("Warning:: Circle A's center is interior to B and C")
 
     alpha = r1
     beta = r2
@@ -290,8 +301,7 @@ def triple_overlap_volume(pos1, pos2, pos3, r1, r2, r3):
             vol = np.nan
     else:
         vol = 0
-    if vol < 0:
-        pdb.set_trace()
+
     return vol
 
 
@@ -430,13 +440,11 @@ class MoleculeFromAtoms(object):
         for (atom, pos) in self.atoms.items():
             rad = RADIUS[LETTERS.match(atom).group()]
             vol += 4. / 3. * np.pi * rad ** 3
-        print(vol)
         # subtract double overlaps
         for ((a1, p1), (a2, p2)) in combinations(self.atoms.items(), 2):
             r1 = RADIUS[LETTERS.match(a1).group()]
             r2 = RADIUS[LETTERS.match(a2).group()]
             vol -= overlap_volume(p1, p2, r1, r2)
-        print(vol)
         for ((a1, p1), (a2, p2), (a3, p3)) in\
                 combinations(self.atoms.items(), 3):
             # pdb.set_trace()
@@ -444,7 +452,6 @@ class MoleculeFromAtoms(object):
             r2 = RADIUS[LETTERS.match(a2).group()]
             r3 = RADIUS[LETTERS.match(a3).group()]
             vol += triple_overlap_volume(p1, p2, p3, r1, r2, r3)
-        print(vol)
         return (vol * 3. / 4. / np.pi) ** (1. / 3.)
 
     def to_plot(self):

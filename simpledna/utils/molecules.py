@@ -161,7 +161,7 @@ class DNASugar(Molecule):
 
     def __init__(self, strand=-1, chain=-1, position=np.zeros(3),
                  rotation=np.zeros(3), index=0):
-        super(DNASugar, self).__init__("DNASugar", "sphere", SUGAR_RADIUS,
+        super(DNASugar, self).__init__("Sugar", "sphere", SUGAR_RADIUS,
                                        strand=strand, chain=chain,
                                        position=position, rotation=rotation,
                                        index=index)
@@ -174,7 +174,7 @@ class Triphosphate(Molecule):
 
     def __init__(self, strand=-1, chain=-1, position=np.zeros(3),
                  rotation=np.zeros(3), index=0):
-        super(Triphosphate, self).__init__("Triphosphate", "sphere",
+        super(Triphosphate, self).__init__("Phosphate", "sphere",
                                            PHOSPHATE_RADIUS,
                                            strand=strand, chain=chain,
                                            position=position,

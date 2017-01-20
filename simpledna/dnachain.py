@@ -3,18 +3,17 @@ Class description of a DNA chain built of base pairs
 """
 from __future__ import division, unicode_literals, print_function
 
-import basepair
-
 import numpy as np
 import matplotlib.pyplot as plt
-import rotations as r
 from mpl_toolkits.mplot3d import Axes3D  # NOQA
 from copy import deepcopy
 
-import rotations as rot
+from utils import rotations as r
+from utils import basepair
+from utils import BP_ROTATION, BP_SEPARATION
 
-BP_SEPARATION = 3.32  # Angstrom
-BP_ROTATION = 36 / 180. * np.pi  # degrees
+# BP_SEPARATION = 3.32  # Angstrom
+# BP_ROTATION = 34.3 / 180. * np.pi  # degrees
 
 
 class DNAChain(object):
@@ -45,40 +44,40 @@ class DNAChain(object):
             index += 1
         return dnachain
 
+    # @staticmethod
+    # def turnAndTwistChain(chain):
+    #     zmax = 0
+    #     zmin = 0
+    #     for pair in chain:
+    #         for (name, mol) in pair.iterMolecules():
+    #             if mol.position[2] < zmin:
+    #                 zmin = mol.position[2]
+    #             elif mol.position[2] > zmax:
+    #                 zmax = mol.position[2]
+    #
+    #     zrange = zmax - zmin
+    #     radius = 2. * zrange / np.pi
+    #
+    #     for pair in chain:
+    #         for (name, mol) in pair.iterMolecules():
+    #             # Translation of the frame - new center position
+    #             theta = np.pi / 2. * (mol.position[2] - zmin) / zrange
+    #             neworigin = np.array([radius * (1 - np.cos(theta)),
+    #                                   0.,
+    #                                   radius * np.sin(theta) - radius])
+    #             # rotation of the frame
+    #             oldframe = np.array([mol.position[0], mol.position[1], 0])
+    #             yrotation = np.pi / 2. * (mol.position[2] - zmin) / zrange
+    #
+    #             newframe = np.dot(r.roty(yrotation), oldframe)
+    #             mol.position[0] = neworigin[0] + newframe[0]
+    #             mol.position[1] = neworigin[1] + newframe[1]
+    #             mol.position[2] = neworigin[2] + newframe[2]
+    #             mol.rotate(np.array([0, yrotation, 0]))
+    #     return chain
+
     @staticmethod
-    def turnChain(chain):
-        zmax = 0
-        zmin = 0
-        for pair in chain:
-            for (name, mol) in pair.iterMolecules():
-                if mol.position[2] < zmin:
-                    zmin = mol.position[2]
-                elif mol.position[2] > zmax:
-                    zmax = mol.position[2]
-
-        zrange = zmax - zmin
-        radius = 2. * zrange / np.pi
-
-        for pair in chain:
-            for (name, mol) in pair.iterMolecules():
-                # Translation of the frame - new center position
-                theta = np.pi / 2. * (mol.position[2] - zmin) / zrange
-                neworigin = np.array([radius * (1 - np.cos(theta)),
-                                      0.,
-                                      radius * np.sin(theta) - radius])
-                # rotation of the frame
-                oldframe = np.array([mol.position[0], mol.position[1], 0])
-                yrotation = np.pi / 2. * (mol.position[2] - zmin) / zrange
-
-                newframe = np.dot(r.roty(yrotation), oldframe)
-                mol.position[0] = neworigin[0] + newframe[0]
-                mol.position[1] = neworigin[1] + newframe[1]
-                mol.position[2] = neworigin[2] + newframe[2]
-                mol.rotate(np.array([0, yrotation, 0]))
-        return chain
-
-    @staticmethod
-    def turnAndTwistChain(chain):
+    def turnAndTwistChain(chain, twist=0.):
         zmax = 0
         zmin = 0
         for pair in chain:
@@ -101,9 +100,7 @@ class DNAChain(object):
                 # rotation of the frame
                 oldframe = np.array([mol.position[0], mol.position[1], 0])
                 yang = np.pi / 2. * (mol.position[2] - zmin) / zrange
-                xang = np.pi / 2. * (mol.position[2] - zmin) / zrange
-
-                print(mol.position[2])
+                xang = twist * (mol.position[2] - zmin) / zrange
 
                 newframe = np.dot(r.rotx(xang), np.dot(r.roty(yang), oldframe))
 
@@ -158,9 +155,9 @@ class DNAChain(object):
         bps = ["guanine", "adenine", "thymine", "cytosine"]
         for pair in self.basepairs:
             for (name, molecule) in pair.iterMolecules():
-                if molecule.name.lower() == "dnasugar":
+                if molecule.name.lower() == "sugar":
                     sugars.append(molecule.position)
-                elif molecule.name.lower() == "triphosphate":
+                elif molecule.name.lower() == "phosphate":
                     triphosphates.append(molecule.position)
                 elif molecule.name.lower() in bps:
                     bases.append(molecule.position)
@@ -186,7 +183,7 @@ class DNAChain(object):
         """
 
         def ellipse_xyz(center, extent, rotation=np.zeros([3])):
-            rmatrix = rot.eulerMatrix(*rotation)
+            rmatrix = r.eulerMatrix(*rotation)
             [a, b, c] = extent
             u, v = np.mgrid[0:2*np.pi:20j, 0:np.pi:10j]
             x = a * np.cos(u) * np.sin(v) + center[0]
@@ -207,10 +204,10 @@ class DNAChain(object):
         bps = ["guanine", "adenine", "thymine", "cytosine"]
         for pair in self.basepairs:
             for (name, molecule) in pair.iterMolecules():
-                if molecule.name.lower() == "dnasugar":
+                if molecule.name.lower() == "sugar":
                     sugars.append((molecule.position, molecule.dimensions,
                                    molecule.rotation))
-                elif molecule.name.lower() == "triphosphate":
+                elif molecule.name.lower() == "phosphate":
                     triphosphates.append((molecule.position,
                                           molecule.dimensions,
                                           molecule.rotation))
@@ -249,7 +246,7 @@ class TurnedDNAChain(DNAChain):
         self.turnDNA()
 
     def turnDNA(self):
-        self.basepairs = DNAChain.turnChain(self.basepairs)
+        self.basepairs = DNAChain.turnAndTwistChain(self.basepairs)
         return None
 
 
@@ -266,7 +263,8 @@ class TurnedTwistedDNAChain(DNAChain):
         self.turnAndTwistDNA()
 
     def turnAndTwistDNA(self):
-        self.basepairs = DNAChain.turnAndTwistChain(self.basepairs)
+        self.basepairs =\
+            DNAChain.turnAndTwistChain(self.basepairs, twist=np.pi/2.)
         return None
 
 
@@ -341,15 +339,15 @@ class FourStrandDNAChain(DNAChain):
             bp.setNewChain(0)
 
         for bp in self.basepairs_chain1:
-            bp.translate(-1 * translation_y)
+            bp.translate(-1 * translation_x)
             bp.setNewChain(1)
 
         for bp in self.basepairs_chain2:
-            bp.translate(translation_x)
+            bp.translate(-1 * translation_y)
             bp.setNewChain(2)
 
         for bp in self.basepairs_chain3:
-            bp.translate(-1 * translation_x)
+            bp.translate(1 * translation_x)
             bp.setNewChain(3)
 
         self.basepairs = self.basepairs_chain0 + self.basepairs_chain1 + \
@@ -376,47 +374,146 @@ class FourStrandTurnedDNAChain(DNAChain):
         translation_y = np.array([0., separation / 2., 0.], dtype=float)
         translation_x = np.array([separation / 2., 0., -separation / 2.],
                                  dtype=float)
-        if twist is True:
-            transform = self.turnAndTwistChain
-        else:
-            transform = self.turnChain
-        radiusMiddleChain =\
+        ang = np.pi/2. if twist is True else 0
+
+        radiusC0 =\
             len(self.basepairs_chain0) * BP_SEPARATION * 2 / np.pi
-        radiusInnerChain = (radiusMiddleChain - separation / 2.)
-        radiusOuterChain = (radiusMiddleChain + separation / 2.)
+        radiusC3 = (radiusC0 - separation / 2.)
+        radiusC1 = (radiusC0 + separation / 2.)
 
         self.basepairs_chain2 = DNAChain(genome, chain=2).basepairs
 
-        chain2Length = \
-            int(np.floor(radiusInnerChain / radiusMiddleChain * len(genome)))
-        chain3Length = \
-            int(np.floor(radiusOuterChain / radiusMiddleChain * len(genome)))
-        longGenome = genome * int(np.ceil(radiusOuterChain /
-                                          radiusMiddleChain))
+        lengthC3 = \
+            int(np.floor(radiusC3 / radiusC0 * len(genome)))
+        lengthC1 = \
+            int(np.floor(radiusC1 / radiusC0 * len(genome)))
+        longGenome = genome * int(np.ceil(radiusC1 /
+                                          radiusC0))
 
-        genome_chain2 = genome[:chain2Length]
-        self.basepairs_chain3 = DNAChain(genome_chain2, chain=3).basepairs
-        genome_chain3 = longGenome[:chain3Length]
-        self.basepairs_chain1 = DNAChain(genome_chain3, chain=1).basepairs
-        # pdb.set_trace()
+        genome_chain3 = genome[:lengthC3]
+        self.basepairs_chain3 = DNAChain(genome_chain3, chain=3).basepairs
+        genome_chain1 = longGenome[:lengthC1]
+        self.basepairs_chain1 = DNAChain(genome_chain1, chain=1).basepairs
 
-        self.basepairs_chain0 = transform(self.basepairs_chain0)
-        for bp in self.basepairs_chain0:
-            bp.translate(translation_y)
+        chains = [self.basepairs_chain0,
+                  self.basepairs_chain1,
+                  self.basepairs_chain2,
+                  self.basepairs_chain3]
+        transforms = [+translation_y,
+                      -translation_x,
+                      -translation_y,
+                      +translation_x]
+        angles = [ang + (2*np.pi - BP_ROTATION*len(c)%(2*np.pi)) for c in chains]
 
-        self.basepairs_chain1 = transform(self.basepairs_chain1)
-        for bp in self.basepairs_chain1:
-            bp.translate(-1 * translation_x)
+        for (ii, (c, t, a)) in enumerate(zip(chains, transforms, angles)):
+            c = self.turnAndTwistChain(c, twist=a)
+            for bp in c:
+                bp.translate(t)
+            chains[ii] = c
 
-        self.basepairs_chain2 = transform(self.basepairs_chain2)
-        for bp in self.basepairs_chain2:
-            bp.translate(-1 * translation_y)
+        self.basepairs = []
+        for c in chains:
+            self.basepairs.extend(c)
 
-        self.basepairs_chain3 = transform(self.basepairs_chain3)
-        for bp in self.basepairs_chain3:
-            bp.translate(translation_x)
+        return None
 
-        self.basepairs = self.basepairs_chain0 + self.basepairs_chain1 + \
-            self.basepairs_chain2 + self.basepairs_chain3
+
+class EightStrandDNAChain(DNAChain):
+    def __init__(self, genome, sep1, sep2, turn=False, twist=False):
+        """
+        FourStrandTurnedDNAChain(genome, sep1, sep2, turn=False, twist=False)
+
+        Construct eight DNA chains that can turn 90 degrees if turn=True
+
+        Chain indices are assigned anticlockwise starting from the +y strand,
+            first to the inner four strands, then two the outer four strands.
+            ie.
+                      4           Strands 1 and 3, 0 and 2 are separated by
+                      0           sep1
+                5  1     3  7     Strands 4 and 6, 5 and 7 are separated by
+                      2           sep2
+                      6
+
+
+        args:
+            genome: string of GATC specifying genome order
+            sep1: separation of inner strands from the center in angstroms
+            sep1: separation of outer strands from the center in angstroms
+
+        kwargs:
+            turn: boolean, turn strands 90degrees along box
+            twist: boolean, add a 90 deg twist to each chain
+        """
+        DNAChain.__init__(self, genome)
+        v1 = -sep1 / 2. if turn is True else 0
+        v2 = -sep2 / 2. if turn is True else 0
+        trans_y1 = np.array([0., sep1 / 2., 0.], dtype=float)
+        trans_x1 = np.array([sep1 / 2., 0., v1],  dtype=float)
+        trans_y2 = np.array([0., sep2 / 2., 0.], dtype=float)
+        trans_x2 = np.array([sep2 / 2., 0., v2],  dtype=float)
+        ang = np.pi/2. if twist is True else 0
+
+        # centrally aligned strands
+        self.basepairs_chain2 = DNAChain(genome, chain=2).basepairs
+        self.basepairs_chain4 = DNAChain(genome, chain=4).basepairs
+        self.basepairs_chain6 = DNAChain(genome, chain=6).basepairs
+
+        radiusC0 = len(self.basepairs_chain0) * BP_SEPARATION * 2 / np.pi
+        if turn is True:
+            radiusC1 = (radiusC0 + sep1 / 2.)
+            radiusC3 = (radiusC0 - sep1 / 2.)
+            radiusC5 = (radiusC0 + sep2 / 2.)
+            radiusC7 = (radiusC0 - sep2 / 2.)
+        else:
+            radiusC1 = radiusC0
+            radiusC3 = radiusC0
+            radiusC5 = radiusC0
+            radiusC7 = radiusC0
+
+        lengthC1 = int(np.floor(radiusC1 / radiusC0 * len(genome)))
+        lengthC3 = int(np.floor(radiusC3 / radiusC0 * len(genome)))
+        lengthC5 = int(np.floor(radiusC5 / radiusC0 * len(genome)))
+        lengthC7 = int(np.floor(radiusC7 / radiusC0 * len(genome)))
+        longGenome = genome * int(np.ceil(radiusC5 / radiusC0))
+
+        self.basepairs_chain1 = DNAChain(longGenome[:lengthC1],
+                                         chain=1).basepairs
+        self.basepairs_chain3 = DNAChain(longGenome[:lengthC3],
+                                         chain=3).basepairs
+        self.basepairs_chain5 = DNAChain(longGenome[:lengthC5],
+                                         chain=5).basepairs
+        self.basepairs_chain7 = DNAChain(longGenome[:lengthC7],
+                                         chain=7).basepairs
+
+
+        chains = [self.basepairs_chain0,
+                  self.basepairs_chain1,
+                  self.basepairs_chain2,
+                  self.basepairs_chain3,
+                  self.basepairs_chain4,
+                  self.basepairs_chain5,
+                  self.basepairs_chain6,
+                  self.basepairs_chain7]
+        transforms = [+trans_y1,
+                      -trans_x1,
+                      -trans_y1,
+                      +trans_x1,
+                      +trans_y2,
+                      -trans_x2,
+                      -trans_y2,
+                      +trans_x2]
+        angles = [ang + (2*np.pi - BP_ROTATION*len(c)%(2*np.pi)) for c in chains]
+        print(angles)
+
+        for (ii, (c, t, a)) in enumerate(zip(chains, transforms, angles)):
+            if turn is True:
+                c = self.turnAndTwistChain(c, twist=a)
+            for bp in c:
+                bp.translate(t)
+            chains[ii] = c
+
+        self.basepairs = []
+        for c in chains:
+            self.basepairs.extend(c)
 
         return None
