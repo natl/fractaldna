@@ -254,7 +254,7 @@ class TestVoxFractalMakeVoxelMethod(unittest.TestCase):
     zdir = np.array([0, 0, 1])
     dirs = {'x': xdir, 'y': ydir, 'z': zdir}
     types = h.Voxel.types
-    reverseTypes = {val: key for (key, val) in types.iteritems()}
+    reverseTypes = {val: key for (key, val) in types.items()}
     pos1 = np.array([0, 0, 0])
     vox1 = h.Voxel(pos1, dirs['x'], dirs['y'],
                    dirs['x'], dirs['y'])
@@ -326,7 +326,7 @@ class TestVoxelisedFractalCreation(unittest.TestCase):
     Test creation of the voxelised fractal, with simple test cases
     """
     types = h.Voxel.types
-    reverseTypes = {val: key for (key, val) in types.iteritems()}
+    reverseTypes = {val: key for (key, val) in types.items()}
 
     def test_empty(self):
         frac = h.VoxelisedFractal()
@@ -344,7 +344,7 @@ class TestVoxelisedFractalCreation(unittest.TestCase):
 
     def test_arbitraryFractalLength(self):
         s = r"n<XFn<XFX-Fn>>XFX&F+>>XFX-F>X->"
-        for ii in xrange(2):
+        for ii in range(2):
             s = h.iterate(s)
         frac = h.VoxelisedFractal.fromLString(s)
         nvoxels = 1
@@ -367,7 +367,7 @@ class TestVoxelisedFractalCreation(unittest.TestCase):
               ["straight"]*3
 
         f = frac.fractal
-        for ii in xrange(len(f)):
+        for ii in range(len(f)):
             self.assertEqual(f[ii].type, self.types[exp[ii]], "expected " +
                              exp[ii] + ", got " +
                              self.reverseTypes[f[ii].type])
@@ -386,7 +386,7 @@ class TestVoxelisedFractalCreation(unittest.TestCase):
                "turntwist", "turn", "straight"]
 
         f = frac.fractal
-        for ii in xrange(len(f)):
+        for ii in range(len(f)):
             self.assertEqual(f[ii].type, self.types[exp[ii]], "expected " +
                              exp[ii] + " for voxel " + str(ii) + ", got " +
                              self.reverseTypes[f[ii].type])
@@ -407,7 +407,7 @@ class TestVoxelisedFractalCreation(unittest.TestCase):
                eulerMatrix(0, np.pi/2, -np.pi/2), eulerMatrix(np.pi, 0, 0)]
 
         f = frac.fractal
-        for ii in xrange(len(f)):
+        for ii in range(len(f)):
             tested = np.around(f[ii].rotation, 8)
             expect = np.around(exp[ii], 8)
             self.assertTrue((tested == expect).all(),
@@ -430,7 +430,7 @@ class TestVoxelisedFractalCreation(unittest.TestCase):
                (0, np.pi/2, -np.pi/2), (np.pi, 0, 0)]
 
         f = frac.fractal
-        for ii in xrange(len(f)):
+        for ii in range(len(f)):
             v = f[ii]
             tested = np.around(np.array([v.psi, v.theta, v.phi]), 8)
             # Make all -pi into +pi
@@ -477,7 +477,7 @@ class TestEulerAngleGeneration(unittest.TestCase):
 
 
 class TestTextOutput(unittest.TestCase):
-    types_inverse = {v: k for (k, v) in h.Voxel.types.iteritems()}
+    types_inverse = {v: k for (k, v) in h.Voxel.types.items()}
 
     def test_straightPath(self):
         s = 'F'*10
