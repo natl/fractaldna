@@ -321,7 +321,7 @@ def mc_triple_volume(p1, p2, p3, r1, r2, r3, n=1e5):
 
     in_overlap = 0.
     in_circle = lambda p, c, r: sum((p - c) ** 2.) ** 0.5 < r
-    for ii in xrange(int(n)):
+    for ii in range(int(n)):
         position = (np.random.random(3) - 0.5) * ranges + centres
         in1 = in_circle(position, p1, r1)
         in2 = in_circle(position, p2, r2)

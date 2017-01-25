@@ -5,11 +5,11 @@ Define base pairs in a DNA chain
 """
 from __future__ import division, unicode_literals, print_function
 
-import molecules
-import dnapositions as dpos
+from . import molecules
+from . import dnapositions as dpos
 import numpy as np
 from copy import deepcopy
-from rotations import eulerMatrix
+from .rotations import eulerMatrix
 from collections import OrderedDict
 
 # Positions in Angstroms
@@ -150,7 +150,7 @@ class BasePair(object):
 
         translate the base pair by the specified 3-vector array
         """
-        for molecule in self.moleculeDict.itervalues():
+        for molecule in self.moleculeDict.values():
             molecule.translate(translation)
 
         return None
@@ -162,7 +162,7 @@ class BasePair(object):
         Rotate elements in base pair
         """
         rmatrix = eulerMatrix(rotation[0], rotation[1], rotation[2])
-        for molecule in self.moleculeDict.itervalues():
+        for molecule in self.moleculeDict.values():
             molecule.position = np.dot(rmatrix, molecule.position)
             molecule.rotate(rotation)
 
@@ -184,7 +184,7 @@ class BasePair(object):
 
         Reset the chain index for all molecules
         """
-        for molecule in self.moleculeDict.itervalues():
+        for molecule in self.moleculeDict.values():
             molecule.chain = chainIdx
 
         return None
@@ -195,7 +195,7 @@ class BasePair(object):
         Return a description of the molecules in the base pair as text
         """
         output = []
-        for molecule in self.moleculeDict.itervalues():
+        for molecule in self.moleculeDict.values():
             output.append(molecule.to_text(seperator=seperator))
 
         return "".join(output)
@@ -204,4 +204,4 @@ class BasePair(object):
         return self.moleculeDict[key]
 
     def iterMolecules(self):
-        return self.moleculeDict.iteritems()
+        return self.moleculeDict.items()

@@ -2,12 +2,11 @@ from __future__ import division, print_function, unicode_literals
 
 import unittest
 import dnachain
-import basepair
-import dnapositions
-
+from utils import basepair
+from utils import dnapositions
 import numpy as np
 from mpl_toolkits.mplot3d import Axes3D  # NOQA
-import rotations as rots
+from utils import rotations as rots
 
 
 class TestDNACreation(unittest.TestCase):

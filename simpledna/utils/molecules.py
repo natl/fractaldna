@@ -7,8 +7,8 @@ from __future__ import division, unicode_literals, print_function
 
 import numpy as np
 from copy import deepcopy
-import dnapositions as dpos
-import rotations as rot
+from . import dnapositions as dpos
+from . import rotations as rot
 
 # Physical parameters, all in Angstrom
 GUANINE_SIZE = dpos.MoleculeFromAtoms.from_cylindrical(dpos.GUANINE)\
