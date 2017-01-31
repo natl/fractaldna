@@ -1,6 +1,7 @@
 import bpy
 import os
-import pdb
+import math
+from mathutils import Vector
 
 COLOURS = {"PHOSPHATE": (255, 255, 0),
            "SUGAR": (255, 0, 0),
@@ -32,19 +33,100 @@ def do_world():
     bpy.data.worlds["World"].zenith_color = (1, 1, 1)
     bpy.data.worlds["World"].ambient_color = (1, 1, 1)
     bpy.data.worlds["World"].light_settings.use_environment_light = 1
+    bpy.data.worlds["World"].light_settings.environment_energy = 0.1
     return None
 
 
-def make_movie(infile, camera_positions, camera_directions):
+def make_movie(infile, centre, distance, outfile, clip=100):
+    """Make a movie
+
+    make_movie(infile, centre, distance, outfile, clip=100)
+
+    For a given infile, the camera will spin around the geometry
+        (around the z-axis), then fly to through along the x-axis to the
+        origin, before spinning once more.
     """
-    """
+    def point_camera(obj_camera, point):
+        loc_camera = obj_camera.matrix_world.to_translation()
+        direction = Vector(point) - loc_camera
+        # point the cameras '-Z' and use its 'Y' as up
+        rot_quat = direction.to_track_quat('-Z', 'Y')
+        # assume we're using euler rotation
+        obj_camera.rotation_euler = rot_quat.to_euler()
+
+    assert os.path.exists(infile), "Could not find infile"
+    assert len(centre) == 3, "centre position invalid"
+    assert distance > 0, "distance is a positive integer"
+
+    print("Opening {}".format(infile))
+    bpy.ops.wm.open_mainfile(filepath=infile)
+    cam = bpy.data.cameras.new("RenderCamera")
+
+    cam_ob = bpy.data.objects.new("RenderCamera", cam)
+    sceneKey = bpy.data.scenes.keys()[0]
+    bpy.data.scenes[sceneKey].objects.link(cam_ob)
+    scene = bpy.data.scenes[sceneKey]
+    scene.frame_start = 1
+    scene.frame_end = 101
+    positions = []
+    for ii in range(24):
+        angle = (ii + 1) * 3.14159 / 12.  # a little less than pi
+        positions.append([distance*math.cos(angle),
+                          distance*math.sin(angle),
+                          0])
+    cam_ob.location = (distance, 0, 0)
+    point_camera(cam_ob, (0, 0, 0))
+    the_frame = 0
+    cam_ob.keyframe_insert(data_path="location", frame=the_frame)
+    cam_ob.keyframe_insert(data_path="rotation_euler", frame=the_frame)
+    for position in positions:
+        the_frame = the_frame + 2
+        bpy.data.scenes[sceneKey].frame_set(the_frame)
+        cam_ob.location = position
+        point_camera(cam_ob, (0, 0, 0))
+        cam_ob.keyframe_insert(data_path="location", frame=the_frame)
+        cam_ob.keyframe_insert(data_path="rotation_euler", frame=the_frame)
+
+    # zoom to center
+    the_frame = the_frame + 10
+    bpy.data.scenes[sceneKey].frame_set(the_frame)
+    cam_ob.location = (0, 0, 0)
+    cam_ob.keyframe_insert(data_path="location", frame=the_frame)
+    for ii in range(6):
+        angle = (ii + 1) * 3.14159 / 12.  # a little less than pi
+        the_frame = the_frame + 2
+        bpy.data.scenes[sceneKey].frame_set(the_frame)
+        cam_ob.rotation_euler[2] = angle
+        cam_ob.keyframe_insert(data_path="rotation_euler", frame=the_frame)
+
+    for ii in range(6):
+        angle = (ii + 1) * 3.14159 / 12.  # a little less than pi
+        the_frame = the_frame + 2
+        bpy.data.scenes[sceneKey].frame_set(the_frame)
+        cam_ob.rotation_euler[1] = angle
+        cam_ob.keyframe_insert(data_path="rotation_euler", frame=the_frame)
+
+    # zoom back out
+    the_frame = the_frame + 10
+    bpy.data.scenes[sceneKey].frame_set(the_frame)
+    cam_ob.location = [0, 0, -1*distance]
+    cam_ob.keyframe_insert(data_path="location", frame=the_frame)
+
+    bpy.data.cameras["RenderCamera"].clip_end = clip
+    bpy.data.scenes[sceneKey].camera = cam_ob
+    bpy.data.scenes[sceneKey].render.image_settings.file_format = 'H264'
+    bpy.data.scenes[sceneKey].render.fps = 24
+    bpy.data.scenes[sceneKey].render.frame_map_old = 1
+    bpy.data.scenes[sceneKey].render.frame_map_new = 24
+    bpy.data.scenes[sceneKey].render.filepath = outfile
+    bpy.ops.render.render()
     return None
 
 
-def make_render(infile, camera_position, camera_rotation, outfile, cut=100):
+def make_render(infile, camera_position, camera_rotation, outfile, clip=100):
     """Render a frame
 
-    make_render(infile, camera_position, camera_rotation, outfile, cut=100)
+    make_render(infile, camera_position, camera_rotation, outfile, clip=100)
 
     args:
         infile: blender file to Render
@@ -60,14 +142,15 @@ def make_render(infile, camera_position, camera_rotation, outfile, cut=100):
     camera_rotation = [3.14159/180.*r for r in camera_rotation]
     cam = bpy.data.cameras.new("RenderCamera")
     cam_ob = bpy.data.objects.new("RenderCamera", cam)
-    bpy.context.scene.objects.link(cam_ob)
+    bpy.data.scenes[sceneKey].objects.link(cam_ob)
     cam_ob.rotation_euler = camera_rotation
     cam_ob.location = camera_position
-
-    bpy.context.scene.objects.active =\
-        bpy.context.scene.objects["RenderCamera"]
-    bpy.ops.render.render()
-    bpy.ops.image.save_as(outfile)
+    bpy.data.cameras["RenderCamera"].clip_end = clip
+    sceneKey = bpy.data.scenes.keys()[0]
+    bpy.data.scenes[sceneKey].camera = cam_ob
+    bpy.context.scene[sceneKey].render.image_settings.file_format = 'PNG'
+    bpy.data.scenes[sceneKey].render.filepath = outfile
+    bpy.ops.render.render(write_still=True)
     return None
 
 
