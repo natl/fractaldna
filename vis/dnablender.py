@@ -41,10 +41,42 @@ def make_movie(infile, camera_positions, camera_directions):
     return None
 
 
-def assemble_geometry(infile, outfile, units, filepath, placement_dict):
+def make_render(infile, camera_position, camera_rotation, outfile, cut=100):
+    """Render a frame
+
+    make_render(infile, camera_position, camera_rotation, outfile, cut=100)
+
+    args:
+        infile: blender file to Render
+        camera_position: 3-element list for position
+        camera_rotation: 3-element list for rotation (degrees)
+        outfile: output image render filename
+    """
+    assert os.path.exists(infile), "Could not find infile"
+    assert len(camera_position) == 3, "camera position invalid"
+    assert len(camera_position) == 3, "camera direction invalid"
+    print("Opening {}".format(infile))
+    bpy.ops.wm.open_mainfile(filepath=infile)
+    camera_rotation = [3.14159/180.*r for r in camera_rotation]
+    cam = bpy.data.cameras.new("RenderCamera")
+    cam_ob = bpy.data.objects.new("RenderCamera", cam)
+    bpy.context.scene.objects.link(cam_ob)
+    cam_ob.rotation_euler = camera_rotation
+    cam_ob.location = camera_position
+
+    bpy.context.scene.objects.active =\
+        bpy.context.scene.objects["RenderCamera"]
+    bpy.ops.render.render()
+    bpy.ops.image.save_as(outfile)
+    return None
+
+
+def assemble_geometry(infile, outfile, units, filepath, placement_dict,
+                      ellipse=None):
     """Assemble placement volumes into a blender file.
 
-    assemble_geometry(infile, outfile, units, filepath, placement_dict)
+    assemble_geometry(infile, outfile, units, filepath, placement_dict,
+                      **kwargs)
 
     args:
         infile: input filename (note [1])
@@ -52,6 +84,12 @@ def assemble_geometry(infile, outfile, units, filepath, placement_dict):
         units: size of each placement volume cube (note [2])
         filepath: directory where input and output file should be
         placement_dict: dictionary, note[3].
+
+    kwargs:
+        ellipse: a list of three semi-major axis values that can serve as
+                 an xyz mask to restrict placements.
+                 Placements are only made inside the ellipse defined by
+                 the xyz values given.
 
     note:
         [1]
@@ -77,6 +115,8 @@ def assemble_geometry(infile, outfile, units, filepath, placement_dict):
     """
     units = float(units)
     assert outfile[-6:] == ".blend", "outfile param needs .blend suffix"
+    if ellipse is not None:
+        assert len(ellipse) == 3, "ellipse kwarg contains 3 elements"
 
     bpy.ops.wm.read_homefile()
     for t in ["MESH", "SURFACE", "CURVE", "META", "FONT", "CAMERA", "LAMP"]:
@@ -94,11 +134,18 @@ def assemble_geometry(infile, outfile, units, filepath, placement_dict):
     for line in infile:
         if line[0] != "#":
             ll = line.split()
-            names.append(ll[1])
             pos = [float(ii)*units for ii in ll[2:5]]
             rot = [float(ii) for ii in ll[5:8]]
-            positions.append(pos)
-            rotations.append(rot)
+            valid = True
+            if ellipse is not None:
+                r = (pos[0]/ellipse[0])**2 + (pos[1]/ellipse[1])**2 +\
+                    (pos[2]/ellipse[2])**2
+                if r > 1:
+                    valid = False
+            if valid is True:
+                names.append(ll[1])
+                positions.append(pos)
+                rotations.append(rot)
 
     for (kind, (path, groupname)) in placement_dict.items():
         with bpy.data.libraries.load(path, link=True) as (data_from, data_to):
