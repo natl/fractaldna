@@ -67,7 +67,6 @@ def make_movie(infile, centre, distance, outfile, clip=100):
     bpy.data.scenes[sceneKey].objects.link(cam_ob)
     scene = bpy.data.scenes[sceneKey]
     scene.frame_start = 1
-    scene.frame_end = 101
     positions = []
     for ii in range(24):
         angle = (ii + 1) * 3.14159 / 12.  # a little less than pi
@@ -76,7 +75,7 @@ def make_movie(infile, centre, distance, outfile, clip=100):
                           0])
     cam_ob.location = (distance, 0, 0)
     point_camera(cam_ob, (0, 0, 0))
-    the_frame = 0
+    the_frame = 1
     cam_ob.keyframe_insert(data_path="location", frame=the_frame)
     cam_ob.keyframe_insert(data_path="rotation_euler", frame=the_frame)
     for position in positions:
@@ -88,38 +87,45 @@ def make_movie(infile, centre, distance, outfile, clip=100):
         cam_ob.keyframe_insert(data_path="rotation_euler", frame=the_frame)
 
     # zoom to center
-    the_frame = the_frame + 10
+    the_frame = the_frame + 24
     bpy.data.scenes[sceneKey].frame_set(the_frame)
     cam_ob.location = (0, 0, 0)
     cam_ob.keyframe_insert(data_path="location", frame=the_frame)
+    cam_ob.keyframe_insert(data_path="rotation_euler", frame=the_frame)
     for ii in range(6):
         angle = (ii + 1) * 3.14159 / 12.  # a little less than pi
         the_frame = the_frame + 2
         bpy.data.scenes[sceneKey].frame_set(the_frame)
         cam_ob.rotation_euler[2] = angle
         cam_ob.keyframe_insert(data_path="rotation_euler", frame=the_frame)
+        cam_ob.keyframe_insert(data_path="location", frame=the_frame)
 
     for ii in range(6):
         angle = (ii + 1) * 3.14159 / 12.  # a little less than pi
         the_frame = the_frame + 2
         bpy.data.scenes[sceneKey].frame_set(the_frame)
-        cam_ob.rotation_euler[1] = angle
+        cam_ob.rotation_euler[1] = -1*angle
         cam_ob.keyframe_insert(data_path="rotation_euler", frame=the_frame)
+        cam_ob.keyframe_insert(data_path="location", frame=the_frame)
 
     # zoom back out
-    the_frame = the_frame + 10
+    the_frame = the_frame + 100
     bpy.data.scenes[sceneKey].frame_set(the_frame)
     cam_ob.location = [0, 0, -1*distance]
     cam_ob.keyframe_insert(data_path="location", frame=the_frame)
+    cam_ob.keyframe_insert(data_path="rotation_euler", frame=the_frame)
 
     bpy.data.cameras["RenderCamera"].clip_end = clip
     bpy.data.scenes[sceneKey].camera = cam_ob
     bpy.data.scenes[sceneKey].render.image_settings.file_format = 'H264'
     bpy.data.scenes[sceneKey].render.fps = 24
-    bpy.data.scenes[sceneKey].render.frame_map_old = 1
-    bpy.data.scenes[sceneKey].render.frame_map_new = 24
+    bpy.data.scenes[sceneKey].render.frame_map_old = 100
+    bpy.data.scenes[sceneKey].render.frame_map_new = 100
     bpy.data.scenes[sceneKey].render.filepath = outfile
-    bpy.ops.render.render()
+    bpy.data.scenes[sceneKey].render.resolution_x = 400
+    bpy.data.scenes[sceneKey].render.resolution_y = 300
+    scene.frame_end = the_frame + 1
+    bpy.ops.render.render(animation=True)
     return None
 
 
@@ -142,13 +148,13 @@ def make_render(infile, camera_position, camera_rotation, outfile, clip=100):
     camera_rotation = [3.14159/180.*r for r in camera_rotation]
     cam = bpy.data.cameras.new("RenderCamera")
     cam_ob = bpy.data.objects.new("RenderCamera", cam)
+    sceneKey = bpy.data.scenes.keys()[0]
     bpy.data.scenes[sceneKey].objects.link(cam_ob)
     cam_ob.rotation_euler = camera_rotation
     cam_ob.location = camera_position
     bpy.data.cameras["RenderCamera"].clip_end = clip
-    sceneKey = bpy.data.scenes.keys()[0]
     bpy.data.scenes[sceneKey].camera = cam_ob
-    bpy.context.scene[sceneKey].render.image_settings.file_format = 'PNG'
+    bpy.data.scenes[sceneKey].render.image_settings.file_format = 'PNG'
     bpy.data.scenes[sceneKey].render.filepath = outfile
     bpy.ops.render.render(write_still=True)
     return None
@@ -234,11 +240,21 @@ def assemble_geometry(infile, outfile, units, filepath, placement_dict,
         with bpy.data.libraries.load(path, link=True) as (data_from, data_to):
             data_to.groups = data_from.groups
 
+    objects = []
     for (ii, (kind, pos, rot)) in enumerate(zip(names, positions, rotations)):
         print("Placement", ii, kind, pos, rot)
-        bpy.ops.object.group_instance_add(group=placement_dict[kind][1],
-                                          location=pos,
-                                          rotation=rot)
+        name = str(kind) + str(ii)
+        obj = bpy.data.objects.new(name, None)
+        obj.dupli_type = "GROUP"
+        obj.dupli_group = bpy.data.groups[placement_dict[kind][1]]
+        objects.append(obj)
+        # bpy.ops.object.group_instance_add(group=placement_dict[kind][1],
+        #                                   location=pos,
+        #                                   rotation=rot)
+
+    for ii, obj in enumerate(objects):
+        print("Linking ", ii + 1, " of ", len(objects))
+        bpy.context.scene.objects.link(obj)
 
     outfile = os.path.join(filepath, outfile)
     bpy.ops.wm.save_as_mainfile(filepath=outfile)
