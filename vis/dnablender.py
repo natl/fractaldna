@@ -256,6 +256,8 @@ def assemble_geometry(infile, outfile, units, filepath, placement_dict,
         print("Linking ", ii + 1, " of ", len(objects))
         bpy.context.scene.objects.link(obj)
 
+    print("Updating Scene... (this may take some time)")
+    bpy.context.scene.update()  # NOT IN LOOP!
     outfile = os.path.join(filepath, outfile)
     bpy.ops.wm.save_as_mainfile(filepath=outfile)
     return None
