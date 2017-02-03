@@ -25,6 +25,15 @@ for (k, v) in COLOURS.items():
     MATERIALS[k] = mat
 
 
+def point_camera(obj_camera, point):
+    loc_camera = obj_camera.location
+    direction = Vector(point) - loc_camera
+    # point the cameras '-Z' and use its 'Y' as up
+    rot_quat = direction.to_track_quat('-Z', 'Y')
+    # assume we're using euler rotation
+    obj_camera.rotation_euler = rot_quat.to_euler()
+
+
 def do_world():
     """Make the world look nice
     """
@@ -46,13 +55,6 @@ def make_movie(infile, centre, distance, outfile, clip=100):
         (around the z-axis), then fly to through along the x-axis to the
         origin, before spinning once more.
     """
-    def point_camera(obj_camera, point):
-        loc_camera = obj_camera.location
-        direction = Vector(point) - loc_camera
-        # point the cameras '-Z' and use its 'Y' as up
-        rot_quat = direction.to_track_quat('-Z', 'Y')
-        # assume we're using euler rotation
-        obj_camera.rotation_euler = rot_quat.to_euler()
 
     assert os.path.exists(infile), "Could not find infile"
     assert len(centre) == 3, "centre position invalid"
@@ -82,7 +84,7 @@ def make_movie(infile, centre, distance, outfile, clip=100):
     cam_ob.keyframe_insert(data_path="location", frame=the_frame)
     cam_ob.keyframe_insert(data_path="rotation_euler", frame=the_frame)
     for position in positions:
-        the_frame = the_frame + 2
+        the_frame = the_frame + 12
         bpy.data.scenes[sceneKey].frame_set(the_frame)
         cam_ob.location = position
         point_camera(cam_ob, centre)
@@ -90,51 +92,57 @@ def make_movie(infile, centre, distance, outfile, clip=100):
         cam_ob.keyframe_insert(data_path="rotation_euler", frame=the_frame)
 
     # Pause
-    the_frame = the_frame + 6
+    the_frame = the_frame + 48
     bpy.data.scenes[sceneKey].frame_set(the_frame)
     cam_ob.keyframe_insert(data_path="location", frame=the_frame)
     cam_ob.keyframe_insert(data_path="rotation_euler", frame=the_frame)
 
     # Zoom to center
-    the_frame = the_frame + 24
+    the_frame = the_frame + 120
     bpy.data.scenes[sceneKey].frame_set(the_frame)
     cam_ob.location = centre
     cam_ob.keyframe_insert(data_path="location", frame=the_frame)
     cam_ob.keyframe_insert(data_path="rotation_euler", frame=the_frame)
 
     # Pause
-    the_frame = the_frame + 6
+    the_frame = the_frame + 24
     bpy.data.scenes[sceneKey].frame_set(the_frame)
     cam_ob.keyframe_insert(data_path="location", frame=the_frame)
     cam_ob.keyframe_insert(data_path="rotation_euler", frame=the_frame)
 
     # Turn around
-    the_frame = the_frame + 6
+    the_frame = the_frame + 24
     point_camera(cam_ob, (centre[0], centre[1] - distance, centre[2]))
     cam_ob.keyframe_insert(data_path="rotation_euler", frame=the_frame)
     cam_ob.keyframe_insert(data_path="location", frame=the_frame)
 
-    the_frame = the_frame + 6
+    the_frame = the_frame + 24
     point_camera(cam_ob, (centre[0] + distance, centre[1], centre[2]))
     cam_ob.keyframe_insert(data_path="rotation_euler", frame=the_frame)
     cam_ob.keyframe_insert(data_path="location", frame=the_frame)
 
     # Pause
-    the_frame = the_frame + 6
+    the_frame = the_frame + 24
     bpy.data.scenes[sceneKey].frame_set(the_frame)
     cam_ob.keyframe_insert(data_path="location", frame=the_frame)
     cam_ob.keyframe_insert(data_path="rotation_euler", frame=the_frame)
 
     # Turn again
-
-    the_frame = the_frame + 6
+    the_frame = the_frame + 24
     point_camera(cam_ob, (centre[0], centre[1], centre[2] + distance))
     cam_ob.keyframe_insert(data_path="rotation_euler", frame=the_frame)
     cam_ob.keyframe_insert(data_path="location", frame=the_frame)
 
     # Pause
-    the_frame = the_frame + 6
+    the_frame = the_frame + 24
     bpy.data.scenes[sceneKey].frame_set(the_frame)
+    cam_ob.keyframe_insert(data_path="location", frame=the_frame)
+    cam_ob.keyframe_insert(data_path="rotation_euler", frame=the_frame)
+
+    # zoom back out
+    the_frame = the_frame + 120
+    bpy.data.scenes[sceneKey].frame_set(the_frame)
+    cam_ob.location = [centre[0], centre[1], centre[2] - 0.5*distance]
     cam_ob.keyframe_insert(data_path="location", frame=the_frame)
     cam_ob.keyframe_insert(data_path="rotation_euler", frame=the_frame)
 
@@ -152,25 +160,25 @@ def make_movie(infile, centre, distance, outfile, clip=100):
     bpy.data.scenes[sceneKey].render.frame_map_old = 100
     bpy.data.scenes[sceneKey].render.frame_map_new = 100
     bpy.data.scenes[sceneKey].render.filepath = outfile
-    bpy.data.scenes[sceneKey].render.resolution_x = 400
-    bpy.data.scenes[sceneKey].render.resolution_y = 300
-    scene.frame_end = the_frame + 1
+    bpy.data.scenes[sceneKey].render.resolution_x = 640
+    bpy.data.scenes[sceneKey].render.resolution_y = 480
+    scene.frame_end = the_frame + 12
     print("Rendering {} frames".format(
-        int(the_frame)*bpy.data.scenes[sceneKey].render.frame_map_new/
+        int(the_frame)*bpy.data.scenes[sceneKey].render.frame_map_new /
         bpy.data.scenes[sceneKey].render.frame_map_old))
     bpy.ops.render.render(animation=True)
     return None
 
 
-def make_render(infile, camera_position, camera_rotation, outfile, clip=100):
+def make_render(infile, camera_position, camera_aim, outfile, clip=100):
     """Render a frame
 
-    make_render(infile, camera_position, camera_rotation, outfile, clip=100)
+    make_render(infile, camera_position, camera_aim, outfile, clip=100)
 
     args:
         infile: blender file to Render
         camera_position: 3-element list for position
-        camera_rotation: 3-element list for rotation (degrees)
+        camera_aim: Point to aim camera
         outfile: output image render filename
     """
     assert os.path.exists(infile), "Could not find infile"
@@ -178,13 +186,14 @@ def make_render(infile, camera_position, camera_rotation, outfile, clip=100):
     assert len(camera_position) == 3, "camera direction invalid"
     print("Opening {}".format(infile))
     bpy.ops.wm.open_mainfile(filepath=infile)
-    camera_rotation = [3.14159/180.*r for r in camera_rotation]
     cam = bpy.data.cameras.new("RenderCamera")
     cam_ob = bpy.data.objects.new("RenderCamera", cam)
     sceneKey = bpy.data.scenes.keys()[0]
     bpy.data.scenes[sceneKey].objects.link(cam_ob)
-    cam_ob.rotation_euler = camera_rotation
+
     cam_ob.location = camera_position
+    point_camera(cam_ob, camera_aim)
+
     bpy.data.cameras["RenderCamera"].clip_end = clip
     bpy.data.scenes[sceneKey].camera = cam_ob
     bpy.data.scenes[sceneKey].render.image_settings.file_format = 'PNG'
@@ -291,6 +300,8 @@ def assemble_geometry(infile, outfile, units, filepath, placement_dict,
         print("Linking ", ii + 1, " of ", len(objects))
         bpy.context.scene.objects.link(obj)
 
+    print("Updating Scene... (this may take some time)")
+    bpy.context.scene.update()  # NOT IN LOOP!
     outfile = os.path.join(filepath, outfile)
     bpy.ops.wm.save_as_mainfile(filepath=outfile)
     return None
@@ -352,7 +363,7 @@ def placement_volume(infile, outfile, filepath):
             enumerate(zip(names, sizes, positions, rotations)):
         if (ii//100)*100 == ii:
             print("{0}/{1}".format(ii, len(names)))
-        bpy.ops.mesh.primitive_uv_sphere_add(segments=16, ring_count=8,
+        bpy.ops.mesh.primitive_uv_sphere_add(segments=8, ring_count=6,
                                              size=1,
                                              view_align=False,
                                              enter_editmode=False,
