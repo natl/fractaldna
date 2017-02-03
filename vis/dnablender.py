@@ -47,7 +47,7 @@ def make_movie(infile, centre, distance, outfile, clip=100):
         origin, before spinning once more.
     """
     def point_camera(obj_camera, point):
-        loc_camera = obj_camera.matrix_world.to_translation()
+        loc_camera = obj_camera.location
         direction = Vector(point) - loc_camera
         # point the cameras '-Z' and use its 'Y' as up
         rot_quat = direction.to_track_quat('-Z', 'Y')
@@ -291,8 +291,6 @@ def assemble_geometry(infile, outfile, units, filepath, placement_dict,
         print("Linking ", ii + 1, " of ", len(objects))
         bpy.context.scene.objects.link(obj)
 
-    print("Updating Scene... (this may take some time)")
-    bpy.context.scene.update()  # NOT IN LOOP!
     outfile = os.path.join(filepath, outfile)
     bpy.ops.wm.save_as_mainfile(filepath=outfile)
     return None
