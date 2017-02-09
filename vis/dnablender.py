@@ -10,28 +10,55 @@ COLOURS = {"PHOSPHATE": (255, 255, 0),
            "CYTOSINE": (0, 255, 255),
            "THYMINE": (255, 0, 255)}
 
-MATERIALS = {}
-for (k, v) in COLOURS.items():
-    # Make Material
-    mat = bpy.data.materials.new(k)
-    mat.diffuse_color = v
-    mat.diffuse_shader = 'LAMBERT'
-    mat.diffuse_intensity = 1.0
-    mat.specular_color = v
-    mat.specular_shader = 'COOKTORR'
-    mat.specular_intensity = 0.5
-    mat.alpha = (1)
-    mat.ambient = 0.05
-    MATERIALS[k] = mat
+def get_materials():
+    materials = {}
+    for (k, v) in COLOURS.items():
+        # Make Material
+        mat = bpy.data.materials.new(k)
+        mat.diffuse_color = v
+        mat.diffuse_shader = 'LAMBERT'
+        mat.diffuse_intensity = 1.0
+        mat.specular_color = (1, 1, 1)
+        mat.specular_shader = 'COOKTORR'
+        mat.specular_intensity = 0.5
+        mat.alpha = (1)
+        mat.ambient = 0.05
+        mat.use_raytrace = False
+        mat.use_mist = False
+        mat.use_shadows = False
+        mat.use_cast_shadows = False
+        mat.use_cast_buffer_shadows = False
+        mat.use_ray_shadow_bias = False
+        mat.use_cast_approximate = False
+        mat.use_tangent_shading = False
+        materials[k] = mat
+    return materials
 
 
 def point_camera(obj_camera, point):
     loc_camera = obj_camera.location
     direction = Vector(point) - loc_camera
+    old_rotation = obj_camera.rotation_euler[:]
     # point the cameras '-Z' and use its 'Y' as up
     rot_quat = direction.to_track_quat('-Z', 'Y')
     # assume we're using euler rotation
-    obj_camera.rotation_euler = rot_quat.to_euler()
+    new_rotation = rot_quat.to_euler()
+    # bunch of code to keep rotations nice regardless of quadrant
+    # treat all angles on the interval [-pi, pi] before adding them
+    for ii, (old, new) in enumerate(zip(old_rotation, new_rotation)):
+        oldang = old % (2 * math.pi)
+        newang = new % (2 * math.pi)
+        if oldang > math.pi:
+            oldang = oldang - 2 * math.pi
+        if newang > math.pi:
+            newang = newang - 2 * math.pi
+        diff = newang - oldang
+        if abs(diff) > math.pi:
+            sgn = 1 if diff > 0 else -1
+            diff = sgn * (abs(diff) - math.pi)
+        # Use the smaller angle to rotate the camera
+        new = old + diff
+        obj_camera.rotation_euler[ii] = new
 
 
 def do_world():
@@ -111,13 +138,13 @@ def make_movie(infile, centre, distance, outfile, clip=100):
     cam_ob.keyframe_insert(data_path="rotation_euler", frame=the_frame)
 
     # Turn around
-    the_frame = the_frame + 24
+    the_frame = the_frame + 48
     point_camera(cam_ob, (centre[0], centre[1] - distance, centre[2]))
     cam_ob.keyframe_insert(data_path="rotation_euler", frame=the_frame)
     cam_ob.keyframe_insert(data_path="location", frame=the_frame)
 
-    the_frame = the_frame + 24
-    point_camera(cam_ob, (centre[0] + distance, centre[1], centre[2]))
+    the_frame = the_frame + 48
+    point_camera(cam_ob, (centre[0] - distance, centre[1], centre[2]))
     cam_ob.keyframe_insert(data_path="rotation_euler", frame=the_frame)
     cam_ob.keyframe_insert(data_path="location", frame=the_frame)
 
@@ -128,7 +155,7 @@ def make_movie(infile, centre, distance, outfile, clip=100):
     cam_ob.keyframe_insert(data_path="rotation_euler", frame=the_frame)
 
     # Turn again
-    the_frame = the_frame + 24
+    the_frame = the_frame + 48
     point_camera(cam_ob, (centre[0], centre[1], centre[2] + distance))
     cam_ob.keyframe_insert(data_path="rotation_euler", frame=the_frame)
     cam_ob.keyframe_insert(data_path="location", frame=the_frame)
@@ -158,10 +185,15 @@ def make_movie(infile, centre, distance, outfile, clip=100):
     bpy.data.scenes[sceneKey].render.image_settings.file_format = 'H264'
     bpy.data.scenes[sceneKey].render.fps = 24
     bpy.data.scenes[sceneKey].render.frame_map_old = 100
-    bpy.data.scenes[sceneKey].render.frame_map_new = 100
+    bpy.data.scenes[sceneKey].render.frame_map_new = 50
     bpy.data.scenes[sceneKey].render.filepath = outfile
     bpy.data.scenes[sceneKey].render.resolution_x = 640
     bpy.data.scenes[sceneKey].render.resolution_y = 480
+    bpy.data.scenes[sceneKey].render.use_textures = False
+    bpy.data.scenes[sceneKey].render.use_sss = False
+    bpy.data.scenes[sceneKey].render.use_envmaps = False
+    bpy.data.scenes[sceneKey].render.use_antialiasing = False
+    bpy.data.scenes[sceneKey].render.use_save_buffers = True
     scene.frame_end = the_frame + 12
     print("Rendering {} frames".format(
         int(the_frame)*bpy.data.scenes[sceneKey].render.frame_map_new /
@@ -198,6 +230,7 @@ def make_render(infile, camera_position, camera_aim, outfile, clip=100):
     bpy.data.scenes[sceneKey].camera = cam_ob
     bpy.data.scenes[sceneKey].render.image_settings.file_format = 'PNG'
     bpy.data.scenes[sceneKey].render.filepath = outfile
+    bpy.data.scenes[sceneKey].render.use_raytrace = False
     bpy.ops.render.render(write_still=True)
     return None
 
@@ -292,9 +325,6 @@ def assemble_geometry(infile, outfile, units, filepath, placement_dict,
         obj.location = pos
         obj.rotation_euler = rot
         objects.append(obj)
-        # bpy.ops.object.group_instance_add(group=placement_dict[kind][1],
-        #                                   location=pos,
-        #                                   rotation=rot)
 
     for ii, obj in enumerate(objects):
         print("Linking ", ii + 1, " of ", len(objects))
@@ -339,6 +369,7 @@ def placement_volume(infile, outfile, filepath):
         bpy.ops.object.delete()
 
     do_world()
+    materials = get_materials()
 
     infile  = open(os.path.join(filepath, infile), "r")
     names = []
@@ -379,16 +410,16 @@ def placement_volume(infile, outfile, filepath):
             print("Material not defined for {}".format(name.upper()))
             color = (100, 100, 100)
 
-        mat = bpy.data.materials.new(k)
-        mat.diffuse_color = color
-        mat.diffuse_shader = 'LAMBERT'
-        mat.diffuse_intensity = 1.0
-        mat.specular_color = (1, 1, 1)
-        mat.specular_shader = 'COOKTORR'
-        mat.specular_intensity = 0.5
-        mat.alpha = (1)
-        mat.ambient = 0.05
-        ob.data.materials.append(mat)
+        # mat = bpy.data.materials.new(k)
+        # mat.diffuse_color = color
+        # mat.diffuse_shader = 'LAMBERT'
+        # mat.diffuse_intensity = 1.0
+        # mat.specular_color = (1, 1, 1)
+        # mat.specular_shader = 'COOKTORR'
+        # mat.specular_intensity = 0.5
+        # mat.alpha = (1)
+        # mat.ambient = 0.05
+        ob.data.materials.append(materials[name.upper()])
 
     outfile = os.path.join(filepath, outfile)
     bpy.ops.wm.save_as_mainfile(filepath=outfile)
