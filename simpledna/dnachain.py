@@ -16,6 +16,164 @@ from utils import BP_ROTATION, BP_SEPARATION
 # BP_ROTATION = 34.3 / 180. * np.pi  # degrees
 
 
+class Histone(object):
+    """
+    """
+    radius_histone = 25  # radius of histone, angstrom
+    pitch_dna = 23.9  # pitch of DNA helix, angstrom
+    radius_dna = 41.8  # radius of DNA wrapping, angstrom
+    histone_bps = 146  # number of bps in histone
+    histone_turns = 1.65 * 2 * np.pi  # angular turn around histone, radians
+    height = histone_turns * radius_dna / pitch_dna
+    z_offset = -height / 2  # distance between first bp and xy-plane, angstrom
+    # separation of bps around histone, angstrom
+    hist_bp_separation = histone_turns * radius_dna / histone_bps
+    hist_bp_rotation = 34.3 / 180. * np.pi  # screw rotation of bp, radians
+    z_per_bp = 2 * height / histone_bps
+    turn_per_bp = histone_turns / histone_bps
+    z_angle = np.arctan(1./pitch_dna)
+
+    def __init__(self, position, rotation, genome=None):
+        """
+        """
+        assert len(position) == 3, "position is length 3 array"
+        assert len(rotation) == 3, "position is length 3 array"
+        if genome is None:
+            genome = "".join([np.random.choice(["G", "A", "T", "C"])
+                              for ii in range(self.histone_bps)])
+        assert len(genome) == self.histone_bps,\
+            "genome should be {} base pairs".format(self.histone_bps)
+        self.position = np.array(position)
+        self.rotation = np.array(rotation)
+        self.basepairs = []
+        theta = -0.5 * (self.histone_turns - 3 * np.pi)
+        z = self.z_offset
+        for ii, char in enumerate(genome):
+            bp = basepair.BasePair(char, chain=0,
+                                   position=np.array([0, 0, 0]),
+                                   rotation=np.array([0, 0, 0]),
+                                   index=ii)
+            # make rotation matrix
+
+            rmatrix = r.rotx(np.pi/2. + self.z_angle)
+            rmatrix = np.dot(r.rotz(theta), rmatrix)
+            bp.rotate(rmatrix)
+            bp.rotate(np.dot(rmatrix,
+                      np.dot(r.rotz(ii*self.hist_bp_rotation),
+                             np.linalg.inv(rmatrix))))
+            # bp.rotate(np.array([np.pi/2., 0., 0]))
+            # bp.rotate(np.array([0, 0, theta]))
+            # bp.rotate(np.array([ii*self.turn_per_bp, 0, 0]))
+            x = self.radius_dna * np.cos(theta)
+            y = self.radius_dna * np.sin(theta)
+            position = np.array([x, y, z])
+            bp.translate(position)
+            theta += self.turn_per_bp
+            z += self.z_per_bp
+            self.basepairs.append(bp)
+        return None
+
+    def to_text(self, seperator=" "):
+        """
+        Return a description of the molecules in the chain as text
+        """
+        key = "# NAME SHAPE CHAIN_ID STRAND_ID BP_INDEX " +\
+              "SIZE_X SIZE_Y SIZE_Z POS_X " +\
+              "POS_Y POS_Z ROT_X ROT_Y ROT_Z\n"
+        output = [key]
+        for pair in self.basepairs:
+            output.append(pair.to_text(seperator=seperator))
+
+        return "".join(output)
+
+    def to_plot(self):
+        """
+        Return a matplotlib.Figure instance with molecules plotted
+        """
+        sugars = []
+        triphosphates = []
+        bases = []
+        bps = ["guanine", "adenine", "thymine", "cytosine"]
+        for pair in self.basepairs:
+            for (name, molecule) in pair.iterMolecules():
+                if molecule.name.lower() == "sugar":
+                    sugars.append(molecule.position)
+                elif molecule.name.lower() == "phosphate":
+                    triphosphates.append(molecule.position)
+                elif molecule.name.lower() in bps:
+                    bases.append(molecule.position)
+
+        # Plotting
+        bases = [ii for ii in zip( * map(list, bases))]
+        triphosphates = [ii for ii in zip( * map(list, triphosphates))]
+        sugars = [ii for ii in zip( * map(list, sugars))]
+
+        fig = plt.figure()
+        ax = fig.add_subplot(111, projection='3d')
+        ax.scatter(bases[0], bases[1], bases[2], c="0.6", s=20)
+        ax.scatter(triphosphates[0], triphosphates[1], triphosphates[2], c="y",
+                   s=20)
+        ax.scatter(sugars[0], sugars[1], sugars[2], c="r", s=20)
+
+        return fig
+
+    def to_surface_plot(self):
+        """
+        Plot the surfaces of each molecule in the chain.
+        Avoid this with large chains, this assumes each molecule is an ellipse
+        """
+
+        def ellipse_xyz(center, extent, rotation=np.zeros([3])):
+            rmatrix = r.eulerMatrix(*rotation)
+            [a, b, c] = extent
+            u, v = np.mgrid[0:2*np.pi:10j, 0:np.pi:5j]
+            x = a * np.cos(u) * np.sin(v) + center[0]
+            y = b * np.sin(u) * np.sin(v) + center[1]
+            z = c * np.cos(v) + center[2]
+            for ii in range(0, len(x)):
+                for jj in range(0, len(x[ii])):
+                    row = np.array([x[ii][jj], y[ii][jj], z[ii][jj]]) - center
+                    xp, yp, zp = np.dot(rmatrix, row.transpose())
+                    x[ii][jj] = xp + center[0]
+                    y[ii][jj] = yp + center[1]
+                    z[ii][jj] = zp + center[2]
+            return x, y, z
+
+        sugars = []
+        triphosphates = []
+        bases = []
+        bps = ["guanine", "adenine", "thymine", "cytosine"]
+        for pair in self.basepairs:
+            for (name, molecule) in pair.iterMolecules():
+                if molecule.name.lower() == "sugar":
+                    sugars.append((molecule.position, molecule.dimensions,
+                                   molecule.rotation))
+                elif molecule.name.lower() == "phosphate":
+                    triphosphates.append((molecule.position,
+                                          molecule.dimensions,
+                                          molecule.rotation))
+                elif molecule.name.lower() in bps:
+                    bases.append((molecule.position, molecule.dimensions,
+                                  molecule.rotation))
+
+        fig = plt.figure()
+        ax = fig.add_subplot(111, projection='3d')
+        for base in bases:
+            x, y, z = ellipse_xyz(base[0], base[1], rotation=base[2])
+            ax.plot_wireframe(x, y, z, color="0.6")
+
+        for phosphate in triphosphates:
+            x, y, z = ellipse_xyz(phosphate[0], phosphate[1],
+                                  rotation=phosphate[2])
+            ax.plot_wireframe(x, y, z, color="y")
+
+        for sugar in sugars:
+            x, y, z = ellipse_xyz(sugar[0], sugar[1], rotation=sugar[2])
+            ax.plot_wireframe(x, y, z, color="r")
+
+        return fig
+
+
 class DNAChain(object):
 
     def __init__(self, genome, chain=0):
@@ -43,38 +201,6 @@ class DNAChain(object):
             rotation += np.array([0., 0., BP_ROTATION])
             index += 1
         return dnachain
-
-    # @staticmethod
-    # def turnAndTwistChain(chain):
-    #     zmax = 0
-    #     zmin = 0
-    #     for pair in chain:
-    #         for (name, mol) in pair.iterMolecules():
-    #             if mol.position[2] < zmin:
-    #                 zmin = mol.position[2]
-    #             elif mol.position[2] > zmax:
-    #                 zmax = mol.position[2]
-    #
-    #     zrange = zmax - zmin
-    #     radius = 2. * zrange / np.pi
-    #
-    #     for pair in chain:
-    #         for (name, mol) in pair.iterMolecules():
-    #             # Translation of the frame - new center position
-    #             theta = np.pi / 2. * (mol.position[2] - zmin) / zrange
-    #             neworigin = np.array([radius * (1 - np.cos(theta)),
-    #                                   0.,
-    #                                   radius * np.sin(theta) - radius])
-    #             # rotation of the frame
-    #             oldframe = np.array([mol.position[0], mol.position[1], 0])
-    #             yrotation = np.pi / 2. * (mol.position[2] - zmin) / zrange
-    #
-    #             newframe = np.dot(r.roty(yrotation), oldframe)
-    #             mol.position[0] = neworigin[0] + newframe[0]
-    #             mol.position[1] = neworigin[1] + newframe[1]
-    #             mol.position[2] = neworigin[2] + newframe[2]
-    #             mol.rotate(np.array([0, yrotation, 0]))
-    #     return chain
 
     @staticmethod
     def turnAndTwistChain(chain, twist=0.):
@@ -403,7 +529,8 @@ class FourStrandTurnedDNAChain(DNAChain):
                       -translation_x,
                       -translation_y,
                       +translation_x]
-        angles = [ang + (2*np.pi - BP_ROTATION*len(c)%(2*np.pi)) for c in chains]
+        angles = [ang + (2*np.pi - BP_ROTATION*len(c) % (2*np.pi))
+                  for c in chains]
 
         for (ii, (c, t, a)) in enumerate(zip(chains, transforms, angles)):
             c = self.turnAndTwistChain(c, twist=a)
@@ -485,7 +612,6 @@ class EightStrandDNAChain(DNAChain):
         self.basepairs_chain7 = DNAChain(longGenome[:lengthC7],
                                          chain=7).basepairs
 
-
         chains = [self.basepairs_chain0,
                   self.basepairs_chain1,
                   self.basepairs_chain2,
@@ -502,7 +628,8 @@ class EightStrandDNAChain(DNAChain):
                       -trans_x2,
                       -trans_y2,
                       +trans_x2]
-        angles = [ang + (2*np.pi - BP_ROTATION*len(c)%(2*np.pi)) for c in chains]
+        angles = [ang + (2*np.pi - BP_ROTATION*len(c) % (2*np.pi))
+                  for c in chains]
         print(angles)
 
         for (ii, (c, t, a)) in enumerate(zip(chains, transforms, angles)):

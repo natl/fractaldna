@@ -83,9 +83,15 @@ class Molecule(object):
 
         Rotate molecule by [X_angle, Y_angle, Z_angle]
         """
-        assert len(rotation) == 3, "Rotation array must be length-3"
+        if rotation.size == 3:
+            rmatrix = rot.eulerMatrix(rotation[0], rotation[1], rotation[2])
+        elif rotation.shape == (3, 3):
+            rmatrix = rotation
+        else:
+            return NotImplementedError("The rotation was invalid")
+        # assert rotation.size == 3, "Rotation array must be length-3"
         oldrotation = rot.eulerMatrix(*self.rotation)
-        newrotation = rot.eulerMatrix(*rotation)
+        newrotation = rmatrix
         self.rotation = rot.getEulerAngles(np.dot(newrotation, oldrotation))
         return None
 

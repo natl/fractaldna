@@ -161,7 +161,12 @@ class BasePair(object):
 
         Rotate elements in base pair
         """
-        rmatrix = eulerMatrix(rotation[0], rotation[1], rotation[2])
+        if rotation.size == 3:
+            rmatrix = eulerMatrix(rotation[0], rotation[1], rotation[2])
+        elif rotation.shape == (3, 3):
+            rmatrix = rotation
+        else:
+            return NotImplementedError("The rotation was invalid")
         for molecule in self.moleculeDict.values():
             molecule.position = np.dot(rmatrix, molecule.position)
             molecule.rotate(rotation)
