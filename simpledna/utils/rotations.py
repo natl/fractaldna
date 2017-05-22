@@ -24,6 +24,30 @@ def rotx(angle):
                      [0, np.sin(angle),  np.cos(angle)]])
 
 
+def rot_ax_angle(axis, angle):
+    ax = axis/np.sqrt(np.sum(np.array(axis)**2))
+    ux = ax[0]
+    uy = ax[1]
+    uz = ax[2]
+
+    c = np.cos(angle)
+    s = np.sin(angle)
+
+    xx = c + ux**2*(1 - c)
+    xy = ux*uy*(1 - c) - uz*s
+    xz = ux*uz*(1 - c) + uy*s
+
+    yx = uy*ux*(1 - c) + uz*s
+    yy = c + uy**2*(1 - c)
+    yz = uy*uz*(1 - c) - ux*s
+
+    zx = uz*ux*(1 - c) - uy*s
+    zy = uz*uy*(1 - c) + ux*s
+    zz = c + uz**2*(1 - c)
+
+    return np.array([[xx, xy, xz], [yx, yy, yz], [zx, zy, zz]])
+
+
 def eulerMatrix(angx, angy, angz):
     return np.dot(rotz(angz), np.dot(roty(angy), rotx(angx)))
 

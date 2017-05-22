@@ -7,72 +7,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D  # NOQA
 from copy import deepcopy
+from scipy.interpolate import interp1d
 
 from utils import rotations as r
 from utils import basepair
 from utils import BP_ROTATION, BP_SEPARATION
 
-# BP_SEPARATION = 3.32  # Angstrom
-# BP_ROTATION = 34.3 / 180. * np.pi  # degrees
 
-
-class Histone(object):
-    """
-    """
-    radius_histone = 25  # radius of histone, angstrom
-    pitch_dna = 23.9  # pitch of DNA helix, angstrom
-    radius_dna = 41.8  # radius of DNA wrapping, angstrom
-    histone_bps = 146  # number of bps in histone
-    histone_turns = 1.65 * 2 * np.pi  # angular turn around histone, radians
-    height = histone_turns * radius_dna / pitch_dna
-    z_offset = -height / 2  # distance between first bp and xy-plane, angstrom
-    # separation of bps around histone, angstrom
-    hist_bp_separation = histone_turns * radius_dna / histone_bps
-    hist_bp_rotation = 34.3 / 180. * np.pi  # screw rotation of bp, radians
-    z_per_bp = 2 * height / histone_bps
-    turn_per_bp = histone_turns / histone_bps
-    z_angle = np.arctan(1./pitch_dna)
-
-    def __init__(self, position, rotation, genome=None):
-        """
-        """
-        assert len(position) == 3, "position is length 3 array"
-        assert len(rotation) == 3, "position is length 3 array"
-        if genome is None:
-            genome = "".join([np.random.choice(["G", "A", "T", "C"])
-                              for ii in range(self.histone_bps)])
-        assert len(genome) == self.histone_bps,\
-            "genome should be {} base pairs".format(self.histone_bps)
-        self.position = np.array(position)
-        self.rotation = np.array(rotation)
-        self.basepairs = []
-        theta = -0.5 * (self.histone_turns - 3 * np.pi)
-        z = self.z_offset
-        for ii, char in enumerate(genome):
-            bp = basepair.BasePair(char, chain=0,
-                                   position=np.array([0, 0, 0]),
-                                   rotation=np.array([0, 0, 0]),
-                                   index=ii)
-            # make rotation matrix
-
-            rmatrix = r.rotx(np.pi/2. + self.z_angle)
-            rmatrix = np.dot(r.rotz(theta), rmatrix)
-            bp.rotate(rmatrix)
-            bp.rotate(np.dot(rmatrix,
-                      np.dot(r.rotz(ii*self.hist_bp_rotation),
-                             np.linalg.inv(rmatrix))))
-            # bp.rotate(np.array([np.pi/2., 0., 0]))
-            # bp.rotate(np.array([0, 0, theta]))
-            # bp.rotate(np.array([ii*self.turn_per_bp, 0, 0]))
-            x = self.radius_dna * np.cos(theta)
-            y = self.radius_dna * np.sin(theta)
-            position = np.array([x, y, z])
-            bp.translate(position)
-            theta += self.turn_per_bp
-            z += self.z_per_bp
-            self.basepairs.append(bp)
-        return None
-
+class PlottableSequence(object):
     def to_text(self, seperator=" "):
         """
         Return a description of the molecules in the chain as text
@@ -172,6 +114,204 @@ class Histone(object):
             ax.plot_wireframe(x, y, z, color="r")
 
         return fig
+
+
+class Solenoid(PlottableSequence):
+    radius = 80  # angstroms, radius from center to place histones
+    tilt = 20*np.pi/180.  # tilt chromosomes 20 deg following F98
+    zshift = 18.3  # angstrom, z shift per chromosome following F98
+    histones = 6
+
+    def __init__(self):
+        self.basepairs = []
+        self.positions = [np.array([0, -self.radius, 0])]
+        rm = r.eulerMatrix(np.pi/2., -np.pi/2., np.pi/2.)
+        rm = np.dot(r.roty(self.tilt), rm)
+        self.rotations = [r.getEulerAngles(rm)]
+        for ii in range(self.histones - 1):
+            last = self.positions[-1]
+            this = np.dot(r.rotz(np.pi/3.), last)
+            this[2] = last[2] + self.zshift
+            self.positions.append(this)
+            last = self.rotations[-1]
+            this = np.array([last[0], last[1], last[2] + np.pi/3.])
+            self.rotations.append(this)
+        print(self.rotations)
+        self.histones = []
+        self.linkers = []
+        for pos, rot in zip(self.positions, self.rotations):
+            h = Histone(pos, rot)
+            self.histones.append(h)
+            if len(self.histones) > 1:
+                bp1 = self.histones[-2].basepairs[-2]
+                bp2 = self.histones[-2].basepairs[-1]
+                bp3 = self.histones[-1].basepairs[0]
+                bp4 = self.histones[-1].basepairs[1]
+                l = SplineLinker(bp1, bp2, bp3, bp4, curviness=1)
+                self.linkers.append(l)
+                self.basepairs.extend(l.basepairs)
+            self.basepairs.extend(h.basepairs)
+
+
+class SplineLinker(PlottableSequence):
+    """
+    """
+    linker_rotation = BP_ROTATION  # rad, default screw rotation of dna
+    linker_bp_spacing = BP_SEPARATION  # angstrom, default spacing between bps
+
+    def __init__(self, bp1, bp2, bp3, bp4, curviness=1.):
+        """
+        Create a smooth linker based on splines.
+
+        linker = SplineLinker(bp1, bp2, bp3, bp4, curviness=1.)
+
+        Create base pairs that link to sections of DNA as follows:
+        bp1 bp2 <==== LINKER =====> bp3 bp4
+        Two base pairs on either side of the linker are needed to build splines
+        low curviness = straighter
+        high_curviness = smoother
+        """
+        self.basepairs = []
+        points = np.array([bp1.position, bp2.position,
+                           bp3.position, bp4.position])
+        start_x = bp2.rmatrix[:, 0]
+        end_x = bp3.rmatrix[:, 0]
+        relative_angle = np.arccos(np.sum(start_x*end_x) /
+                                   np.sum(start_x**2)**.5 /
+                                   np.sum(end_x**2)**.5)
+        d = np.sum((bp2.position - bp3.position)**2)**.5
+        if curviness <= 0:
+            curviness = 1e-200
+        diff = 3.4/180/curviness
+        print(d)
+        t = np.array([1 - diff, 1, 2, 2 + diff])
+        x_interp = interp1d(t, points[:, 0], kind="cubic")
+        y_interp = interp1d(t, points[:, 1], kind="cubic")
+        z_interp = interp1d(t, points[:, 2], kind="cubic")
+        self.x_interp = x_interp
+        self.y_interp = y_interp
+        self.z_interp = z_interp
+
+        # calculate length
+        tt = np.linspace(1, 2, 1000)
+        xx = x_interp(tt)
+        yy = y_interp(tt)
+        zz = z_interp(tt)
+        dx = xx[1:] - xx[:(len(xx) - 1)]
+        dy = yy[1:] - yy[:(len(yy) - 1)]
+        dz = zz[1:] - zz[:(len(zz) - 1)]
+        length = sum((dx**2 + dy**2 + dz**2)**.5)
+        n = length // self.linker_bp_spacing
+        self.spacing = length / n
+        tt = np.linspace(1, 2, n)
+        xx = x_interp(tt[1:len(tt)])
+        yy = y_interp(tt[1:len(tt)])
+        zz = z_interp(tt[1:len(tt)])
+
+        estim_rel_angle = ((n*self.linker_rotation) % (2*np.pi)) - np.pi
+        diff = relative_angle - estim_rel_angle
+        rot_angle = self.linker_rotation - estim_rel_angle/n
+        # rot_start = bp2.rotation
+        # rot_stop = bp3.rotation
+        for (ii, (_x, _y, _z)) in enumerate(zip(xx, yy, zz)):
+            if ii == 0:
+                prev_bp = bp2
+            else:
+                prev_bp = self.basepairs[-1]
+
+            if ii != len(xx) - 1:
+                new_z = np.array([xx[ii + 1] - xx[ii],
+                                  yy[ii + 1] - yy[ii],
+                                  zz[ii + 1] - zz[ii]])
+                old_rotation = prev_bp.rmatrix
+                old_x = old_rotation[:, 0]
+                old_z = old_rotation[:, 2]
+                # rotate about local z axis by 34 deg.
+                rz = r.rot_ax_angle(old_z, rot_angle)
+                # rotate about a chosen eigenvector so new z axis aligns
+                # with normal. Choose local x axis to be eigenvector
+                dot_product = new_z[0]*old_z[0] + new_z[1]*old_z[1] +\
+                    new_z[2]*old_z[2]
+                mag_old = np.sum(old_z**2)**.5
+                mag_new = np.sum(new_z**2)**.5
+                angle = np.arccos(dot_product/mag_old/mag_new)
+
+                rx = r.rot_ax_angle(old_x, angle)
+                rots = r.getEulerAngles(np.dot(np.dot(rx, rz), old_rotation))
+                bp = basepair.BasePair(np.random.choice(["G", "A", "T", "C"]),
+                                       chain=0,
+                                       position=np.array([_x, _y, _z]),
+                                       rotation=np.array(rots),
+                                       index=ii)
+                self.basepairs.append(bp)
+
+        pass
+
+
+class Histone(PlottableSequence):
+    """
+    """
+    radius_histone = 25  # radius of histone, angstrom
+    pitch_dna = 23.9  # pitch of DNA helix, angstrom
+    radius_dna = 41.8  # radius of DNA wrapping, angstrom
+    histone_bps = 146  # number of bps in histone
+    histone_turns = 1.65 * 2 * np.pi  # angular turn around histone, radians
+    height = histone_turns * radius_dna / pitch_dna
+    z_offset = -height / 2  # distance between first bp and xy-plane, angstrom
+    # separation of bps around histone, angstrom
+    hist_bp_separation = histone_turns * radius_dna / histone_bps
+    hist_bp_rotation = 34.3 / 180. * np.pi  # screw rotation of bp, radians
+    z_per_bp = 2 * height / histone_bps
+    turn_per_bp = histone_turns / histone_bps
+    z_angle = np.arctan(1./pitch_dna)
+    histone_start_bp_rot = 0  # radians, rotation of bp at start of histone
+    histone_end_bp_rot = histone_start_bp_rot + histone_bps*hist_bp_rotation
+
+    def __init__(self, position, rotation, genome=None):
+        """
+        """
+        assert len(position) == 3, "position is length 3 array"
+        assert len(rotation) == 3, "position is length 3 array"
+        if genome is None:
+            genome = "".join([np.random.choice(["G", "A", "T", "C"])
+                              for ii in range(self.histone_bps)])
+        assert len(genome) == self.histone_bps,\
+            "genome should be {} base pairs".format(self.histone_bps)
+        self.position = np.array(position)
+        self.rotation = np.array(rotation)
+        self.basepairs = []
+        theta = -0.5 * (self.histone_turns - 3 * np.pi)
+        z = self.z_offset
+        for ii, char in enumerate(genome):
+            bp = basepair.BasePair(char, chain=0,
+                                   position=np.array([0, 0, 0]),
+                                   rotation=np.array([0, 0, 0]),
+                                   index=ii)
+            # make rotation matrix
+
+            rmatrix = r.rotx(np.pi/2. + self.z_angle)
+            rmatrix = np.dot(r.rotz(theta), rmatrix)
+            bp.rotate(rmatrix)
+            bp.rotate(np.dot(rmatrix,
+                      np.dot(r.rotz(self.histone_start_bp_rot +
+                                    ii*self.hist_bp_rotation),
+                             np.linalg.inv(rmatrix))))
+            # bp.rotate(np.array([np.pi/2., 0., 0]))
+            # bp.rotate(np.array([0, 0, theta]))
+            # bp.rotate(np.array([ii*self.turn_per_bp, 0, 0]))
+            x = self.radius_dna * np.cos(theta)
+            y = self.radius_dna * np.sin(theta)
+            position = np.array([x, y, z])
+            bp.translate(position)
+            theta += self.turn_per_bp
+            z += self.z_per_bp
+            self.basepairs.append(bp)
+
+        for bp in self.basepairs:
+            bp.rotate(self.rotation, about_origin=True)
+            bp.translate(self.position)
+
+        return None
 
 
 class DNAChain(object):

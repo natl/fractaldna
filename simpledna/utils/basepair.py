@@ -75,8 +75,10 @@ class BasePair(object):
             index:    index of base pair in chain
         """
         assert base in ["G", "A", "T", "C"], "base must be either G, A, T, C"
-        position = deepcopy(position)
-        rotation = deepcopy(rotation)
+        self.position = np.zeros(3)
+        self.rmatrix = np.eye(3)
+        position = np.array(deepcopy(position), dtype=float)
+        rotation = np.array(deepcopy(rotation), dtype=float)
 
         leftPhosphateRot = np.zeros(3)
         leftPhosphatePos = deepcopy(PHOSPHATE_POS)
@@ -152,12 +154,12 @@ class BasePair(object):
         """
         for molecule in self.moleculeDict.values():
             molecule.translate(translation)
-
+        self.position = self.position + np.array(translation)
         return None
 
-    def rotate(self, rotation):
+    def rotate(self, rotation, about_origin=False):
         """
-        BasePair.rotation(rotation)
+        BasePair.rotation(rotation, about_origin=False)
 
         Rotate elements in base pair
         """
@@ -167,8 +169,17 @@ class BasePair(object):
             rmatrix = rotation
         else:
             return NotImplementedError("The rotation was invalid")
+
+        self.rmatrix = np.dot(rmatrix, self.rmatrix)
+        if about_origin is True:
+            self.position = np.dot(rmatrix, self.position)
+
         for molecule in self.moleculeDict.values():
-            molecule.position = np.dot(rmatrix, molecule.position)
+            if about_origin is True:
+                molecule.position = np.dot(rmatrix, molecule.position)
+            else:
+                local_pos = molecule.position - self.position
+                molecule.position = np.dot(rmatrix, local_pos) + self.position
             molecule.rotate(rotation)
 
         return None
