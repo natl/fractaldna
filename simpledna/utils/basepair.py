@@ -143,7 +143,7 @@ class BasePair(object):
         self.moleculeDict =\
             OrderedDict(zip(self.moleculeNames, self.molecules))
 
-        self.rotate(rotation)
+        self.rotate(rotation, about_origin=False)
         self.translate(position)
 
     def translate(self, translation):

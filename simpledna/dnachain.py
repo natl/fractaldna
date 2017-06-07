@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D  # NOQA
 from copy import deepcopy
 from scipy.interpolate import interp1d
+from mayavi import mlab
 
 from utils import rotations as r
 from utils import basepair
@@ -28,7 +29,7 @@ class PlottableSequence(object):
 
         return "".join(output)
 
-    def to_plot(self):
+    def to_plot(self, plot_p=True, plot_b=True, plot_s=True):
         """
         Return a matplotlib.Figure instance with molecules plotted
         """
@@ -46,9 +47,11 @@ class PlottableSequence(object):
                     bases.append(molecule.position)
 
         # Plotting
-        bases = [ii for ii in zip( * map(list, bases))]
-        triphosphates = [ii for ii in zip( * map(list, triphosphates))]
-        sugars = [ii for ii in zip( * map(list, sugars))]
+        empty = [[], [], []]
+        bases = [ii for ii in zip( * map(list, bases))] if plot_b else empty
+        triphosphates = [ii for ii in zip( * map(list, triphosphates))]\
+            if plot_p else empty
+        sugars = [ii for ii in zip( * map(list, sugars))] if plot_s else empty
 
         fig = plt.figure()
         ax = fig.add_subplot(111, projection='3d')
@@ -115,20 +118,146 @@ class PlottableSequence(object):
 
         return fig
 
+    def to_line_plot(self):
+        """
+        Return a matplotlib.Figure instance with histone and linkers shown
+        """
+        fig = mlab.figure()
+        if hasattr(self, "histones"):
+            # ax = fig.add_subplot(111, projection='3d')
+            histones = []
+            for histone in self.histones:
+                pos = np.array([bp.position for bp in histone.basepairs])
+                mlab.plot3d(pos[:, 0], pos[:, 1], pos[:, 2], color=(1., .8, 0),
+                            tube_radius = 11.5)
+                histones.append(histone.position)
+
+            for linker in self.linkers:
+                pos = np.array([bp.position for bp in linker.basepairs])
+                mlab.plot3d(pos[:, 0], pos[:, 1], pos[:, 2], color=(0, .8, 0),
+                            tube_radius = 11.5)
+
+            histones = np.array(histones)
+            mlab.points3d(histones[:, 0], histones[:, 1], histones[:, 2],
+                          color=(0, 0, 1.), opacity=.4, scale_factor=70)
+
+        else:
+            pos = np.array([bp.position for bp in self.basepairs])
+            mlab.plot3d(pos[:, 0], pos[:, 1], pos[:, 2], color=(1., 0, 0),
+                        tube_radius = 11.5)
+
+        return fig
+
+    def to_strand_plot(self, plot_p=True, plot_b=True, plot_s=True,
+                       plot_bp=False):
+        """
+        Return a matplotlib.Figure instance with molecules plotted
+        """
+        sugar_l = []
+        sugar_r = []
+        phosphate_l = []
+        phosphate_r = []
+        base_l = []
+        base_r = []
+        bps = ["guanine", "adenine", "thymine", "cytosine"]
+        for pair in self.basepairs:
+            for (name, molecule) in pair.iterMolecules():
+                if molecule.name.lower() == "sugar":
+                    if molecule.strand == 0:
+                        sugar_l.append(molecule.position)
+                    elif molecule.strand == 1:
+                        sugar_r.append(molecule.position)
+                elif molecule.name.lower() == "phosphate":
+                    if molecule.strand == 0:
+                        phosphate_l.append(molecule.position)
+                    elif molecule.strand == 1:
+                        phosphate_r.append(molecule.position)
+                elif molecule.name.lower() in bps:
+                    if molecule.strand == 0:
+                        base_l.append(molecule.position)
+                    elif molecule.strand == 1:
+                        base_r.append(molecule.position)
+
+        # Plotting
+        base_l = [ii for ii in zip( * map(list, base_l))]
+        base_r = [ii for ii in zip( * map(list, base_r))]
+        phosphate_l = [ii for ii in zip( * map(list, phosphate_l))]
+        phosphate_r = [ii for ii in zip( * map(list, phosphate_r))]
+        sugar_l = [ii for ii in zip( * map(list, sugar_l))]
+        sugar_r = [ii for ii in zip( * map(list, sugar_r))]
+        fig = mlab.figure()
+
+        if plot_b:
+            mlab.plot3d(base_l[0], base_l[1], base_l[2],
+                        color=(0.6, 0.6, 0.6), tube_radius = 1)
+            mlab.plot3d(base_r[0], base_r[1], base_r[2],
+                        color=(0.6, 0.6, 0.6), tube_radius = 1)
+        if plot_s:
+            mlab.plot3d(sugar_l[0], sugar_l[1], sugar_l[2],
+                        color=(1., 0, 0), tube_radius = 1)
+            mlab.plot3d(sugar_r[0], sugar_r[1], sugar_r[2],
+                        color=(1., 0, 0), tube_radius = 1)
+        if plot_p:
+            mlab.plot3d(phosphate_l[0], phosphate_l[1], phosphate_l[2],
+                        color=(1, 1, 0), tube_radius = 1)
+            mlab.plot3d(phosphate_r[0], phosphate_r[1], phosphate_r[2],
+                        color=(1, 1, 0), tube_radius = 1)
+
+        if plot_bp:
+            # plot bars joining base pairs
+            for ii in range(0, len(base_l[0])):
+                xs = (phosphate_l[0][ii], sugar_l[0][ii], base_l[0][ii],
+                      base_r[0][ii], sugar_r[0][ii], phosphate_r[0][ii])
+                ys = (phosphate_l[1][ii], sugar_l[1][ii], base_l[1][ii],
+                      base_r[1][ii], sugar_r[1][ii], phosphate_r[1][ii])
+                zs = (phosphate_l[2][ii], sugar_l[2][ii], base_l[2][ii],
+                      base_r[2][ii], sugar_r[2][ii], phosphate_r[2][ii])
+                mlab.plot3d(xs, ys, zs, color=(1, 1, 1), tube_radius=.5)
+
+        return fig
+
 
 class Solenoid(PlottableSequence):
-    radius = 80  # angstroms, radius from center to place histones
+    radius = 100  # angstroms, radius from center to place histones
     tilt = 20*np.pi/180.  # tilt chromosomes 20 deg following F98
     zshift = 18.3  # angstrom, z shift per chromosome following F98
-    histones = 6
+    nhistones = 21
+    height = (nhistones - 1) * zshift  # length of the fibre
+    voxelheight = 500
 
-    def __init__(self):
+    def __init__(self, turn=False):
+        prev_bp1 = basepair.BasePair(np.random.choice(["G", "A", "T", "C"]),
+                                     chain=0,
+                                     position=np.array([0, 0,
+                                                        -2*BP_SEPARATION]),
+                                     index=-2)
+        prev_bp2 = basepair.BasePair(np.random.choice(["G", "A", "T", "C"]),
+                                     chain=0,
+                                     position=np.array([0, 0,
+                                                        -1*BP_SEPARATION]),
+                                     index=-1)
+        rot = np.array([0, 0, np.pi/2.]) if turn is True else np.zeros(3)
+        next_bp3 = basepair.BasePair(np.random.choice(["G", "A", "T", "C"]),
+                                     chain=0,
+                                     position=np.array([0, 0,
+                                                        self.voxelheight +
+                                                        BP_SEPARATION]),
+                                     rotation=rot,
+                                     index=1000)
+        next_bp4 = basepair.BasePair(np.random.choice(["G", "A", "T", "C"]),
+                                     chain=0,
+                                     position=np.array([0, 0,
+                                                        self.voxelheight +
+                                                        2*BP_SEPARATION]),
+                                     rotation=rot,
+                                     index=1001)
         self.basepairs = []
-        self.positions = [np.array([0, -self.radius, 0])]
+        self.positions = [np.array([0, -self.radius,
+                                    .5*(self.voxelheight - self.height)])]
         rm = r.eulerMatrix(np.pi/2., -np.pi/2., np.pi/2.)
         rm = np.dot(r.roty(self.tilt), rm)
         self.rotations = [r.getEulerAngles(rm)]
-        for ii in range(self.histones - 1):
+        for ii in range(self.nhistones - 1):
             last = self.positions[-1]
             this = np.dot(r.rotz(np.pi/3.), last)
             this[2] = last[2] + self.zshift
@@ -136,7 +265,6 @@ class Solenoid(PlottableSequence):
             last = self.rotations[-1]
             this = np.array([last[0], last[1], last[2] + np.pi/3.])
             self.rotations.append(this)
-        print(self.rotations)
         self.histones = []
         self.linkers = []
         for pos, rot in zip(self.positions, self.rotations):
@@ -147,10 +275,33 @@ class Solenoid(PlottableSequence):
                 bp2 = self.histones[-2].basepairs[-1]
                 bp3 = self.histones[-1].basepairs[0]
                 bp4 = self.histones[-1].basepairs[1]
-                l = SplineLinker(bp1, bp2, bp3, bp4, curviness=1)
+                zr = - Histone.histone_total_twist - np.pi/3 +\
+                    Histone.hist_bp_rotation
+                l = SplineLinker(bp1, bp2, bp3, bp4, curviness=1,
+                                 zrot=zr, method="corrected_quaternion")
+                self.linkers.append(l)
+                self.basepairs.extend(l.basepairs)
+            else:
+                bp3 = self.histones[-1].basepairs[0]
+                bp4 = self.histones[-1].basepairs[1]
+                l = SplineLinker(prev_bp1, prev_bp2, bp3, bp4,
+                                 curviness=1,
+                                 zrot=0,
+                                 method="corrected_quaternion")
                 self.linkers.append(l)
                 self.basepairs.extend(l.basepairs)
             self.basepairs.extend(h.basepairs)
+
+        # Add final linker
+        bp1 = self.histones[-1].basepairs[-2]
+        bp2 = self.histones[-1].basepairs[-1]
+        zr = -Histone.histone_total_twist - np.pi/3 * (self.nhistones % 6)
+        if turn is True:
+            zr += np.pi/2.
+        l = SplineLinker(bp1, bp2, next_bp3, next_bp4, curviness=1,
+                         zrot=zr, method="corrected_quaternion")
+        self.linkers.append(l)
+        self.basepairs.extend(l.basepairs)
 
 
 class SplineLinker(PlottableSequence):
@@ -159,31 +310,51 @@ class SplineLinker(PlottableSequence):
     linker_rotation = BP_ROTATION  # rad, default screw rotation of dna
     linker_bp_spacing = BP_SEPARATION  # angstrom, default spacing between bps
 
-    def __init__(self, bp1, bp2, bp3, bp4, curviness=1.):
+    def __init__(self, bp1, bp2, bp3, bp4, curviness=1., zrot=None,
+                 startkey=None, stopkey=None, method="corrected_quaternion"):
         """
         Create a smooth linker based on splines.
 
-        linker = SplineLinker(bp1, bp2, bp3, bp4, curviness=1.)
+        linker = SplineLinker(bp1, bp2, bp3, bp4, curviness=1., zrot=None)
 
         Create base pairs that link to sections of DNA as follows:
         bp1 bp2 <==== LINKER =====> bp3 bp4
         Two base pairs on either side of the linker are needed to build splines
         low curviness = straighter
         high_curviness = smoother
+
+        zrot describes the twist of bp3 relative to bp2
+            None: Determine automatically (experimental)
+            double: rotation in radians (mod 2*pi)
+
+        startkey and stopkey act as keyframes for rotations
+            key = i will start/stop rotations after the i-th base pair
+            key = -i will start/stop rotations after the i-th last base pair
+
+        method: method to handle rotational interpolation
+            "quaternion":           Full use of quaternions
+            "corrected_quaternion": Full use of quaternions, with a correction
+                                    to check that the base pair is aligned.
+                                    This method is recommended
+            "matrix":               Experimental method that doesn't use
+                                    quaternions. Currently incorrect.
         """
+        assert method in ["quaternion", "matrix", "corrected_quaternion"],\
+            "Invalid interpolation method"
         self.basepairs = []
         points = np.array([bp1.position, bp2.position,
                            bp3.position, bp4.position])
-        start_x = bp2.rmatrix[:, 0]
-        end_x = bp3.rmatrix[:, 0]
-        relative_angle = np.arccos(np.sum(start_x*end_x) /
-                                   np.sum(start_x**2)**.5 /
-                                   np.sum(end_x**2)**.5)
-        d = np.sum((bp2.position - bp3.position)**2)**.5
+        # start_x = bp2.rmatrix[:, 0]
+        # end_x = bp3.rmatrix[:, 0]
+        # this line is incorrect. We need to transfer the two rmatrices into
+        # the same frame
+        # relative_angle = np.arccos(np.sum(start_x*end_x) /
+        #                            np.sum(start_x**2)**.5 /
+        #                            np.sum(end_x**2)**.5)
+        # d = np.sum((bp2.position - bp3.position)**2)**.5
         if curviness <= 0:
             curviness = 1e-200
         diff = 3.4/180/curviness
-        print(d)
         t = np.array([1 - diff, 1, 2, 2 + diff])
         x_interp = interp1d(t, points[:, 0], kind="cubic")
         y_interp = interp1d(t, points[:, 1], kind="cubic")
@@ -203,46 +374,104 @@ class SplineLinker(PlottableSequence):
         length = sum((dx**2 + dy**2 + dz**2)**.5)
         n = length // self.linker_bp_spacing
         self.spacing = length / n
+        # print(self.spacing)
         tt = np.linspace(1, 2, n)
         xx = x_interp(tt[1:len(tt)])
         yy = y_interp(tt[1:len(tt)])
         zz = z_interp(tt[1:len(tt)])
+        interpolator = lambda t: np.array([x_interp(t + 1), y_interp(t + 1),
+                                           z_interp(t + 1)])
 
-        estim_rel_angle = ((n*self.linker_rotation) % (2*np.pi)) - np.pi
-        diff = relative_angle - estim_rel_angle
-        rot_angle = self.linker_rotation - estim_rel_angle/n
-        # rot_start = bp2.rotation
-        # rot_stop = bp3.rotation
+        if startkey is None:
+            startkey = 0
+        elif startkey < 0:
+            startkey = len(tt) - abs(startkey) - 1
+        if stopkey is None:
+            stopkey = len(tt) - 1
+        elif stopkey < 0:
+            stopkey = len(tt) - abs(stopkey)
+
+        # total rotation that the BP undergoes, relative to initial
+        rotation_unmodified = (-n*self.linker_rotation) % (2*np.pi)
+
+        if zrot is None:
+            zrot = 0
+
+        # desired rotation relative to initial
+        zrot = zrot % (2*np.pi)
+        diff = zrot - rotation_unmodified
+        if diff < -np.pi:
+            diff += 2*np.pi
+        elif diff > np.pi:
+            diff -= 2*np.pi
+        rot_angle = (self.linker_rotation + diff/n)
+        # print("\n", n, diff*180/np.pi, rot_angle*180/np.pi)
+        # print("Desired rotation", zrot*180/np.pi)
+        # print("Default rotation", rotation_unmodified*180/np.pi)
+        # print("Final rotation", ((rot_angle*n) % (2*np.pi))*180/np.pi)
+
+        # Run one loop to generate a series of rotation matrices
         for (ii, (_x, _y, _z)) in enumerate(zip(xx, yy, zz)):
-            if ii == 0:
-                prev_bp = bp2
-            else:
-                prev_bp = self.basepairs[-1]
-
             if ii != len(xx) - 1:
-                new_z = np.array([xx[ii + 1] - xx[ii],
-                                  yy[ii + 1] - yy[ii],
-                                  zz[ii + 1] - zz[ii]])
-                old_rotation = prev_bp.rmatrix
-                old_x = old_rotation[:, 0]
-                old_z = old_rotation[:, 2]
-                # rotate about local z axis by 34 deg.
-                rz = r.rot_ax_angle(old_z, rot_angle)
-                # rotate about a chosen eigenvector so new z axis aligns
-                # with normal. Choose local x axis to be eigenvector
-                dot_product = new_z[0]*old_z[0] + new_z[1]*old_z[1] +\
-                    new_z[2]*old_z[2]
-                mag_old = np.sum(old_z**2)**.5
-                mag_new = np.sum(new_z**2)**.5
-                angle = np.arccos(dot_product/mag_old/mag_new)
-
-                rx = r.rot_ax_angle(old_x, angle)
-                rots = r.getEulerAngles(np.dot(np.dot(rx, rz), old_rotation))
+                pos = np.array([_x, _y, _z])
                 bp = basepair.BasePair(np.random.choice(["G", "A", "T", "C"]),
                                        chain=0,
-                                       position=np.array([_x, _y, _z]),
-                                       rotation=np.array(rots),
+                                       position=[0, 0, 0],
+                                       rotation=[0, 0, 0],
                                        index=ii)
+
+                if method in ["quaternion", "corrected_quaternion"]:
+                    start_quaternion = r.quaternion_from_matrix(bp2.rmatrix)
+                    if ii < startkey:
+                        ll = 0
+                    elif ii >= stopkey:
+                        ll = 1
+                    else:
+                        ll = (ii - startkey + 1.)/float(stopkey - startkey)
+                    if method == "corrected_quaternion":
+                        # get interpolated rotation matrix
+                        end_quaternion = r.quaternion_from_matrix(bp3.rmatrix)
+                        quat = r.quaternion_slerp(start_quaternion,
+                                                  end_quaternion,
+                                                  ll, shortestpath=True)
+                        rmat = r.quaternion_matrix(quat)
+                        # correct z
+                        z = interpolator((ii + 1)/len(xx)) -\
+                            interpolator(ii/len(xx))
+                        z = -z/np.linalg.norm(z)
+                        z_current = rmat[:, 2]
+                        perp = np.cross(z_current, z)
+                        angle = np.arccos(np.dot(z, z_current) /
+                                          (np.linalg.norm(z) *
+                                           np.linalg.norm(z_current)))
+                        r2 = r.rot_ax_angle(perp, angle)
+                        rmat = np.dot(r2, rmat)
+                        # new_z = bp3.rmatrix[:, 2]
+                        # old_x = bp2.rmatrix[:, 0]
+                        # old_y = bp2.rmatrix[:, 1]
+                        # a = 1
+                        # b = -np.dot(new_z, old_y) / np.dot(new_z, old_x)
+                        # perp_x = a*old_x + b*old_y
+                        # perp_x /= np.linalg.norm(perp_x)
+                        # perp_y = np.cross(new_z, perp_x)
+                        # end_matrix =\
+                        #     np.array([perp_x, perp_y, new_z]).transpose()
+                        # end_quaternion = r.quaternion_from_matrix(end_matrix)
+                    else:
+                        end_quaternion = r.quaternion_from_matrix(bp3.rmatrix)
+                        quat = r.quaternion_slerp(start_quaternion,
+                                                  end_quaternion,
+                                                  ll, shortestpath=True)
+                        rmat = r.quaternion_matrix(quat)
+                elif method == "matrix":
+                    ll = ii/len(xx)
+                    rmat = r.matrix_interpolate(bp2.rmatrix, bp3.rmatrix,
+                                                interpolator, ll,
+                                                precision=.01)
+                bp.rotate(rmat)
+                spin = rot_angle * (ii + 1)
+                bp.rotate(r.rot_ax_angle(rmat[:, 2], spin))
+                bp.translate(pos)
                 self.basepairs.append(bp)
 
         pass
@@ -252,20 +481,21 @@ class Histone(PlottableSequence):
     """
     """
     radius_histone = 25  # radius of histone, angstrom
-    pitch_dna = 23.9  # pitch of DNA helix, angstrom
+    pitch_dna = 23.9  # 23.9  # pitch of DNA helix, angstrom
     radius_dna = 41.8  # radius of DNA wrapping, angstrom
     histone_bps = 146  # number of bps in histone
     histone_turns = 1.65 * 2 * np.pi  # angular turn around histone, radians
-    height = histone_turns * radius_dna / pitch_dna
-    z_offset = -height / 2  # distance between first bp and xy-plane, angstrom
+    height = 27*1.65
+    z_offset = -height / 2.  # distance between first bp and xy-plane, angstrom
     # separation of bps around histone, angstrom
     hist_bp_separation = histone_turns * radius_dna / histone_bps
-    hist_bp_rotation = 34.3 / 180. * np.pi  # screw rotation of bp, radians
-    z_per_bp = 2 * height / histone_bps
+    hist_bp_rotation = BP_ROTATION  # screw rotation of bp, radians
+    z_per_bp = height / histone_bps
     turn_per_bp = histone_turns / histone_bps
     z_angle = np.arctan(1./pitch_dna)
     histone_start_bp_rot = 0  # radians, rotation of bp at start of histone
     histone_end_bp_rot = histone_start_bp_rot + histone_bps*hist_bp_rotation
+    histone_total_twist = (histone_bps * hist_bp_separation) % (2*np.pi)
 
     def __init__(self, position, rotation, genome=None):
         """
@@ -310,7 +540,6 @@ class Histone(PlottableSequence):
         for bp in self.basepairs:
             bp.rotate(self.rotation, about_origin=True)
             bp.translate(self.position)
-
         return None
 
 
