@@ -151,7 +151,13 @@ class PlottableSequence(object):
     def to_strand_plot(self, plot_p=True, plot_b=True, plot_s=True,
                        plot_bp=False):
         """
-        Return a matplotlib.Figure instance with molecules plotted
+        to_strand_plot(plot_p=True, plot_b=True, plot_s=True, plot_bp=False)
+        Return a mayav1 figure instance with strands plotted
+
+        plot_p : plot phosphate strands
+        plot_s : plot sugar strands
+        plot_b : plot base strands
+        plot_bp : join base pairs together
         """
         sugar_l = []
         sugar_r = []
@@ -215,93 +221,6 @@ class PlottableSequence(object):
                 mlab.plot3d(xs, ys, zs, color=(1, 1, 1), tube_radius=.5)
 
         return fig
-
-
-class Solenoid(PlottableSequence):
-    radius = 100  # angstroms, radius from center to place histones
-    tilt = 20*np.pi/180.  # tilt chromosomes 20 deg following F98
-    zshift = 18.3  # angstrom, z shift per chromosome following F98
-    nhistones = 21
-    height = (nhistones - 1) * zshift  # length of the fibre
-    voxelheight = 500
-
-    def __init__(self, turn=False):
-        prev_bp1 = basepair.BasePair(np.random.choice(["G", "A", "T", "C"]),
-                                     chain=0,
-                                     position=np.array([0, 0,
-                                                        -2*BP_SEPARATION]),
-                                     index=-2)
-        prev_bp2 = basepair.BasePair(np.random.choice(["G", "A", "T", "C"]),
-                                     chain=0,
-                                     position=np.array([0, 0,
-                                                        -1*BP_SEPARATION]),
-                                     index=-1)
-        rot = np.array([0, 0, np.pi/2.]) if turn is True else np.zeros(3)
-        next_bp3 = basepair.BasePair(np.random.choice(["G", "A", "T", "C"]),
-                                     chain=0,
-                                     position=np.array([0, 0,
-                                                        self.voxelheight +
-                                                        BP_SEPARATION]),
-                                     rotation=rot,
-                                     index=1000)
-        next_bp4 = basepair.BasePair(np.random.choice(["G", "A", "T", "C"]),
-                                     chain=0,
-                                     position=np.array([0, 0,
-                                                        self.voxelheight +
-                                                        2*BP_SEPARATION]),
-                                     rotation=rot,
-                                     index=1001)
-        self.basepairs = []
-        self.positions = [np.array([0, -self.radius,
-                                    .5*(self.voxelheight - self.height)])]
-        rm = r.eulerMatrix(np.pi/2., -np.pi/2., np.pi/2.)
-        rm = np.dot(r.roty(self.tilt), rm)
-        self.rotations = [r.getEulerAngles(rm)]
-        for ii in range(self.nhistones - 1):
-            last = self.positions[-1]
-            this = np.dot(r.rotz(np.pi/3.), last)
-            this[2] = last[2] + self.zshift
-            self.positions.append(this)
-            last = self.rotations[-1]
-            this = np.array([last[0], last[1], last[2] + np.pi/3.])
-            self.rotations.append(this)
-        self.histones = []
-        self.linkers = []
-        for pos, rot in zip(self.positions, self.rotations):
-            h = Histone(pos, rot)
-            self.histones.append(h)
-            if len(self.histones) > 1:
-                bp1 = self.histones[-2].basepairs[-2]
-                bp2 = self.histones[-2].basepairs[-1]
-                bp3 = self.histones[-1].basepairs[0]
-                bp4 = self.histones[-1].basepairs[1]
-                zr = - Histone.histone_total_twist - np.pi/3 +\
-                    Histone.hist_bp_rotation
-                l = SplineLinker(bp1, bp2, bp3, bp4, curviness=1,
-                                 zrot=zr, method="corrected_quaternion")
-                self.linkers.append(l)
-                self.basepairs.extend(l.basepairs)
-            else:
-                bp3 = self.histones[-1].basepairs[0]
-                bp4 = self.histones[-1].basepairs[1]
-                l = SplineLinker(prev_bp1, prev_bp2, bp3, bp4,
-                                 curviness=1,
-                                 zrot=0,
-                                 method="corrected_quaternion")
-                self.linkers.append(l)
-                self.basepairs.extend(l.basepairs)
-            self.basepairs.extend(h.basepairs)
-
-        # Add final linker
-        bp1 = self.histones[-1].basepairs[-2]
-        bp2 = self.histones[-1].basepairs[-1]
-        zr = -Histone.histone_total_twist - np.pi/3 * (self.nhistones % 6)
-        if turn is True:
-            zr += np.pi/2.
-        l = SplineLinker(bp1, bp2, next_bp3, next_bp4, curviness=1,
-                         zrot=zr, method="corrected_quaternion")
-        self.linkers.append(l)
-        self.basepairs.extend(l.basepairs)
 
 
 class SplineLinker(PlottableSequence):
@@ -540,6 +459,195 @@ class Histone(PlottableSequence):
         for bp in self.basepairs:
             bp.rotate(self.rotation, about_origin=True)
             bp.translate(self.position)
+        return None
+
+
+class Solenoid(PlottableSequence):
+    radius = 100  # angstroms, radius from center to place histones
+    tilt = 20*np.pi/180.  # tilt chromosomes 20 deg following F98
+    zshift = 18.3  # angstrom, z shift per chromosome following F98
+    nhistones = 21
+    height = (nhistones - 1) * zshift  # length of the fibre
+    voxelheight = 500
+
+    def __init__(self, turn=False):
+        prev_bp1 = basepair.BasePair(np.random.choice(["G", "A", "T", "C"]),
+                                     chain=0,
+                                     position=np.array([0, 0,
+                                                        -2*BP_SEPARATION]),
+                                     index=-2)
+        prev_bp2 = basepair.BasePair(np.random.choice(["G", "A", "T", "C"]),
+                                     chain=0,
+                                     position=np.array([0, 0,
+                                                        -1*BP_SEPARATION]),
+                                     index=-1)
+        rot = np.array([0, 0, np.pi/2.]) if turn is True else np.zeros(3)
+        next_bp3 = basepair.BasePair(np.random.choice(["G", "A", "T", "C"]),
+                                     chain=0,
+                                     position=np.array([0, 0,
+                                                        self.voxelheight +
+                                                        BP_SEPARATION]),
+                                     rotation=rot,
+                                     index=1000)
+        next_bp4 = basepair.BasePair(np.random.choice(["G", "A", "T", "C"]),
+                                     chain=0,
+                                     position=np.array([0, 0,
+                                                        self.voxelheight +
+                                                        2*BP_SEPARATION]),
+                                     rotation=rot,
+                                     index=1001)
+        self.basepairs = []
+        self.positions = [np.array([0, -self.radius,
+                                    .5*(self.voxelheight - self.height)])]
+        rm = r.eulerMatrix(np.pi/2., -np.pi/2., np.pi/2.)
+        rm = np.dot(r.roty(self.tilt), rm)
+        self.rotations = [r.getEulerAngles(rm)]
+        for ii in range(self.nhistones - 1):
+            last = self.positions[-1]
+            this = np.dot(r.rotz(np.pi/3.), last)
+            this[2] = last[2] + self.zshift
+            self.positions.append(this)
+            last = self.rotations[-1]
+            this = np.array([last[0], last[1], last[2] + np.pi/3.])
+            self.rotations.append(this)
+        self.histones = []
+        self.linkers = []
+        for pos, rot in zip(self.positions, self.rotations):
+            h = Histone(pos, rot)
+            self.histones.append(h)
+            if len(self.histones) > 1:
+                bp1 = self.histones[-2].basepairs[-2]
+                bp2 = self.histones[-2].basepairs[-1]
+                bp3 = self.histones[-1].basepairs[0]
+                bp4 = self.histones[-1].basepairs[1]
+                zr = - Histone.histone_total_twist - np.pi/3 +\
+                    Histone.hist_bp_rotation
+                l = SplineLinker(bp1, bp2, bp3, bp4, curviness=1,
+                                 zrot=zr, method="corrected_quaternion")
+                self.linkers.append(l)
+                self.basepairs.extend(l.basepairs)
+            else:
+                bp3 = self.histones[-1].basepairs[0]
+                bp4 = self.histones[-1].basepairs[1]
+                l = SplineLinker(prev_bp1, prev_bp2, bp3, bp4,
+                                 curviness=1,
+                                 zrot=0,
+                                 method="corrected_quaternion")
+                self.linkers.append(l)
+                self.basepairs.extend(l.basepairs)
+            self.basepairs.extend(h.basepairs)
+
+        # Add final linker
+        bp1 = self.histones[-1].basepairs[-2]
+        bp2 = self.histones[-1].basepairs[-1]
+        zr = -Histone.histone_total_twist - np.pi/3 * (self.nhistones % 6)
+        if turn is True:
+            zr += np.pi/2.
+        l = SplineLinker(bp1, bp2, next_bp3, next_bp4, curviness=1,
+                         zrot=zr, method="corrected_quaternion")
+        self.linkers.append(l)
+        self.basepairs.extend(l.basepairs)
+        return None
+
+
+class TurnedSolenoid(Solenoid):
+    nhistones = Solenoid.nhistones // 2 + 1
+    zshift = (Solenoid.voxelheight - 2 * Histone.radius_histone)/nhistones/2.
+    box_width = Solenoid.voxelheight/2.
+    # tilt = 20*np.pi/180.  # tilt chromosomes 20 deg following F98
+
+    def __init__(self, turn=False):
+        prev_bp1 = basepair.BasePair(np.random.choice(["G", "A", "T", "C"]),
+                                     chain=0,
+                                     position=np.array([0, 0,
+                                                        -2*BP_SEPARATION]),
+                                     index=-2)
+        prev_bp2 = basepair.BasePair(np.random.choice(["G", "A", "T", "C"]),
+                                     chain=0,
+                                     position=np.array([0, 0,
+                                                        -1*BP_SEPARATION]),
+                                     index=-1)
+        rot = np.array([0, 0, np.pi/2.]) if turn is True else np.zeros(3)
+        next_bp3 = basepair.BasePair(np.random.choice(["G", "A", "T", "C"]),
+                                     chain=0,
+                                     position=np.array(
+                                     [self.box_width + BP_SEPARATION,
+                                      0, self.box_width]),
+                                     rotation=rot,
+                                     index=1000)
+        next_bp4 = basepair.BasePair(np.random.choice(["G", "A", "T", "C"]),
+                                     chain=0,
+                                     position=np.array(
+                                     [self.box_width + 2 * BP_SEPARATION,
+                                      0, self.box_width]),
+                                     rotation=rot,
+                                     index=1001)
+        self.basepairs = []
+        self.positions = [np.array([0, -self.radius,
+                                    .5*(self.voxelheight - self.height)])]
+        rm = r.eulerMatrix(np.pi/2., -np.pi/2., np.pi/2.)
+        rm = np.dot(r.roty(self.tilt), rm)
+        self.rotations = [r.getEulerAngles(rm)]
+        for ii in range(self.nhistones - 1):
+            last = self.positions[-1]
+            this = np.dot(r.rotz(np.pi/3.), last)
+            this[2] = last[2] + self.zshift
+            self.positions.append(this)
+            last = self.rotations[-1]
+            this = np.array([last[0], last[1], last[2] + np.pi/3.])
+            self.rotations.append(this)
+
+        # Rotate positions/rotations through pi/2.
+        for ii in range(0, len(self.positions)):
+            pos = self.positions[ii]
+            f = pos[2]/self.voxelheight
+            ang = np.pi/2. * f
+            new_x = pos[2] * np.sin(ang) + pos[0] * np.cos(ang)
+            new_z = pos[2] * np.cos(ang) - pos[0] * np.sin(ang)
+            self.positions[ii] = [new_x, pos[1], new_z]
+
+            rot = self.rotations[ii]
+            rm = r.eulerMatrix(*rot)
+            rm = np.dot(r.roty(ang), rm)
+            self.rotations[ii] = r.getEulerAngles(rm)
+
+        self.histones = []
+        self.linkers = []
+        for pos, rot in zip(self.positions, self.rotations):
+            h = Histone(pos, rot)
+            self.histones.append(h)
+            if len(self.histones) > 1:
+                bp1 = self.histones[-2].basepairs[-2]
+                bp2 = self.histones[-2].basepairs[-1]
+                bp3 = self.histones[-1].basepairs[0]
+                bp4 = self.histones[-1].basepairs[1]
+                zr = - Histone.histone_total_twist - np.pi/3 +\
+                    Histone.hist_bp_rotation
+                l = SplineLinker(bp1, bp2, bp3, bp4, curviness=1,
+                                 zrot=zr, method="corrected_quaternion")
+                self.linkers.append(l)
+                self.basepairs.extend(l.basepairs)
+            else:
+                bp3 = self.histones[-1].basepairs[0]
+                bp4 = self.histones[-1].basepairs[1]
+                l = SplineLinker(prev_bp1, prev_bp2, bp3, bp4,
+                                 curviness=1,
+                                 zrot=0,
+                                 method="corrected_quaternion")
+                self.linkers.append(l)
+                self.basepairs.extend(l.basepairs)
+            self.basepairs.extend(h.basepairs)
+
+        # Add final linker
+        bp1 = self.histones[-1].basepairs[-2]
+        bp2 = self.histones[-1].basepairs[-1]
+        zr = -Histone.histone_total_twist - np.pi/3 * (self.nhistones % 6)
+        if turn is True:
+            zr += np.pi/2.
+        l = SplineLinker(bp1, bp2, next_bp3, next_bp4, curviness=1.,
+                         zrot=zr, method="corrected_quaternion")
+        self.linkers.append(l)
+        self.basepairs.extend(l.basepairs)
         return None
 
 
