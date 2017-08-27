@@ -474,26 +474,26 @@ class Solenoid(PlottableSequence):
         prev_bp1 = basepair.BasePair(np.random.choice(["G", "A", "T", "C"]),
                                      chain=0,
                                      position=np.array([0, 0,
-                                                        -2*BP_SEPARATION]),
+                                                        -1*BP_SEPARATION]),
                                      index=-2)
         prev_bp2 = basepair.BasePair(np.random.choice(["G", "A", "T", "C"]),
                                      chain=0,
                                      position=np.array([0, 0,
-                                                        -1*BP_SEPARATION]),
+                                                        -0*BP_SEPARATION]),
                                      index=-1)
         rot = np.array([0, 0, np.pi/2.]) if turn is True else np.zeros(3)
         next_bp3 = basepair.BasePair(np.random.choice(["G", "A", "T", "C"]),
                                      chain=0,
                                      position=np.array([0, 0,
                                                         self.voxelheight +
-                                                        BP_SEPARATION]),
+                                                        0.*BP_SEPARATION]),
                                      rotation=rot,
                                      index=1000)
         next_bp4 = basepair.BasePair(np.random.choice(["G", "A", "T", "C"]),
                                      chain=0,
                                      position=np.array([0, 0,
                                                         self.voxelheight +
-                                                        2*BP_SEPARATION]),
+                                                        1.*BP_SEPARATION]),
                                      rotation=rot,
                                      index=1001)
         self.basepairs = []
@@ -560,25 +560,25 @@ class TurnedSolenoid(Solenoid):
         prev_bp1 = basepair.BasePair(np.random.choice(["G", "A", "T", "C"]),
                                      chain=0,
                                      position=np.array([0, 0,
-                                                        -2*BP_SEPARATION]),
+                                                        -1*BP_SEPARATION]),
                                      index=-2)
         prev_bp2 = basepair.BasePair(np.random.choice(["G", "A", "T", "C"]),
                                      chain=0,
                                      position=np.array([0, 0,
-                                                        -1*BP_SEPARATION]),
+                                                        -0*BP_SEPARATION]),
                                      index=-1)
         rot = np.array([0, 0, np.pi/2.]) if turn is True else np.zeros(3)
         next_bp3 = basepair.BasePair(np.random.choice(["G", "A", "T", "C"]),
                                      chain=0,
                                      position=np.array(
-                                     [self.box_width + BP_SEPARATION,
+                                     [self.box_width + 0*BP_SEPARATION,
                                       0, self.box_width]),
                                      rotation=rot,
                                      index=1000)
         next_bp4 = basepair.BasePair(np.random.choice(["G", "A", "T", "C"]),
                                      chain=0,
                                      position=np.array(
-                                     [self.box_width + 2 * BP_SEPARATION,
+                                     [self.box_width + 1*BP_SEPARATION,
                                       0, self.box_width]),
                                      rotation=rot,
                                      index=1001)
