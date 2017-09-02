@@ -547,12 +547,16 @@ class Solenoid(PlottableSequence):
                          zrot=zr, method="corrected_quaternion")
         self.linkers.append(l)
         self.basepairs.extend(l.basepairs)
+        # reset bp indices
+        for ii, bp in enumerate(self.basepairs):
+            bp.set_bp_index(ii)
         return None
 
 
 class TurnedSolenoid(Solenoid):
     nhistones = Solenoid.nhistones // 2 + 1
-    zshift = (Solenoid.voxelheight - 2 * Histone.radius_histone)/nhistones/2.
+    # check that the 2.3 in this line does not cause overlaps
+    zshift = (Solenoid.voxelheight - 2 * Histone.radius_histone)/nhistones/2.3
     box_width = Solenoid.voxelheight/2.
     # tilt = 20*np.pi/180.  # tilt chromosomes 20 deg following F98
 
@@ -648,6 +652,9 @@ class TurnedSolenoid(Solenoid):
                          zrot=zr, method="corrected_quaternion")
         self.linkers.append(l)
         self.basepairs.extend(l.basepairs)
+        # reset bp indices
+        for ii, bp in enumerate(self.basepairs):
+            bp.set_bp_index(ii)
         return None
 
 
@@ -772,6 +779,9 @@ class DNAChain(object):
 
         fig = plt.figure()
         ax = fig.add_subplot(111, projection='3d')
+        ax.set_xlabel('x')
+        ax.set_ylabel('y')
+        ax.set_zlabel('z')
         ax.scatter(bases[0], bases[1], bases[2], c="0.6", s=20)
         ax.scatter(triphosphates[0], triphosphates[1], triphosphates[2], c="y",
                    s=20)

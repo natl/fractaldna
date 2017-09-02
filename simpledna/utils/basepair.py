@@ -205,6 +205,17 @@ class BasePair(object):
 
         return None
 
+    def set_bp_index(self, bp_idx):
+        """
+        BasePair.setNewChain(chainIdx)
+
+        Reset the chain index for all molecules
+        """
+        for molecule in self.moleculeDict.values():
+            molecule.index = bp_idx
+
+        return None
+
     def to_text(self, seperator=" "):
         """
         BasePair.to_text(self, seperator=" ")
