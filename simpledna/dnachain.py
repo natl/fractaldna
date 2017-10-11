@@ -474,26 +474,26 @@ class Solenoid(PlottableSequence):
         prev_bp1 = basepair.BasePair(np.random.choice(["G", "A", "T", "C"]),
                                      chain=0,
                                      position=np.array([0, 0,
-                                                        -2*BP_SEPARATION]),
+                                                        -1*BP_SEPARATION]),
                                      index=-2)
         prev_bp2 = basepair.BasePair(np.random.choice(["G", "A", "T", "C"]),
                                      chain=0,
                                      position=np.array([0, 0,
-                                                        -1*BP_SEPARATION]),
+                                                        -0*BP_SEPARATION]),
                                      index=-1)
         rot = np.array([0, 0, np.pi/2.]) if turn is True else np.zeros(3)
         next_bp3 = basepair.BasePair(np.random.choice(["G", "A", "T", "C"]),
                                      chain=0,
                                      position=np.array([0, 0,
                                                         self.voxelheight +
-                                                        BP_SEPARATION]),
+                                                        0.*BP_SEPARATION]),
                                      rotation=rot,
                                      index=1000)
         next_bp4 = basepair.BasePair(np.random.choice(["G", "A", "T", "C"]),
                                      chain=0,
                                      position=np.array([0, 0,
                                                         self.voxelheight +
-                                                        2*BP_SEPARATION]),
+                                                        1.*BP_SEPARATION]),
                                      rotation=rot,
                                      index=1001)
         self.basepairs = []
@@ -547,6 +547,9 @@ class Solenoid(PlottableSequence):
                          zrot=zr, method="corrected_quaternion")
         self.linkers.append(l)
         self.basepairs.extend(l.basepairs)
+        # reset bp indices
+        for ii, bp in enumerate(self.basepairs):
+            bp.set_bp_index(ii)
         return None
 
 
@@ -562,25 +565,25 @@ class TurnedSolenoid(Solenoid):
         prev_bp1 = basepair.BasePair(np.random.choice(["G", "A", "T", "C"]),
                                      chain=0,
                                      position=np.array([0, 0,
-                                                        -2*BP_SEPARATION]),
+                                                        -1*BP_SEPARATION]),
                                      index=-2)
         prev_bp2 = basepair.BasePair(np.random.choice(["G", "A", "T", "C"]),
                                      chain=0,
                                      position=np.array([0, 0,
-                                                        -1*BP_SEPARATION]),
+                                                        -0*BP_SEPARATION]),
                                      index=-1)
         rot = np.array([0, 0, np.pi/2.]) if turn is True else np.zeros(3)
         next_bp3 = basepair.BasePair(np.random.choice(["G", "A", "T", "C"]),
                                      chain=0,
                                      position=np.array(
-                                     [self.box_width + BP_SEPARATION,
+                                     [self.box_width + 0*BP_SEPARATION,
                                       0, self.box_width]),
                                      rotation=rot,
                                      index=1000)
         next_bp4 = basepair.BasePair(np.random.choice(["G", "A", "T", "C"]),
                                      chain=0,
                                      position=np.array(
-                                     [self.box_width + 2 * BP_SEPARATION,
+                                     [self.box_width + 1*BP_SEPARATION,
                                       0, self.box_width]),
                                      rotation=rot,
                                      index=1001)
@@ -652,6 +655,9 @@ class TurnedSolenoid(Solenoid):
                          zrot=zr, method="corrected_quaternion")
         self.linkers.append(l)
         self.basepairs.extend(l.basepairs)
+        # reset bp indices
+        for ii, bp in enumerate(self.basepairs):
+            bp.set_bp_index(ii)
         return None
 
 
@@ -776,6 +782,9 @@ class DNAChain(object):
 
         fig = plt.figure()
         ax = fig.add_subplot(111, projection='3d')
+        ax.set_xlabel('x')
+        ax.set_ylabel('y')
+        ax.set_zlabel('z')
         ax.scatter(bases[0], bases[1], bases[2], c="0.6", s=20)
         ax.scatter(triphosphates[0], triphosphates[1], triphosphates[2], c="y",
                    s=20)
