@@ -466,9 +466,9 @@ class Solenoid(PlottableSequence):
     radius = 100  # angstroms, radius from center to place histones
     tilt = 20*np.pi/180.  # tilt chromosomes 20 deg following F98
     zshift = 18.3  # angstrom, z shift per chromosome following F98
-    nhistones = 21
+    nhistones = 34
     height = (nhistones - 1) * zshift  # length of the fibre
-    voxelheight = 500
+    voxelheight = 750
 
     def __init__(self, turn=False):
         prev_bp1 = basepair.BasePair(np.random.choice(["G", "A", "T", "C"]),
@@ -551,9 +551,11 @@ class Solenoid(PlottableSequence):
 
 
 class TurnedSolenoid(Solenoid):
-    nhistones = Solenoid.nhistones // 2 + 1
-    zshift = (Solenoid.voxelheight - 2 * Histone.radius_histone)/nhistones/2.
+    nhistones = int(Solenoid.nhistones/2**.5) - 1
     box_width = Solenoid.voxelheight/2.
+    strand_length = Solenoid.voxelheight/2**.5
+    zshift = (strand_length - 3. * Histone.radius_histone)/nhistones
+    height = (nhistones - 1) * zshift
     # tilt = 20*np.pi/180.  # tilt chromosomes 20 deg following F98
 
     def __init__(self, turn=False):
@@ -583,8 +585,9 @@ class TurnedSolenoid(Solenoid):
                                      rotation=rot,
                                      index=1001)
         self.basepairs = []
+        print(self.height, self.zshift, self.nhistones)
         self.positions = [np.array([0, -self.radius,
-                                    .5*(self.voxelheight - self.height)])]
+                                    .5*(self.strand_length - self.height)])]
         rm = r.eulerMatrix(np.pi/2., -np.pi/2., np.pi/2.)
         rm = np.dot(r.roty(self.tilt), rm)
         self.rotations = [r.getEulerAngles(rm)]
@@ -600,12 +603,13 @@ class TurnedSolenoid(Solenoid):
         # Rotate positions/rotations through pi/2.
         for ii in range(0, len(self.positions)):
             pos = self.positions[ii]
-            f = pos[2]/self.voxelheight
-            ang = np.pi/2. * f
-            new_x = pos[2] * np.sin(ang) + pos[0] * np.cos(ang)
-            new_z = pos[2] * np.cos(ang) - pos[0] * np.sin(ang)
+            f = pos[2]/self.strand_length
+            ang_pos = pos[2]/self.voxelheight
+            new_x = pos[2] * np.sin(ang_pos) + pos[0] * np.cos(ang_pos)
+            new_z = pos[2] * np.cos(ang_pos) - pos[0] * np.sin(ang_pos)
             self.positions[ii] = [new_x, pos[1], new_z]
 
+            ang = np.pi/2. * f
             rot = self.rotations[ii]
             rm = r.eulerMatrix(*rot)
             rm = np.dot(r.roty(ang), rm)
