@@ -463,12 +463,14 @@ class Histone(PlottableSequence):
 
 
 class Solenoid(PlottableSequence):
-    radius = 100  # angstroms, radius from center to place histones
-    tilt = 20*np.pi/180.  # tilt chromosomes 20 deg following F98
-    zshift = 18.3  # angstrom, z shift per chromosome following F98
-    nhistones = 34
-    height = (nhistones - 1) * zshift  # length of the fibre
     voxelheight = 750
+    radius = 100  # angstroms, radius from center to place histones
+    # tilt = 20*np.pi/180.  # tilt chromosomes 20 deg following F98
+    # zshift = 18.3  # angstrom, z shift per chromosome following F98
+    nhistones = 38
+    tilt = 50*np.pi/180.
+    zshift = (voxelheight - 4. * Histone.radius_histone)/nhistones
+    height = (nhistones - 1) * zshift  # length of the fibre
 
     def __init__(self, turn=False):
         prev_bp1 = basepair.BasePair(np.random.choice(["G", "A", "T", "C"]),
@@ -603,7 +605,6 @@ class TurnedSolenoid(Solenoid):
             last = self.rotations[-1]
             this = np.array([last[0], last[1], last[2] + np.pi/3.])
             self.rotations.append(this)
-        print(self.positions[0])
         # Rotate positions/rotations through pi/2.
         for ii in range(0, len(self.positions)):
             pos = self.positions[ii]
@@ -632,7 +633,6 @@ class TurnedSolenoid(Solenoid):
             rm = np.dot(r.roty(ang_histone), rm)
             self.rotations[ii] = r.getEulerAngles(rm)
 
-        print(self.positions[0])
         self.histones = []
         self.linkers = []
         for pos, rot in zip(self.positions, self.rotations):
