@@ -554,12 +554,12 @@ class Solenoid(PlottableSequence):
 
 
 class TurnedSolenoid(Solenoid):
-    nhistones = int(Solenoid.nhistones/2**.5) - 1
+    nhistones = int(Solenoid.nhistones/2**.5)
     box_width = Solenoid.voxelheight/2.
     strand_length = Solenoid.voxelheight/2**.5
-    zshift = (strand_length - 3. * Histone.radius_histone)/nhistones
+    zshift = (strand_length - 4. * Histone.radius_histone)/nhistones
     height = (nhistones - 1) * zshift
-    # tilt = 20*np.pi/180.  # tilt chromosomes 20 deg following F98
+    tilt = 50*np.pi/180.  # tilt chromosomes 20 deg following F98
 
     def __init__(self, turn=False):
         prev_bp1 = basepair.BasePair(np.random.choice(["G", "A", "T", "C"]),
@@ -589,9 +589,10 @@ class TurnedSolenoid(Solenoid):
                                      index=1001)
         self.basepairs = []
         print(self.height, self.zshift, self.nhistones)
-        self.positions = [np.array([0, -self.radius,
-                                    .5*(self.strand_length - self.height)])]
-        rm = r.eulerMatrix(np.pi/2., -np.pi/2., np.pi/2.)
+        pos1 = np.array([0, -self.radius,
+                         .5*(self.strand_length - self.height)])
+        self.positions = [np.dot(r.rotz(0*np.pi/3.), pos1)]  # start at 2pi/3
+        rm = r.eulerMatrix(np.pi/2., -np.pi/2., np.pi/2. + 0*np.pi/3.)
         rm = np.dot(r.roty(self.tilt), rm)
         self.rotations = [r.getEulerAngles(rm)]
         for ii in range(self.nhistones - 1):
@@ -602,22 +603,36 @@ class TurnedSolenoid(Solenoid):
             last = self.rotations[-1]
             this = np.array([last[0], last[1], last[2] + np.pi/3.])
             self.rotations.append(this)
-
+        print(self.positions[0])
         # Rotate positions/rotations through pi/2.
         for ii in range(0, len(self.positions)):
             pos = self.positions[ii]
-            f = pos[2]/self.strand_length
-            ang_pos = pos[2]/self.voxelheight
-            new_x = pos[2] * np.sin(ang_pos) + pos[0] * np.cos(ang_pos)
-            new_z = pos[2] * np.cos(ang_pos) - pos[0] * np.sin(ang_pos)
+            old_x = pos[0]
+            old_z = pos[2]
+            ang_histone = old_z/self.strand_length*np.pi/2.
+            ang_pos = old_z/self.strand_length*np.pi/4.
+
+            # need to do two rotations to eliminate shear
+            ref_x = old_z*np.sin(ang_pos)
+            ref_z = old_z*np.cos(ang_pos)
+
+            new_x1 = old_z*np.sin(ang_pos) + old_x*np.cos(ang_pos)
+            new_z1 = old_z*np.cos(ang_pos) - old_x*np.sin(ang_pos)
+
+            new_x2 = new_x1 - ref_x
+            new_z2 = new_z1 - ref_z
+
+            new_x = ref_x + new_z2*np.sin(ang_pos) + new_x2*np.cos(ang_pos)
+            new_z = ref_z + new_z2*np.cos(ang_pos) - new_x2*np.sin(ang_pos)
+
             self.positions[ii] = [new_x, pos[1], new_z]
 
-            ang = np.pi/2. * f
             rot = self.rotations[ii]
             rm = r.eulerMatrix(*rot)
-            rm = np.dot(r.roty(ang), rm)
+            rm = np.dot(r.roty(ang_histone), rm)
             self.rotations[ii] = r.getEulerAngles(rm)
 
+        print(self.positions[0])
         self.histones = []
         self.linkers = []
         for pos, rot in zip(self.positions, self.rotations):
