@@ -414,7 +414,17 @@ class SplineLinker(PlottableSequence):
                 bp.translate(pos)
                 self.basepairs.append(bp)
 
-        pass
+        return None
+
+    def translate(self, translation):
+        for bp in self.basepairs:
+            bp.translate(translation)
+        return None
+
+    def setChain(self, chainIdx):
+        for bp in self.basepairs:
+            bp.setNewChain(chainIdx)
+        return None
 
 
 class Histone(PlottableSequence):
@@ -482,18 +492,29 @@ class Histone(PlottableSequence):
             bp.translate(self.position)
         return None
 
+    def translate(self, translation):
+        for bp in self.basepairs:
+            bp.translate(translation)
+        self.position += translation
+        return None
+
+    def setChain(self, chainIdx):
+        for bp in self.basepairs:
+            bp.setNewChain(chainIdx)
+        return None
+
 
 class Solenoid(PlottableSequence):
-    voxelheight = 750
-    radius = 100  # angstroms, radius from center to place histones
-    # tilt = 20*np.pi/180.  # tilt chromosomes 20 deg following F98
-    # zshift = 18.3  # angstrom, z shift per chromosome following F98
-    nhistones = 38
-    tilt = 50*np.pi/180.
-    zshift = (voxelheight - 4. * Histone.radius_histone)/nhistones
-    height = (nhistones - 1) * zshift  # length of the fibre
 
-    def __init__(self, turn=False):
+    def __init__(self, voxelheight=750, radius=100, nhistones=38,
+                 histone_angle=50, twist=False):
+        self.radius = radius
+        self.voxelheight = voxelheight
+        self.nhistones = nhistones
+        self.tilt = histone_angle*np.pi/180.
+        self.zshift = ((self.voxelheight - 4. * Histone.radius_histone) /
+                       self.nhistones)
+        self.height = (self.nhistones - 1) * self.zshift  # length of the fibre
         prev_bp1 = basepair.BasePair(np.random.choice(["G", "A", "T", "C"]),
                                      chain=0,
                                      position=np.array([0, 0,
@@ -504,7 +525,7 @@ class Solenoid(PlottableSequence):
                                      position=np.array([0, 0,
                                                         -0*BP_SEPARATION]),
                                      index=-1)
-        rot = np.array([0, 0, np.pi/2.]) if turn is True else np.zeros(3)
+        rot = np.array([0, 0, np.pi/2.]) if twist is True else np.zeros(3)
         next_bp3 = basepair.BasePair(np.random.choice(["G", "A", "T", "C"]),
                                      chain=0,
                                      position=np.array([0, 0,
@@ -564,7 +585,7 @@ class Solenoid(PlottableSequence):
         bp1 = self.histones[-1].basepairs[-2]
         bp2 = self.histones[-1].basepairs[-1]
         zr = -Histone.histone_total_twist - np.pi/3 * (self.nhistones % 6)
-        if turn is True:
+        if twist is True:
             zr += np.pi/2.
         l = SplineLinker(bp1, bp2, next_bp3, next_bp4, curviness=1,
                          zrot=zr, method="corrected_quaternion")
@@ -575,16 +596,37 @@ class Solenoid(PlottableSequence):
             bp.set_bp_index(ii)
         return None
 
+    def translate(self, translation):
+        for histone in self.histones:
+            histone.translate(translation)
+        for linker in self.linkers:
+            linker.translate(translation)
+        return None
+
+    def setChain(self, chainIdx):
+        for histone in self.histones:
+            histone.setChain(chainIdx)
+        for linker in self.linkers:
+            linker.setChain(chainIdx)
+        return None
+
 
 class TurnedSolenoid(Solenoid):
-    nhistones = int(Solenoid.nhistones/2**.5)
-    box_width = Solenoid.voxelheight/2.
-    strand_length = Solenoid.voxelheight/2**.5
-    zshift = (strand_length - 4. * Histone.radius_histone)/nhistones
-    height = (nhistones - 1) * zshift
-    tilt = 50*np.pi/180.  # tilt chromosomes 20 deg following F98
-
-    def __init__(self, turn=False):
+    def __init__(self, voxelheight=750, radius=100, nhistones=38,
+                 histone_angle=50, twist=False):
+        """
+        TurnedSolenoid(voxelheight=750, radius=100, nhistones=38,
+                       histone_angle=50, twist=False)
+        Solenoid parameters are as apply to a straight Solenoid
+        """
+        self.nhistones = int(nhistones/2**.5)
+        self.box_width = voxelheight/2.
+        self.radius = radius
+        self.strand_length = voxelheight/2**.5
+        self.zshift = ((self.strand_length - 4. * Histone.radius_histone) /
+                       self.nhistones)
+        self.height = (self.nhistones - 1) * self.zshift
+        self.tilt = histone_angle*np.pi/180.
         prev_bp1 = basepair.BasePair(np.random.choice(["G", "A", "T", "C"]),
                                      chain=0,
                                      position=np.array([0, 0,
@@ -595,7 +637,7 @@ class TurnedSolenoid(Solenoid):
                                      position=np.array([0, 0,
                                                         -0*BP_SEPARATION]),
                                      index=-1)
-        rot = np.array([0, 0, np.pi/2.]) if turn is True else np.zeros(3)
+        rot = np.array([0, 0, np.pi/2.]) if twist is True else np.zeros(3)
         next_bp3 = basepair.BasePair(np.random.choice(["G", "A", "T", "C"]),
                                      chain=0,
                                      position=np.array(
@@ -685,7 +727,7 @@ class TurnedSolenoid(Solenoid):
         bp1 = self.histones[-1].basepairs[-2]
         bp2 = self.histones[-1].basepairs[-1]
         zr = -Histone.histone_total_twist - np.pi/3 * (self.nhistones % 6)
-        if turn is True:
+        if twist is True:
             zr += np.pi/2.
         l = SplineLinker(bp1, bp2, next_bp3, next_bp4, curviness=1.,
                          zrot=zr, method="corrected_quaternion")
@@ -694,6 +736,46 @@ class TurnedSolenoid(Solenoid):
         # reset bp indices
         for ii, bp in enumerate(self.basepairs):
             bp.set_bp_index(ii)
+        return None
+
+
+class MultiSolenoidVolume(PlottableSequence):
+    def __init__(self, voxelheight=1500., separation=400, twist=False):
+        self.voxelheight = voxelheight
+        self.radius = 100
+        self.nhistones = int(38 * voxelheight/750.)
+        self.histone_angle = 50
+        self.sep = separation
+        self.twist = twist
+
+        self.basepairs = []
+        self.histones = []
+        self.linkers = []
+
+        translations = [np.array([self.sep, 0, 0]),
+                        np.array([0, self.sep, 0]),
+                        np.array([-self.sep, 0, 0]),
+                        np.array([0, -self.sep, 0]),
+                        np.array([self.sep, self.sep, 0]),
+                        np.array([-self.sep, self.sep, 0]),
+                        np.array([-self.sep, -self.sep, 0]),
+                        np.array([self.sep, -self.sep, 0])]
+        solenoids = []
+        for ii in range(8):
+            s = Solenoid(voxelheight=self.voxelheight,
+                         radius=self.radius,
+                         nhistones=self.nhistones,
+                         histone_angle=self.histone_angle,
+                         twist=self.twist)
+            s.setChain(ii)
+            s.translate(translations[ii])
+            solenoids.append(s)
+
+        for s in solenoids:
+            self.basepairs.extend(s.basepairs)
+            self.linkers.extend(s.linkers)
+            self.histones.extend(s.histones)
+
         return None
 
 
