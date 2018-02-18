@@ -8,7 +8,14 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D  # NOQA
 from copy import deepcopy
 from scipy.interpolate import interp1d
-from mayavi import mlab
+
+try:
+    from mayavi import mlab
+    maya_imported = True
+except ImportError:
+    maya_imported = False
+    print("Could not import mayavi libraries, 3d plotting is disabled")
+    print("MayaVi may need Python2")
 
 from utils import rotations as r
 from utils import basepair
@@ -16,6 +23,10 @@ from utils import BP_ROTATION, BP_SEPARATION
 
 
 class PlottableSequence(object):
+    """
+    This is an inheritable class that gives DNA chains plotting methods and
+    output methods.
+    """
     def to_text(self, seperator=" "):
         """
         Return a description of the molecules in the chain as text
@@ -122,31 +133,37 @@ class PlottableSequence(object):
         """
         Return a matplotlib.Figure instance with histone and linkers shown
         """
-        fig = mlab.figure()
-        if hasattr(self, "histones"):
-            # ax = fig.add_subplot(111, projection='3d')
-            histones = []
-            for histone in self.histones:
-                pos = np.array([bp.position for bp in histone.basepairs])
-                mlab.plot3d(pos[:, 0], pos[:, 1], pos[:, 2], color=(1., .8, 0),
+        if maya_imported is True:
+            fig = mlab.figure()
+            if hasattr(self, "histones"):
+                # ax = fig.add_subplot(111, projection='3d')
+                histones = []
+                for histone in self.histones:
+                    pos = np.array([bp.position for bp in histone.basepairs])
+                    mlab.plot3d(pos[:, 0], pos[:, 1], pos[:, 2],
+                                color=(1., .8, 0),
+                                tube_radius = 11.5)
+                    histones.append(histone.position)
+
+                for linker in self.linkers:
+                    pos = np.array([bp.position for bp in linker.basepairs])
+                    mlab.plot3d(pos[:, 0], pos[:, 1], pos[:, 2],
+                                color=(0, .8, 0),
+                                tube_radius = 11.5)
+
+                histones = np.array(histones)
+                mlab.points3d(histones[:, 0], histones[:, 1], histones[:, 2],
+                              color=(0, 0, 1.), opacity=.4, scale_factor=70)
+
+            else:
+                pos = np.array([bp.position for bp in self.basepairs])
+                mlab.plot3d(pos[:, 0], pos[:, 1], pos[:, 2], color=(1., 0, 0),
                             tube_radius = 11.5)
-                histones.append(histone.position)
 
-            for linker in self.linkers:
-                pos = np.array([bp.position for bp in linker.basepairs])
-                mlab.plot3d(pos[:, 0], pos[:, 1], pos[:, 2], color=(0, .8, 0),
-                            tube_radius = 11.5)
-
-            histones = np.array(histones)
-            mlab.points3d(histones[:, 0], histones[:, 1], histones[:, 2],
-                          color=(0, 0, 1.), opacity=.4, scale_factor=70)
-
+            return fig
         else:
-            pos = np.array([bp.position for bp in self.basepairs])
-            mlab.plot3d(pos[:, 0], pos[:, 1], pos[:, 2], color=(1., 0, 0),
-                        tube_radius = 11.5)
-
-        return fig
+            print("MayaVi not imporrted, cannot produce this plot")
+            return None
 
     def to_strand_plot(self, plot_p=True, plot_b=True, plot_s=True,
                        plot_bp=False):
@@ -159,68 +176,72 @@ class PlottableSequence(object):
         plot_b : plot base strands
         plot_bp : join base pairs together
         """
-        sugar_l = []
-        sugar_r = []
-        phosphate_l = []
-        phosphate_r = []
-        base_l = []
-        base_r = []
-        bps = ["guanine", "adenine", "thymine", "cytosine"]
-        for pair in self.basepairs:
-            for (name, molecule) in pair.iterMolecules():
-                if molecule.name.lower() == "sugar":
-                    if molecule.strand == 0:
-                        sugar_l.append(molecule.position)
-                    elif molecule.strand == 1:
-                        sugar_r.append(molecule.position)
-                elif molecule.name.lower() == "phosphate":
-                    if molecule.strand == 0:
-                        phosphate_l.append(molecule.position)
-                    elif molecule.strand == 1:
-                        phosphate_r.append(molecule.position)
-                elif molecule.name.lower() in bps:
-                    if molecule.strand == 0:
-                        base_l.append(molecule.position)
-                    elif molecule.strand == 1:
-                        base_r.append(molecule.position)
+        if maya_imported is True:
+            sugar_l = []
+            sugar_r = []
+            phosphate_l = []
+            phosphate_r = []
+            base_l = []
+            base_r = []
+            bps = ["guanine", "adenine", "thymine", "cytosine"]
+            for pair in self.basepairs:
+                for (name, molecule) in pair.iterMolecules():
+                    if molecule.name.lower() == "sugar":
+                        if molecule.strand == 0:
+                            sugar_l.append(molecule.position)
+                        elif molecule.strand == 1:
+                            sugar_r.append(molecule.position)
+                    elif molecule.name.lower() == "phosphate":
+                        if molecule.strand == 0:
+                            phosphate_l.append(molecule.position)
+                        elif molecule.strand == 1:
+                            phosphate_r.append(molecule.position)
+                    elif molecule.name.lower() in bps:
+                        if molecule.strand == 0:
+                            base_l.append(molecule.position)
+                        elif molecule.strand == 1:
+                            base_r.append(molecule.position)
 
-        # Plotting
-        base_l = [ii for ii in zip( * map(list, base_l))]
-        base_r = [ii for ii in zip( * map(list, base_r))]
-        phosphate_l = [ii for ii in zip( * map(list, phosphate_l))]
-        phosphate_r = [ii for ii in zip( * map(list, phosphate_r))]
-        sugar_l = [ii for ii in zip( * map(list, sugar_l))]
-        sugar_r = [ii for ii in zip( * map(list, sugar_r))]
-        fig = mlab.figure()
+            # Plotting
+            base_l = [ii for ii in zip( * map(list, base_l))]
+            base_r = [ii for ii in zip( * map(list, base_r))]
+            phosphate_l = [ii for ii in zip( * map(list, phosphate_l))]
+            phosphate_r = [ii for ii in zip( * map(list, phosphate_r))]
+            sugar_l = [ii for ii in zip( * map(list, sugar_l))]
+            sugar_r = [ii for ii in zip( * map(list, sugar_r))]
+            fig = mlab.figure()
 
-        if plot_b:
-            mlab.plot3d(base_l[0], base_l[1], base_l[2],
-                        color=(0.6, 0.6, 0.6), tube_radius = 1)
-            mlab.plot3d(base_r[0], base_r[1], base_r[2],
-                        color=(0.6, 0.6, 0.6), tube_radius = 1)
-        if plot_s:
-            mlab.plot3d(sugar_l[0], sugar_l[1], sugar_l[2],
-                        color=(1., 0, 0), tube_radius = 1)
-            mlab.plot3d(sugar_r[0], sugar_r[1], sugar_r[2],
-                        color=(1., 0, 0), tube_radius = 1)
-        if plot_p:
-            mlab.plot3d(phosphate_l[0], phosphate_l[1], phosphate_l[2],
-                        color=(1, 1, 0), tube_radius = 1)
-            mlab.plot3d(phosphate_r[0], phosphate_r[1], phosphate_r[2],
-                        color=(1, 1, 0), tube_radius = 1)
+            if plot_b:
+                mlab.plot3d(base_l[0], base_l[1], base_l[2],
+                            color=(0.6, 0.6, 0.6), tube_radius = 1)
+                mlab.plot3d(base_r[0], base_r[1], base_r[2],
+                            color=(0.6, 0.6, 0.6), tube_radius = 1)
+            if plot_s:
+                mlab.plot3d(sugar_l[0], sugar_l[1], sugar_l[2],
+                            color=(1., 0, 0), tube_radius = 1)
+                mlab.plot3d(sugar_r[0], sugar_r[1], sugar_r[2],
+                            color=(1., 0, 0), tube_radius = 1)
+            if plot_p:
+                mlab.plot3d(phosphate_l[0], phosphate_l[1], phosphate_l[2],
+                            color=(1, 1, 0), tube_radius = 1)
+                mlab.plot3d(phosphate_r[0], phosphate_r[1], phosphate_r[2],
+                            color=(1, 1, 0), tube_radius = 1)
 
-        if plot_bp:
-            # plot bars joining base pairs
-            for ii in range(0, len(base_l[0])):
-                xs = (phosphate_l[0][ii], sugar_l[0][ii], base_l[0][ii],
-                      base_r[0][ii], sugar_r[0][ii], phosphate_r[0][ii])
-                ys = (phosphate_l[1][ii], sugar_l[1][ii], base_l[1][ii],
-                      base_r[1][ii], sugar_r[1][ii], phosphate_r[1][ii])
-                zs = (phosphate_l[2][ii], sugar_l[2][ii], base_l[2][ii],
-                      base_r[2][ii], sugar_r[2][ii], phosphate_r[2][ii])
-                mlab.plot3d(xs, ys, zs, color=(1, 1, 1), tube_radius=.5)
+            if plot_bp:
+                # plot bars joining base pairs
+                for ii in range(0, len(base_l[0])):
+                    xs = (phosphate_l[0][ii], sugar_l[0][ii], base_l[0][ii],
+                          base_r[0][ii], sugar_r[0][ii], phosphate_r[0][ii])
+                    ys = (phosphate_l[1][ii], sugar_l[1][ii], base_l[1][ii],
+                          base_r[1][ii], sugar_r[1][ii], phosphate_r[1][ii])
+                    zs = (phosphate_l[2][ii], sugar_l[2][ii], base_l[2][ii],
+                          base_r[2][ii], sugar_r[2][ii], phosphate_r[2][ii])
+                    mlab.plot3d(xs, ys, zs, color=(1, 1, 1), tube_radius=.5)
 
-        return fig
+            return fig
+        else:
+            print("MayaVi not imporrted, cannot produce this plot")
+            return None
 
 
 class SplineLinker(PlottableSequence):
@@ -676,7 +697,7 @@ class TurnedSolenoid(Solenoid):
         return None
 
 
-class DNAChain(object):
+class DNAChain(PlottableSequence):
 
     def __init__(self, genome, chain=0):
         """
@@ -709,33 +730,33 @@ class DNAChain(object):
         zmax = 0
         zmin = 0
         for pair in chain:
-            for (name, mol) in pair.iterMolecules():
-                if mol.position[2] < zmin:
-                    zmin = mol.position[2]
-                elif mol.position[2] > zmax:
-                    zmax = mol.position[2]
+            # for (name, mol) in pair.iterMolecules():
+            if pair.position[2] < zmin:
+                zmin = pair.position[2]
+            elif pair.position[2] > zmax:
+                zmax = pair.position[2]
 
         zrange = zmax - zmin
         radius = 2. * zrange / np.pi
+        print(radius)
 
         for pair in chain:
-            for (name, mol) in pair.iterMolecules():
-                # Translation of the frame - new center position
-                theta = np.pi / 2. * (mol.position[2] - zmin) / zrange
-                neworigin = np.array([radius * (1 - np.cos(theta)),
-                                      0.,
-                                      radius * np.sin(theta) - radius])
-                # rotation of the frame
-                oldframe = np.array([mol.position[0], mol.position[1], 0])
-                yang = np.pi / 2. * (mol.position[2] - zmin) / zrange
-                xang = twist * (mol.position[2] - zmin) / zrange
+            # Translation of the frame - new center position
+            theta = np.pi / 2. * (pair.position[2] - zmin) / zrange
+            new_origin = np.array([radius * (1 - np.cos(theta)),
+                                   0.,
+                                   radius * np.sin(theta) - radius])
+            # rotation of the frame
+            # oldframe = np.array([mol.position[0], mol.position[1], 0])
+            yang = np.pi / 2. * (pair.position[2] - zmin) / zrange
+            pair.rotate(np.array([0, yang, 0]), about_origin=True)
 
-                newframe = np.dot(r.rotx(xang), np.dot(r.roty(yang), oldframe))
+            xang = twist * (pair.position[2] - zmin) / zrange
+            chain_z_axis = pair.rmatrix[:, 2]
+            rmatrix = r.rot_ax_angle(chain_z_axis, xang)
+            pair.rotate(rmatrix, about_origin=True)
 
-                mol.position[0] = neworigin[0] + newframe[0]
-                mol.position[1] = neworigin[1] + newframe[1]
-                mol.position[2] = neworigin[2] + newframe[2]
-                mol.rotate(np.array([xang, yang, 0]))
+            pair.translate(new_origin - pair.position)
         return chain
 
     def center_in_z(self):
@@ -760,108 +781,108 @@ class DNAChain(object):
 
         return None
 
-    def to_text(self, seperator=" "):
-        """
-        Return a description of the molecules in the chain as text
-        """
-        key = "# NAME SHAPE CHAIN_ID STRAND_ID BP_INDEX " +\
-              "SIZE_X SIZE_Y SIZE_Z POS_X " +\
-              "POS_Y POS_Z ROT_X ROT_Y ROT_Z\n"
-        output = [key]
-        for pair in self.basepairs:
-            output.append(pair.to_text(seperator=seperator))
-
-        return "".join(output)
-
-    def to_plot(self):
-        """
-        Return a matplotlib.Figure instance with molecules plotted
-        """
-        sugars = []
-        triphosphates = []
-        bases = []
-        bps = ["guanine", "adenine", "thymine", "cytosine"]
-        for pair in self.basepairs:
-            for (name, molecule) in pair.iterMolecules():
-                if molecule.name.lower() == "sugar":
-                    sugars.append(molecule.position)
-                elif molecule.name.lower() == "phosphate":
-                    triphosphates.append(molecule.position)
-                elif molecule.name.lower() in bps:
-                    bases.append(molecule.position)
-
-        # Plotting
-        bases = zip( * map(list, bases))
-        triphosphates = zip( * map(list, triphosphates))
-        sugars = zip( * map(list, sugars))
-
-        fig = plt.figure()
-        ax = fig.add_subplot(111, projection='3d')
-        ax.set_xlabel('x')
-        ax.set_ylabel('y')
-        ax.set_zlabel('z')
-        ax.scatter(bases[0], bases[1], bases[2], c="0.6", s=20)
-        ax.scatter(triphosphates[0], triphosphates[1], triphosphates[2], c="y",
-                   s=20)
-        ax.scatter(sugars[0], sugars[1], sugars[2], c="r", s=20)
-
-        return fig
-
-    def to_surface_plot(self):
-        """
-        Plot the surfaces of each molecule in the chain.
-        Avoid this with large chains, this assumes each molecule is an ellipse
-        """
-
-        def ellipse_xyz(center, extent, rotation=np.zeros([3])):
-            rmatrix = r.eulerMatrix(*rotation)
-            [a, b, c] = extent
-            u, v = np.mgrid[0:2*np.pi:20j, 0:np.pi:10j]
-            x = a * np.cos(u) * np.sin(v) + center[0]
-            y = b * np.sin(u) * np.sin(v) + center[1]
-            z = c * np.cos(v) + center[2]
-            for ii in range(0, len(x)):
-                for jj in range(0, len(x[ii])):
-                    row = np.array([x[ii][jj], y[ii][jj], z[ii][jj]]) - center
-                    xp, yp, zp = np.dot(rmatrix, row.transpose())
-                    x[ii][jj] = xp + center[0]
-                    y[ii][jj] = yp + center[1]
-                    z[ii][jj] = zp + center[2]
-            return x, y, z
-
-        sugars = []
-        triphosphates = []
-        bases = []
-        bps = ["guanine", "adenine", "thymine", "cytosine"]
-        for pair in self.basepairs:
-            for (name, molecule) in pair.iterMolecules():
-                if molecule.name.lower() == "sugar":
-                    sugars.append((molecule.position, molecule.dimensions,
-                                   molecule.rotation))
-                elif molecule.name.lower() == "phosphate":
-                    triphosphates.append((molecule.position,
-                                          molecule.dimensions,
-                                          molecule.rotation))
-                elif molecule.name.lower() in bps:
-                    bases.append((molecule.position, molecule.dimensions,
-                                  molecule.rotation))
-
-        fig = plt.figure()
-        ax = fig.add_subplot(111, projection='3d')
-        for base in bases:
-            x, y, z = ellipse_xyz(base[0], base[1], rotation=base[2])
-            ax.plot_wireframe(x, y, z, color="0.6")
-
-        for phosphate in triphosphates:
-            x, y, z = ellipse_xyz(phosphate[0], phosphate[1],
-                                  rotation=phosphate[2])
-            ax.plot_wireframe(x, y, z, color="y")
-
-        for sugar in sugars:
-            x, y, z = ellipse_xyz(sugar[0], sugar[1], rotation=sugar[2])
-            ax.plot_wireframe(x, y, z, color="r")
-
-        return fig
+    # def to_text(self, seperator=" "):
+    #     """
+    #     Return a description of the molecules in the chain as text
+    #     """
+    #     key = "# NAME SHAPE CHAIN_ID STRAND_ID BP_INDEX " +\
+    #           "SIZE_X SIZE_Y SIZE_Z POS_X " +\
+    #           "POS_Y POS_Z ROT_X ROT_Y ROT_Z\n"
+    #     output = [key]
+    #     for pair in self.basepairs:
+    #         output.append(pair.to_text(seperator=seperator))
+    #
+    #     return "".join(output)
+    #
+    # def to_plot(self):
+    #     """
+    #     Return a matplotlib.Figure instance with molecules plotted
+    #     """
+    #     sugars = []
+    #     triphosphates = []
+    #     bases = []
+    #     bps = ["guanine", "adenine", "thymine", "cytosine"]
+    #     for pair in self.basepairs:
+    #         for (name, molecule) in pair.iterMolecules():
+    #             if molecule.name.lower() == "sugar":
+    #                 sugars.append(molecule.position)
+    #             elif molecule.name.lower() == "phosphate":
+    #                 triphosphates.append(molecule.position)
+    #             elif molecule.name.lower() in bps:
+    #                 bases.append(molecule.position)
+    #
+    #     # Plotting
+    #     bases = zip( * map(list, bases))
+    #     triphosphates = zip( * map(list, triphosphates))
+    #     sugars = zip( * map(list, sugars))
+    #
+    #     fig = plt.figure()
+    #     ax = fig.add_subplot(111, projection='3d')
+    #     ax.set_xlabel('x')
+    #     ax.set_ylabel('y')
+    #     ax.set_zlabel('z')
+    #     ax.scatter(bases[0], bases[1], bases[2], c="0.6", s=20)
+    #     ax.scatter(triphosphates[0], triphosphates[1], triphosphates[2],
+    #                 c="y", s=20)
+    #     ax.scatter(sugars[0], sugars[1], sugars[2], c="r", s=20)
+    #
+    #     return fig
+    #
+    # def to_surface_plot(self):
+    #     """
+    #     Plot the surfaces of each molecule in the chain.
+    #     Avoid this with large chains, this assumes each molecule is an ellipse  # NOQA
+    #     """
+    #
+    #     def ellipse_xyz(center, extent, rotation=np.zeros([3])):
+    #         rmatrix = r.eulerMatrix(*rotation)
+    #         [a, b, c] = extent
+    #         u, v = np.mgrid[0:2*np.pi:20j, 0:np.pi:10j]
+    #         x = a * np.cos(u) * np.sin(v) + center[0]
+    #         y = b * np.sin(u) * np.sin(v) + center[1]
+    #         z = c * np.cos(v) + center[2]
+    #         for ii in range(0, len(x)):
+    #             for jj in range(0, len(x[ii])):
+    #                 row = np.array([x[ii][jj], y[ii][jj], z[ii][jj]]) - center  # NOQA
+    #                 xp, yp, zp = np.dot(rmatrix, row.transpose())
+    #                 x[ii][jj] = xp + center[0]
+    #                 y[ii][jj] = yp + center[1]
+    #                 z[ii][jj] = zp + center[2]
+    #         return x, y, z
+    #
+    #     sugars = []
+    #     triphosphates = []
+    #     bases = []
+    #     bps = ["guanine", "adenine", "thymine", "cytosine"]
+    #     for pair in self.basepairs:
+    #         for (name, molecule) in pair.iterMolecules():
+    #             if molecule.name.lower() == "sugar":
+    #                 sugars.append((molecule.position, molecule.dimensions,
+    #                                molecule.rotation))
+    #             elif molecule.name.lower() == "phosphate":
+    #                 triphosphates.append((molecule.position,
+    #                                       molecule.dimensions,
+    #                                       molecule.rotation))
+    #             elif molecule.name.lower() in bps:
+    #                 bases.append((molecule.position, molecule.dimensions,
+    #                               molecule.rotation))
+    #
+    #     fig = plt.figure()
+    #     ax = fig.add_subplot(111, projection='3d')
+    #     for base in bases:
+    #         x, y, z = ellipse_xyz(base[0], base[1], rotation=base[2])
+    #         ax.plot_wireframe(x, y, z, color="0.6")
+    #
+    #     for phosphate in triphosphates:
+    #         x, y, z = ellipse_xyz(phosphate[0], phosphate[1],
+    #                               rotation=phosphate[2])
+    #         ax.plot_wireframe(x, y, z, color="y")
+    #
+    #     for sugar in sugars:
+    #         x, y, z = ellipse_xyz(sugar[0], sugar[1], rotation=sugar[2])
+    #         ax.plot_wireframe(x, y, z, color="r")
+    #
+    #     return fig
 
 
 class TurnedDNAChain(DNAChain):
