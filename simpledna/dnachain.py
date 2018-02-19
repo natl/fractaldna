@@ -740,7 +740,25 @@ class TurnedSolenoid(Solenoid):
 
 
 class MultiSolenoidVolume(PlottableSequence):
-    def __init__(self, voxelheight=1500., separation=400, twist=False):
+    """
+    Class to build placement volumes that contain multiple solenoidal DNA
+    strands.
+
+    Constructor:
+
+    MultiSolenoidVolume(voxelheight=1500., separation=400, twist=False,
+                        turn=False)
+
+    voxelheight: size of placement volume
+    separation: separation between DNA strands
+
+    Try:
+    dna = MultiSolenoidVolume()
+    dna.to_line_plot()
+    dna.to_text()
+    """
+    def __init__(self, voxelheight=1500., separation=400, twist=False,
+                 turn=False):
         self.voxelheight = voxelheight
         self.radius = 100
         self.nhistones = int(38 * voxelheight/750.)
@@ -748,9 +766,25 @@ class MultiSolenoidVolume(PlottableSequence):
         self.sep = separation
         self.twist = twist
 
+        self.turn = turn
+
         self.basepairs = []
         self.histones = []
         self.linkers = []
+
+        if turn is True:
+            big_height = 2 * (self.voxelheight/2. + self.sep)
+            little_height = 2 * (self.voxelheight/2. - self.sep)
+            lengths = [little_height,
+                       self.voxelheight,
+                       big_height,
+                       self.voxelheight,
+                       little_height,
+                       big_height,
+                       big_height,
+                       little_height]
+        else:
+            lengths = [self.voxelheight] * 8
 
         translations = [np.array([self.sep, 0, 0]),
                         np.array([0, self.sep, 0]),
@@ -762,11 +796,19 @@ class MultiSolenoidVolume(PlottableSequence):
                         np.array([self.sep, -self.sep, 0])]
         solenoids = []
         for ii in range(8):
-            s = Solenoid(voxelheight=self.voxelheight,
-                         radius=self.radius,
-                         nhistones=self.nhistones,
-                         histone_angle=self.histone_angle,
-                         twist=self.twist)
+            if self.turn is True:
+                nhistones = int(self.nhistones*lengths[ii]/self.voxelheight)
+                s = TurnedSolenoid(voxelheight=lengths[ii],
+                                   radius=self.radius,
+                                   nhistones=nhistones,
+                                   histone_angle=self.histone_angle,
+                                   twist=self.twist)
+            else:
+                s = Solenoid(voxelheight=lengths[ii],
+                             radius=self.radius,
+                             nhistones=self.nhistones,
+                             histone_angle=self.histone_angle,
+                             twist=self.twist)
             s.setChain(ii)
             s.translate(translations[ii])
             solenoids.append(s)

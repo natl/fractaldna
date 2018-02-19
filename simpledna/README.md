@@ -18,7 +18,7 @@ Install this with `pip install mayavi` or `apt-get install python-mayavi2`
 Then try
 
 ```.py
-import danchain as d
+import dnachain as d
 sol = d.Solenoid()
 sol.to_strand_plot()
 sol.to_line_plot()
@@ -30,5 +30,12 @@ sol.to_line_plot()
 with open("solenoidal.txt", "w") as f:
     f.write(sol.to_text())
 
-```
+# You can also build Multi-Solenoidal volumes
 
+dna = MultiSolenoidVolume(voxelheight=1500., separation=400, twist=False,
+                    turn=true)
+dna.to_line_plot()
+with open("solenoidal_8.txt", "w") as f:
+    f.write(dna.to_text())
+
+```
