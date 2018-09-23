@@ -1,3 +1,7 @@
+"""
+Blender script to build a video of a Hilbert Curved DNA model
+"""
+
 import numpy as np
 import bpy
 

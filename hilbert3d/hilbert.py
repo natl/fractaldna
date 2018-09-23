@@ -1,7 +1,14 @@
 from __future__ import division, print_function, unicode_literals
 import numpy as np
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
+from mpl_toolkits.mplot3d import Axes3D  # NOQA
+try:
+    from mayavi import mlab
+    maya_imported = True
+except ImportError:
+    maya_imported = False
+    print("Could not import mayavi libraries, 3d plotting is disabled")
+    print("MayaVi may need Python2")
 
 # interpret F as DrawForward(1);
 # interpret + as Yaw(90);
@@ -29,7 +36,7 @@ U = T[::-1]
 Y = r"YFZFY-F-ZFYFZ+F+YFZFYnFn+UFTFU-F-TFUFT+F+UFTFU&F&+YFZFY-F-ZFYFZ+F+YFZFY"
 Z = Y[::-1]
 
-# This guy needs dome testing
+# This guy needs some testing
 # R = r"RFRFR-F-RFRFR+F+RFRFRnFn+RFRFR-F-RFRFR+F+RFRFR&F&+RFRFR-F-RFRFR+F+RFRFR<<"  # NOQA
 R = r"R>>FR>>FR>>+F+R>>FR>>FR>>+F+R>>FR>>FRnFn>>-R>>FR>>FR>>-F-R>>FR>>FR>>-F-R>>FR>>FRnFn>>+R>>FR>>FR>>+F+R>>FR>>FR>>+F+R>>FR>>FR"  # NOQA
 
@@ -71,6 +78,30 @@ def rotl(local_axis, angle):
 
 def rotu(local_axis, angle):
     return np.dot(local_axis, np.dot(rotz(angle), np.linalg.inv(local_axis)))
+
+
+def rot_ax_angle(axis, angle):
+    ax = axis/np.sqrt(np.sum(np.array(axis)**2))
+    ux = ax[0]
+    uy = ax[1]
+    uz = ax[2]
+
+    c = np.cos(angle)
+    s = np.sin(angle)
+
+    xx = c + ux**2*(1 - c)
+    xy = ux*uy*(1 - c) - uz*s
+    xz = ux*uz*(1 - c) + uy*s
+
+    yx = uy*ux*(1 - c) + uz*s
+    yy = c + uy**2*(1 - c)
+    yz = uy*uz*(1 - c) - ux*s
+
+    zx = uz*ux*(1 - c) - uy*s
+    zy = uz*uy*(1 - c) + ux*s
+    zz = c + uz**2*(1 - c)
+
+    return np.array([[xx, xy, xz], [yx, yy, yz], [zx, zy, zz]])
 
 
 def getEulerAngles(rotmatrix):
@@ -272,10 +303,62 @@ class VoxelisedFractal(object):
 
         fig = plt.figure()
         ax = fig.add_subplot(111, projection='3d')
-        ax.scatter(pts[:, 0], pts[:, 1], pts[:, 2])
+        ax.plot(pts[:, 0], pts[:, 1], pts[:, 2])
 
         if batch is not True:
             fig.show()
+
+        return fig
+
+    def to_pretty_plot(self, refine=10, batch=False, mayavi=False, mask=None):
+        """
+        fig = to_pretty_plot(refine=10, batch=False)
+        Create a matplotlib figure instance of this fractal, with curved lines
+        rather than hard corners
+
+        kwargs
+        ---
+        refine: points to plot in between voxels (more points = clearer path)
+        batch: True to suppress automatic display of the figure
+        """
+        pts = [vox.pos for vox in self.fractal]
+
+        # replace pts with an array containing the sides of boxes rather than
+        # the centres of boxes. We are then going to interp curves b/w points
+        midpoints = [0.5*(ii+jj) for ii, jj in zip(pts[0:-1], pts[1:])]
+
+        refinedpts = [pts[0]]
+        for ii in range(0, len(midpoints)-1):
+            # print(ii)
+            refinedpts.append(midpoints[ii])
+            step = 1/(refine)
+            entry_point = midpoints[ii]
+            exit_point = midpoints[ii+1]
+            entry_normal = midpoints[ii] - pts[ii]
+            exit_normal = midpoints[ii+1] - pts[ii+1]
+            interp = self.interpolator(entry_point, entry_normal, exit_point,
+                                       exit_normal)
+            for jj in range(0, refine+1):
+                # print(jj*step)
+                refinedpts.append(interp(step*jj))
+        refinedpts.append(pts[-1])
+
+        pts = np.array(refinedpts)
+        if mayavi:
+            if mask is not None:
+                assert type(mask) == type(lambda x: 1), "mask is a function"
+                plot_points = [ii for ii, pos in enumerate(pts) if mask(pts)]
+                # iterate over plot_points to find acceptable points
+            fig = mlab.figure()
+            mlab.plot3d(pts[:, 0], pts[:, 1], pts[:, 2],
+                        np.arange(len(pts))/len(pts),
+                        # color=(0., .8, 0),
+                        colormap='Spectral',
+                        tube_radius=0.1)
+        else:
+            fig = plt.figure()
+            ax = fig.add_subplot(111, projection='3d')
+            ax.plot(pts[:, 0], pts[:, 1], pts[:, 2])
 
         return fig
 
@@ -285,7 +368,7 @@ class VoxelisedFractal(object):
         minvals = np.array([np.inf, np.inf, np.inf])
         maxvals = np.array([-np.inf, -np.inf, -np.inf])
 
-        #identify max/min values
+        # identify max/min values
         for voxel in self.fractal:
             for (ii, (minv, v, maxv)) in\
                     enumerate(zip(minvals, voxel.pos, maxvals)):
@@ -301,6 +384,37 @@ class VoxelisedFractal(object):
             voxel.pos = oldpos + transform
 
         return None
+
+    def interpolator(self, point_entry, norm_entry, point_exit, norm_exit):
+        """
+        """
+        # 1. case 1, norm_entry = norm_exit
+        if (norm_entry == norm_exit).all():
+            interp = lambda x: point_entry + x*(point_exit - point_entry)
+            return interp
+        # 2. Case 2, circular interpolation
+        # 2a. find centre of circle
+        # pdb.set_trace()
+        norm_plane = np.cross(norm_entry, norm_exit)
+        d1 = -np.dot(point_entry, norm_entry)
+        d2 = -np.dot(point_exit, norm_exit)
+        d3 = -np.dot(point_entry, norm_plane)
+        centre = -(d1*np.cross(norm_exit, norm_plane) +
+                   d2*np.cross(norm_plane, norm_entry) +
+                   d3*np.cross(norm_entry, norm_exit)) \
+            / (np.dot(norm_entry, np.cross(norm_exit, norm_plane)))
+        v_init = point_entry - centre
+        v_final = point_exit - centre
+        rotation_axis = np.cross(v_init, v_final)
+        rotation_axis /= np.linalg.norm(rotation_axis)  # unit vector
+
+        # function to change the magnitude of the vector
+        mag = lambda x: np.linalg.norm(v_init) + \
+            x*(np.linalg.norm(v_final) - np.linalg.norm(v_init))
+
+        vec = lambda x: np.dot(rot_ax_angle(rotation_axis, x*np.pi/2.), v_init)
+
+        return lambda x: centre + 2*mag(x)*vec(x)
 
     @staticmethod
     def makeVoxel(prevVoxel, currpos, nextpos):
@@ -368,6 +482,3 @@ class VoxelisedFractal(object):
         # print "Path Length: ", len(vf.fractal)
 
         return vf
-
-    def __len__(self):
-        return self.fractal.__len__()
