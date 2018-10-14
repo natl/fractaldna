@@ -134,7 +134,7 @@ class PlottableSequence(object):
         Return a matplotlib.Figure instance with histone and linkers shown
         """
         if maya_imported is True:
-            fig = mlab.figure()
+            fig = mlab.figure(bgcolor=(1., 1., 1.))
             if hasattr(self, "histones"):
                 # ax = fig.add_subplot(111, projection='3d')
                 histones = []
@@ -209,7 +209,7 @@ class PlottableSequence(object):
             phosphate_r = [ii for ii in zip( * map(list, phosphate_r))]
             sugar_l = [ii for ii in zip( * map(list, sugar_l))]
             sugar_r = [ii for ii in zip( * map(list, sugar_r))]
-            fig = mlab.figure()
+            fig = mlab.figure(bgcolor=(1., 1., 1.))
 
             if plot_b:
                 mlab.plot3d(base_l[0], base_l[1], base_l[2],

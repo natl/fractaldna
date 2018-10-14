@@ -344,17 +344,35 @@ class VoxelisedFractal(object):
         refinedpts.append(pts[-1])
 
         pts = np.array(refinedpts)
+        idx = np.arange(len(pts))/len(pts)
+        pts = np.concatenate([pts, idx.reshape([len(idx), 1])], axis=1)
         if mayavi:
             if mask is not None:
                 assert type(mask) == type(lambda x: 1), "mask is a function"
-                plot_points = [ii for ii, pos in enumerate(pts) if mask(pts)]
                 # iterate over plot_points to find acceptable points
-            fig = mlab.figure()
-            mlab.plot3d(pts[:, 0], pts[:, 1], pts[:, 2],
-                        np.arange(len(pts))/len(pts),
-                        # color=(0., .8, 0),
-                        colormap='Spectral',
-                        tube_radius=0.1)
+                plot_points = [ii for (ii, pos) in enumerate(pts) if mask(pos)]
+                grouped_plot_points = []
+                while len(plot_points) > 0:
+                    end_point = plot_points.pop()
+                    grouped_plot_points
+                    current_point = end_point
+                    while plot_points[-1] == current_point - 1:
+                        current_point = plot_points.pop()
+                        if len(plot_points) == 0:
+                            break
+                    grouped_plot_points.append((current_point, end_point))
+                pts = [pts[start:end+1] for start, end in grouped_plot_points]
+
+            else:
+                pts = [pts]
+            fig = mlab.figure(bgcolor=(1., 1., 1.))
+            for arr in pts:
+                assert arr[:, 3] >= 0 and arr[:, 3] <= 1, """color value was
+                    {}, outside acceptable range [0, 1]""".format(arr[:, 3])
+                mlab.plot3d(arr[:, 0], arr[:, 1], arr[:, 2], arr[:, 3],
+                            # color=(0., .8, 0),
+                            colormap='Spectral',
+                            tube_radius=0.1, vmin=0., vmax=1.)
         else:
             fig = plt.figure()
             ax = fig.add_subplot(111, projection='3d')
