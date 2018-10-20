@@ -344,7 +344,7 @@ class VoxelisedFractal(object):
         refinedpts.append(pts[-1])
 
         pts = np.array(refinedpts)
-        idx = np.arange(len(pts))/len(pts)
+        idx = np.round(np.arange(len(pts))/len(pts), 3)
         pts = np.concatenate([pts, idx.reshape([len(idx), 1])], axis=1)
         if mayavi:
             if mask is not None:
@@ -367,8 +367,9 @@ class VoxelisedFractal(object):
                 pts = [pts]
             fig = mlab.figure(bgcolor=(1., 1., 1.))
             for arr in pts:
-                assert arr[:, 3] >= 0 and arr[:, 3] <= 1, """color value was
-                    {}, outside acceptable range [0, 1]""".format(arr[:, 3])
+                assert np.all(arr[:, 3] >= 0) and np.all(arr[:, 3] <= 1),\
+                    """color value was {}, outside acceptable range
+                    [0, 1]""".format(arr[:, 3])
                 mlab.plot3d(arr[:, 0], arr[:, 1], arr[:, 2], arr[:, 3],
                             # color=(0., .8, 0),
                             colormap='Spectral',

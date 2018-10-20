@@ -17,9 +17,9 @@ except ImportError:
     print("Could not import mayavi libraries, 3d plotting is disabled")
     print("MayaVi may need Python2")
 
-from utils import rotations as r
-from utils import basepair
-from utils import BP_ROTATION, BP_SEPARATION
+from .utils import rotations as r
+from .utils import basepair
+from .utils import BP_ROTATION, BP_SEPARATION
 
 
 class PlottableSequence(object):
@@ -131,7 +131,7 @@ class PlottableSequence(object):
 
     def to_line_plot(self):
         """
-        Return a matplotlib.Figure instance with histone and linkers shown
+        Return a mayavi figure instance with histone and linkers shown
         """
         if maya_imported is True:
             fig = mlab.figure(bgcolor=(1., 1., 1.))
@@ -145,15 +145,15 @@ class PlottableSequence(object):
                                 tube_radius = 11.5)
                     histones.append(histone.position)
 
+                histones = np.array(histones)
+                mlab.points3d(histones[:, 0], histones[:, 1], histones[:, 2],
+                              color=(0, 0, 1.), opacity=0.4, scale_factor=70)
+
                 for linker in self.linkers:
                     pos = np.array([bp.position for bp in linker.basepairs])
                     mlab.plot3d(pos[:, 0], pos[:, 1], pos[:, 2],
                                 color=(0, .8, 0),
                                 tube_radius = 11.5)
-
-                histones = np.array(histones)
-                mlab.points3d(histones[:, 0], histones[:, 1], histones[:, 2],
-                              color=(0, 0, 1.), opacity=.4, scale_factor=70)
 
             else:
                 pos = np.array([bp.position for bp in self.basepairs])
