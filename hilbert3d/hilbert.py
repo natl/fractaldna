@@ -330,7 +330,6 @@ class VoxelisedFractal(object):
         refinedpts = [pts[0]]
         for ii in range(0, len(midpoints)-1):
             # print(ii)
-            refinedpts.append(midpoints[ii])
             step = 1/(refine)
             entry_point = midpoints[ii]
             exit_point = midpoints[ii+1]
@@ -338,7 +337,7 @@ class VoxelisedFractal(object):
             exit_normal = midpoints[ii+1] - pts[ii+1]
             interp = self.interpolator(entry_point, entry_normal, exit_point,
                                        exit_normal)
-            for jj in range(0, refine+1):
+            for jj in range(0, refine):
                 # print(jj*step)
                 refinedpts.append(interp(step*jj))
         refinedpts.append(pts[-1])

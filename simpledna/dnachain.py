@@ -129,12 +129,12 @@ class PlottableSequence(object):
 
         return fig
 
-    def to_line_plot(self):
+    def to_line_plot(self, size=(400, 350)):
         """
         Return a mayavi figure instance with histone and linkers shown
         """
         if maya_imported is True:
-            fig = mlab.figure(bgcolor=(1., 1., 1.))
+            fig = mlab.figure(bgcolor=(1., 1., 1.), size=size)
             if hasattr(self, "histones"):
                 # ax = fig.add_subplot(111, projection='3d')
                 histones = []
