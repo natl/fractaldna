@@ -182,7 +182,7 @@ def make_movie(infile, centre, distance, outfile, clip=100):
 
     bpy.data.cameras["RenderCamera"].clip_end = clip
     bpy.data.scenes[sceneKey].camera = cam_ob
-    bpy.data.scenes[sceneKey].render.image_settings.file_format = 'H264'
+    bpy.data.scenes[sceneKey].render.image_settings.file_format = 'FFMPEG'
     bpy.data.scenes[sceneKey].render.fps = 24
     bpy.data.scenes[sceneKey].render.frame_map_old = 100
     bpy.data.scenes[sceneKey].render.frame_map_new = 50
