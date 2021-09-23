@@ -8,7 +8,8 @@ import typer
 from rich.console import Console
 
 from fractaldna import version
-from fractaldna.example import hello
+
+# from fractaldna.example import hello
 
 
 class Color(str, Enum):
@@ -59,7 +60,7 @@ def main(
     if color is None:
         color = choice(list(Color))
 
-    greeting: str = hello(name)
+    greeting: str = f"Hello {name}"
     console.print(f"[bold {color}]{greeting}[/]")
 
 

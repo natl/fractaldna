@@ -2,7 +2,7 @@
 Class description of a DNA chain built of base pairs
 """
 
-from typing import List, Union
+from typing import List, Tuple, Union
 
 from copy import deepcopy
 
@@ -19,10 +19,10 @@ try:
 except ImportError:
     maya_imported = False
     print("Could not import mayavi libraries, 3d plotting is disabled")
-    print("MayaVi may need Python2")
 
-from .utils import BP_ROTATION, BP_SEPARATION, basepair
-from .utils import rotations as r
+from fractaldna.dna_models import basepair
+from fractaldna.utils import rotations as r
+from fractaldna.utils.constants import BP_ROTATION, BP_SEPARATION
 
 
 class PlottableSequence:
@@ -93,6 +93,8 @@ class PlottableSequence:
         """
         Plot the surfaces of each molecule in the chain.
         Avoid this with large chains, this assumes each molecule is an ellipse
+
+        :return: Matplotlib figure (contour plot)
         """
 
         def ellipse_xyz(center, extent, rotation=np.zeros([3])):
@@ -146,10 +148,19 @@ class PlottableSequence:
 
         return fig
 
-    def to_line_plot(self, size=(400, 350)):
+    def to_line_plot(self, size: Tuple[int, int] = (400, 350)):
         """
         Return a mayavi figure instance with histone and linkers shown
+
+        :param size: Figure size (width, height)
+
+        :return: mayavi figure
+
+        :raises ImportError: MayaVi likely Not installed
         """
+        if not maya_imported:
+            raise ImportError("MayaVi could not be imported")
+
         if maya_imported is True:
             fig = mlab.figure(bgcolor=(1.0, 1.0, 1.0), size=size)
             if hasattr(self, "histones"):
@@ -199,14 +210,20 @@ class PlottableSequence:
 
     def to_strand_plot(self, plot_p=True, plot_b=True, plot_s=True, plot_bp=False):
         """
-        to_strand_plot(plot_p=True, plot_b=True, plot_s=True, plot_bp=False)
-        Return a mayav1 figure instance with strands plotted
+        Return a mayavi figure instance with strands plotted
 
-        plot_p : plot phosphate strands
-        plot_s : plot sugar strands
-        plot_b : plot base strands
-        plot_bp : join base pairs together
+        :param plot_p : plot phosphate strands
+        :param plot_s : plot sugar strands
+        :param plot_b : plot base strands
+        :param plot_bp : join base pairs together
+
+        :return: Mayavi Figure
+
+        :raises ImportError: MayaVi not imported
         """
+        if not maya_imported:
+            raise ImportError("MayaVi Not Imported")
+
         if maya_imported is True:
             sugar_l = []
             sugar_r = []
@@ -516,7 +533,7 @@ class SplineLinker(PlottableSequence):
 
 
 class Histone(PlottableSequence):
-    """This class degines a histone."""
+    """This class defines a histone."""
 
     radius_histone = 25  # radius of histone, angstrom
     pitch_dna = 23.9  # 23.9  # pitch of DNA helix, angstrom
