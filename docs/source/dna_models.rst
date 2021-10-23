@@ -10,7 +10,7 @@ Base and Helper Classes
 
 .. autoclass:: fractaldna.dna_models.dnachain.PlottableSequence
     :members:
-    
+
 .. autoclass:: fractaldna.dna_models.dnachain.Histone
     :members:
 
@@ -26,7 +26,10 @@ Unpacked DNA
     :members:
 
 .. autoclass:: fractaldna.dna_models.dnachain.TurnedDNAChain
+    :members:
+
 .. autoclass:: fractaldna.dna_models.dnachain.TurnedTwistedDNAChain
+    :members:
 
 *Two Strands per Volume*
 

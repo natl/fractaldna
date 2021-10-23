@@ -333,7 +333,46 @@ class PlottableSequence:
 
 
 class SplineLinker(PlottableSequence):
-    """ """
+    """
+    *Inherits from PlottableSequence*
+
+    Link two histones together via a cubic spline
+
+    linker = SplineLinker(bp1, bp2, bp3, bp4, curviness=1., zrot=None)
+
+    Create base pairs that link to sections of DNA as follows:
+    bp1 bp2 <==== LINKER =====> bp3 bp4
+    Two base pairs on either side of the linker are needed to build splines
+    low curviness = straighter
+    high_curviness = smoother
+
+    startkey and stopkey act as keyframes for rotations
+
+    :param zrot:
+        Describes the twist of bp3 relative to bp2
+            - None: Determine automatically (experimental)
+            - double: rotation in radians (mod 2*pi)
+
+    :param startkey:
+        Starting keyframe for rotations
+            - key = i will start/stop rotations after the i-th base pair
+            - key = -i will start/stop rotations after the i-th last base pair
+
+    :param stopkey:
+        Ending keyframe for rotations
+            - key = i will start/stop rotations after the i-th base pair
+            - key = -i will start/stop rotations after the i-th last base pair
+
+    :param method:
+        Method to handle rotational interpolation
+            - "quaternion": Full use of quaternions
+            - "corrected_quaternion": Full use of quaternions, with a correction
+              to check that the base pair is aligned.
+              This method is recommended
+            - "matrix": Experimental method that doesn't use
+              quaternions. Currently incorrect.
+
+    """
 
     linker_rotation = BP_ROTATION  # rad, default screw rotation of dna
     linker_bp_spacing = BP_SEPARATION  # angstrom, default spacing between bps
@@ -351,31 +390,7 @@ class SplineLinker(PlottableSequence):
         method="corrected_quaternion",
     ):
         """
-        Create a smooth linker based on splines.
-
-        linker = SplineLinker(bp1, bp2, bp3, bp4, curviness=1., zrot=None)
-
-        Create base pairs that link to sections of DNA as follows:
-        bp1 bp2 <==== LINKER =====> bp3 bp4
-        Two base pairs on either side of the linker are needed to build splines
-        low curviness = straighter
-        high_curviness = smoother
-
-        zrot describes the twist of bp3 relative to bp2
-            None: Determine automatically (experimental)
-            double: rotation in radians (mod 2*pi)
-
-        startkey and stopkey act as keyframes for rotations
-            key = i will start/stop rotations after the i-th base pair
-            key = -i will start/stop rotations after the i-th last base pair
-
-        method: method to handle rotational interpolation
-            "quaternion":           Full use of quaternions
-            "corrected_quaternion": Full use of quaternions, with a correction
-                                    to check that the base pair is aligned.
-                                    This method is recommended
-            "matrix":               Experimental method that doesn't use
-                                    quaternions. Currently incorrect.
+        Constructor
         """
         assert method in [
             "quaternion",
@@ -522,18 +537,34 @@ class SplineLinker(PlottableSequence):
         return None
 
     def translate(self, translation):
+        """Translate the histone spatially
+
+        :param translation: 3-vector for translation
+        """
         for bp in self.basepairs:
             bp.translate(translation)
         return None
 
     def setChain(self, chainIdx):
+        """Set the Chain Index of all base pairs in the histone
+
+        :param chainIdx: Index for Chain
+        """
         for bp in self.basepairs:
             bp.setNewChain(chainIdx)
         return None
 
 
 class Histone(PlottableSequence):
-    """This class defines a histone."""
+    """
+    *Inherits from PlottableSequence*
+
+    This class defines a histone.
+
+    :param position: 3-vector for histone position
+    :param rotation: 3-vector for histone rotation (euler angles)
+    :param genome: string defining the genome for the histone
+    """
 
     radius_histone = 25  # radius of histone, angstrom
     pitch_dna = 23.9  # 23.9  # pitch of DNA helix, angstrom
@@ -558,12 +589,7 @@ class Histone(PlottableSequence):
         rotation: Union[List, np.array],
         genome: str = None,
     ):
-        """Create a Histone
-
-        :param position: 3-vector for histone position
-        :param rotation: 3-vector for histone rotation (euler angles)
-        :param genome: string defining the genome for the histone
-        """
+        """Create a Histone"""
         assert len(position) == 3, "position is length 3 array"
         assert len(rotation) == 3, "position is length 3 array"
         if genome is None:
@@ -640,8 +666,30 @@ class Histone(PlottableSequence):
 
 
 class Solenoid(PlottableSequence):
+    """
+    *Inherits from PlottableSequence*
+
+    Define Solenoidal DNA in a voxel (basically a box).
+
+    This method works by placing histones around the z-axis (≈6 histones
+    per rotation) and then joining them together using SplineLinkers
+
+    :param voxelheight: Height of 'voxel' in angstrom
+    :param radius: Radius from Solenoid centre to histone centre
+    :param nhistones: Number of histones to place
+    :param histone_angle: tilt of histones from axis in degrees
+    :param twist: whether the DNA exiting the final spine should be
+        rotated an extra pi/2.
+
+    """
+
     def __init__(
-        self, voxelheight=750, radius=100, nhistones=38, histone_angle=50, twist=False
+        self,
+        voxelheight: float = 750,
+        radius: float = 100,
+        nhistones: int = 38,
+        histone_angle: float = 50,
+        twist: bool = False,
     ):
         self.radius = radius
         self.voxelheight = voxelheight
@@ -751,14 +799,22 @@ class Solenoid(PlottableSequence):
             bp.set_bp_index(ii)
         return None
 
-    def translate(self, translation):
+    def translate(self, translation: Union[List, np.array]) -> None:
+        """Translate the solenoid spatially
+
+        :param translation: 3-vector for translation
+        """
         for histone in self.histones:
             histone.translate(translation)
         for linker in self.linkers:
             linker.translate(translation)
         return None
 
-    def setChain(self, chainIdx):
+    def setChain(self, chainIdx: int) -> None:
+        """Set the Chain Index of all base pairs in the solenoid
+
+        :param chainIdx: Index for Chain
+        """
         for histone in self.histones:
             histone.setChain(chainIdx)
         for linker in self.linkers:
@@ -767,13 +823,35 @@ class Solenoid(PlottableSequence):
 
 
 class TurnedSolenoid(Solenoid):
+    """
+    *Inherits from Solenoid*
+
+    Define Solenoidal DNA in a voxel (basically a box). This Solenoid
+    will turn 90 degrees through the box
+
+    This method works by placing histones around the z-axis (≈6 histones
+    per rotation) and then joining them together using SplineLinkers
+
+    :param voxelheight: Height of 'voxel' in angstrom
+    :param radius: Radius of circle the solenoid is turning around (angstrom)
+    :param radius: Radius from Solenoid centre to histone centre
+    :param nhistones: Number of histones to place
+    :param histone_angle: tilt of histones from axis in degrees
+    :param twist: whether the DNA exiting the final spine should be
+        rotated an extra pi/2.
+
+    """
+
     def __init__(
-        self, voxelheight=750, radius=100, nhistones=38, histone_angle=50, twist=False
+        self,
+        voxelheight: float = 750,
+        radius: float = 100,
+        nhistones: int = 38,
+        histone_angle: float = 50,
+        twist: bool = False,
     ):
         """
-        TurnedSolenoid(voxelheight=750, radius=100, nhistones=38,
-                       histone_angle=50, twist=False)
-        Solenoid parameters are as apply to a straight Solenoid
+        Constructor
         """
         self.nhistones = int(nhistones / 2 ** 0.5)
         self.box_width = voxelheight / 2.0
@@ -1006,21 +1084,26 @@ class MultiSolenoidVolume(PlottableSequence):
 
 
 class DNAChain(PlottableSequence):
-    """A single DNA Chain built from a genome specified."""
+    """
+    *Inherits from PlottableSequence*
+    A single DNA Chain built from a genome specified.
+
+
+    :param genome: A string specifying the genome, e.g. 'AGTATC'
+    :param chain: The Chain index to label this strand
+    """
 
     def __init__(self, genome: str, chain: int = 0):
         """
         Construct a DNA chain from a genome specified from a string
-
-        :param genome: A string specifying the genome, e.g. 'AGTATC'
-        :param chain: The Chain index to label this strand
         """
-        self.basepairs_chain0 = self.makeFromGenome(genome, chain=chain)
+        self.basepairs_chain0 = self._makeFromGenome(genome, chain=chain)
         self.basepairs = self.basepairs_chain0
         self.center_in_z()
 
     @staticmethod
-    def makeFromGenome(genome, chain=0):
+    def _makeFromGenome(genome, chain=0):
+        """ """
         dnachain = []
         position = np.array([0, 0, 0], dtype=float)
         rotation = np.array([0, 0, 0], dtype=float)
@@ -1038,7 +1121,7 @@ class DNAChain(PlottableSequence):
         return dnachain
 
     @staticmethod
-    def turnAndTwistChain(chain, twist=0.0):
+    def _turnAndTwistChain(chain, twist=0.0):
         zmax = 0
         zmin = 0
         for pair in chain:
@@ -1106,7 +1189,7 @@ class TurnedDNAChain(DNAChain):
         self.turnDNA()
 
     def turnDNA(self):
-        self.basepairs = DNAChain.turnAndTwistChain(self.basepairs)
+        self.basepairs = DNAChain._turnAndTwistChain(self.basepairs)
         return None
 
 
@@ -1123,7 +1206,7 @@ class TurnedTwistedDNAChain(DNAChain):
         self.turnAndTwistDNA()
 
     def turnAndTwistDNA(self):
-        self.basepairs = DNAChain.turnAndTwistChain(self.basepairs, twist=np.pi / 2.0)
+        self.basepairs = DNAChain._turnAndTwistChain(self.basepairs, twist=np.pi / 2.0)
         return None
 
 
@@ -1141,9 +1224,9 @@ class DoubleDNAChain(DNAChain):
             separation: separation of each strand from the center in angstroms
         """
         super().__init__(genome)
-        self.duplicateDNA(separation)
+        self._duplicateDNA(separation)
 
-    def duplicateDNA(self, separation):
+    def _duplicateDNA(self, separation):
         translation = np.array([0.0, separation / 2.0, 0.0], dtype=float)
         self.basepairs_chain1 = deepcopy(self.basepairs_chain0)
 
@@ -1160,16 +1243,16 @@ class DoubleDNAChain(DNAChain):
 
 class TurnedDoubleDNAChain(TurnedDNAChain, DoubleDNAChain):
     def __init__(self, genome, separation):
-        self.makeFromGenome(genome)
-        self.duplicateDNA(separation=separation)
-        self.turnDNA()
+        self._makeFromGenome(genome)
+        self._duplicateDNA(separation=separation)
+        self._turnDNA()
 
 
 class TurnedTwistedDoubleDNAChain(TurnedTwistedDNAChain, DoubleDNAChain):
     def __init__(self, genome, separation):
-        self.makeFromGenome(genome)
-        self.duplicateDNA(separation=separation)
-        self.turnAndTwistDNA()
+        self._makeFromGenome(genome)
+        self._duplicateDNA(separation=separation)
+        self._turnAndTwistDNA()
 
 
 class FourStrandDNAChain(DNAChain):
@@ -1267,7 +1350,7 @@ class FourStrandTurnedDNAChain(DNAChain):
         ]
 
         for (ii, (c, t, a)) in enumerate(zip(chains, transforms, angles)):
-            c = self.turnAndTwistChain(c, twist=a)
+            c = self._turnAndTwistChain(c, twist=a)
             for bp in c:
                 bp.translate(t)
             chains[ii] = c
@@ -1280,30 +1363,42 @@ class FourStrandTurnedDNAChain(DNAChain):
 
 
 class EightStrandDNAChain(DNAChain):
-    def __init__(self, genome, sep1, sep2, turn=False, twist=False):
+    """
+    Construct eight DNA chains that can turn 90 degrees if turn=True
+
+    Chain indices are assigned anticlockwise starting from the +y strand,
+    first to the inner four strands, then two the outer four strands.
+    i.e.::
+
+        ____________________
+        |                  |
+        |        4         |
+        |        0         |
+        |  5  1     3  7   |
+        |        2         |
+        |        6         |
+        |__________________|
+
+    Strands 1 and 3, 0 and 2 are separated by sep1
+    Strands 4 and 6, 5 and 7 are separated by sep2
+
+    :param genome: string of GATC specifying genome order
+    :param sep1: separation of inner strands from the center in angstroms
+    :param sep2: separation of outer strands from the center in angstroms
+    :param turn: boolean, turn strands 90 degrees along box
+    :param twist: boolean, add a 90 deg twist to each chain
+    """
+
+    def __init__(
+        self,
+        genome: str,
+        sep1: float,
+        sep2: float,
+        turn: bool = False,
+        twist: bool = False,
+    ):
         """
-        FourStrandTurnedDNAChain(genome, sep1, sep2, turn=False, twist=False)
-
-        Construct eight DNA chains that can turn 90 degrees if turn=True
-
-        Chain indices are assigned anticlockwise starting from the +y strand,
-            first to the inner four strands, then two the outer four strands.
-            ie.
-                      4           Strands 1 and 3, 0 and 2 are separated by
-                      0           sep1
-                5  1     3  7     Strands 4 and 6, 5 and 7 are separated by
-                      2           sep2
-                      6
-
-
-        args:
-            genome: string of GATC specifying genome order
-            sep1: separation of inner strands from the center in angstroms
-            sep1: separation of outer strands from the center in angstroms
-
-        kwargs:
-            turn: boolean, turn strands 90degrees along box
-            twist: boolean, add a 90 deg twist to each chain
+        EightStrandTurnedDNAChain(genome, sep1, sep2, turn=False, twist=False)
         """
         DNAChain.__init__(self, genome)
         v1 = -sep1 / 2.0 if turn is True else 0
@@ -1369,7 +1464,7 @@ class EightStrandDNAChain(DNAChain):
 
         for (ii, (c, t, a)) in enumerate(zip(chains, transforms, angles)):
             if turn is True:
-                c = self.turnAndTwistChain(c, twist=a)
+                c = self._turnAndTwistChain(c, twist=a)
             for bp in c:
                 bp.translate(t)
             chains[ii] = c
