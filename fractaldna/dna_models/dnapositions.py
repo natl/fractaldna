@@ -401,18 +401,16 @@ class MoleculeFromAtoms:
 
     @classmethod
     def from_cylindrical(cls, atoms: Dict[str, np.array], inverse: bool = False):
-        """
-        MoleculeFromAtoms.from_cylindrical(atoms, inverse=False)
-        Make a MoleculeFromAtoms instance from a list of atoms in cylindrical
-        coords (r, theta phi)
+        """Make a MoleculeFromAtoms instance from a list of atoms in cylindrical
+        coords (r, theta, phi)
 
-        kwargs:
-        ---
-        inverse (default False): Set to True to generate a dyadically related
-                                 base pair (negates theta and z)
+        MoleculeFromAtoms.from_cylindrical(atoms, inverse=False)
 
         Note:
         Theta is in degrees
+
+        :param inverse: (default False)Set to True to generate a dyadically related
+            base pair (negates theta and z)
         """
         cylindrical = deepcopy(atoms)
         cartesian = {}

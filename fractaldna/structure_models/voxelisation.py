@@ -1,3 +1,5 @@
+from typing import Callable, List, Tuple, Union
+
 import matplotlib.pyplot as plt
 import numpy as np
 from mpl_toolkits.mplot3d import Axes3D  # NOQA
@@ -14,7 +16,14 @@ except ImportError:
     print("MayaVi may need Python2")
 
 
-def rot_ax_angle(axis, angle):
+def rot_ax_angle(axis: Union[List, np.array], angle: float) -> np.array:
+    """Build the rotation matrix for a given rotation around an axis
+
+    :param axis: Rotation axis (3-vector)
+    :param angle: rotation angle (radians)
+
+    :returns: The rotation matrix
+    """
     ax = axis / np.sqrt(np.sum(np.array(axis) ** 2))
     ux = ax[0]
     uy = ax[1]
@@ -38,8 +47,12 @@ def rot_ax_angle(axis, angle):
     return np.array([[xx, xy, xz], [yx, yy, yz], [zx, zy, zz]])
 
 
-def getEulerAngles(rotmatrix):
-    """ """
+def getEulerAngles(rotmatrix: np.array) -> Tuple[float, float, float]:
+    """Get the euler angles from a rotation matrix
+
+    :param rotmatrix: 3x3 rotation matrix
+    :returns: Euler psi angle
+    """
     sintheta = rotmatrix[2, 0]
     if abs(sintheta) != 1:
         theta = -np.arcsin(rotmatrix[2, 0])
@@ -60,18 +73,32 @@ def getEulerAngles(rotmatrix):
 
 class Voxel:
     """
-    Position, rotation and form of a DNA voxel.
+    Position, rotation and form of a DNA placement voxel.
 
-    Members:
+    The principal axes are used to determine if the DNA would
+    undergo a 90˚ rotation as it passes through the voxel.
+
+    One way to think of them is to consider that the path of your
+    DNA or curve through the voxel is along a continuous z-axis,
+    perpendicular to an X-Y plane. The Principal Axes could be the
+    vectors that describe the direction of the X-axis.
+
+    Class Notes:
     psi, theta, phi: Euler rotations about the X, Y and Z axes
-                     (XYZ rotation order)
+    (XYZ rotation order)
 
     type: code corresponding to geometrical shape
     pos: XYZ position
 
-    Methods:
-    to_text: Print a textual representation of the voxel as
-            KIND POS_X POS_Y POS_Z EUL_PSI EUL_THETA EUL_PHI
+    Voxel(pos, inHeading, inPrincipal, outHeading, outPrincipal)
+
+    :param pos: XYZ-position of voxel
+    :param inHeading: vector of the DNA heading "into" the voxel.
+    :param inPrincipal: vector of the DNA's principal axis at the
+        entrace to the voxel
+    :param outHeading: vector of the DNA heading "out" of the voxel.
+    :param outPrincipal: vector of the DNA's principal axis at the
+        exit to the voxel
     """
 
     types = {"straight": 1, "straighttwist": 2, "turn": 3, "turntwist": 4}
@@ -83,12 +110,16 @@ class Voxel:
     defaultAxis = np.transpose(defaultAxis)
     defaultAxisInv = np.linalg.inv(defaultAxis)
 
-    def __init__(self, pos, inHeading, inPrincipal, outHeading, outPrincipal):
+    def __init__(
+        self,
+        pos: np.array,
+        inHeading: np.array,
+        inPrincipal: np.array,
+        outHeading: np.array,
+        outPrincipal: np.array,
+    ):
         """
-        Voxel(pos, inHeading, inPrincipal, outHeading, outPrincipal)
-
-        Identifies the form of the DNA voxel that corresponds to specified
-        input and output vectors.
+        Constructor
         """
         # Clean and vet input
         pos = np.around(pos, decimals=8)
@@ -143,19 +174,25 @@ class Voxel:
         # Using (x, y, z) rotations = (psi, theta, phi)
         self.psi, self.theta, self.phi = getEulerAngles(self.rotation)
 
-    def to_text(self):
-        """ """
+    def to_text(self, sep: str = " ") -> str:
+        """Print a textual representation of the voxel as
+        KIND POS_X POS_Y POS_Z EUL_PSI EUL_THETA EUL_PHI
+        """
+        if len(sep) == 0:
+            raise ValueError("Separator cannot be a zero-length string")
         l = (
             [self.types_inverse[self.type]]
             + list(map(str, list(self.pos)))
             + list(map(str, [self.psi, self.theta, self.phi]))
         )
-        return " ".join(l) + "\n"
+        return sep.join(l) + "\n"
 
 
 class VoxelisedFractal:
     """
     Class containing a voxelised representation of a fractal
+
+    Typically created using the VoxelisedFractal.fromSeed class method
 
     fractal = VoxelisedFractal.fromSeed('X', 1)
     fractal.fractal contains a list of 'Voxels' representing the DNA Path
@@ -163,30 +200,38 @@ class VoxelisedFractal:
     """
 
     def __init__(self):
-        """ """
+        """Constructor"""
         self.fractal = []
 
-    def __len__(self):
+    def __len__(self) -> int:
         return self.fractal.__len__()
 
-    def to_text(self):
-        """ """
-        output = "#IDX KIND POS_X POS_Y POS_Z EUL_PSI EUL_THETA EUL_PHI\n"
-        text = [output] + [
-            " ".join([str(idx), voxel.to_text()])
+    def to_text(self, sep: str = " ", comment: str = "#"):
+        """Return a textual representation of the fractal as
+            KIND POS_X POS_Y POS_Z EUL_PSI EUL_THETA EUL_PHI
+
+        :param sep: string to use to separate fields (default space)
+        :param comment: string to use to denote comment in first line
+            (default hash: #)
+        """
+        if len(sep) == 0:
+            raise ValueError("Separator cannot be a zero-length string")
+
+        output = "IDX KIND POS_X POS_Y POS_Z EUL_PSI EUL_THETA EUL_PHI\n"
+        output = output.replace(" ", sep)
+        text = [comment + output] + [
+            sep.join([str(idx), voxel.to_text(sep=sep)])
             for idx, voxel in enumerate(self.fractal)
         ]
-        return "".join(text)
+        return "\n".join(text)
 
-    def to_plot(self, refine=0, batch=False):
+    def to_plot(self, refine: int = 0, batch: bool = False) -> plt.figure:
         """
-        fig = toPlot(refine=0, batch=False)
         Create a matplotlib figure instance of this fractal
 
-        kwargs
-        ---
-        refine: points to plot in between voxels (more points = clearer path)
-        batch: True to suppress automatic display of the figure
+        fig = toPlot(refine=0, batch=False)
+        :param refine: points to plot in between voxels (more points = clearer path)
+        :param batch: True to suppress automatic display of the figure
         """
         pts = [vox.pos for vox in self.fractal]
 
@@ -209,17 +254,23 @@ class VoxelisedFractal:
 
         return fig
 
-    def to_pretty_plot(self, refine=10, batch=False, mayavi=False, mask=None):
-        """
-        fig = to_pretty_plot(refine=10, batch=False)
-        Create a matplotlib figure instance of this fractal, with curved lines
+    def to_pretty_plot(
+        self, refine: int = 10, mayavi: bool = False, mask: Callable = None
+    ):
+        """Create a matplotlib figure instance of this fractal, with curved lines
         rather than hard corners
 
-        kwargs
-        ---
-        refine: points to plot in between voxels (more points = clearer path)
-        batch: True to suppress automatic display of the figure
+        fig = to_pretty_plot(refine=10, batch=False)
+
+        :param refine: points to plot in between voxels (more points = clearer path)
+        :param mayavi: make plot with MayaVI
+        :param mask: Callable function that returns true for voxels that should be
+            plotted. mask is a function that should take a position three vector and
+            return boolean True/False for any position.
         """
+        if mask is not None:
+            if not callable(mask):
+                raise ValueError("Mask should be callable")
         pts = [vox.pos for vox in self.fractal]
 
         # replace pts with an array containing the sides of boxes rather than
@@ -234,7 +285,7 @@ class VoxelisedFractal:
             exit_point = midpoints[ii + 1]
             entry_normal = midpoints[ii] - pts[ii]
             exit_normal = midpoints[ii + 1] - pts[ii + 1]
-            interp = self.interpolator(
+            interp = self._interpolator(
                 entry_point, entry_normal, exit_point, exit_normal
             )
             for jj in range(0, refine):
@@ -247,7 +298,6 @@ class VoxelisedFractal:
         pts = np.concatenate([pts, idx.reshape([len(idx), 1])], axis=1)
         if mayavi:
             if mask is not None:
-                assert type(mask) == type(lambda x: 1), "mask is a function"
                 # iterate over plot_points to find acceptable points
                 plot_points = [ii for (ii, pos) in enumerate(pts) if mask(pos)]
                 grouped_plot_points = []
@@ -290,7 +340,7 @@ class VoxelisedFractal:
 
         return fig
 
-    def center_fractal(self):
+    def center_fractal(self) -> None:
         """Center the fractal around (x, y, z) = (0, 0, 0)"""
         minvals = np.array([np.inf, np.inf, np.inf])
         maxvals = np.array([-np.inf, -np.inf, -np.inf])
@@ -311,8 +361,8 @@ class VoxelisedFractal:
 
         return None
 
-    def interpolator(self, point_entry, norm_entry, point_exit, norm_exit):
-        """ """
+    def _interpolator(self, point_entry, norm_entry, point_exit, norm_exit):
+        """Interpolator for pretty_plot"""
         # 1. case 1, norm_entry = norm_exit
         if (norm_entry == norm_exit).all():
             interp = lambda x: point_entry + x * (point_exit - point_entry)
@@ -344,7 +394,13 @@ class VoxelisedFractal:
         return lambda x: centre + 2 * mag(x) * vec(x)
 
     @staticmethod
-    def makeVoxel(prevVoxel, currpos, nextpos):
+    def _makeVoxel(prevVoxel: Voxel, currpos: np.array, nextpos: np.array) -> Voxel:
+        """Make the next voxel in a chain.
+
+        :param prevVoxel: Previous Voxel in Chain
+        :param currpos: Position (centre) of the voxel to make
+        :param nexpos: Position (centre) of the next voxel to make
+        """
         # clean and vet output
         currpos = np.around(currpos, 8)
         nextpos = np.around(nextpos, 8)
@@ -372,15 +428,30 @@ class VoxelisedFractal:
             )
 
     @classmethod
-    def fromSeed(cls, seed, iterations, distance=1):
-        """ """
+    def fromSeed(cls, seed: str, iterations: int, distance: float = 1):
+        """Make a voxelised fractal from an L-String seed.
+
+        The available L-Strings are described in fractaldna.structure_models.hilbert
+
+        :param seed: Seed L-String
+        :param iterations: number of times to iterate seed
+        :param distance: distance between voxels
+
+        :returns: Voxelised Fractal representation
+        """
         for n in range(iterations):
             seed = hilbert.iterate_lstring(seed)
         return cls.fromLString(seed, distance=distance)
 
     @classmethod
     def fromLString(cls, lstring, distance=1):
-        """ """
+        """Convert an L-String into a VoxelisedFractal
+
+        :param lstring: L-String to convert
+        :param distance: distance between voxels
+
+        :returns: Voxelised Fractal representation
+        """
         path = hilbert.generate_path(lstring, n=1, distance=distance)
         lastpos = 2 * path[len(path) - 1] - path[len(path) - 2]
         path.append(lastpos)
@@ -409,11 +480,11 @@ class VoxelisedFractal:
             zeroposition, zeroheading, zeroprincipal, zeroheading, zeroprincipal
         )
 
-        vf.fractal = [cls.makeVoxel(zeroVoxel, first, second)]
+        vf.fractal = [cls._makeVoxel(zeroVoxel, first, second)]
 
         for ii in range(1, len(path) - 1):
             vf.fractal.append(
-                cls.makeVoxel(vf.fractal[ii - 1], arrpath[ii], arrpath[ii + 1])
+                cls._makeVoxel(vf.fractal[ii - 1], arrpath[ii], arrpath[ii + 1])
             )
             # print np.around(arrpath[ii], 3)
         # print "Path Length: ", len(vf.fractal)

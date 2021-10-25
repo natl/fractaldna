@@ -59,7 +59,6 @@ pytest = "^6.2.4"
 pyupgrade = "^2.24.0"
 safety = "^1.10.3"
 Sphinx = "^4.2.0"
-furo = "^2021.10.9"
 sphinx-rtd-theme = "^1.0.0"
 sphinx-autodoc-typehints = "^1.12.0"
 

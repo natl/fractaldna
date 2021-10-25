@@ -1177,7 +1177,14 @@ class DNAChain(PlottableSequence):
 
 
 class TurnedDNAChain(DNAChain):
-    """ """
+    """
+    *Inherits from DNAChain*
+
+    TurnedDNAChain(genome)
+    Construct a single turned, twisted DNA chaiun
+
+    :param genome: string of GATC specifying genome order
+    """
 
     def __init__(self, genome):
         """
@@ -1194,7 +1201,14 @@ class TurnedDNAChain(DNAChain):
 
 
 class TurnedTwistedDNAChain(DNAChain):
-    """ """
+    """
+    *Inherits from DNAChain*
+
+    TurnedTwistedDNAChain(genome)
+    Construct a single turned, twisted DNA chaiun
+
+    :param genome: string of GATC specifying genome order
+    """
 
     def __init__(self, genome):
         """
@@ -1211,17 +1225,22 @@ class TurnedTwistedDNAChain(DNAChain):
 
 
 class DoubleDNAChain(DNAChain):
-    """ """
+    """
+    *Inherits from DNAChain*
+
+    DoubleDNAChain(genome, separation)
+    Construct four straight DNA chains
+    Chain indices are assigned anticlockwise starting from the +y strand.
+
+    :param genome: string of GATC specifying genome order
+    :param separation: separation of each strand from the center in angstroms
+    """
 
     def __init__(self, genome, separation):
         """
         DoubleDNAChain(genome, separation)
 
         Construct two parallel straight DNA chains
-
-        args:
-            genome: string of GATC specifying genome order
-            separation: separation of each strand from the center in angstroms
         """
         super().__init__(genome)
         self._duplicateDNA(separation)
@@ -1256,15 +1275,20 @@ class TurnedTwistedDoubleDNAChain(TurnedTwistedDNAChain, DoubleDNAChain):
 
 
 class FourStrandDNAChain(DNAChain):
-    def __init__(self, genome, separation):
+    """
+    *Inherits from DNAChain*
+
+    FourStrandDNAChain(genome, separation)
+    Construct four straight DNA chains
+    Chain indices are assigned anticlockwise starting from the +y strand.
+
+    :param genome: string of GATC specifying genome order
+    :param separation: separation of each strand from the center in angstroms
+    """
+
+    def __init__(self, genome: str, separation: float):
         """
-        FourStrandDNAChain(genome, separation)
-
-        Construct four parallel straight DNA chains
-
-        args:
-            genome: string of GATC specifying genome order
-            separation: separation of each strand from the center in angstroms
+        constructor
         """
         super().__init__(genome)
         self.makeFourStrands(separation)
@@ -1301,20 +1325,21 @@ class FourStrandDNAChain(DNAChain):
 
 
 class FourStrandTurnedDNAChain(DNAChain):
-    def __init__(self, genome, separation, twist=False):
+    """
+    *Inherits from DNAChain*
+
+    FourStrandTurnedDNAChain(genome, separation)
+    Construct four DNA chains that turn 90 degrees.
+    Chain indices are assigned anticlockwise starting from the +y strand.
+
+    :param genome: string of GATC specifying genome order
+    :param separation: separation of each strand from the center in angstroms
+    :param twist: boolean, add a 90 deg twist to each chain
+    """
+
+    def __init__(self, genome: str, separation: float, twist: bool = False):
         """
-        FourStrandTurnedDNAChain(genome, separation)
-
-        Construct four DNA chains that turn 90 degrees.
-
-        Chain indices are assigned anticlockwise starting from the +y strand.
-
-        args:
-            genome: string of GATC specifying genome order
-            separation: separation of each strand from the center in angstroms
-
-        kwargs:
-            twist: boolean, add a 90 deg twist to each chain
+        Constructor
         """
         DNAChain.__init__(self, genome)
         translation_y = np.array([0.0, separation / 2.0, 0.0], dtype=float)

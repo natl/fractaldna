@@ -45,6 +45,16 @@ CYTOSINE_POS_OPP = dpos.MoleculeFromAtoms.from_cylindrical(
 class BasePair:
     """
     Defines a base pair
+
+    BasePair(base, chain=-1, position=np.zeros(3), rotation=np.zeros(3))
+
+    Create a base pair defined by a particular base GTAC (in the 5' dirn)
+
+    :param base:   defining base (GATC)
+    :param chain:    int to indicate the id of the current DNA macromolecule
+    :param position: position of base pair relative to (0, 0, 0)
+    :param rotation: rotation euler angles of base pair relative to local xyz
+    :param index:    index of base pair in chain
     """
 
     pairings = {
@@ -70,20 +80,7 @@ class BasePair:
         rotation: np.array = np.zeros(3),
         index: int = 0,
     ):
-        """
-        BasePair(base, chain=-1, position=np.zeros(3), rotation=np.zeros(3))
-
-        Create a base pair defined by a particular base GTAC (in the 5' dirn)
-
-        args:
-            base:   defining base (GATC)
-
-        kwargs:
-            chain:    int to indicate the id of the current DNA macromolecule
-            position: position of base pair relative to (0, 0, 0)
-            rotation: rotation euler angles of base pair relative to local xyz
-            index:    index of base pair in chain
-        """
+        """Constructor"""
         if base not in ["G", "A", "T", "C"]:
             raise ValueError("base must be either G, A, T, C")
 

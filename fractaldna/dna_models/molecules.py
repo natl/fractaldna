@@ -34,6 +34,21 @@ PHOSPHATE_RADIUS = dpos.MoleculeFromAtoms.from_cylindrical(
 
 
 class Molecule:
+    """Create a molecule
+
+    :param name: molecule name
+    :param shape: shape of molecule
+    :param dimensions: dimensions of molecule shape
+        (3-vector for xyz-dims, int/float for radius)
+    :param strand: int to hold an ID related to a localised strand
+    :param chain: int to hold an ID related to a macromolecule/protein or
+        DNA chain
+    :param position: 3-vector for molecule position relative to global axis
+    :param rotation: 3-vector of euler angles (radians) for molecule
+        rotation relative to the global xyz axis
+    :param index: index of base pair along chain
+    """
+
     def __init__(
         self,
         name: str,
@@ -45,26 +60,7 @@ class Molecule:
         rotation: np.array = np.zeros(3),
         index: int = 0,
     ):
-        """
-        Molecule(name, shape, dimensions, strand=-1, chain=-1,
-                 position=np.zeros(3), rotation=np.zeros(3)):
-
-        Create a molecule
-        args:
-            name:       molecule name
-            shape:      shape of molecule
-            dimensions: dimensions of molecule shape
-                        (3-vector for xyz-dims, int/float for radius)
-
-        kwargs:
-            strand:     int to hold an ID related to a localised strand
-            chain:      int to hold an ID related to a macromolecule/protein or
-                        DNA chain
-            position:   3-vector for molecule position relative to global axis
-            rotation:   3-vector of euler angles (radians) for molecule
-                        rotation relative to the global xyz axis
-            index:      index of base pair along chain
-        """
+        """constructor"""
         if type(dimensions) in [int, float, np.float64]:
             self.dimensions = np.array([deepcopy(dimensions)] * 3)
         else:
@@ -83,7 +79,7 @@ class Molecule:
         """
         Molecule.translate(translation)
 
-        Translate the molecule by (x, y, z)
+        :param translation: Translate the molecule by (x, y, z)
         """
         self.position = self.position + translation
         return None
@@ -93,6 +89,8 @@ class Molecule:
         Molecule.rotate(rotation)
 
         Rotate molecule by [X_angle, Y_angle, Z_angle]
+
+        :param rotation: Euler angles for rotation
         """
         if rotation.size == 3:
             rmatrix = rot.eulerMatrix(rotation[0], rotation[1], rotation[2])
@@ -107,9 +105,10 @@ class Molecule:
         return None
 
     def to_text(self, seperator: str = " ") -> str:
-        """
+        """Return a text description of the molecule
         Molecule.toText(seperator=" ")
-        Return a text description of the molecule
+
+        :param seperator: seperation character
         """
         return (
             seperator.join(
@@ -132,11 +131,23 @@ class Molecule:
 class Guanine(Molecule):
     """
     Guanine molecule
+
+    :param strand: strand ID
+    :param chain: Chain ID
+    :param position: position array (3-vector)
+    :param rotation: rotation array (euler angles)
+    :param index: base pait index
     """
 
     def __init__(
-        self, strand=-1, chain=-1, position=np.zeros(3), rotation=np.zeros(3), index=0
+        self,
+        strand: int = -1,
+        chain: int = -1,
+        position: np.array = np.zeros(3),
+        rotation: np.array = np.zeros(3),
+        index: int = 0,
     ):
+        """constructor"""
         super().__init__(
             "Guanine",
             "ellipse",
@@ -150,13 +161,24 @@ class Guanine(Molecule):
 
 
 class Adenine(Molecule):
-    """
-    Adenine molecule
+    """Adenine molecule
+
+    :param strand: strand ID
+    :param chain: Chain ID
+    :param position: position array (3-vector)
+    :param rotation: rotation array (euler angles)
+    :param index: base pait index
     """
 
     def __init__(
-        self, strand=-1, chain=-1, position=np.zeros(3), rotation=np.zeros(3), index=0
+        self,
+        strand: int = -1,
+        chain: int = -1,
+        position: np.array = np.zeros(3),
+        rotation: np.array = np.zeros(3),
+        index: int = 0,
     ):
+        """Constructor"""
         super().__init__(
             "Adenine",
             "ellipse",
@@ -170,13 +192,24 @@ class Adenine(Molecule):
 
 
 class Thymine(Molecule):
-    """
-    Thymine molecule
+    """Thymine molecule
+
+    :param strand: strand ID
+    :param chain: Chain ID
+    :param position: position array (3-vector)
+    :param rotation: rotation array (euler angles)
+    :param index: base pait index
     """
 
     def __init__(
-        self, strand=-1, chain=-1, position=np.zeros(3), rotation=np.zeros(3), index=0
+        self,
+        strand: int = -1,
+        chain: int = -1,
+        position: np.array = np.zeros(3),
+        rotation: np.array = np.zeros(3),
+        index: int = 0,
     ):
+        """constructor"""
         super().__init__(
             "Thymine",
             "ellipse",
@@ -192,11 +225,23 @@ class Thymine(Molecule):
 class Cytosine(Molecule):
     """
     Cytosine molecule
+
+    :param strand: strand ID
+    :param chain: Chain ID
+    :param position: position array (3-vector)
+    :param rotation: rotation array (euler angles)
+    :param index: base pait index
     """
 
     def __init__(
-        self, strand=-1, chain=-1, position=np.zeros(3), rotation=np.zeros(3), index=0
+        self,
+        strand: int = -1,
+        chain: int = -1,
+        position: np.array = np.zeros(3),
+        rotation: np.array = np.zeros(3),
+        index: int = 0,
     ):
+        """constructor"""
         super().__init__(
             "Cytosine",
             "ellipse",
@@ -212,11 +257,23 @@ class Cytosine(Molecule):
 class DNASugar(Molecule):
     """
     DNASugar molecule
+
+    :param strand: strand ID
+    :param chain: Chain ID
+    :param position: position array (3-vector)
+    :param rotation: rotation array (euler angles)
+    :param index: base pait index
     """
 
     def __init__(
-        self, strand=-1, chain=-1, position=np.zeros(3), rotation=np.zeros(3), index=0
+        self,
+        strand: int = -1,
+        chain: int = -1,
+        position: np.array = np.zeros(3),
+        rotation: np.array = np.zeros(3),
+        index: int = 0,
     ):
+        """constructor"""
         super().__init__(
             "Sugar",
             "sphere",
@@ -232,11 +289,23 @@ class DNASugar(Molecule):
 class Triphosphate(Molecule):
     """
     Triphosphate molecule
+
+    :param strand: strand ID
+    :param chain: Chain ID
+    :param position: position array (3-vector)
+    :param rotation: rotation array (euler angles)
+    :param index: base pait index
     """
 
     def __init__(
-        self, strand=-1, chain=-1, position=np.zeros(3), rotation=np.zeros(3), index=0
+        self,
+        strand: int = -1,
+        chain: int = -1,
+        position: np.array = np.zeros(3),
+        rotation: np.array = np.zeros(3),
+        index: int = 0,
     ):
+        """constructor"""
         super().__init__(
             "Phosphate",
             "sphere",
