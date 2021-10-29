@@ -1,0 +1,6 @@
+fractaldna.utils.rotations.rot\_ax\_angle
+=========================================
+
+.. currentmodule:: fractaldna.utils.rotations
+
+.. autofunction:: rot_ax_angle

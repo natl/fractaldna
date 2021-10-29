@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>fractaldna.dna_models.dnachain.TurnedSolenoid &mdash; FractalDNA 0.1 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="fractaldna.dna_models.dnachain.TurnedTwistedDNAChain" href="fractaldna.dna_models.dnachain.TurnedTwistedDNAChain.html" />
+    <link rel="prev" title="fractaldna.dna_models.dnachain.TurnedDoubleDNAChain" href="fractaldna.dna_models.dnachain.TurnedDoubleDNAChain.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> FractalDNA
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../dna_models.html">DNA Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../structure_models.html">Structure Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="fractaldna.structure_models.html">fractaldna.structure_models</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="fractaldna.dna_models.html">fractaldna.dna_models</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="fractaldna.dna_models.basepair.html">fractaldna.dna_models.basepair</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="fractaldna.dna_models.dnachain.html">fractaldna.dna_models.dnachain</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="fractaldna.dna_models.dnachain.DNAChain.html">fractaldna.dna_models.dnachain.DNAChain</a></li>
+<li class="toctree-l4"><a class="reference internal" href="fractaldna.dna_models.dnachain.DoubleDNAChain.html">fractaldna.dna_models.dnachain.DoubleDNAChain</a></li>
+<li class="toctree-l4"><a class="reference internal" href="fractaldna.dna_models.dnachain.EightStrandDNAChain.html">fractaldna.dna_models.dnachain.EightStrandDNAChain</a></li>
+<li class="toctree-l4"><a class="reference internal" href="fractaldna.dna_models.dnachain.FourStrandDNAChain.html">fractaldna.dna_models.dnachain.FourStrandDNAChain</a></li>
+<li class="toctree-l4"><a class="reference internal" href="fractaldna.dna_models.dnachain.FourStrandTurnedDNAChain.html">fractaldna.dna_models.dnachain.FourStrandTurnedDNAChain</a></li>
+<li class="toctree-l4"><a class="reference internal" href="fractaldna.dna_models.dnachain.Histone.html">fractaldna.dna_models.dnachain.Histone</a></li>
+<li class="toctree-l4"><a class="reference internal" href="fractaldna.dna_models.dnachain.MultiSolenoidVolume.html">fractaldna.dna_models.dnachain.MultiSolenoidVolume</a></li>
+<li class="toctree-l4"><a class="reference internal" href="fractaldna.dna_models.dnachain.PlottableSequence.html">fractaldna.dna_models.dnachain.PlottableSequence</a></li>
+<li class="toctree-l4"><a class="reference internal" href="fractaldna.dna_models.dnachain.Solenoid.html">fractaldna.dna_models.dnachain.Solenoid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="fractaldna.dna_models.dnachain.SplineLinker.html">fractaldna.dna_models.dnachain.SplineLinker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="fractaldna.dna_models.dnachain.TurnedDNAChain.html">fractaldna.dna_models.dnachain.TurnedDNAChain</a></li>
+<li class="toctree-l4"><a class="reference internal" href="fractaldna.dna_models.dnachain.TurnedDoubleDNAChain.html">fractaldna.dna_models.dnachain.TurnedDoubleDNAChain</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">fractaldna.dna_models.dnachain.TurnedSolenoid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="fractaldna.dna_models.dnachain.TurnedTwistedDNAChain.html">fractaldna.dna_models.dnachain.TurnedTwistedDNAChain</a></li>
+<li class="toctree-l4"><a class="reference internal" href="fractaldna.dna_models.dnachain.TurnedTwistedDoubleDNAChain.html">fractaldna.dna_models.dnachain.TurnedTwistedDoubleDNAChain</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="fractaldna.dna_models.dnapositions.html">fractaldna.dna_models.dnapositions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fractaldna.dna_models.molecules.html">fractaldna.dna_models.molecules</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="fractaldna.utils.html">fractaldna.utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fractaldna.exceptions.html">fractaldna.exceptions</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">FractalDNA</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../api.html">API Reference</a> &raquo;</li>
+          <li><a href="fractaldna.dna_models.html">fractaldna.dna_models</a> &raquo;</li>
+          <li><a href="fractaldna.dna_models.dnachain.html">fractaldna.dna_models.dnachain</a> &raquo;</li>
+      <li>fractaldna.dna_models.dnachain.TurnedSolenoid</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_autosummary/fractaldna.dna_models.dnachain.TurnedSolenoid.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="fractaldna-dna-models-dnachain-turnedsolenoid">
+<h1>fractaldna.dna_models.dnachain.TurnedSolenoid<a class="headerlink" href="#fractaldna-dna-models-dnachain-turnedsolenoid" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="fractaldna.dna_models.dnachain.TurnedSolenoid">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">fractaldna.dna_models.dnachain.</span></span><span class="sig-name descname"><span class="pre">TurnedSolenoid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">voxelheight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">750</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nhistones</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">38</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">histone_angle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">twist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.dna_models.dnachain.TurnedSolenoid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="fractaldna.dna_models.dnachain.Solenoid.html#fractaldna.dna_models.dnachain.Solenoid" title="fractaldna.dna_models.dnachain.Solenoid"><code class="xref py py-class docutils literal notranslate"><span class="pre">fractaldna.dna_models.dnachain.Solenoid</span></code></a></p>
+<p><em>Inherits from Solenoid</em></p>
+<p>Define Solenoidal DNA in a voxel (basically a box). This Solenoid
+will turn 90 degrees through the box</p>
+<p>This method works by placing histones around the z-axis (≈6 histones
+per rotation) and then joining them together using SplineLinkers</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>voxelheight</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – Height of ‘voxel’ in angstrom</p></li>
+<li><p><strong>radius</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – Radius of circle the solenoid is turning around (angstrom)</p></li>
+<li><p><strong>radius</strong> – Radius from Solenoid centre to histone centre</p></li>
+<li><p><strong>nhistones</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – Number of histones to place</p></li>
+<li><p><strong>histone_angle</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – tilt of histones from axis in degrees</p></li>
+<li><p><strong>twist</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – whether the DNA exiting the final spine should be
+rotated an extra pi/2.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="fractaldna.dna_models.dnachain.TurnedSolenoid.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">voxelheight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">750</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nhistones</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">38</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">histone_angle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">twist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.dna_models.dnachain.TurnedSolenoid.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor</p>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#fractaldna.dna_models.dnachain.TurnedSolenoid.__init__" title="fractaldna.dna_models.dnachain.TurnedSolenoid.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>([voxelheight, radius, nhistones, ...])</p></td>
+<td><p>Constructor</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#fractaldna.dna_models.dnachain.TurnedSolenoid.setChain" title="fractaldna.dna_models.dnachain.TurnedSolenoid.setChain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setChain</span></code></a>(chainIdx)</p></td>
+<td><p>Set the Chain Index of all base pairs in the solenoid</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#fractaldna.dna_models.dnachain.TurnedSolenoid.to_line_plot" title="fractaldna.dna_models.dnachain.TurnedSolenoid.to_line_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_line_plot</span></code></a>([size])</p></td>
+<td><p>Return a mayavi figure instance with histone and linkers shown</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#fractaldna.dna_models.dnachain.TurnedSolenoid.to_plot" title="fractaldna.dna_models.dnachain.TurnedSolenoid.to_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_plot</span></code></a>([plot_p, plot_b, plot_s])</p></td>
+<td><p>Return a matplotlib.Figure instance with molecules plotted</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#fractaldna.dna_models.dnachain.TurnedSolenoid.to_strand_plot" title="fractaldna.dna_models.dnachain.TurnedSolenoid.to_strand_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_strand_plot</span></code></a>([plot_p, plot_b, plot_s, plot_bp])</p></td>
+<td><p>Return a mayavi figure instance with strands plotted</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#fractaldna.dna_models.dnachain.TurnedSolenoid.to_surface_plot" title="fractaldna.dna_models.dnachain.TurnedSolenoid.to_surface_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_surface_plot</span></code></a>()</p></td>
+<td><p>Plot the surfaces of each molecule in the chain.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#fractaldna.dna_models.dnachain.TurnedSolenoid.to_text" title="fractaldna.dna_models.dnachain.TurnedSolenoid.to_text"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_text</span></code></a>([seperator])</p></td>
+<td><p>Return a description of the molecules in the chain as text</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#fractaldna.dna_models.dnachain.TurnedSolenoid.translate" title="fractaldna.dna_models.dnachain.TurnedSolenoid.translate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">translate</span></code></a>(translation)</p></td>
+<td><p>Translate the solenoid spatially</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="fractaldna.dna_models.dnachain.TurnedSolenoid.setChain">
+<span class="sig-name descname"><span class="pre">setChain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chainIdx</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.dna_models.dnachain.TurnedSolenoid.setChain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the Chain Index of all base pairs in the solenoid</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>chainIdx</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – Index for Chain</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fractaldna.dna_models.dnachain.TurnedSolenoid.to_line_plot">
+<span class="sig-name descname"><span class="pre">to_line_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(400,</span> <span class="pre">350)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.dna_models.dnachain.TurnedSolenoid.to_line_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a mayavi figure instance with histone and linkers shown</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>size</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]) – Figure size (width, height)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>mayavi figure</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>ImportError</strong> – MayaVi likely Not installed</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fractaldna.dna_models.dnachain.TurnedSolenoid.to_plot">
+<span class="sig-name descname"><span class="pre">to_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plot_p</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_s</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.dna_models.dnachain.TurnedSolenoid.to_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a matplotlib.Figure instance with molecules plotted</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>plot_p</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – Show Phosphates in plot</p></li>
+<li><p><strong>plot_b</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – Show Bases in plot</p></li>
+<li><p><strong>plot_s</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – Show sugars in plot</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Figure</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Matplotlib Figure</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fractaldna.dna_models.dnachain.TurnedSolenoid.to_strand_plot">
+<span class="sig-name descname"><span class="pre">to_strand_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plot_p</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_s</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_bp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.dna_models.dnachain.TurnedSolenoid.to_strand_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a mayavi figure instance with strands plotted</p>
+<p>:param plot_p : plot phosphate strands
+:param plot_s : plot sugar strands
+:param plot_b : plot base strands
+:param plot_bp : join base pairs together</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Mayavi Figure</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>ImportError</strong> – MayaVi not imported</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fractaldna.dna_models.dnachain.TurnedSolenoid.to_surface_plot">
+<span class="sig-name descname"><span class="pre">to_surface_plot</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.dna_models.dnachain.TurnedSolenoid.to_surface_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot the surfaces of each molecule in the chain.
+Avoid this with large chains, this assumes each molecule is an ellipse</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Figure</span></code></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Matplotlib figure (contour plot)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fractaldna.dna_models.dnachain.TurnedSolenoid.to_text">
+<span class="sig-name descname"><span class="pre">to_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seperator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'</span> <span class="pre">'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.dna_models.dnachain.TurnedSolenoid.to_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a description of the molecules in the chain as text</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>seperator</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – column seperator</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fractaldna.dna_models.dnachain.TurnedSolenoid.translate">
+<span class="sig-name descname"><span class="pre">translate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">translation</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.dna_models.dnachain.TurnedSolenoid.translate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translate the solenoid spatially</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>translation</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code>]) – 3-vector for translation</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="fractaldna.dna_models.dnachain.TurnedDoubleDNAChain.html" class="btn btn-neutral float-left" title="fractaldna.dna_models.dnachain.TurnedDoubleDNAChain" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="fractaldna.dna_models.dnachain.TurnedTwistedDNAChain.html" class="btn btn-neutral float-right" title="fractaldna.dna_models.dnachain.TurnedTwistedDNAChain" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Nathanael Lampe.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

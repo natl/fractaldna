@@ -1,0 +1,6 @@
+fractaldna.dna\_models.dnapositions.mc\_triple\_volume
+======================================================
+
+.. currentmodule:: fractaldna.dna_models.dnapositions
+
+.. autofunction:: mc_triple_volume

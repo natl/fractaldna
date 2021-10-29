@@ -1,0 +1,39 @@
+fractaldna.dna\_models.dnachain.SplineLinker
+============================================
+
+.. currentmodule:: fractaldna.dna_models.dnachain
+
+.. autoclass:: SplineLinker
+   :members:                                    
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~SplineLinker.__init__
+      ~SplineLinker.setChain
+      ~SplineLinker.to_line_plot
+      ~SplineLinker.to_plot
+      ~SplineLinker.to_strand_plot
+      ~SplineLinker.to_surface_plot
+      ~SplineLinker.to_text
+      ~SplineLinker.translate
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~SplineLinker.linker_bp_spacing
+      ~SplineLinker.linker_rotation
+   
+   

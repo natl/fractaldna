@@ -1,0 +1,28 @@
+fractaldna.dna\_models.molecules.DNASugar
+=========================================
+
+.. currentmodule:: fractaldna.dna_models.molecules
+
+.. autoclass:: DNASugar
+   :members:                                    
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~DNASugar.__init__
+      ~DNASugar.rotate
+      ~DNASugar.to_text
+      ~DNASugar.translate
+   
+   
+
+   
+   
+   

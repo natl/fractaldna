@@ -1,0 +1,6 @@
+fractaldna.dna\_models.dnapositions.opposite\_pair
+==================================================
+
+.. currentmodule:: fractaldna.dna_models.dnapositions
+
+.. autofunction:: opposite_pair

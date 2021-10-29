@@ -1,0 +1,38 @@
+fractaldna.structure\_models.voxelisation.Voxel
+===============================================
+
+.. currentmodule:: fractaldna.structure_models.voxelisation
+
+.. autoclass:: Voxel
+   :members:                                    
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Voxel.__init__
+      ~Voxel.to_text
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Voxel.defaultAxis
+      ~Voxel.defaultAxisInv
+      ~Voxel.defaultHeading
+      ~Voxel.defaultOrtho
+      ~Voxel.defaultPrincipal
+      ~Voxel.types
+      ~Voxel.types_inverse
+   
+   

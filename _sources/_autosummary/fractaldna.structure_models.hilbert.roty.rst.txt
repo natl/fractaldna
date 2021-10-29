@@ -1,0 +1,6 @@
+fractaldna.structure\_models.hilbert.roty
+=========================================
+
+.. currentmodule:: fractaldna.structure_models.hilbert
+
+.. autofunction:: roty

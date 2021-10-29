@@ -1,0 +1,6 @@
+fractaldna.exceptions.FractalDNAException
+=========================================
+
+.. currentmodule:: fractaldna.exceptions
+
+.. autoexception:: FractalDNAException

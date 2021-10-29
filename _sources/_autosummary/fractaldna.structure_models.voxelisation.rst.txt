@@ -1,0 +1,40 @@
+fractaldna.structure\_models.voxelisation
+=========================================
+
+.. automodule:: fractaldna.structure_models.voxelisation
+  
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:                                          
+   
+      getEulerAngles
+      rot_ax_angle
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:                                          
+      :template: custom-class-template.rst               
+   
+      Voxel
+      VoxelisedFractal
+   
+   
+
+   
+   
+   
+
+
+

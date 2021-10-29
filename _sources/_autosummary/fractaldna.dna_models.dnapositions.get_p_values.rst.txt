@@ -1,0 +1,6 @@
+fractaldna.dna\_models.dnapositions.get\_p\_values
+==================================================
+
+.. currentmodule:: fractaldna.dna_models.dnapositions
+
+.. autofunction:: get_p_values

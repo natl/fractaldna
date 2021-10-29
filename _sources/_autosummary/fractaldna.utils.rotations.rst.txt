@@ -1,0 +1,43 @@
+fractaldna.utils.rotations
+==========================
+
+.. automodule:: fractaldna.utils.rotations
+  
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:                                          
+   
+      eulerMatrix
+      getEulerAngles
+      matrix_interpolate
+      quaternion_about_axis
+      quaternion_from_matrix
+      quaternion_matrix
+      quaternion_multiply
+      quaternion_slerp
+      rot_ax_angle
+      rotx
+      roty
+      rotz
+      unit_vector
+      vector_norm
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

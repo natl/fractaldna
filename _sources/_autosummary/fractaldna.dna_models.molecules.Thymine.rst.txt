@@ -1,0 +1,28 @@
+fractaldna.dna\_models.molecules.Thymine
+========================================
+
+.. currentmodule:: fractaldna.dna_models.molecules
+
+.. autoclass:: Thymine
+   :members:                                    
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Thymine.__init__
+      ~Thymine.rotate
+      ~Thymine.to_text
+      ~Thymine.translate
+   
+   
+
+   
+   
+   

@@ -1,0 +1,26 @@
+fractaldna.dna\_models.dnapositions.MoleculeDictionary
+======================================================
+
+.. currentmodule:: fractaldna.dna_models.dnapositions
+
+.. autoclass:: MoleculeDictionary
+   :members:                                    
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~MoleculeDictionary.__init__
+      ~MoleculeDictionary.items
+   
+   
+
+   
+   
+   

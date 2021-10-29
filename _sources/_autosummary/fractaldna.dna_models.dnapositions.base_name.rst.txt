@@ -1,0 +1,6 @@
+fractaldna.dna\_models.dnapositions.base\_name
+==============================================
+
+.. currentmodule:: fractaldna.dna_models.dnapositions
+
+.. autofunction:: base_name

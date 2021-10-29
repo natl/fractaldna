@@ -1,0 +1,30 @@
+﻿fractaldna.exceptions
+=====================
+
+.. automodule:: fractaldna.exceptions
+  
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Exceptions
+
+   .. autosummary::
+      :toctree:                                          
+   
+      FractalDNAException
+   
+   
+
+
+

@@ -1,0 +1,6 @@
+fractaldna.structure\_models.hilbert.iterate\_lstring
+=====================================================
+
+.. currentmodule:: fractaldna.structure_models.hilbert
+
+.. autofunction:: iterate_lstring

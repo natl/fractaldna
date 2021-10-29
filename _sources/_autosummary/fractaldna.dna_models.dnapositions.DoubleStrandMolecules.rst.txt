@@ -1,0 +1,27 @@
+fractaldna.dna\_models.dnapositions.DoubleStrandMolecules
+=========================================================
+
+.. currentmodule:: fractaldna.dna_models.dnapositions
+
+.. autoclass:: DoubleStrandMolecules
+   :members:                                    
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~DoubleStrandMolecules.__init__
+      ~DoubleStrandMolecules.items
+      ~DoubleStrandMolecules.shift
+   
+   
+
+   
+   
+   

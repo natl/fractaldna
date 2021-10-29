@@ -1,0 +1,6 @@
+fractaldna.structure\_models.voxelisation.getEulerAngles
+========================================================
+
+.. currentmodule:: fractaldna.structure_models.voxelisation
+
+.. autofunction:: getEulerAngles

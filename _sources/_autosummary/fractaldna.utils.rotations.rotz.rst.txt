@@ -1,0 +1,6 @@
+fractaldna.utils.rotations.rotz
+===============================
+
+.. currentmodule:: fractaldna.utils.rotations
+
+.. autofunction:: rotz

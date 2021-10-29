@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>fractaldna.utils.rotations.quaternion_multiply &mdash; FractalDNA 0.1 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="fractaldna.utils.rotations.quaternion_slerp" href="fractaldna.utils.rotations.quaternion_slerp.html" />
+    <link rel="prev" title="fractaldna.utils.rotations.quaternion_matrix" href="fractaldna.utils.rotations.quaternion_matrix.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> FractalDNA
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../dna_models.html">DNA Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../structure_models.html">Structure Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="fractaldna.structure_models.html">fractaldna.structure_models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fractaldna.dna_models.html">fractaldna.dna_models</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="fractaldna.utils.html">fractaldna.utils</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="fractaldna.utils.constants.html">fractaldna.utils.constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fractaldna.utils.logging.html">fractaldna.utils.logging</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="fractaldna.utils.rotations.html">fractaldna.utils.rotations</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="fractaldna.utils.rotations.eulerMatrix.html">fractaldna.utils.rotations.eulerMatrix</a></li>
+<li class="toctree-l4"><a class="reference internal" href="fractaldna.utils.rotations.getEulerAngles.html">fractaldna.utils.rotations.getEulerAngles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="fractaldna.utils.rotations.matrix_interpolate.html">fractaldna.utils.rotations.matrix_interpolate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="fractaldna.utils.rotations.quaternion_about_axis.html">fractaldna.utils.rotations.quaternion_about_axis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="fractaldna.utils.rotations.quaternion_from_matrix.html">fractaldna.utils.rotations.quaternion_from_matrix</a></li>
+<li class="toctree-l4"><a class="reference internal" href="fractaldna.utils.rotations.quaternion_matrix.html">fractaldna.utils.rotations.quaternion_matrix</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">fractaldna.utils.rotations.quaternion_multiply</a></li>
+<li class="toctree-l4"><a class="reference internal" href="fractaldna.utils.rotations.quaternion_slerp.html">fractaldna.utils.rotations.quaternion_slerp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="fractaldna.utils.rotations.rot_ax_angle.html">fractaldna.utils.rotations.rot_ax_angle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="fractaldna.utils.rotations.rotx.html">fractaldna.utils.rotations.rotx</a></li>
+<li class="toctree-l4"><a class="reference internal" href="fractaldna.utils.rotations.roty.html">fractaldna.utils.rotations.roty</a></li>
+<li class="toctree-l4"><a class="reference internal" href="fractaldna.utils.rotations.rotz.html">fractaldna.utils.rotations.rotz</a></li>
+<li class="toctree-l4"><a class="reference internal" href="fractaldna.utils.rotations.unit_vector.html">fractaldna.utils.rotations.unit_vector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="fractaldna.utils.rotations.vector_norm.html">fractaldna.utils.rotations.vector_norm</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="fractaldna.utils.sequence.html">fractaldna.utils.sequence</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="fractaldna.exceptions.html">fractaldna.exceptions</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">FractalDNA</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../api.html">API Reference</a> &raquo;</li>
+          <li><a href="fractaldna.utils.html">fractaldna.utils</a> &raquo;</li>
+          <li><a href="fractaldna.utils.rotations.html">fractaldna.utils.rotations</a> &raquo;</li>
+      <li>fractaldna.utils.rotations.quaternion_multiply</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_autosummary/fractaldna.utils.rotations.quaternion_multiply.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="fractaldna-utils-rotations-quaternion-multiply">
+<h1>fractaldna.utils.rotations.quaternion_multiply<a class="headerlink" href="#fractaldna-utils-rotations-quaternion-multiply" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="fractaldna.utils.rotations.quaternion_multiply">
+<span class="sig-prename descclassname"><span class="pre">fractaldna.utils.rotations.</span></span><span class="sig-name descname"><span class="pre">quaternion_multiply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">quaternion1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quaternion0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.utils.rotations.quaternion_multiply" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return multiplication of two quaternions.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">q</span> <span class="o">=</span> <span class="n">quaternion_multiply</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">numpy</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="p">[</span><span class="mi">28</span><span class="p">,</span> <span class="o">-</span><span class="mi">44</span><span class="p">,</span> <span class="o">-</span><span class="mi">14</span><span class="p">,</span> <span class="mi">48</span><span class="p">])</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="fractaldna.utils.rotations.quaternion_matrix.html" class="btn btn-neutral float-left" title="fractaldna.utils.rotations.quaternion_matrix" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="fractaldna.utils.rotations.quaternion_slerp.html" class="btn btn-neutral float-right" title="fractaldna.utils.rotations.quaternion_slerp" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Nathanael Lampe.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

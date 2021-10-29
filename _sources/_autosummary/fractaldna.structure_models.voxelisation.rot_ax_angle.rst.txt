@@ -1,0 +1,6 @@
+fractaldna.structure\_models.voxelisation.rot\_ax\_angle
+========================================================
+
+.. currentmodule:: fractaldna.structure_models.voxelisation
+
+.. autofunction:: rot_ax_angle

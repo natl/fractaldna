@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DNA Models &mdash; FractalDNA 0.1 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <title>DNA Models &mdash; FractalDNA 0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -71,23 +73,468 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="dna-models">
+  <section id="dna-models">
 <h1>DNA Models<a class="headerlink" href="#dna-models" title="Permalink to this headline">¶</a></h1>
 <p>FractalDNA provides a number of models for building DNA.</p>
-<div class="section" id="base-and-helper-classes">
+<section id="base-and-helper-classes">
 <h2>Base and Helper Classes<a class="headerlink" href="#base-and-helper-classes" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="unpacked-dna">
+<dl class="py class">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">fractaldna.dna_models.dnachain.</span></span><span class="sig-name descname"><span class="pre">PlottableSequence</span></span></dt>
+<dd><p>This is an inheritable class that gives DNA chains plotting methods and
+output methods.</p>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">to_line_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(400,</span> <span class="pre">350)</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Return a mayavi figure instance with histone and linkers shown</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>size</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]) – Figure size (width, height)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>mayavi figure</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>ImportError</strong> – MayaVi likely Not installed</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">to_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plot_p</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_s</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Return a matplotlib.Figure instance with molecules plotted</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>plot_p</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – Show Phosphates in plot</p></li>
+<li><p><strong>plot_b</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – Show Bases in plot</p></li>
+<li><p><strong>plot_s</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – Show sugars in plot</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Figure</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Matplotlib Figure</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">to_strand_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plot_p</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_s</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_bp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Return a mayavi figure instance with strands plotted</p>
+<p>:param plot_p : plot phosphate strands
+:param plot_s : plot sugar strands
+:param plot_b : plot base strands
+:param plot_bp : join base pairs together</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Mayavi Figure</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>ImportError</strong> – MayaVi not imported</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">to_surface_plot</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd><p>Plot the surfaces of each molecule in the chain.
+Avoid this with large chains, this assumes each molecule is an ellipse</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Figure</span></code></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Matplotlib figure (contour plot)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">to_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seperator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'</span> <span class="pre">'</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Return a description of the molecules in the chain as text</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>seperator</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – column seperator</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">fractaldna.dna_models.dnachain.</span></span><span class="sig-name descname"><span class="pre">Histone</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">position</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">genome</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p><em>Inherits from PlottableSequence</em></p>
+<p>This class defines a histone.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>position</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code>]) – 3-vector for histone position</p></li>
+<li><p><strong>rotation</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code>]) – 3-vector for histone rotation (euler angles)</p></li>
+<li><p><strong>genome</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – string defining the genome for the histone</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">setChain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chainIdx</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Set the Chain Index of all base pairs in the histone</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>chainIdx</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – Index for Chain</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">translate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">translation</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Translate the histone spatially</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>translation</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code>]) – 3-vector for translation</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">fractaldna.dna_models.dnachain.</span></span><span class="sig-name descname"><span class="pre">SplineLinker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bp1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bp2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bp3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bp4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">curviness</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zrot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">startkey</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stopkey</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'corrected_quaternion'</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p><em>Inherits from PlottableSequence</em></p>
+<p>Link two histones together via a cubic spline</p>
+<p>linker = SplineLinker(bp1, bp2, bp3, bp4, curviness=1., zrot=None)</p>
+<p>Create base pairs that link to sections of DNA as follows:
+bp1 bp2 &lt;==== LINKER =====&gt; bp3 bp4
+Two base pairs on either side of the linker are needed to build splines
+low curviness = straighter
+high_curviness = smoother</p>
+<p>startkey and stopkey act as keyframes for rotations</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>zrot</strong> – <dl class="simple">
+<dt>Describes the twist of bp3 relative to bp2</dt><dd><ul>
+<li><p>None: Determine automatically (experimental)</p></li>
+<li><p>double: rotation in radians (mod 2*pi)</p></li>
+</ul>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>startkey</strong> – <dl class="simple">
+<dt>Starting keyframe for rotations</dt><dd><ul>
+<li><p>key = i will start/stop rotations after the i-th base pair</p></li>
+<li><p>key = -i will start/stop rotations after the i-th last base pair</p></li>
+</ul>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>stopkey</strong> – <dl class="simple">
+<dt>Ending keyframe for rotations</dt><dd><ul>
+<li><p>key = i will start/stop rotations after the i-th base pair</p></li>
+<li><p>key = -i will start/stop rotations after the i-th last base pair</p></li>
+</ul>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>method</strong> – <dl class="simple">
+<dt>Method to handle rotational interpolation</dt><dd><ul>
+<li><p>”quaternion”: Full use of quaternions</p></li>
+<li><p>”corrected_quaternion”: Full use of quaternions, with a correction
+to check that the base pair is aligned.
+This method is recommended</p></li>
+<li><p>”matrix”: Experimental method that doesn’t use
+quaternions. Currently incorrect.</p></li>
+</ul>
+</dd>
+</dl>
+</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">setChain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chainIdx</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Set the Chain Index of all base pairs in the histone</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>chainIdx</strong> – Index for Chain</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">translate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">translation</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Translate the histone spatially</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>translation</strong> – 3-vector for translation</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="unpacked-dna">
 <h2>Unpacked DNA<a class="headerlink" href="#unpacked-dna" title="Permalink to this headline">¶</a></h2>
 <p><em>Single Strand</em></p>
+<dl class="py class">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">fractaldna.dna_models.dnachain.</span></span><span class="sig-name descname"><span class="pre">DNAChain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">genome</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p><em>Inherits from PlottableSequence</em>
+A single DNA Chain built from a genome specified.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>genome</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – A string specifying the genome, e.g. ‘AGTATC’</p></li>
+<li><p><strong>chain</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – The Chain index to label this strand</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">center_in_z</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd><p>Center the molecule around the z=0 plane</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">fractaldna.dna_models.dnachain.</span></span><span class="sig-name descname"><span class="pre">TurnedDNAChain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">genome</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p><em>Inherits from DNAChain</em></p>
+<p>TurnedDNAChain(genome)
+Construct a single turned, twisted DNA chaiun</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>genome</strong> – string of GATC specifying genome order</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">fractaldna.dna_models.dnachain.</span></span><span class="sig-name descname"><span class="pre">TurnedTwistedDNAChain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">genome</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p><em>Inherits from DNAChain</em></p>
+<p>TurnedTwistedDNAChain(genome)
+Construct a single turned, twisted DNA chaiun</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>genome</strong> – string of GATC specifying genome order</p>
+</dd>
+</dl>
+</dd></dl>
+
 <p><em>Two Strands per Volume</em></p>
+<dl class="py class">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">fractaldna.dna_models.dnachain.</span></span><span class="sig-name descname"><span class="pre">DoubleDNAChain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">genome</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separation</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p><em>Inherits from DNAChain</em></p>
+<p>DoubleDNAChain(genome, separation)
+Construct four straight DNA chains
+Chain indices are assigned anticlockwise starting from the +y strand.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>genome</strong> – string of GATC specifying genome order</p></li>
+<li><p><strong>separation</strong> – separation of each strand from the center in angstroms</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">fractaldna.dna_models.dnachain.</span></span><span class="sig-name descname"><span class="pre">TurnedDoubleDNAChain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">genome</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separation</span></span></em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">fractaldna.dna_models.dnachain.</span></span><span class="sig-name descname"><span class="pre">TurnedTwistedDoubleDNAChain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">genome</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separation</span></span></em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
 <p><em>Four Strands per Volume</em></p>
+<dl class="py class">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">fractaldna.dna_models.dnachain.</span></span><span class="sig-name descname"><span class="pre">FourStrandDNAChain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">genome</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separation</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p><em>Inherits from DNAChain</em></p>
+<p>FourStrandDNAChain(genome, separation)
+Construct four straight DNA chains
+Chain indices are assigned anticlockwise starting from the +y strand.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>genome</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – string of GATC specifying genome order</p></li>
+<li><p><strong>separation</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – separation of each strand from the center in angstroms</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">fractaldna.dna_models.dnachain.</span></span><span class="sig-name descname"><span class="pre">FourStrandTurnedDNAChain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">genome</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">twist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p><em>Inherits from DNAChain</em></p>
+<p>FourStrandTurnedDNAChain(genome, separation)
+Construct four DNA chains that turn 90 degrees.
+Chain indices are assigned anticlockwise starting from the +y strand.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>genome</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – string of GATC specifying genome order</p></li>
+<li><p><strong>separation</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – separation of each strand from the center in angstroms</p></li>
+<li><p><strong>twist</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – boolean, add a 90 deg twist to each chain</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
 <p><em>Eight Strands per Volume</em></p>
+<dl class="py class">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">fractaldna.dna_models.dnachain.</span></span><span class="sig-name descname"><span class="pre">EightStrandDNAChain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">genome</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sep1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sep2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">turn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">twist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Construct eight DNA chains that can turn 90 degrees if turn=True</p>
+<p>Chain indices are assigned anticlockwise starting from the +y strand,
+first to the inner four strands, then two the outer four strands.
+i.e.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">____________________</span>
+<span class="o">|</span>                  <span class="o">|</span>
+<span class="o">|</span>        <span class="mi">4</span>         <span class="o">|</span>
+<span class="o">|</span>        <span class="mi">0</span>         <span class="o">|</span>
+<span class="o">|</span>  <span class="mi">5</span>  <span class="mi">1</span>     <span class="mi">3</span>  <span class="mi">7</span>   <span class="o">|</span>
+<span class="o">|</span>        <span class="mi">2</span>         <span class="o">|</span>
+<span class="o">|</span>        <span class="mi">6</span>         <span class="o">|</span>
+<span class="o">|</span><span class="n">__________________</span><span class="o">|</span>
+</pre></div>
 </div>
-<div class="section" id="solenoid-packed-dna">
+<p>Strands 1 and 3, 0 and 2 are separated by sep1
+Strands 4 and 6, 5 and 7 are separated by sep2</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>genome</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – string of GATC specifying genome order</p></li>
+<li><p><strong>sep1</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – separation of inner strands from the center in angstroms</p></li>
+<li><p><strong>sep2</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – separation of outer strands from the center in angstroms</p></li>
+<li><p><strong>turn</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – boolean, turn strands 90 degrees along box</p></li>
+<li><p><strong>twist</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – boolean, add a 90 deg twist to each chain</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="solenoid-packed-dna">
 <h2>Solenoid-Packed DNA<a class="headerlink" href="#solenoid-packed-dna" title="Permalink to this headline">¶</a></h2>
-</div>
-</div>
+<dl class="py class">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">fractaldna.dna_models.dnachain.</span></span><span class="sig-name descname"><span class="pre">Solenoid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">voxelheight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">750</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nhistones</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">38</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">histone_angle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">twist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p><em>Inherits from PlottableSequence</em></p>
+<p>Define Solenoidal DNA in a voxel (basically a box).</p>
+<p>This method works by placing histones around the z-axis (≈6 histones
+per rotation) and then joining them together using SplineLinkers</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>voxelheight</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – Height of ‘voxel’ in angstrom</p></li>
+<li><p><strong>radius</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – Radius from Solenoid centre to histone centre</p></li>
+<li><p><strong>nhistones</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – Number of histones to place</p></li>
+<li><p><strong>histone_angle</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – tilt of histones from axis in degrees</p></li>
+<li><p><strong>twist</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – whether the DNA exiting the final spine should be
+rotated an extra pi/2.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">setChain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chainIdx</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Set the Chain Index of all base pairs in the solenoid</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>chainIdx</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – Index for Chain</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">translate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">translation</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Translate the solenoid spatially</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>translation</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code>]) – 3-vector for translation</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">fractaldna.dna_models.dnachain.</span></span><span class="sig-name descname"><span class="pre">TurnedSolenoid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">voxelheight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">750</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nhistones</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">38</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">histone_angle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">twist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p><em>Inherits from Solenoid</em></p>
+<p>Define Solenoidal DNA in a voxel (basically a box). This Solenoid
+will turn 90 degrees through the box</p>
+<p>This method works by placing histones around the z-axis (≈6 histones
+per rotation) and then joining them together using SplineLinkers</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>voxelheight</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – Height of ‘voxel’ in angstrom</p></li>
+<li><p><strong>radius</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – Radius of circle the solenoid is turning around (angstrom)</p></li>
+<li><p><strong>radius</strong> – Radius from Solenoid centre to histone centre</p></li>
+<li><p><strong>nhistones</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – Number of histones to place</p></li>
+<li><p><strong>histone_angle</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – tilt of histones from axis in degrees</p></li>
+<li><p><strong>twist</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – whether the DNA exiting the final spine should be
+rotated an extra pi/2.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">fractaldna.dna_models.dnachain.</span></span><span class="sig-name descname"><span class="pre">MultiSolenoidVolume</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">voxelheight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1500.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">400</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">twist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">turn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Class to build placement volumes that contain multiple solenoidal DNA
+strands.</p>
+<p>Constructor:</p>
+<dl class="simple">
+<dt>MultiSolenoidVolume(voxelheight=1500., separation=400, twist=False,</dt><dd><p>turn=False)</p>
+</dd>
+</dl>
+<p>voxelheight: size of placement volume
+separation: separation between DNA strands</p>
+<p>Try:
+dna = MultiSolenoidVolume()
+dna.to_line_plot()
+dna.to_text()</p>
+</dd></dl>
+
+</section>
+</section>
 
 
            </div>

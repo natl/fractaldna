@@ -1,0 +1,32 @@
+fractaldna.dna\_models.dnapositions.MoleculeFromAtoms
+=====================================================
+
+.. currentmodule:: fractaldna.dna_models.dnapositions
+
+.. autoclass:: MoleculeFromAtoms
+   :members:                                    
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~MoleculeFromAtoms.__init__
+      ~MoleculeFromAtoms.find_center
+      ~MoleculeFromAtoms.find_equivalent_half_lengths
+      ~MoleculeFromAtoms.find_equivalent_radius
+      ~MoleculeFromAtoms.find_half_lengths
+      ~MoleculeFromAtoms.find_radius
+      ~MoleculeFromAtoms.from_cylindrical
+      ~MoleculeFromAtoms.to_plot
+   
+   
+
+   
+   
+   

@@ -1,0 +1,6 @@
+fractaldna.utils.rotations.eulerMatrix
+======================================
+
+.. currentmodule:: fractaldna.utils.rotations
+
+.. autofunction:: eulerMatrix

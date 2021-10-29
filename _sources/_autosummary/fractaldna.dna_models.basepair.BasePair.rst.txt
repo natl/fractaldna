@@ -1,0 +1,39 @@
+fractaldna.dna\_models.basepair.BasePair
+========================================
+
+.. currentmodule:: fractaldna.dna_models.basepair
+
+.. autoclass:: BasePair
+   :members:                                    
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~BasePair.__init__
+      ~BasePair.getCenter
+      ~BasePair.iterMolecules
+      ~BasePair.rotate
+      ~BasePair.setNewChain
+      ~BasePair.set_bp_index
+      ~BasePair.to_text
+      ~BasePair.translate
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BasePair.moleculeNames
+      ~BasePair.pairings
+   
+   

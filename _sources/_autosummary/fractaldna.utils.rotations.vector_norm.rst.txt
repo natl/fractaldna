@@ -1,0 +1,6 @@
+fractaldna.utils.rotations.vector\_norm
+=======================================
+
+.. currentmodule:: fractaldna.utils.rotations
+
+.. autofunction:: vector_norm

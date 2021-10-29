@@ -1,0 +1,6 @@
+fractaldna.utils.rotations.quaternion\_matrix
+=============================================
+
+.. currentmodule:: fractaldna.utils.rotations
+
+.. autofunction:: quaternion_matrix

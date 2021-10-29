@@ -1,0 +1,32 @@
+fractaldna.dna\_models.dnachain.FourStrandDNAChain
+==================================================
+
+.. currentmodule:: fractaldna.dna_models.dnachain
+
+.. autoclass:: FourStrandDNAChain
+   :members:                                    
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~FourStrandDNAChain.__init__
+      ~FourStrandDNAChain.center_in_z
+      ~FourStrandDNAChain.makeFourStrands
+      ~FourStrandDNAChain.to_line_plot
+      ~FourStrandDNAChain.to_plot
+      ~FourStrandDNAChain.to_strand_plot
+      ~FourStrandDNAChain.to_surface_plot
+      ~FourStrandDNAChain.to_text
+   
+   
+
+   
+   
+   

@@ -1,0 +1,32 @@
+fractaldna.dna\_models.dnachain.Solenoid
+========================================
+
+.. currentmodule:: fractaldna.dna_models.dnachain
+
+.. autoclass:: Solenoid
+   :members:                                    
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Solenoid.__init__
+      ~Solenoid.setChain
+      ~Solenoid.to_line_plot
+      ~Solenoid.to_plot
+      ~Solenoid.to_strand_plot
+      ~Solenoid.to_surface_plot
+      ~Solenoid.to_text
+      ~Solenoid.translate
+   
+   
+
+   
+   
+   

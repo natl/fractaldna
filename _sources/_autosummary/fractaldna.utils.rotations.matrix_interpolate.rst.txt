@@ -1,0 +1,6 @@
+fractaldna.utils.rotations.matrix\_interpolate
+==============================================
+
+.. currentmodule:: fractaldna.utils.rotations
+
+.. autofunction:: matrix_interpolate

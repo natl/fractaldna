@@ -1,0 +1,30 @@
+fractaldna.dna\_models.dnachain.PlottableSequence
+=================================================
+
+.. currentmodule:: fractaldna.dna_models.dnachain
+
+.. autoclass:: PlottableSequence
+   :members:                                    
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~PlottableSequence.__init__
+      ~PlottableSequence.to_line_plot
+      ~PlottableSequence.to_plot
+      ~PlottableSequence.to_strand_plot
+      ~PlottableSequence.to_surface_plot
+      ~PlottableSequence.to_text
+   
+   
+
+   
+   
+   

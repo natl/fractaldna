@@ -1,0 +1,6 @@
+fractaldna.utils.rotations.unit\_vector
+=======================================
+
+.. currentmodule:: fractaldna.utils.rotations
+
+.. autofunction:: unit_vector

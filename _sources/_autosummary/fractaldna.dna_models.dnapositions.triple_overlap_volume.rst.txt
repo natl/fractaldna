@@ -1,0 +1,6 @@
+fractaldna.dna\_models.dnapositions.triple\_overlap\_volume
+===========================================================
+
+.. currentmodule:: fractaldna.dna_models.dnapositions
+
+.. autofunction:: triple_overlap_volume

@@ -1,0 +1,31 @@
+fractaldna.dna\_models.dnachain.DoubleDNAChain
+==============================================
+
+.. currentmodule:: fractaldna.dna_models.dnachain
+
+.. autoclass:: DoubleDNAChain
+   :members:                                    
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~DoubleDNAChain.__init__
+      ~DoubleDNAChain.center_in_z
+      ~DoubleDNAChain.to_line_plot
+      ~DoubleDNAChain.to_plot
+      ~DoubleDNAChain.to_strand_plot
+      ~DoubleDNAChain.to_surface_plot
+      ~DoubleDNAChain.to_text
+   
+   
+
+   
+   
+   

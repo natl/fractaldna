@@ -1,0 +1,28 @@
+fractaldna.dna\_models.molecules.Adenine
+========================================
+
+.. currentmodule:: fractaldna.dna_models.molecules
+
+.. autoclass:: Adenine
+   :members:                                    
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Adenine.__init__
+      ~Adenine.rotate
+      ~Adenine.to_text
+      ~Adenine.translate
+   
+   
+
+   
+   
+   

@@ -1,0 +1,30 @@
+fractaldna.utils.sequence
+=========================
+
+.. automodule:: fractaldna.utils.sequence
+  
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:                                          
+   
+      get_dna_string
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

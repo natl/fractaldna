@@ -1,0 +1,6 @@
+fractaldna.utils.sequence.get\_dna\_string
+==========================================
+
+.. currentmodule:: fractaldna.utils.sequence
+
+.. autofunction:: get_dna_string

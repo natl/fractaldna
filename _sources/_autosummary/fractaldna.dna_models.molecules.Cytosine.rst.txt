@@ -1,0 +1,28 @@
+fractaldna.dna\_models.molecules.Cytosine
+=========================================
+
+.. currentmodule:: fractaldna.dna_models.molecules
+
+.. autoclass:: Cytosine
+   :members:                                    
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Cytosine.__init__
+      ~Cytosine.rotate
+      ~Cytosine.to_text
+      ~Cytosine.translate
+   
+   
+
+   
+   
+   

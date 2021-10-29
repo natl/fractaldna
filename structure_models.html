@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Structure Models &mdash; FractalDNA 0.1 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <title>Structure Models &mdash; FractalDNA 0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -70,19 +72,133 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="structure-models">
+  <section id="structure-models">
 <h1>Structure Models<a class="headerlink" href="#structure-models" title="Permalink to this headline">¶</a></h1>
 <p>Structure Models for DNA Simulations are included under <cite>fractaldna.structure_models</cite>.</p>
 <p>Long fractals can be generated using L-Strings, which can then be
 turned into a voxelised representation using the methods in
 <cite>fractaldna.structure_models.voxelisation</cite>.</p>
-<div class="section" id="generating-hilbert-curves-using-l-strings">
+<section id="generating-hilbert-curves-using-l-strings">
 <h2>Generating Hilbert Curves using L-Strings<a class="headerlink" href="#generating-hilbert-curves-using-l-strings" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="voxelising-fractals">
+<dl class="py function">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">fractaldna.structure_models.hilbert.</span></span><span class="sig-name descname"><span class="pre">generate_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lstring</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+</section>
+<section id="voxelising-fractals">
 <h2>Voxelising Fractals<a class="headerlink" href="#voxelising-fractals" title="Permalink to this headline">¶</a></h2>
-</div>
-</div>
+<dl class="py class">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">fractaldna.structure_models.voxelisation.</span></span><span class="sig-name descname"><span class="pre">VoxelisedFractal</span></span></dt>
+<dd><p>Class containing a voxelised representation of a fractal</p>
+<p>Typically created using the VoxelisedFractal.fromSeed class method</p>
+<p>fractal = VoxelisedFractal.fromSeed(‘X’, 1)
+fractal.fractal contains a list of ‘Voxels’ representing the DNA Path</p>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">center_fractal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd><p>Center the fractal around (x, y, z) = (0, 0, 0)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">fromLString</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lstring</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Convert an L-String into a VoxelisedFractal</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lstring</strong> – L-String to convert</p></li>
+<li><p><strong>distance</strong> – distance between voxels</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Voxelised Fractal representation</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">fromSeed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iterations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Make a voxelised fractal from an L-String seed.</p>
+<p>The available L-Strings are described in fractaldna.structure_models.hilbert</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>seed</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – Seed L-String</p></li>
+<li><p><strong>iterations</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of times to iterate seed</p></li>
+<li><p><strong>distance</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – distance between voxels</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Voxelised Fractal representation</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">to_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">refine</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Create a matplotlib figure instance of this fractal</p>
+<p>fig = toPlot(refine=0, batch=False)
+:type refine: <code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>
+:param refine: points to plot in between voxels (more points = clearer path)
+:type batch: <code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>
+:param batch: True to suppress automatic display of the figure</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">figure</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">to_pretty_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">refine</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mayavi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Create a matplotlib figure instance of this fractal, with curved lines
+rather than hard corners</p>
+<p>fig = to_pretty_plot(refine=10, batch=False)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>refine</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – points to plot in between voxels (more points = clearer path)</p></li>
+<li><p><strong>mayavi</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – make plot with MayaVI</p></li>
+<li><p><strong>mask</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code>]) – Callable function that returns true for voxels that should be
+plotted. mask is a function that should take a position three vector and
+return boolean True/False for any position.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">to_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'</span> <span class="pre">'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comment</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'#'</span></span></em><span class="sig-paren">)</span></dt>
+<dd><dl class="simple">
+<dt>Return a textual representation of the fractal as</dt><dd><p>KIND POS_X POS_Y POS_Z EUL_PSI EUL_THETA EUL_PHI</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sep</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – string to use to separate fields (default space)</p></li>
+<li><p><strong>comment</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – string to use to denote comment in first line
+(default hash: #)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
 
 
            </div>

@@ -1,0 +1,6 @@
+fractaldna.utils.rotations.getEulerAngles
+=========================================
+
+.. currentmodule:: fractaldna.utils.rotations
+
+.. autofunction:: getEulerAngles

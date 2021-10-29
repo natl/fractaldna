@@ -1,0 +1,52 @@
+fractaldna.dna\_models.dnachain.Histone
+=======================================
+
+.. currentmodule:: fractaldna.dna_models.dnachain
+
+.. autoclass:: Histone
+   :members:                                    
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Histone.__init__
+      ~Histone.setChain
+      ~Histone.to_line_plot
+      ~Histone.to_plot
+      ~Histone.to_strand_plot
+      ~Histone.to_surface_plot
+      ~Histone.to_text
+      ~Histone.translate
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Histone.height
+      ~Histone.hist_bp_rotation
+      ~Histone.hist_bp_separation
+      ~Histone.histone_bps
+      ~Histone.histone_end_bp_rot
+      ~Histone.histone_start_bp_rot
+      ~Histone.histone_total_twist
+      ~Histone.histone_turns
+      ~Histone.pitch_dna
+      ~Histone.radius_dna
+      ~Histone.radius_histone
+      ~Histone.turn_per_bp
+      ~Histone.z_angle
+      ~Histone.z_offset
+      ~Histone.z_per_bp
+   
+   

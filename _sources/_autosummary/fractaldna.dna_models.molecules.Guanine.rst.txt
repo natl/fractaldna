@@ -1,0 +1,28 @@
+fractaldna.dna\_models.molecules.Guanine
+========================================
+
+.. currentmodule:: fractaldna.dna_models.molecules
+
+.. autoclass:: Guanine
+   :members:                                    
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Guanine.__init__
+      ~Guanine.rotate
+      ~Guanine.to_text
+      ~Guanine.translate
+   
+   
+
+   
+   
+   

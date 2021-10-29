@@ -1,0 +1,31 @@
+fractaldna.structure\_models.voxelisation.VoxelisedFractal
+==========================================================
+
+.. currentmodule:: fractaldna.structure_models.voxelisation
+
+.. autoclass:: VoxelisedFractal
+   :members:                                    
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~VoxelisedFractal.__init__
+      ~VoxelisedFractal.center_fractal
+      ~VoxelisedFractal.fromLString
+      ~VoxelisedFractal.fromSeed
+      ~VoxelisedFractal.to_plot
+      ~VoxelisedFractal.to_pretty_plot
+      ~VoxelisedFractal.to_text
+   
+   
+
+   
+   
+   

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>fractaldna.structure_models.voxelisation.VoxelisedFractal &mdash; FractalDNA 0.1 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="fractaldna.dna_models" href="fractaldna.dna_models.html" />
+    <link rel="prev" title="fractaldna.structure_models.voxelisation.Voxel" href="fractaldna.structure_models.voxelisation.Voxel.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> FractalDNA
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../dna_models.html">DNA Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../structure_models.html">Structure Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="fractaldna.structure_models.html">fractaldna.structure_models</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="fractaldna.structure_models.hilbert.html">fractaldna.structure_models.hilbert</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="fractaldna.structure_models.voxelisation.html">fractaldna.structure_models.voxelisation</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="fractaldna.structure_models.voxelisation.getEulerAngles.html">fractaldna.structure_models.voxelisation.getEulerAngles</a></li>
+<li class="toctree-l4"><a class="reference internal" href="fractaldna.structure_models.voxelisation.rot_ax_angle.html">fractaldna.structure_models.voxelisation.rot_ax_angle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="fractaldna.structure_models.voxelisation.Voxel.html">fractaldna.structure_models.voxelisation.Voxel</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">fractaldna.structure_models.voxelisation.VoxelisedFractal</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="fractaldna.dna_models.html">fractaldna.dna_models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fractaldna.utils.html">fractaldna.utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fractaldna.exceptions.html">fractaldna.exceptions</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">FractalDNA</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../api.html">API Reference</a> &raquo;</li>
+          <li><a href="fractaldna.structure_models.html">fractaldna.structure_models</a> &raquo;</li>
+          <li><a href="fractaldna.structure_models.voxelisation.html">fractaldna.structure_models.voxelisation</a> &raquo;</li>
+      <li>fractaldna.structure_models.voxelisation.VoxelisedFractal</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_autosummary/fractaldna.structure_models.voxelisation.VoxelisedFractal.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="fractaldna-structure-models-voxelisation-voxelisedfractal">
+<h1>fractaldna.structure_models.voxelisation.VoxelisedFractal<a class="headerlink" href="#fractaldna-structure-models-voxelisation-voxelisedfractal" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="fractaldna.structure_models.voxelisation.VoxelisedFractal">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">fractaldna.structure_models.voxelisation.</span></span><span class="sig-name descname"><span class="pre">VoxelisedFractal</span></span><a class="headerlink" href="#fractaldna.structure_models.voxelisation.VoxelisedFractal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class containing a voxelised representation of a fractal</p>
+<p>Typically created using the VoxelisedFractal.fromSeed class method</p>
+<p>fractal = VoxelisedFractal.fromSeed(‘X’, 1)
+fractal.fractal contains a list of ‘Voxels’ representing the DNA Path</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="fractaldna.structure_models.voxelisation.VoxelisedFractal.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.structure_models.voxelisation.VoxelisedFractal.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor</p>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#fractaldna.structure_models.voxelisation.VoxelisedFractal.__init__" title="fractaldna.structure_models.voxelisation.VoxelisedFractal.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>()</p></td>
+<td><p>Constructor</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#fractaldna.structure_models.voxelisation.VoxelisedFractal.center_fractal" title="fractaldna.structure_models.voxelisation.VoxelisedFractal.center_fractal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">center_fractal</span></code></a>()</p></td>
+<td><p>Center the fractal around (x, y, z) = (0, 0, 0)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#fractaldna.structure_models.voxelisation.VoxelisedFractal.fromLString" title="fractaldna.structure_models.voxelisation.VoxelisedFractal.fromLString"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fromLString</span></code></a>(lstring[, distance])</p></td>
+<td><p>Convert an L-String into a VoxelisedFractal</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#fractaldna.structure_models.voxelisation.VoxelisedFractal.fromSeed" title="fractaldna.structure_models.voxelisation.VoxelisedFractal.fromSeed"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fromSeed</span></code></a>(seed, iterations[, distance])</p></td>
+<td><p>Make a voxelised fractal from an L-String seed.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#fractaldna.structure_models.voxelisation.VoxelisedFractal.to_plot" title="fractaldna.structure_models.voxelisation.VoxelisedFractal.to_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_plot</span></code></a>([refine, batch])</p></td>
+<td><p>Create a matplotlib figure instance of this fractal</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#fractaldna.structure_models.voxelisation.VoxelisedFractal.to_pretty_plot" title="fractaldna.structure_models.voxelisation.VoxelisedFractal.to_pretty_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_pretty_plot</span></code></a>([refine, mayavi, mask])</p></td>
+<td><p>Create a matplotlib figure instance of this fractal, with curved lines rather than hard corners</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#fractaldna.structure_models.voxelisation.VoxelisedFractal.to_text" title="fractaldna.structure_models.voxelisation.VoxelisedFractal.to_text"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_text</span></code></a>([sep, comment])</p></td>
+<td><p>Return a textual representation of the fractal as</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="fractaldna.structure_models.voxelisation.VoxelisedFractal.center_fractal">
+<span class="sig-name descname"><span class="pre">center_fractal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.structure_models.voxelisation.VoxelisedFractal.center_fractal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Center the fractal around (x, y, z) = (0, 0, 0)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fractaldna.structure_models.voxelisation.VoxelisedFractal.fromLString">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">fromLString</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lstring</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.structure_models.voxelisation.VoxelisedFractal.fromLString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert an L-String into a VoxelisedFractal</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lstring</strong> – L-String to convert</p></li>
+<li><p><strong>distance</strong> – distance between voxels</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Voxelised Fractal representation</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fractaldna.structure_models.voxelisation.VoxelisedFractal.fromSeed">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">fromSeed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iterations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.structure_models.voxelisation.VoxelisedFractal.fromSeed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a voxelised fractal from an L-String seed.</p>
+<p>The available L-Strings are described in fractaldna.structure_models.hilbert</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>seed</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – Seed L-String</p></li>
+<li><p><strong>iterations</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of times to iterate seed</p></li>
+<li><p><strong>distance</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – distance between voxels</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Voxelised Fractal representation</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fractaldna.structure_models.voxelisation.VoxelisedFractal.to_plot">
+<span class="sig-name descname"><span class="pre">to_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">refine</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.structure_models.voxelisation.VoxelisedFractal.to_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a matplotlib figure instance of this fractal</p>
+<p>fig = toPlot(refine=0, batch=False)
+:type refine: <code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>
+:param refine: points to plot in between voxels (more points = clearer path)
+:type batch: <code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>
+:param batch: True to suppress automatic display of the figure</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">figure</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fractaldna.structure_models.voxelisation.VoxelisedFractal.to_pretty_plot">
+<span class="sig-name descname"><span class="pre">to_pretty_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">refine</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mayavi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.structure_models.voxelisation.VoxelisedFractal.to_pretty_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a matplotlib figure instance of this fractal, with curved lines
+rather than hard corners</p>
+<p>fig = to_pretty_plot(refine=10, batch=False)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>refine</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – points to plot in between voxels (more points = clearer path)</p></li>
+<li><p><strong>mayavi</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – make plot with MayaVI</p></li>
+<li><p><strong>mask</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Callable</span></code>]) – Callable function that returns true for voxels that should be
+plotted. mask is a function that should take a position three vector and
+return boolean True/False for any position.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fractaldna.structure_models.voxelisation.VoxelisedFractal.to_text">
+<span class="sig-name descname"><span class="pre">to_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'</span> <span class="pre">'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comment</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'#'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.structure_models.voxelisation.VoxelisedFractal.to_text" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Return a textual representation of the fractal as</dt><dd><p>KIND POS_X POS_Y POS_Z EUL_PSI EUL_THETA EUL_PHI</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sep</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – string to use to separate fields (default space)</p></li>
+<li><p><strong>comment</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – string to use to denote comment in first line
+(default hash: #)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="fractaldna.structure_models.voxelisation.Voxel.html" class="btn btn-neutral float-left" title="fractaldna.structure_models.voxelisation.Voxel" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="fractaldna.dna_models.html" class="btn btn-neutral float-right" title="fractaldna.dna_models" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Nathanael Lampe.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

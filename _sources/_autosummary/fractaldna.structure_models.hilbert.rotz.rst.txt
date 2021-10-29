@@ -1,0 +1,6 @@
+fractaldna.structure\_models.hilbert.rotz
+=========================================
+
+.. currentmodule:: fractaldna.structure_models.hilbert
+
+.. autofunction:: rotz

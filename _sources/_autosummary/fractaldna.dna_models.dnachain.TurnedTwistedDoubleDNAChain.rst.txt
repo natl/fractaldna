@@ -1,0 +1,32 @@
+fractaldna.dna\_models.dnachain.TurnedTwistedDoubleDNAChain
+===========================================================
+
+.. currentmodule:: fractaldna.dna_models.dnachain
+
+.. autoclass:: TurnedTwistedDoubleDNAChain
+   :members:                                    
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~TurnedTwistedDoubleDNAChain.__init__
+      ~TurnedTwistedDoubleDNAChain.center_in_z
+      ~TurnedTwistedDoubleDNAChain.to_line_plot
+      ~TurnedTwistedDoubleDNAChain.to_plot
+      ~TurnedTwistedDoubleDNAChain.to_strand_plot
+      ~TurnedTwistedDoubleDNAChain.to_surface_plot
+      ~TurnedTwistedDoubleDNAChain.to_text
+      ~TurnedTwistedDoubleDNAChain.turnAndTwistDNA
+   
+   
+
+   
+   
+   

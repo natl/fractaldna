@@ -1,0 +1,31 @@
+fractaldna.dna\_models.dnachain.EightStrandDNAChain
+===================================================
+
+.. currentmodule:: fractaldna.dna_models.dnachain
+
+.. autoclass:: EightStrandDNAChain
+   :members:                                    
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~EightStrandDNAChain.__init__
+      ~EightStrandDNAChain.center_in_z
+      ~EightStrandDNAChain.to_line_plot
+      ~EightStrandDNAChain.to_plot
+      ~EightStrandDNAChain.to_strand_plot
+      ~EightStrandDNAChain.to_surface_plot
+      ~EightStrandDNAChain.to_text
+   
+   
+
+   
+   
+   

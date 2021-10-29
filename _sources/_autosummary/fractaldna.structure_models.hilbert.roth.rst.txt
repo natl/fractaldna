@@ -1,0 +1,6 @@
+fractaldna.structure\_models.hilbert.roth
+=========================================
+
+.. currentmodule:: fractaldna.structure_models.hilbert
+
+.. autofunction:: roth
