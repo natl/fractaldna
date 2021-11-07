@@ -185,7 +185,7 @@ class Voxel:
             + list(map(str, list(self.pos)))
             + list(map(str, [self.psi, self.theta, self.phi]))
         )
-        return sep.join(l) + "\n"
+        return sep.join(l)
 
 
 class VoxelisedFractal:
@@ -217,7 +217,7 @@ class VoxelisedFractal:
         if len(sep) == 0:
             raise ValueError("Separator cannot be a zero-length string")
 
-        output = "IDX KIND POS_X POS_Y POS_Z EUL_PSI EUL_THETA EUL_PHI\n"
+        output = "IDX KIND POS_X POS_Y POS_Z EUL_PSI EUL_THETA EUL_PHI"
         output = output.replace(" ", sep)
         text = [comment + output] + [
             sep.join([str(idx), voxel.to_text(sep=sep)])

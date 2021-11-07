@@ -380,7 +380,7 @@ class TestVoxFractalMakeVoxelMethod(unittest.TestCase):
     def test_straight(self):
         currpos = self.pos1 + self.dirs["x"]
         nextpos = currpos + self.dirs["x"]
-        newVoxel = vxl.VoxelisedFractal.makeVoxel(self.vox1, currpos, nextpos)
+        newVoxel = vxl.VoxelisedFractal._makeVoxel(self.vox1, currpos, nextpos)
         self.assertTrue((newVoxel.pos == currpos).all(), "newVoxel position mismatch")
         self.assertTrue(
             (newVoxel.inHeading == self.dirs["x"]).all(), "newVoxel inHeading mismatch"
@@ -408,7 +408,7 @@ class TestVoxFractalMakeVoxelMethod(unittest.TestCase):
     def test_turn(self):
         currpos = self.pos1 + self.dirs["x"]
         nextpos = currpos + self.dirs["z"]
-        newVoxel = vxl.VoxelisedFractal.makeVoxel(self.vox1, currpos, nextpos)
+        newVoxel = vxl.VoxelisedFractal._makeVoxel(self.vox1, currpos, nextpos)
         self.assertTrue((newVoxel.pos == currpos).all(), "newVoxel position mismatch")
         self.assertTrue(
             (newVoxel.inHeading == self.dirs["x"]).all(), "newVoxel inHeading mismatch"
@@ -436,7 +436,7 @@ class TestVoxFractalMakeVoxelMethod(unittest.TestCase):
     def test_turntwist(self):
         currpos = self.pos1 + self.dirs["x"]
         nextpos = currpos + self.dirs["y"]
-        newVoxel = vxl.VoxelisedFractal.makeVoxel(self.vox1, currpos, nextpos)
+        newVoxel = vxl.VoxelisedFractal._makeVoxel(self.vox1, currpos, nextpos)
         self.assertTrue((newVoxel.pos == currpos).all(), "newVoxel position mismatch")
         self.assertTrue(
             (newVoxel.inHeading == self.dirs["x"]).all(), "newVoxel inHeading mismatch"
@@ -683,9 +683,7 @@ class TestTextOutput(unittest.TestCase):
         text = text.split("\n")[1:]
         for (vtext, voxel) in zip(text, frac.fractal):
             vtext = " ".join(vtext.split(" ")[1:])  # remove index
-            self.assertEqual(
-                vtext + "\n", voxel.to_text(), "voxel text output incorrect"
-            )
+            self.assertEqual(vtext, voxel.to_text(), "voxel text output incorrect")
             self.assertEqual(
                 vtext,
                 " ".join(
