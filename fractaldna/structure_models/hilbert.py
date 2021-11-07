@@ -1,3 +1,4 @@
+from typing import List
 import matplotlib.pyplot as plt
 import numpy as np
 from mpl_toolkits.mplot3d import Axes3D  # NOQA
@@ -96,8 +97,13 @@ def rotu(local_axis, angle):
     return np.dot(local_axis, np.dot(rotz(angle), np.linalg.inv(local_axis)))
 
 
-def iterate_lstring(inString):
-    """ """
+def iterate_lstring(inString: str):
+    """
+    Iterate an L-String one time
+
+    :param inString:  L-string to iterate
+    :return: Iterated L-String
+    """
     outString = []
     append = outString.append
     for char in inString:
@@ -109,8 +115,15 @@ def iterate_lstring(inString):
     return "".join(outString)
 
 
-def generate_path(lstring, n=2, distance=10.0):
-    """ """
+def generate_path(lstring: str, n: int = 2, distance: float = 10.0) -> List[np.array]:
+    """
+    Generate a path from an l-string
+
+    :param lstring: lstring describing path
+    :param n: steps on path between forward movements
+    :param distance: distance between points forward movements
+    :return: list of XYZ points
+    """
     axis = np.eye(3)
     pos = [np.array([0, 0, 0])]
 

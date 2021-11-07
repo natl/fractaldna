@@ -51,7 +51,7 @@ def getEulerAngles(rotmatrix: np.array) -> Tuple[float, float, float]:
     """Get the euler angles from a rotation matrix
 
     :param rotmatrix: 3x3 rotation matrix
-    :returns: Euler psi angle
+    :return: Euler psi angle
     """
     sintheta = rotmatrix[2, 0]
     if abs(sintheta) != 1:

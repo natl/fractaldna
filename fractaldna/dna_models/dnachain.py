@@ -1102,8 +1102,12 @@ class DNAChain(PlottableSequence):
         self.center_in_z()
 
     @staticmethod
-    def _makeFromGenome(genome, chain=0):
-        """ """
+    def _makeFromGenome(genome: str, chain: int = 0):
+        """
+        :param genome: String of the genome, e.g. "GATTACA"
+        :param chain: Integer to set as the chain index
+        :return: DNA Chain object
+        """
         dnachain = []
         position = np.array([0, 0, 0], dtype=float)
         rotation = np.array([0, 0, 0], dtype=float)

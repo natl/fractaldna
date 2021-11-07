@@ -1,22 +1,30 @@
 
 # From https://github.com/ammaraskar/sphinx-action-test
-name: build_documentation
+name: build_sphinx_docs
 
 on:
   push:
     branches:    
-      - none
+      - master
+      # - devel-package
 
 jobs:
   build_docs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - uses: ammaraskar/sphinx-action@master
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v2
       with:
-        docs-folder: "docs/"
-        pre-build-command: "echo $(pwd) && pip install sphinx-rtd-theme sphinx-autodoc-typehints"
-    # Create an artifact of the html output.
+        python-version: 3.9
+    - name: Install dependencies
+      run: |
+        sudo apt update
+        sudo apt-get install -y python3-sphinx
+        python -m pip install -r requirements-dev.txt
+    - name: Build sphinx documentation
+      run: |
+        cd docs && make html
     - uses: actions/upload-artifact@v1
       with:
         name: DocumentationHTML

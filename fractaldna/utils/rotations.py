@@ -63,8 +63,11 @@ def eulerMatrix(angx, angy, angz):
     return np.dot(rotz(angz), np.dot(roty(angy), rotx(angx)))
 
 
-def getEulerAngles(rotmatrix):
-    """ """
+def getEulerAngles(rotmatrix: np.array):
+    """
+    :param rotmarix: rotation matrix
+    :return: 1-D array of euler angles
+    """
     sintheta = rotmatrix[2, 0]
     if abs(sintheta) != 1:
         theta = -np.arcsin(rotmatrix[2, 0])
