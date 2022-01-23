@@ -6,6 +6,7 @@ Define the molecules that make up a simple DNA chain
 
 from copy import deepcopy
 
+import pandas as pd
 import numpy as np
 
 from fractaldna.dna_models import dnapositions as dpos
@@ -125,6 +126,28 @@ class Molecule:
             )
             + "\n"
         )
+
+    def to_series(self) -> pd.Series:
+        """Convert molecule to a pandas series
+
+        :return: Series representation of the molecule
+        """
+        return pd.Series({
+            "name": self.name,
+            "shape": self.shape,
+            "chain_idx": self.chain,
+            "strand_idx": self.strand,
+            "bp_idx": self.index,
+            "size_x": self.dimensions[0],
+            "size_y": self.dimensions[1],
+            "size_z": self.dimensions[2],
+            "pos_x": self.position[0],
+            "pos_y": self.position[1],
+            "pos_z": self.position[2],
+            "rot_x": self.rotation[0],
+            "rot_y": self.rotation[1],
+            "rot_z": self.rotation[2]
+        })
 
 
 # Define some standard molecules

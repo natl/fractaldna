@@ -2,7 +2,10 @@
 """Awesome `fractaldna` is a Python cli/package created with https://github.com/TezRomacH/python-package-template"""
 
 import sys
-from importlib import metadata as importlib_metadata
+try:
+    from importlib import metadata as importlib_metadata
+except ImportError: # for Python<3.8
+    import importlib_metadata
 
 
 def get_version() -> str:

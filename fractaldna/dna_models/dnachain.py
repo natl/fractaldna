@@ -8,6 +8,7 @@ from copy import deepcopy
 
 import matplotlib
 import matplotlib.pyplot as plt
+import pandas as pd
 import numpy as np
 from mpl_toolkits.mplot3d import Axes3D  # NOQA
 from scipy.interpolate import interp1d
@@ -47,6 +48,15 @@ class PlottableSequence:
             output.append(pair.to_text(seperator=seperator))
 
         return "".join(output)
+    
+    def to_frame(self) -> pd.DataFrame:
+        """
+        Return the molecules as a pandas data frame
+
+        :return: Pandas data frame with molecule information
+        """
+        return pd.concat([pair.to_frame() for pair in self.basepairs], ignore_index=False, sort=False)
+
 
     def to_plot(
         self, plot_p: bool = True, plot_b: bool = True, plot_s: bool = True
@@ -198,10 +208,12 @@ class PlottableSequence:
                     )
 
             else:
-                pos = np.array([bp.position for bp in self.basepairs])
-                mlab.plot3d(
-                    pos[:, 0], pos[:, 1], pos[:, 2], color=(1.0, 0, 0), tube_radius=11.5
-                )
+                chains = set([bp.chain for bp in self.basepairs])
+                for chain in chains:
+                    pos = np.array([bp.position for bp in filter(lambda x: x.chain==chain, self.basepairs)])
+                    mlab.plot3d(
+                        pos[:, 0], pos[:, 1], pos[:, 2], color=(1.0, 0, 0), tube_radius=11.5
+                    )
 
             return fig
         else:
@@ -225,106 +237,108 @@ class PlottableSequence:
             raise ImportError("MayaVi Not Imported")
 
         if maya_imported is True:
-            sugar_l = []
-            sugar_r = []
-            phosphate_l = []
-            phosphate_r = []
-            base_l = []
-            base_r = []
-            bps = ["guanine", "adenine", "thymine", "cytosine"]
-            for pair in self.basepairs:
-                for (name, molecule) in pair.iterMolecules():
-                    if molecule.name.lower() == "sugar":
-                        if molecule.strand == 0:
-                            sugar_l.append(molecule.position)
-                        elif molecule.strand == 1:
-                            sugar_r.append(molecule.position)
-                    elif molecule.name.lower() == "phosphate":
-                        if molecule.strand == 0:
-                            phosphate_l.append(molecule.position)
-                        elif molecule.strand == 1:
-                            phosphate_r.append(molecule.position)
-                    elif molecule.name.lower() in bps:
-                        if molecule.strand == 0:
-                            base_l.append(molecule.position)
-                        elif molecule.strand == 1:
-                            base_r.append(molecule.position)
-
-            # Plotting
-            base_l = [ii for ii in zip(*map(list, base_l))]
-            base_r = [ii for ii in zip(*map(list, base_r))]
-            phosphate_l = [ii for ii in zip(*map(list, phosphate_l))]
-            phosphate_r = [ii for ii in zip(*map(list, phosphate_r))]
-            sugar_l = [ii for ii in zip(*map(list, sugar_l))]
-            sugar_r = [ii for ii in zip(*map(list, sugar_r))]
             fig = mlab.figure(bgcolor=(1.0, 1.0, 1.0))
+            chains = set([bp.chain for bp in self.basepairs])
+            for chain in chains:
+                basepairs = [bp for bp in filter(lambda x: x.chain==chain, self.basepairs)]
+                sugar_l = []
+                sugar_r = []
+                phosphate_l = []
+                phosphate_r = []
+                base_l = []
+                base_r = []
+                bps = ["guanine", "adenine", "thymine", "cytosine"]
+                for pair in basepairs:
+                    for (name, molecule) in pair.iterMolecules():
+                        if molecule.name.lower() == "sugar":
+                            if molecule.strand == 0:
+                                sugar_l.append(molecule.position)
+                            elif molecule.strand == 1:
+                                sugar_r.append(molecule.position)
+                        elif molecule.name.lower() == "phosphate":
+                            if molecule.strand == 0:
+                                phosphate_l.append(molecule.position)
+                            elif molecule.strand == 1:
+                                phosphate_r.append(molecule.position)
+                        elif molecule.name.lower() in bps:
+                            if molecule.strand == 0:
+                                base_l.append(molecule.position)
+                            elif molecule.strand == 1:
+                                base_r.append(molecule.position)
+                # Plotting
+                base_l = [ii for ii in zip(*map(list, base_l))]
+                base_r = [ii for ii in zip(*map(list, base_r))]
+                phosphate_l = [ii for ii in zip(*map(list, phosphate_l))]
+                phosphate_r = [ii for ii in zip(*map(list, phosphate_r))]
+                sugar_l = [ii for ii in zip(*map(list, sugar_l))]
+                sugar_r = [ii for ii in zip(*map(list, sugar_r))]
 
-            if plot_b:
-                mlab.plot3d(
-                    base_l[0],
-                    base_l[1],
-                    base_l[2],
-                    color=(0.6, 0.6, 0.6),
-                    tube_radius=1,
-                )
-                mlab.plot3d(
-                    base_r[0],
-                    base_r[1],
-                    base_r[2],
-                    color=(0.6, 0.6, 0.6),
-                    tube_radius=1,
-                )
-            if plot_s:
-                mlab.plot3d(
-                    sugar_l[0], sugar_l[1], sugar_l[2], color=(1.0, 0, 0), tube_radius=1
-                )
-                mlab.plot3d(
-                    sugar_r[0], sugar_r[1], sugar_r[2], color=(1.0, 0, 0), tube_radius=1
-                )
-            if plot_p:
-                mlab.plot3d(
-                    phosphate_l[0],
-                    phosphate_l[1],
-                    phosphate_l[2],
-                    color=(1, 1, 0),
-                    tube_radius=1,
-                )
-                mlab.plot3d(
-                    phosphate_r[0],
-                    phosphate_r[1],
-                    phosphate_r[2],
-                    color=(1, 1, 0),
-                    tube_radius=1,
-                )
+                if plot_b:
+                    mlab.plot3d(
+                        base_l[0],
+                        base_l[1],
+                        base_l[2],
+                        color=(0.6, 0.6, 0.6),
+                        tube_radius=1,
+                    )
+                    mlab.plot3d(
+                        base_r[0],
+                        base_r[1],
+                        base_r[2],
+                        color=(0.6, 0.6, 0.6),
+                        tube_radius=1,
+                    )
+                if plot_s:
+                    mlab.plot3d(
+                        sugar_l[0], sugar_l[1], sugar_l[2], color=(1.0, 0, 0), tube_radius=1
+                    )
+                    mlab.plot3d(
+                        sugar_r[0], sugar_r[1], sugar_r[2], color=(1.0, 0, 0), tube_radius=1
+                    )
+                if plot_p:
+                    mlab.plot3d(
+                        phosphate_l[0],
+                        phosphate_l[1],
+                        phosphate_l[2],
+                        color=(1, 1, 0),
+                        tube_radius=1,
+                    )
+                    mlab.plot3d(
+                        phosphate_r[0],
+                        phosphate_r[1],
+                        phosphate_r[2],
+                        color=(1, 1, 0),
+                        tube_radius=1,
+                    )
 
-            if plot_bp:
-                # plot bars joining base pairs
-                for ii in range(0, len(base_l[0])):
-                    xs = (
-                        phosphate_l[0][ii],
-                        sugar_l[0][ii],
-                        base_l[0][ii],
-                        base_r[0][ii],
-                        sugar_r[0][ii],
-                        phosphate_r[0][ii],
-                    )
-                    ys = (
-                        phosphate_l[1][ii],
-                        sugar_l[1][ii],
-                        base_l[1][ii],
-                        base_r[1][ii],
-                        sugar_r[1][ii],
-                        phosphate_r[1][ii],
-                    )
-                    zs = (
-                        phosphate_l[2][ii],
-                        sugar_l[2][ii],
-                        base_l[2][ii],
-                        base_r[2][ii],
-                        sugar_r[2][ii],
-                        phosphate_r[2][ii],
-                    )
-                    mlab.plot3d(xs, ys, zs, color=(1, 1, 1), tube_radius=0.5)
+                if plot_bp:
+                    # plot bars joining base pairs
+                    for ii in range(0, len(base_l[0])):
+                        xs = (
+                            phosphate_l[0][ii],
+                            sugar_l[0][ii],
+                            base_l[0][ii],
+                            base_r[0][ii],
+                            sugar_r[0][ii],
+                            phosphate_r[0][ii],
+                        )
+                        ys = (
+                            phosphate_l[1][ii],
+                            sugar_l[1][ii],
+                            base_l[1][ii],
+                            base_r[1][ii],
+                            sugar_r[1][ii],
+                            phosphate_r[1][ii],
+                        )
+                        zs = (
+                            phosphate_l[2][ii],
+                            sugar_l[2][ii],
+                            base_l[2][ii],
+                            base_r[2][ii],
+                            sugar_r[2][ii],
+                            phosphate_r[2][ii],
+                        )
+                        mlab.plot3d(xs, ys, zs, color=(1, 1, 1), tube_radius=0.5)
 
             return fig
         else:
@@ -372,6 +386,8 @@ class SplineLinker(PlottableSequence):
             - "matrix": Experimental method that doesn't use
               quaternions. Currently incorrect.
 
+    :param chain:
+        Chain index assigned to linker and basepairs created therein
     """
 
     linker_rotation = BP_ROTATION  # rad, default screw rotation of dna
@@ -379,15 +395,16 @@ class SplineLinker(PlottableSequence):
 
     def __init__(
         self,
-        bp1,
-        bp2,
-        bp3,
-        bp4,
-        curviness=1.0,
-        zrot=None,
-        startkey=None,
-        stopkey=None,
-        method="corrected_quaternion",
+        bp1: basepair.BasePair,
+        bp2: basepair.BasePair,
+        bp3: basepair.BasePair,
+        bp4: basepair.BasePair,
+        curviness: float=1.0,
+        zrot: float=None,
+        startkey:int=None,
+        stopkey:int=None,
+        method:str="corrected_quaternion",
+        chain: int = 0,
     ):
         """
         Constructor
@@ -398,6 +415,7 @@ class SplineLinker(PlottableSequence):
             "corrected_quaternion",
         ], "Invalid interpolation method"
         self.basepairs = []
+        self.chain = chain
         points = np.array([bp1.position, bp2.position, bp3.position, bp4.position])
         # start_x = bp2.rmatrix[:, 0]
         # end_x = bp3.rmatrix[:, 0]
@@ -430,7 +448,7 @@ class SplineLinker(PlottableSequence):
         n = length // self.linker_bp_spacing
         self.spacing = length / n
         # print(self.spacing)
-        tt = np.linspace(1, 2, n)
+        tt = np.linspace(1, 2, int(n))
         xx = x_interp(tt[1 : len(tt)])
         yy = y_interp(tt[1 : len(tt)])
         zz = z_interp(tt[1 : len(tt)])
@@ -472,10 +490,10 @@ class SplineLinker(PlottableSequence):
                 pos = np.array([_x, _y, _z])
                 bp = basepair.BasePair(
                     np.random.choice(["G", "A", "T", "C"]),
-                    chain=0,
+                    chain=chain,
                     position=[0, 0, 0],
                     rotation=[0, 0, 0],
-                    index=ii,
+                    index=ii
                 )
 
                 if method in ["quaternion", "corrected_quaternion"]:
@@ -550,6 +568,7 @@ class SplineLinker(PlottableSequence):
 
         :param chainIdx: Index for Chain
         """
+        self.chain=chainIdx
         for bp in self.basepairs:
             bp.setNewChain(chainIdx)
         return None
@@ -564,6 +583,8 @@ class Histone(PlottableSequence):
     :param position: 3-vector for histone position
     :param rotation: 3-vector for histone rotation (euler angles)
     :param genome: string defining the genome for the histone
+    :param chain: Chain index for histone and basepairs therein
+    :param histone_index: An index for the histone (by default, order in the solenoid)
     """
 
     radius_histone = 25  # radius of histone, angstrom
@@ -588,6 +609,8 @@ class Histone(PlottableSequence):
         position: Union[List, np.array],
         rotation: Union[List, np.array],
         genome: str = None,
+        chain: int=0,
+        histone_index: int=0
     ):
         """Create a Histone"""
         assert len(position) == 3, "position is length 3 array"
@@ -602,15 +625,17 @@ class Histone(PlottableSequence):
         assert len(genome) == self.histone_bps, "genome should be {} base pairs".format(
             self.histone_bps
         )
+        self.histone_index = histone_index
         self.position = np.array(position)
         self.rotation = np.array(rotation)
+        self.chain = chain
         self.basepairs = []
         theta = -0.5 * (self.histone_turns - 3 * np.pi)
         z = self.z_offset
         for ii, char in enumerate(genome):
             bp = basepair.BasePair(
                 char,
-                chain=0,
+                chain=chain,
                 position=np.array([0, 0, 0]),
                 rotation=np.array([0, 0, 0]),
                 index=ii,
@@ -645,6 +670,29 @@ class Histone(PlottableSequence):
             bp.translate(self.position)
         return None
 
+    def as_series(self) -> pd.Series:
+        """Express the histone as a single molecule in a pandas series
+        
+        :returns: Pandas Series for Histone
+        """
+        return pd.Series({
+            "name": "Histone",
+            "shape": "sphere",
+            "chain_idx": self.chain,
+            # "strand_idx": -1,
+            "histone_idx": self.histone_index,
+            "size_x": self.radius_histone,
+            "size_y": self.radius_histone,
+            "size_z": self.radius_histone,
+            "pos_x": self.position[0],
+            "pos_y": self.position[1],
+            "pos_z": self.position[2],
+            "rot_x": self.rotation[0],
+            "rot_y": self.rotation[1],
+            "rot_z": self.rotation[2]
+        })
+
+
     def translate(self, translation: Union[List, np.array]) -> None:
         """Translate the histone spatially
 
@@ -660,6 +708,7 @@ class Histone(PlottableSequence):
 
         :param chainIdx: Index for Chain
         """
+        self.chain=chainIdx
         for bp in self.basepairs:
             bp.setNewChain(chainIdx)
         return None
@@ -680,6 +729,7 @@ class Solenoid(PlottableSequence):
     :param histone_angle: tilt of histones from axis in degrees
     :param twist: whether the DNA exiting the final spine should be
         rotated an extra pi/2.
+    :param chain: Chain index for solenoid and basepairs therein
 
     """
 
@@ -690,36 +740,38 @@ class Solenoid(PlottableSequence):
         nhistones: int = 38,
         histone_angle: float = 50,
         twist: bool = False,
+        chain: int=0,
     ):
         self.radius = radius
         self.voxelheight = voxelheight
         self.nhistones = nhistones
+        self.chain = chain
         self.tilt = histone_angle * np.pi / 180.0
         self.zshift = (self.voxelheight - 4.0 * Histone.radius_histone) / self.nhistones
         self.height = (self.nhistones - 1) * self.zshift  # length of the fibre
         prev_bp1 = basepair.BasePair(
             np.random.choice(["G", "A", "T", "C"]),
-            chain=0,
+            chain=chain,
             position=np.array([0, 0, -1 * BP_SEPARATION]),
             index=-2,
         )
         prev_bp2 = basepair.BasePair(
             np.random.choice(["G", "A", "T", "C"]),
-            chain=0,
+            chain=chain,
             position=np.array([0, 0, -0 * BP_SEPARATION]),
             index=-1,
         )
         rot = np.array([0, 0, np.pi / 2.0]) if twist is True else np.zeros(3)
         next_bp3 = basepair.BasePair(
             np.random.choice(["G", "A", "T", "C"]),
-            chain=0,
+            chain=chain,
             position=np.array([0, 0, self.voxelheight + 0.0 * BP_SEPARATION]),
             rotation=rot,
             index=1000,
         )
         next_bp4 = basepair.BasePair(
             np.random.choice(["G", "A", "T", "C"]),
-            chain=0,
+            chain=chain,
             position=np.array([0, 0, self.voxelheight + 1.0 * BP_SEPARATION]),
             rotation=rot,
             index=1001,
@@ -740,9 +792,9 @@ class Solenoid(PlottableSequence):
             this = np.array([last[0], last[1], last[2] + np.pi / 3.0])
             self.rotations.append(this)
         self.histones = []
-        self.linkers = []
-        for pos, rot in zip(self.positions, self.rotations):
-            h = Histone(pos, rot)
+        self.linkers = []  # the BPs in the linkers array are also in the basepairs array
+        for ii, (pos, rot) in enumerate(zip(self.positions, self.rotations)):
+            h = Histone(pos, rot, chain=chain, histone_index=ii)
             self.histones.append(h)
             if len(self.histones) > 1:
                 bp1 = self.histones[-2].basepairs[-2]
@@ -758,6 +810,7 @@ class Solenoid(PlottableSequence):
                     curviness=1,
                     zrot=zr,
                     method="corrected_quaternion",
+                    chain=chain
                 )
                 self.linkers.append(l)
                 self.basepairs.extend(l.basepairs)
@@ -772,6 +825,7 @@ class Solenoid(PlottableSequence):
                     curviness=1,
                     zrot=0,
                     method="corrected_quaternion",
+                    chain=chain
                 )
                 self.linkers.append(l)
                 self.basepairs.extend(l.basepairs)
@@ -791,6 +845,7 @@ class Solenoid(PlottableSequence):
             curviness=1,
             zrot=zr,
             method="corrected_quaternion",
+            chain=chain
         )
         self.linkers.append(l)
         self.basepairs.extend(l.basepairs)
@@ -815,12 +870,21 @@ class Solenoid(PlottableSequence):
 
         :param chainIdx: Index for Chain
         """
+        self.chain=chainIdx
         for histone in self.histones:
             histone.setChain(chainIdx)
         for linker in self.linkers:
             linker.setChain(chainIdx)
+        for basepair in self.basepairs:
+            basepair.setNewChain(chainIdx)
         return None
 
+    def histones_to_frame(self) -> pd.DataFrame:
+        """Get Histones in Solenoid as a dataframe of their positions
+        
+        :return: DataFrame of Histones
+        """
+        return pd.DataFrame([histone.as_series() for histone in self.histones])
 
 class TurnedSolenoid(Solenoid):
     """
@@ -839,7 +903,7 @@ class TurnedSolenoid(Solenoid):
     :param histone_angle: tilt of histones from axis in degrees
     :param twist: whether the DNA exiting the final spine should be
         rotated an extra pi/2.
-
+    :param chain: Chain index for solenoid and basepairs therein
     """
 
     def __init__(
@@ -849,6 +913,7 @@ class TurnedSolenoid(Solenoid):
         nhistones: int = 38,
         histone_angle: float = 50,
         twist: bool = False,
+        chain: int=0,
     ):
         """
         Constructor
@@ -856,6 +921,7 @@ class TurnedSolenoid(Solenoid):
         self.nhistones = int(nhistones / 2 ** 0.5)
         self.box_width = voxelheight / 2.0
         self.radius = radius
+        self.chain=chain
         self.strand_length = voxelheight / 2 ** 0.5
         self.zshift = (
             self.strand_length - 4.0 * Histone.radius_histone
@@ -864,33 +930,33 @@ class TurnedSolenoid(Solenoid):
         self.tilt = histone_angle * np.pi / 180.0
         prev_bp1 = basepair.BasePair(
             np.random.choice(["G", "A", "T", "C"]),
-            chain=0,
+            chain=chain,
             position=np.array([0, 0, -1 * BP_SEPARATION]),
             index=-2,
         )
         prev_bp2 = basepair.BasePair(
             np.random.choice(["G", "A", "T", "C"]),
-            chain=0,
+            chain=chain,
             position=np.array([0, 0, -0 * BP_SEPARATION]),
             index=-1,
         )
         rot = np.array([0, 0, np.pi / 2.0]) if twist is True else np.zeros(3)
         next_bp3 = basepair.BasePair(
             np.random.choice(["G", "A", "T", "C"]),
-            chain=0,
+            chain=chain,
             position=np.array([self.box_width + 0 * BP_SEPARATION, 0, self.box_width]),
             rotation=rot,
             index=1000,
         )
         next_bp4 = basepair.BasePair(
             np.random.choice(["G", "A", "T", "C"]),
-            chain=0,
+            chain=chain,
             position=np.array([self.box_width + 1 * BP_SEPARATION, 0, self.box_width]),
             rotation=rot,
             index=1001,
         )
         self.basepairs = []
-        print(self.height, self.zshift, self.nhistones)
+        # print(self.height, self.zshift, self.nhistones)
         pos1 = np.array([0, -self.radius, 0.5 * (self.strand_length - self.height)])
         self.positions = [np.dot(r.rotz(0 * np.pi / 3.0), pos1)]  # start at 2pi/3
         rm = r.eulerMatrix(np.pi / 2.0, -np.pi / 2.0, np.pi / 2.0 + 0 * np.pi / 3.0)
@@ -934,8 +1000,8 @@ class TurnedSolenoid(Solenoid):
 
         self.histones = []
         self.linkers = []
-        for pos, rot in zip(self.positions, self.rotations):
-            h = Histone(pos, rot)
+        for ii, (pos, rot) in enumerate(zip(self.positions, self.rotations)):
+            h = Histone(pos, rot, chain=chain, histone_index=ii)
             self.histones.append(h)
             if len(self.histones) > 1:
                 bp1 = self.histones[-2].basepairs[-2]
@@ -951,6 +1017,7 @@ class TurnedSolenoid(Solenoid):
                     curviness=1,
                     zrot=zr,
                     method="corrected_quaternion",
+                    chain=chain,
                 )
                 self.linkers.append(l)
                 self.basepairs.extend(l.basepairs)
@@ -965,6 +1032,7 @@ class TurnedSolenoid(Solenoid):
                     curviness=1,
                     zrot=0,
                     method="corrected_quaternion",
+                    chain=chain,
                 )
                 self.linkers.append(l)
                 self.basepairs.extend(l.basepairs)
@@ -984,6 +1052,7 @@ class TurnedSolenoid(Solenoid):
             curviness=1.0,
             zrot=zr,
             method="corrected_quaternion",
+            chain=chain
         )
         self.linkers.append(l)
         self.basepairs.extend(l.basepairs)
@@ -1012,7 +1081,18 @@ class MultiSolenoidVolume(PlottableSequence):
     dna.to_text()
     """
 
-    def __init__(self, voxelheight=1500.0, separation=400, twist=False, turn=False):
+    def __init__(
+        self,
+        voxelheight: float=1500.0,
+        separation: float=400,
+        twist: bool=False,
+        turn: bool=False,
+        chains: List=list(range(9))
+    ):
+        if not (len(chains) == len(set(chains))):
+            raise ValueError('The same chain cannot be generated twice')
+        if not set(chains).issubset(set(range(9))):
+            raise ValueError(f"Valid Chains are {set(range(9))} and must be ints")
         self.voxelheight = voxelheight
         self.radius = 100
         self.nhistones = int(38 * voxelheight / 750.0)
@@ -1030,6 +1110,7 @@ class MultiSolenoidVolume(PlottableSequence):
             big_height = 2 * (self.voxelheight / 2.0 + self.sep)
             little_height = 2 * (self.voxelheight / 2.0 - self.sep)
             lengths = [
+                self.voxelheight,
                 little_height,
                 self.voxelheight,
                 big_height,
@@ -1043,6 +1124,7 @@ class MultiSolenoidVolume(PlottableSequence):
             lengths = [self.voxelheight] * 8
 
         translations = [
+            np.array([0, 0, 0]),
             np.array([self.sep, 0, 0]),
             np.array([0, self.sep, 0]),
             np.array([-self.sep, 0, 0]),
@@ -1053,7 +1135,7 @@ class MultiSolenoidVolume(PlottableSequence):
             np.array([self.sep, -self.sep, 0]),
         ]
         solenoids = []
-        for ii in range(8):
+        for ii in chains:
             if self.turn is True:
                 nhistones = int(self.nhistones * lengths[ii] / self.voxelheight)
                 s = TurnedSolenoid(
@@ -1062,6 +1144,7 @@ class MultiSolenoidVolume(PlottableSequence):
                     nhistones=nhistones,
                     histone_angle=self.histone_angle,
                     twist=self.twist,
+                    chain=ii,
                 )
             else:
                 s = Solenoid(
@@ -1070,8 +1153,9 @@ class MultiSolenoidVolume(PlottableSequence):
                     nhistones=self.nhistones,
                     histone_angle=self.histone_angle,
                     twist=self.twist,
+                    chain=ii,
                 )
-            s.setChain(ii)
+            # s.setChain(ii)
             s.translate(translations[ii])
             solenoids.append(s)
 
@@ -1113,7 +1197,7 @@ class DNAChain(PlottableSequence):
         rotation = np.array([0, 0, 0], dtype=float)
         index = 0
         for char in genome:
-            print("Appending " + char)
+            # print("Appending " + char)
             dnachain.append(
                 basepair.BasePair(
                     char, chain=chain, position=position, rotation=rotation, index=index
@@ -1137,7 +1221,7 @@ class DNAChain(PlottableSequence):
 
         zrange = zmax - zmin
         radius = 2.0 * zrange / np.pi
-        print(radius)
+        # print(radius)
 
         for pair in chain:
             # Translation of the frame - new center position
@@ -1489,7 +1573,7 @@ class EightStrandDNAChain(DNAChain):
         angles = [
             ang + (2 * np.pi - BP_ROTATION * len(c) % (2 * np.pi)) for c in chains
         ]
-        print(angles)
+        # print(angles)
 
         for (ii, (c, t, a)) in enumerate(zip(chains, transforms, angles)):
             if turn is True:

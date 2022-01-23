@@ -3,6 +3,8 @@ fractaldna
 Python routines for generating simple models of DNA
 ---
 
+*FractalDNA is being converted to a package, it is under active developmemt*
+
 <div align="center">
 
 [![Build status](https://github.com/fractaldna/fractaldna/workflows/build/badge.svg?branch=master&event=push)](https://github.com/fractaldna/fractaldna/actions?query=workflow%3Abuild)

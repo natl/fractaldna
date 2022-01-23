@@ -3,6 +3,7 @@ from typing import Callable, List, Tuple, Union
 import matplotlib.pyplot as plt
 import numpy as np
 from mpl_toolkits.mplot3d import Axes3D  # NOQA
+import pandas as pd
 
 from . import hilbert
 
@@ -187,6 +188,18 @@ class Voxel:
         )
         return sep.join(l)
 
+    def to_series(self):
+        """Return the voxel as a pandas series
+        """
+        return pd.Series({
+            "KIND": self.types_inverse[self.type],
+            "POS_X": self.pos[0],
+            "POS_Y": self.pos[1],
+            "POS_Z": self.pos[2],
+            "EUL_PSI": self.psi,
+            "EUL_THETA": self.theta,
+            "EUL_PHI": self.phi
+        })
 
 class VoxelisedFractal:
     """
@@ -224,6 +237,17 @@ class VoxelisedFractal:
             for idx, voxel in enumerate(self.fractal)
         ]
         return "\n".join(text)
+
+    def to_frame(self):
+        """Convert voxelised representation to data frame
+        """
+        rows = []
+        for idx, voxel in enumerate(self.fractal):
+            ss = voxel.to_series()
+            ss["IDX"] = idx
+            rows.append(ss)
+        df = pd.DataFrame(rows)
+        return df[["IDX", "KIND", "POS_X", "POS_Y", "POS_Z", "EUL_PSI", "EUL_THETA", "EUL_PHI"]]
 
     def to_plot(self, refine: int = 0, batch: bool = False) -> plt.figure:
         """

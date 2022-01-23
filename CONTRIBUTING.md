@@ -39,9 +39,11 @@ Before submitting your code please do the following steps:
 1. Run `make codestyle` to format your changes.
 1. Run `make lint` to ensure that types, security and docstrings are okay.
 
-## Other help
+### Building and releasing
 
-You can contribute by spreading a word about this library.
-It would also be a huge contribution to write
-a short article on how you are using this project.
-You can also share your best practices with us.
+Building a new version of the application contains the following steps, that are run manually following a merge to master.
+
+- Bump the version of your package `poetry version <version>`. You can pass the new version explicitly, or a rule such as `major`, `minor`, or `patch`. For more details, refer to the [Semantic Versions](https://semver.org/) standard.
+- Make a commit to `GitHub`.
+- Create a `GitHub release`.
+- And... publish 🙂 `poetry publish --build`

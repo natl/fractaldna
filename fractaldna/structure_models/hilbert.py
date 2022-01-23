@@ -20,32 +20,34 @@ D = r"|CFB-F+B|FA&FnA&&FB-F+B|FC<<"
 
 X = r"n<XFn<XFX-Fn>>XFX&F+>>XFX-F>X->"
 
+
+# Legacy Peano Curves
 # This Peano works infinitely - maybe not! but goes to at least n=3 iterations
-P = r"P>>FP>>FP>>+F+P>>FP>>FP>>+F+P>>FP>>FP>>&F&P>>FP>>FP>>+F+P>>FP>>FP>>+F+P>>FP>>FP>>&F&P>>FP>>FP>>+F+P>>FP>>FP>>+F+P>>FP>>FP"  # NOQA
+# P = r"P>>FP>>FP>>+F+P>>FP>>FP>>+F+P>>FP>>FP>>&F&P>>FP>>FP>>+F+P>>FP>>FP>>+F+P>>FP>>FP>>&F&P>>FP>>FP>>+F+P>>FP>>FP>>+F+P>>FP>>FP"  # NOQA
 
-# These Peanos do not work
-# Y = r"FF-F-FF+F+FFnFn+FF-F-FF+F+FF&F&+FF-F-FF+F+FF"  # Peano bottom to top
-T = r"TFUFT+F+UFTFU-F-TFUFTnFn-ZFYFZ+F+YFZFY-F-ZFYFZ&F&-TFUFT+F+UFTFU-F-TFUFT"
-U = T[::-1]
-Y = r"YFZFY-F-ZFYFZ+F+YFZFYnFn+UFTFU-F-TFUFT+F+UFTFU&F&+YFZFY-F-ZFYFZ+F+YFZFY"
-Z = Y[::-1]
+# # These Peanos do not work
+# # Y = r"FF-F-FF+F+FFnFn+FF-F-FF+F+FF&F&+FF-F-FF+F+FF"  # Peano bottom to top
+# T = r"TFUFT+F+UFTFU-F-TFUFTnFn-ZFYFZ+F+YFZFY-F-ZFYFZ&F&-TFUFT+F+UFTFU-F-TFUFT"
+# U = T[::-1]
+# Y = r"YFZFY-F-ZFYFZ+F+YFZFYnFn+UFTFU-F-TFUFT+F+UFTFU&F&+YFZFY-F-ZFYFZ+F+YFZFY"
+# Z = Y[::-1]
 
-# This guy needs some testing
-# R = r"RFRFR-F-RFRFR+F+RFRFRnFn+RFRFR-F-RFRFR+F+RFRFR&F&+RFRFR-F-RFRFR+F+RFRFR<<"  # NOQA
-R = r"R>>FR>>FR>>+F+R>>FR>>FR>>+F+R>>FR>>FRnFn>>-R>>FR>>FR>>-F-R>>FR>>FR>>-F-R>>FR>>FRnFn>>+R>>FR>>FR>>+F+R>>FR>>FR>>+F+R>>FR>>FR"  # NOQA
+# # This guy needs some testing
+# # R = r"RFRFR-F-RFRFR+F+RFRFRnFn+RFRFR-F-RFRFR+F+RFRFR&F&+RFRFR-F-RFRFR+F+RFRFR<<"  # NOQA
+# R = r"R>>FR>>FR>>+F+R>>FR>>FR>>+F+R>>FR>>FRnFn>>-R>>FR>>FR>>-F-R>>FR>>FR>>-F-R>>FR>>FRnFn>>+R>>FR>>FR>>+F+R>>FR>>FR>>+F+R>>FR>>FR"  # NOQA
 
-d = {
+SUBSTITUTIONS = {
     "A": A,
     "B": B,
     "C": C,
     "D": D,
     "X": X,
-    "P": P,
-    "Y": Y,
-    "Z": Z,
-    "T": T,
-    "U": U,
-    "R": R,
+    # "P": P,
+    # "Y": Y,
+    # "Z": Z,
+    # "T": T,
+    # "U": U,
+    # "R": R,
 }
 
 
@@ -108,8 +110,8 @@ def iterate_lstring(inString: str):
     outString = []
     append = outString.append
     for char in inString:
-        if char in d:
-            append(d[char])
+        if char in SUBSTITUTIONS:
+            append(SUBSTITUTIONS[char])
         else:
             append(char)
 

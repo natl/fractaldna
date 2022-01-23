@@ -7,6 +7,7 @@ Define base pairs in a DNA chain
 from collections import OrderedDict
 from copy import deepcopy
 
+import pandas as pd
 import numpy as np
 
 from fractaldna.dna_models import dnapositions as dpos
@@ -88,6 +89,7 @@ class BasePair:
         # before translating
         self.position = np.zeros(3)
         self.rmatrix = np.eye(3)
+        self.chain = chain
         position = np.array(deepcopy(position), dtype=float)
         rotation = np.array(deepcopy(rotation), dtype=float)
 
@@ -233,8 +235,9 @@ class BasePair:
         """
         BasePair.setNewChain(chainIdx)
 
-        Reset the chain index for all molecules
+        Reset the chain index for all molecules and the base pair
         """
+        self.chain = chainIdx
         for molecule in self.moleculeDict.values():
             molecule.chain = chainIdx
 
@@ -261,6 +264,11 @@ class BasePair:
             output.append(molecule.to_text(seperator=seperator))
 
         return "".join(output)
+
+    def to_frame(self) -> pd.DataFrame:
+        """Return base pair as data frame of molecules
+        """
+        return pd.DataFrame([mol.to_series() for mol in self.moleculeDict.values()])
 
     def __getitem__(self, key: str) -> molecules.Molecule:
         return self.moleculeDict[key]

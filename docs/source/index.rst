@@ -7,8 +7,11 @@
 FractalDNA
 ==========
 
+FractalDNA is a Python package to make DNA geometries that can be joined together like
+jigsaw puzzles. Both simple, sections of DNA and Solenoidal DNA can be built.
+
 Documentation is divided into three main sections, focused on :doc:`building DNA models <dna_models>`,
-high level structure models, and explaining examples.
+:doc:`high level structure models <structure_models>`, and explaining :doc:`examples <examples>`.
 
 .. toctree::
    :maxdepth: 1
@@ -26,8 +29,3 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
-
-
-.. note::
-
-   This project is under active development.
