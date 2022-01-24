@@ -23,7 +23,7 @@ X = r"n<XFn<XFX-Fn>>XFX&F+>>XFX-F>X->"
 
 # Legacy Peano Curves
 # This Peano works infinitely - maybe not! but goes to at least n=3 iterations
-# P = r"P>>FP>>FP>>+F+P>>FP>>FP>>+F+P>>FP>>FP>>&F&P>>FP>>FP>>+F+P>>FP>>FP>>+F+P>>FP>>FP>>&F&P>>FP>>FP>>+F+P>>FP>>FP>>+F+P>>FP>>FP"  # NOQA
+P = r"P>>FP>>FP>>+F+P>>FP>>FP>>+F+P>>FP>>FP>>&F&P>>FP>>FP>>+F+P>>FP>>FP>>+F+P>>FP>>FP>>&F&P>>FP>>FP>>+F+P>>FP>>FP>>+F+P>>FP>>FP"  # NOQA
 
 # # These Peanos do not work
 # # Y = r"FF-F-FF+F+FFnFn+FF-F-FF+F+FF&F&+FF-F-FF+F+FF"  # Peano bottom to top
@@ -42,6 +42,7 @@ SUBSTITUTIONS = {
     "C": C,
     "D": D,
     "X": X,
+    "P": P
     # "P": P,
     # "Y": Y,
     # "Z": Z,

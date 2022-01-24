@@ -22,9 +22,10 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
 
-    - name: Install poetry
+    - name: Install poetry and link it if it isn't automatically found
       run: |
         make poetry-download
+        if ! command -v poetry ; then ln -s /root/.local/bin/poetry /usr/bin/poetry ; fi
 
     - name: Set up cache
       uses: actions/cache@v2.1.6
@@ -34,9 +35,8 @@ jobs:
 
     - name: Install dependencies
       run: |
-        ln -sf /usr/lib/x86_64-linux-gnu/qt5/plugins/platforms/ /usr/bin/
-        /root/.local/bin/poetry config virtualenvs.in-project true
-        /root/.local/bin/poetry install
+        poetry config virtualenvs.in-project true
+        poetry install
 
     - name: Run style checks
       run: |
