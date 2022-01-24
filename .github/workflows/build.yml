@@ -7,10 +7,16 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.8", "3.9"]
+        python-version: ["3.8"]
 
     steps:
     - uses: actions/checkout@v2
+
+    # - name: Set up Ubuntu dependencies (Qt5)
+    #   run: |
+    #     apt update
+    #     apt-get install -y libglu1-mesa libqt5x11extras5
+
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2.2.2
       with:
@@ -28,8 +34,9 @@ jobs:
 
     - name: Install dependencies
       run: |
-        poetry config virtualenvs.in-project true
-        poetry install
+        ln -sf /usr/lib/x86_64-linux-gnu/qt5/plugins/platforms/ /usr/bin/
+        /root/.local/bin/poetry config virtualenvs.in-project true
+        /root/.local/bin/poetry install
 
     - name: Run style checks
       run: |
