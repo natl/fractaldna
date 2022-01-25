@@ -1,3 +1,9 @@
+### Python ###
+=======
+*.blend
+*.blend1
+*.mkv
+
 .vscode
 
 
@@ -121,6 +127,11 @@ fabric.properties
 .idea/**/markdown-navigator/
 
 ### Python ###
+=======
+*.blend
+*.blend1
+*.mkv
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
