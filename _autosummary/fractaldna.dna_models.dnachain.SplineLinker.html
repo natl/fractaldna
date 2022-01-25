@@ -104,7 +104,7 @@
 <h1>fractaldna.dna_models.dnachain.SplineLinker<a class="headerlink" href="#fractaldna-dna-models-dnachain-splinelinker" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="fractaldna.dna_models.dnachain.SplineLinker">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">fractaldna.dna_models.dnachain.</span></span><span class="sig-name descname"><span class="pre">SplineLinker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bp1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bp2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bp3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bp4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">curviness</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zrot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">startkey</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stopkey</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'corrected_quaternion'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.dna_models.dnachain.SplineLinker" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">fractaldna.dna_models.dnachain.</span></span><span class="sig-name descname"><span class="pre">SplineLinker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bp1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bp2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bp3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bp4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">curviness</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zrot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">startkey</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stopkey</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'corrected_quaternion'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.dna_models.dnachain.SplineLinker" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="fractaldna.dna_models.dnachain.PlottableSequence.html#fractaldna.dna_models.dnachain.PlottableSequence" title="fractaldna.dna_models.dnachain.PlottableSequence"><code class="xref py py-class docutils literal notranslate"><span class="pre">fractaldna.dna_models.dnachain.PlottableSequence</span></code></a></p>
 <p><em>Inherits from PlottableSequence</em></p>
 <p>Link two histones together via a cubic spline</p>
@@ -118,7 +118,7 @@ high_curviness = smoother</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>zrot</strong> – <dl class="simple">
+<li><p><strong>zrot</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>]) – <dl class="simple">
 <dt>Describes the twist of bp3 relative to bp2</dt><dd><ul>
 <li><p>None: Determine automatically (experimental)</p></li>
 <li><p>double: rotation in radians (mod 2*pi)</p></li>
@@ -126,7 +126,7 @@ high_curviness = smoother</p>
 </dd>
 </dl>
 </p></li>
-<li><p><strong>startkey</strong> – <dl class="simple">
+<li><p><strong>startkey</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]) – <dl class="simple">
 <dt>Starting keyframe for rotations</dt><dd><ul>
 <li><p>key = i will start/stop rotations after the i-th base pair</p></li>
 <li><p>key = -i will start/stop rotations after the i-th last base pair</p></li>
@@ -134,7 +134,7 @@ high_curviness = smoother</p>
 </dd>
 </dl>
 </p></li>
-<li><p><strong>stopkey</strong> – <dl class="simple">
+<li><p><strong>stopkey</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]) – <dl class="simple">
 <dt>Ending keyframe for rotations</dt><dd><ul>
 <li><p>key = i will start/stop rotations after the i-th base pair</p></li>
 <li><p>key = -i will start/stop rotations after the i-th last base pair</p></li>
@@ -142,7 +142,7 @@ high_curviness = smoother</p>
 </dd>
 </dl>
 </p></li>
-<li><p><strong>method</strong> – <dl class="simple">
+<li><p><strong>method</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – <dl class="simple">
 <dt>Method to handle rotational interpolation</dt><dd><ul>
 <li><p>”quaternion”: Full use of quaternions</p></li>
 <li><p>”corrected_quaternion”: Full use of quaternions, with a correction
@@ -154,12 +154,13 @@ quaternions. Currently incorrect.</p></li>
 </dd>
 </dl>
 </p></li>
+<li><p><strong>chain</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – Chain index assigned to linker and basepairs created therein</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="fractaldna.dna_models.dnachain.SplineLinker.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bp1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bp2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bp3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bp4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">curviness</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zrot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">startkey</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stopkey</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'corrected_quaternion'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.dna_models.dnachain.SplineLinker.__init__" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bp1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bp2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bp3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bp4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">curviness</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zrot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">startkey</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stopkey</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'corrected_quaternion'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.dna_models.dnachain.SplineLinker.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Constructor</p>
 </dd></dl>
 
@@ -176,22 +177,25 @@ quaternions. Currently incorrect.</p></li>
 <tr class="row-even"><td><p><a class="reference internal" href="#fractaldna.dna_models.dnachain.SplineLinker.setChain" title="fractaldna.dna_models.dnachain.SplineLinker.setChain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setChain</span></code></a>(chainIdx)</p></td>
 <td><p>Set the Chain Index of all base pairs in the histone</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#fractaldna.dna_models.dnachain.SplineLinker.to_line_plot" title="fractaldna.dna_models.dnachain.SplineLinker.to_line_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_line_plot</span></code></a>([size])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#fractaldna.dna_models.dnachain.SplineLinker.to_frame" title="fractaldna.dna_models.dnachain.SplineLinker.to_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_frame</span></code></a>()</p></td>
+<td><p>Return the molecules as a pandas data frame</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#fractaldna.dna_models.dnachain.SplineLinker.to_line_plot" title="fractaldna.dna_models.dnachain.SplineLinker.to_line_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_line_plot</span></code></a>([size])</p></td>
 <td><p>Return a mayavi figure instance with histone and linkers shown</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#fractaldna.dna_models.dnachain.SplineLinker.to_plot" title="fractaldna.dna_models.dnachain.SplineLinker.to_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_plot</span></code></a>([plot_p, plot_b, plot_s])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#fractaldna.dna_models.dnachain.SplineLinker.to_plot" title="fractaldna.dna_models.dnachain.SplineLinker.to_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_plot</span></code></a>([plot_p, plot_b, plot_s])</p></td>
 <td><p>Return a matplotlib.Figure instance with molecules plotted</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#fractaldna.dna_models.dnachain.SplineLinker.to_strand_plot" title="fractaldna.dna_models.dnachain.SplineLinker.to_strand_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_strand_plot</span></code></a>([plot_p, plot_b, plot_s, plot_bp])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#fractaldna.dna_models.dnachain.SplineLinker.to_strand_plot" title="fractaldna.dna_models.dnachain.SplineLinker.to_strand_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_strand_plot</span></code></a>([plot_p, plot_b, plot_s, plot_bp])</p></td>
 <td><p>Return a mayavi figure instance with strands plotted</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#fractaldna.dna_models.dnachain.SplineLinker.to_surface_plot" title="fractaldna.dna_models.dnachain.SplineLinker.to_surface_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_surface_plot</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#fractaldna.dna_models.dnachain.SplineLinker.to_surface_plot" title="fractaldna.dna_models.dnachain.SplineLinker.to_surface_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_surface_plot</span></code></a>()</p></td>
 <td><p>Plot the surfaces of each molecule in the chain.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#fractaldna.dna_models.dnachain.SplineLinker.to_text" title="fractaldna.dna_models.dnachain.SplineLinker.to_text"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_text</span></code></a>([seperator])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#fractaldna.dna_models.dnachain.SplineLinker.to_text" title="fractaldna.dna_models.dnachain.SplineLinker.to_text"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_text</span></code></a>([seperator])</p></td>
 <td><p>Return a description of the molecules in the chain as text</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#fractaldna.dna_models.dnachain.SplineLinker.translate" title="fractaldna.dna_models.dnachain.SplineLinker.translate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">translate</span></code></a>(translation)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#fractaldna.dna_models.dnachain.SplineLinker.translate" title="fractaldna.dna_models.dnachain.SplineLinker.translate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">translate</span></code></a>(translation)</p></td>
 <td><p>Translate the histone spatially</p></td>
 </tr>
 </tbody>
@@ -218,6 +222,20 @@ quaternions. Currently incorrect.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>chainIdx</strong> – Index for Chain</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fractaldna.dna_models.dnachain.SplineLinker.to_frame">
+<span class="sig-name descname"><span class="pre">to_frame</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.dna_models.dnachain.SplineLinker.to_frame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the molecules as a pandas data frame</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Pandas data frame with molecule information</p>
 </dd>
 </dl>
 </dd></dl>

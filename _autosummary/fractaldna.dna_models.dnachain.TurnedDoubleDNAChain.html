@@ -104,7 +104,7 @@
 <h1>fractaldna.dna_models.dnachain.TurnedDoubleDNAChain<a class="headerlink" href="#fractaldna-dna-models-dnachain-turneddoublednachain" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="fractaldna.dna_models.dnachain.TurnedDoubleDNAChain">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">fractaldna.dna_models.dnachain.</span></span><span class="sig-name descname"><span class="pre">TurnedDoubleDNAChain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">genome</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separation</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.dna_models.dnachain.TurnedDoubleDNAChain" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">fractaldna.dna_models.dnachain.</span></span><span class="sig-name descname"><span class="pre">TurnedDoubleDNAChain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">genome</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separation</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.dna_models.dnachain.TurnedDoubleDNAChain" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="fractaldna.dna_models.dnachain.TurnedDNAChain.html#fractaldna.dna_models.dnachain.TurnedDNAChain" title="fractaldna.dna_models.dnachain.TurnedDNAChain"><code class="xref py py-class docutils literal notranslate"><span class="pre">fractaldna.dna_models.dnachain.TurnedDNAChain</span></code></a>, <a class="reference internal" href="fractaldna.dna_models.dnachain.DoubleDNAChain.html#fractaldna.dna_models.dnachain.DoubleDNAChain" title="fractaldna.dna_models.dnachain.DoubleDNAChain"><code class="xref py py-class docutils literal notranslate"><span class="pre">fractaldna.dna_models.dnachain.DoubleDNAChain</span></code></a></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="fractaldna.dna_models.dnachain.TurnedDoubleDNAChain.__init__">
@@ -126,22 +126,25 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#fractaldna.dna_models.dnachain.TurnedDoubleDNAChain.center_in_z" title="fractaldna.dna_models.dnachain.TurnedDoubleDNAChain.center_in_z"><code class="xref py py-obj docutils literal notranslate"><span class="pre">center_in_z</span></code></a>()</p></td>
 <td><p>Center the molecule around the z=0 plane</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#fractaldna.dna_models.dnachain.TurnedDoubleDNAChain.to_line_plot" title="fractaldna.dna_models.dnachain.TurnedDoubleDNAChain.to_line_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_line_plot</span></code></a>([size])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#fractaldna.dna_models.dnachain.TurnedDoubleDNAChain.to_frame" title="fractaldna.dna_models.dnachain.TurnedDoubleDNAChain.to_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_frame</span></code></a>()</p></td>
+<td><p>Return the molecules as a pandas data frame</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#fractaldna.dna_models.dnachain.TurnedDoubleDNAChain.to_line_plot" title="fractaldna.dna_models.dnachain.TurnedDoubleDNAChain.to_line_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_line_plot</span></code></a>([size])</p></td>
 <td><p>Return a mayavi figure instance with histone and linkers shown</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#fractaldna.dna_models.dnachain.TurnedDoubleDNAChain.to_plot" title="fractaldna.dna_models.dnachain.TurnedDoubleDNAChain.to_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_plot</span></code></a>([plot_p, plot_b, plot_s])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#fractaldna.dna_models.dnachain.TurnedDoubleDNAChain.to_plot" title="fractaldna.dna_models.dnachain.TurnedDoubleDNAChain.to_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_plot</span></code></a>([plot_p, plot_b, plot_s])</p></td>
 <td><p>Return a matplotlib.Figure instance with molecules plotted</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#fractaldna.dna_models.dnachain.TurnedDoubleDNAChain.to_strand_plot" title="fractaldna.dna_models.dnachain.TurnedDoubleDNAChain.to_strand_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_strand_plot</span></code></a>([plot_p, plot_b, plot_s, plot_bp])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#fractaldna.dna_models.dnachain.TurnedDoubleDNAChain.to_strand_plot" title="fractaldna.dna_models.dnachain.TurnedDoubleDNAChain.to_strand_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_strand_plot</span></code></a>([plot_p, plot_b, plot_s, plot_bp])</p></td>
 <td><p>Return a mayavi figure instance with strands plotted</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#fractaldna.dna_models.dnachain.TurnedDoubleDNAChain.to_surface_plot" title="fractaldna.dna_models.dnachain.TurnedDoubleDNAChain.to_surface_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_surface_plot</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#fractaldna.dna_models.dnachain.TurnedDoubleDNAChain.to_surface_plot" title="fractaldna.dna_models.dnachain.TurnedDoubleDNAChain.to_surface_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_surface_plot</span></code></a>()</p></td>
 <td><p>Plot the surfaces of each molecule in the chain.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#fractaldna.dna_models.dnachain.TurnedDoubleDNAChain.to_text" title="fractaldna.dna_models.dnachain.TurnedDoubleDNAChain.to_text"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_text</span></code></a>([seperator])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#fractaldna.dna_models.dnachain.TurnedDoubleDNAChain.to_text" title="fractaldna.dna_models.dnachain.TurnedDoubleDNAChain.to_text"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_text</span></code></a>([seperator])</p></td>
 <td><p>Return a description of the molecules in the chain as text</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">turnDNA</span></code>()</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">turnDNA</span></code>()</p></td>
 <td><p></p></td>
 </tr>
 </tbody>
@@ -150,6 +153,20 @@
 <dt class="sig sig-object py" id="fractaldna.dna_models.dnachain.TurnedDoubleDNAChain.center_in_z">
 <span class="sig-name descname"><span class="pre">center_in_z</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.dna_models.dnachain.TurnedDoubleDNAChain.center_in_z" title="Permalink to this definition">¶</a></dt>
 <dd><p>Center the molecule around the z=0 plane</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fractaldna.dna_models.dnachain.TurnedDoubleDNAChain.to_frame">
+<span class="sig-name descname"><span class="pre">to_frame</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.dna_models.dnachain.TurnedDoubleDNAChain.to_frame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the molecules as a pandas data frame</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Pandas data frame with molecule information</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">

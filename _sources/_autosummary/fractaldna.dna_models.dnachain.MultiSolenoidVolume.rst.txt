@@ -17,6 +17,7 @@ fractaldna.dna\_models.dnachain.MultiSolenoidVolume
    .. autosummary::
    
       ~MultiSolenoidVolume.__init__
+      ~MultiSolenoidVolume.to_frame
       ~MultiSolenoidVolume.to_line_plot
       ~MultiSolenoidVolume.to_plot
       ~MultiSolenoidVolume.to_strand_plot

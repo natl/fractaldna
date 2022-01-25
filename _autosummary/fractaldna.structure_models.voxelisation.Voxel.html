@@ -91,7 +91,7 @@
 <h1>fractaldna.structure_models.voxelisation.Voxel<a class="headerlink" href="#fractaldna-structure-models-voxelisation-voxel" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="fractaldna.structure_models.voxelisation.Voxel">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">fractaldna.structure_models.voxelisation.</span></span><span class="sig-name descname"><span class="pre">Voxel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inHeading</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inPrincipal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outHeading</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outPrincipal</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.structure_models.voxelisation.Voxel" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">fractaldna.structure_models.voxelisation.</span></span><span class="sig-name descname"><span class="pre">Voxel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inHeading</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inPrincipal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outHeading</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outPrincipal</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.structure_models.voxelisation.Voxel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Position, rotation and form of a DNA placement voxel.</p>
 <p>The principal axes are used to determine if the DNA would
@@ -135,7 +135,10 @@ exit to the voxel</p></li>
 <tr class="row-odd"><td><p><a class="reference internal" href="#fractaldna.structure_models.voxelisation.Voxel.__init__" title="fractaldna.structure_models.voxelisation.Voxel.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(pos, inHeading, inPrincipal, ...)</p></td>
 <td><p>Constructor</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#fractaldna.structure_models.voxelisation.Voxel.to_text" title="fractaldna.structure_models.voxelisation.Voxel.to_text"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_text</span></code></a>([sep])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#fractaldna.structure_models.voxelisation.Voxel.to_series" title="fractaldna.structure_models.voxelisation.Voxel.to_series"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_series</span></code></a>()</p></td>
+<td><p>Return the voxel as a pandas series</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#fractaldna.structure_models.voxelisation.Voxel.to_text" title="fractaldna.structure_models.voxelisation.Voxel.to_text"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_text</span></code></a>([sep])</p></td>
 <td><p>Print a textual representation of the voxel as KIND POS_X POS_Y POS_Z EUL_PSI EUL_THETA EUL_PHI</p></td>
 </tr>
 </tbody>
@@ -170,6 +173,12 @@ exit to the voxel</p></li>
 </tr>
 </tbody>
 </table>
+<dl class="py method">
+<dt class="sig sig-object py" id="fractaldna.structure_models.voxelisation.Voxel.to_series">
+<span class="sig-name descname"><span class="pre">to_series</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.structure_models.voxelisation.Voxel.to_series" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the voxel as a pandas series</p>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="fractaldna.structure_models.voxelisation.Voxel.to_text">
 <span class="sig-name descname"><span class="pre">to_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'</span> <span class="pre">'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.structure_models.voxelisation.Voxel.to_text" title="Permalink to this definition">¶</a></dt>

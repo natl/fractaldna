@@ -18,6 +18,7 @@ fractaldna.dna\_models.dnachain.SplineLinker
    
       ~SplineLinker.__init__
       ~SplineLinker.setChain
+      ~SplineLinker.to_frame
       ~SplineLinker.to_line_plot
       ~SplineLinker.to_plot
       ~SplineLinker.to_strand_plot

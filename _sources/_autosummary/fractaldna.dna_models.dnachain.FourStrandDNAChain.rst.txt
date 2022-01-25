@@ -19,6 +19,7 @@ fractaldna.dna\_models.dnachain.FourStrandDNAChain
       ~FourStrandDNAChain.__init__
       ~FourStrandDNAChain.center_in_z
       ~FourStrandDNAChain.makeFourStrands
+      ~FourStrandDNAChain.to_frame
       ~FourStrandDNAChain.to_line_plot
       ~FourStrandDNAChain.to_plot
       ~FourStrandDNAChain.to_strand_plot

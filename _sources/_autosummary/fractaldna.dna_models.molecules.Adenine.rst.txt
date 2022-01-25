@@ -18,6 +18,7 @@ fractaldna.dna\_models.molecules.Adenine
    
       ~Adenine.__init__
       ~Adenine.rotate
+      ~Adenine.to_series
       ~Adenine.to_text
       ~Adenine.translate
    

@@ -17,6 +17,7 @@ fractaldna.structure\_models.voxelisation.Voxel
    .. autosummary::
    
       ~Voxel.__init__
+      ~Voxel.to_series
       ~Voxel.to_text
    
    

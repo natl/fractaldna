@@ -18,6 +18,7 @@ fractaldna.dna\_models.molecules.Cytosine
    
       ~Cytosine.__init__
       ~Cytosine.rotate
+      ~Cytosine.to_series
       ~Cytosine.to_text
       ~Cytosine.translate
    

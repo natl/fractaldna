@@ -18,6 +18,7 @@ fractaldna.dna\_models.molecules.Guanine
    
       ~Guanine.__init__
       ~Guanine.rotate
+      ~Guanine.to_series
       ~Guanine.to_text
       ~Guanine.translate
    

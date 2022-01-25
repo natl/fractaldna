@@ -17,7 +17,9 @@ fractaldna.dna\_models.dnachain.Histone
    .. autosummary::
    
       ~Histone.__init__
+      ~Histone.as_series
       ~Histone.setChain
+      ~Histone.to_frame
       ~Histone.to_line_plot
       ~Histone.to_plot
       ~Histone.to_strand_plot

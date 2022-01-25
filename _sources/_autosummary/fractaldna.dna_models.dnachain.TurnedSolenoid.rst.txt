@@ -17,7 +17,9 @@ fractaldna.dna\_models.dnachain.TurnedSolenoid
    .. autosummary::
    
       ~TurnedSolenoid.__init__
+      ~TurnedSolenoid.histones_to_frame
       ~TurnedSolenoid.setChain
+      ~TurnedSolenoid.to_frame
       ~TurnedSolenoid.to_line_plot
       ~TurnedSolenoid.to_plot
       ~TurnedSolenoid.to_strand_plot

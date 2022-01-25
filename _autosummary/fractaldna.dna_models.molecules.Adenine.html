@@ -96,7 +96,7 @@
 <h1>fractaldna.dna_models.molecules.Adenine<a class="headerlink" href="#fractaldna-dna-models-molecules-adenine" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="fractaldna.dna_models.molecules.Adenine">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">fractaldna.dna_models.molecules.</span></span><span class="sig-name descname"><span class="pre">Adenine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">strand</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">array([0.,</span> <span class="pre">0.,</span> <span class="pre">0.])</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">array([0.,</span> <span class="pre">0.,</span> <span class="pre">0.])</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.dna_models.molecules.Adenine" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">fractaldna.dna_models.molecules.</span></span><span class="sig-name descname"><span class="pre">Adenine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">strand</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">array([0.,</span> <span class="pre">0.,</span> <span class="pre">0.])</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">array([0.,</span> <span class="pre">0.,</span> <span class="pre">0.])</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.dna_models.molecules.Adenine" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="fractaldna.dna_models.molecules.Molecule.html#fractaldna.dna_models.molecules.Molecule" title="fractaldna.dna_models.molecules.Molecule"><code class="xref py py-class docutils literal notranslate"><span class="pre">fractaldna.dna_models.molecules.Molecule</span></code></a></p>
 <p>Adenine molecule</p>
 <dl class="field-list simple">
@@ -129,10 +129,13 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#fractaldna.dna_models.molecules.Adenine.rotate" title="fractaldna.dna_models.molecules.Adenine.rotate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rotate</span></code></a>(rotation)</p></td>
 <td><p>Rotate molecule by [X_angle, Y_angle, Z_angle]</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#fractaldna.dna_models.molecules.Adenine.to_text" title="fractaldna.dna_models.molecules.Adenine.to_text"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_text</span></code></a>([seperator])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#fractaldna.dna_models.molecules.Adenine.to_series" title="fractaldna.dna_models.molecules.Adenine.to_series"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_series</span></code></a>()</p></td>
+<td><p>Convert molecule to a pandas series</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#fractaldna.dna_models.molecules.Adenine.to_text" title="fractaldna.dna_models.molecules.Adenine.to_text"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_text</span></code></a>([seperator])</p></td>
 <td><p>Return a text description of the molecule Molecule.toText(seperator=&quot; &quot;)</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#fractaldna.dna_models.molecules.Adenine.translate" title="fractaldna.dna_models.molecules.Adenine.translate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">translate</span></code></a>(translation)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#fractaldna.dna_models.molecules.Adenine.translate" title="fractaldna.dna_models.molecules.Adenine.translate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">translate</span></code></a>(translation)</p></td>
 <td><p><dl class="field-list simple">
 <dt class="field-odd">type translation</dt>
 <dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code></p>
@@ -152,6 +155,20 @@
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fractaldna.dna_models.molecules.Adenine.to_series">
+<span class="sig-name descname"><span class="pre">to_series</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.dna_models.molecules.Adenine.to_series" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert molecule to a pandas series</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Series representation of the molecule</p>
 </dd>
 </dl>
 </dd></dl>

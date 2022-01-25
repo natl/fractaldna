@@ -104,7 +104,7 @@
 <h1>fractaldna.dna_models.dnachain.TurnedSolenoid<a class="headerlink" href="#fractaldna-dna-models-dnachain-turnedsolenoid" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="fractaldna.dna_models.dnachain.TurnedSolenoid">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">fractaldna.dna_models.dnachain.</span></span><span class="sig-name descname"><span class="pre">TurnedSolenoid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">voxelheight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">750</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nhistones</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">38</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">histone_angle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">twist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.dna_models.dnachain.TurnedSolenoid" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">fractaldna.dna_models.dnachain.</span></span><span class="sig-name descname"><span class="pre">TurnedSolenoid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">voxelheight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">750</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nhistones</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">38</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">histone_angle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">twist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.dna_models.dnachain.TurnedSolenoid" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="fractaldna.dna_models.dnachain.Solenoid.html#fractaldna.dna_models.dnachain.Solenoid" title="fractaldna.dna_models.dnachain.Solenoid"><code class="xref py py-class docutils literal notranslate"><span class="pre">fractaldna.dna_models.dnachain.Solenoid</span></code></a></p>
 <p><em>Inherits from Solenoid</em></p>
 <p>Define Solenoidal DNA in a voxel (basically a box). This Solenoid
@@ -121,12 +121,13 @@ per rotation) and then joining them together using SplineLinkers</p>
 <li><p><strong>histone_angle</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – tilt of histones from axis in degrees</p></li>
 <li><p><strong>twist</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – whether the DNA exiting the final spine should be
 rotated an extra pi/2.</p></li>
+<li><p><strong>chain</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – Chain index for solenoid and basepairs therein</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="fractaldna.dna_models.dnachain.TurnedSolenoid.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">voxelheight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">750</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nhistones</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">38</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">histone_angle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">twist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.dna_models.dnachain.TurnedSolenoid.__init__" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">voxelheight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">750</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nhistones</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">38</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">histone_angle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">twist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.dna_models.dnachain.TurnedSolenoid.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Constructor</p>
 </dd></dl>
 
@@ -140,8 +141,14 @@ rotated an extra pi/2.</p></li>
 <tr class="row-odd"><td><p><a class="reference internal" href="#fractaldna.dna_models.dnachain.TurnedSolenoid.__init__" title="fractaldna.dna_models.dnachain.TurnedSolenoid.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>([voxelheight, radius, nhistones, ...])</p></td>
 <td><p>Constructor</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#fractaldna.dna_models.dnachain.TurnedSolenoid.setChain" title="fractaldna.dna_models.dnachain.TurnedSolenoid.setChain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setChain</span></code></a>(chainIdx)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#fractaldna.dna_models.dnachain.TurnedSolenoid.histones_to_frame" title="fractaldna.dna_models.dnachain.TurnedSolenoid.histones_to_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">histones_to_frame</span></code></a>()</p></td>
+<td><p>Get Histones in Solenoid as a dataframe of their positions</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#fractaldna.dna_models.dnachain.TurnedSolenoid.setChain" title="fractaldna.dna_models.dnachain.TurnedSolenoid.setChain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setChain</span></code></a>(chainIdx)</p></td>
 <td><p>Set the Chain Index of all base pairs in the solenoid</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#fractaldna.dna_models.dnachain.TurnedSolenoid.to_frame" title="fractaldna.dna_models.dnachain.TurnedSolenoid.to_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_frame</span></code></a>()</p></td>
+<td><p>Return the molecules as a pandas data frame</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#fractaldna.dna_models.dnachain.TurnedSolenoid.to_line_plot" title="fractaldna.dna_models.dnachain.TurnedSolenoid.to_line_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_line_plot</span></code></a>([size])</p></td>
 <td><p>Return a mayavi figure instance with histone and linkers shown</p></td>
@@ -164,6 +171,20 @@ rotated an extra pi/2.</p></li>
 </tbody>
 </table>
 <dl class="py method">
+<dt class="sig sig-object py" id="fractaldna.dna_models.dnachain.TurnedSolenoid.histones_to_frame">
+<span class="sig-name descname"><span class="pre">histones_to_frame</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.dna_models.dnachain.TurnedSolenoid.histones_to_frame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get Histones in Solenoid as a dataframe of their positions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>DataFrame of Histones</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="fractaldna.dna_models.dnachain.TurnedSolenoid.setChain">
 <span class="sig-name descname"><span class="pre">setChain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chainIdx</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.dna_models.dnachain.TurnedSolenoid.setChain" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the Chain Index of all base pairs in the solenoid</p>
@@ -173,6 +194,20 @@ rotated an extra pi/2.</p></li>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fractaldna.dna_models.dnachain.TurnedSolenoid.to_frame">
+<span class="sig-name descname"><span class="pre">to_frame</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.dna_models.dnachain.TurnedSolenoid.to_frame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the molecules as a pandas data frame</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Pandas data frame with molecule information</p>
 </dd>
 </dl>
 </dd></dl>

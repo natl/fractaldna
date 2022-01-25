@@ -90,7 +90,7 @@
 <h1>fractaldna.dna_models.basepair.BasePair<a class="headerlink" href="#fractaldna-dna-models-basepair-basepair" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="fractaldna.dna_models.basepair.BasePair">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">fractaldna.dna_models.basepair.</span></span><span class="sig-name descname"><span class="pre">BasePair</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">array([0.,</span> <span class="pre">0.,</span> <span class="pre">0.])</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">array([0.,</span> <span class="pre">0.,</span> <span class="pre">0.])</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.dna_models.basepair.BasePair" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">fractaldna.dna_models.basepair.</span></span><span class="sig-name descname"><span class="pre">BasePair</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">array([0.,</span> <span class="pre">0.,</span> <span class="pre">0.])</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rotation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">array([0.,</span> <span class="pre">0.,</span> <span class="pre">0.])</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.dna_models.basepair.BasePair" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Defines a base pair</p>
 <p>BasePair(base, chain=-1, position=np.zeros(3), rotation=np.zeros(3))</p>
@@ -132,15 +132,18 @@
 <td><p>BasePair.rotation(rotation, about_origin=False)</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#fractaldna.dna_models.basepair.BasePair.setNewChain" title="fractaldna.dna_models.basepair.BasePair.setNewChain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setNewChain</span></code></a>(chainIdx)</p></td>
-<td><p>Reset the chain index for all molecules</p></td>
+<td><p>Reset the chain index for all molecules and the base pair</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#fractaldna.dna_models.basepair.BasePair.set_bp_index" title="fractaldna.dna_models.basepair.BasePair.set_bp_index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_bp_index</span></code></a>(bp_idx)</p></td>
 <td><p>BasePair.setNewChain(chainIdx)</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#fractaldna.dna_models.basepair.BasePair.to_text" title="fractaldna.dna_models.basepair.BasePair.to_text"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_text</span></code></a>([seperator])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#fractaldna.dna_models.basepair.BasePair.to_frame" title="fractaldna.dna_models.basepair.BasePair.to_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_frame</span></code></a>()</p></td>
+<td><p>Return base pair as data frame of molecules</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#fractaldna.dna_models.basepair.BasePair.to_text" title="fractaldna.dna_models.basepair.BasePair.to_text"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_text</span></code></a>([seperator])</p></td>
 <td><p>Return a description of the molecules in the base pair as text</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#fractaldna.dna_models.basepair.BasePair.translate" title="fractaldna.dna_models.basepair.BasePair.translate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">translate</span></code></a>(translation)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#fractaldna.dna_models.basepair.BasePair.translate" title="fractaldna.dna_models.basepair.BasePair.translate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">translate</span></code></a>(translation)</p></td>
 <td><p>translate the base pair by the specified 3-vector array</p></td>
 </tr>
 </tbody>
@@ -189,7 +192,7 @@ If about_origin is False, the rotation is with respect to the base pair position
 <dl class="py method">
 <dt class="sig sig-object py" id="fractaldna.dna_models.basepair.BasePair.setNewChain">
 <span class="sig-name descname"><span class="pre">setNewChain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chainIdx</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.dna_models.basepair.BasePair.setNewChain" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reset the chain index for all molecules</p>
+<dd><p>Reset the chain index for all molecules and the base pair</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
@@ -205,6 +208,17 @@ If about_origin is False, the rotation is with respect to the base pair position
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="fractaldna.dna_models.basepair.BasePair.to_frame">
+<span class="sig-name descname"><span class="pre">to_frame</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.dna_models.basepair.BasePair.to_frame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return base pair as data frame of molecules</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></p>
 </dd>
 </dl>
 </dd></dl>

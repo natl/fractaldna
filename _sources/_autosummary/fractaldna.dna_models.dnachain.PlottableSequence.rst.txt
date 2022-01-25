@@ -17,6 +17,7 @@ fractaldna.dna\_models.dnachain.PlottableSequence
    .. autosummary::
    
       ~PlottableSequence.__init__
+      ~PlottableSequence.to_frame
       ~PlottableSequence.to_line_plot
       ~PlottableSequence.to_plot
       ~PlottableSequence.to_strand_plot

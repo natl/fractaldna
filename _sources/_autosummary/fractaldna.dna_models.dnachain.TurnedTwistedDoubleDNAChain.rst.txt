@@ -18,6 +18,7 @@ fractaldna.dna\_models.dnachain.TurnedTwistedDoubleDNAChain
    
       ~TurnedTwistedDoubleDNAChain.__init__
       ~TurnedTwistedDoubleDNAChain.center_in_z
+      ~TurnedTwistedDoubleDNAChain.to_frame
       ~TurnedTwistedDoubleDNAChain.to_line_plot
       ~TurnedTwistedDoubleDNAChain.to_plot
       ~TurnedTwistedDoubleDNAChain.to_strand_plot

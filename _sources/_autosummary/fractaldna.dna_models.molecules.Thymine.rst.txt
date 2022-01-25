@@ -18,6 +18,7 @@ fractaldna.dna\_models.molecules.Thymine
    
       ~Thymine.__init__
       ~Thymine.rotate
+      ~Thymine.to_series
       ~Thymine.to_text
       ~Thymine.translate
    

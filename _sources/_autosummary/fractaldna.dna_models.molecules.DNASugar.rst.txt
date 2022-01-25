@@ -18,6 +18,7 @@ fractaldna.dna\_models.molecules.DNASugar
    
       ~DNASugar.__init__
       ~DNASugar.rotate
+      ~DNASugar.to_series
       ~DNASugar.to_text
       ~DNASugar.translate
    

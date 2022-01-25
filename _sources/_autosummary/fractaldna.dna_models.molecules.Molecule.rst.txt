@@ -18,6 +18,7 @@ fractaldna.dna\_models.molecules.Molecule
    
       ~Molecule.__init__
       ~Molecule.rotate
+      ~Molecule.to_series
       ~Molecule.to_text
       ~Molecule.translate
    

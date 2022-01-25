@@ -83,14 +83,30 @@ turned into a voxelised representation using the methods in
 <dl class="py function">
 <dt class="sig sig-object py">
 <span class="sig-prename descclassname"><span class="pre">fractaldna.structure_models.hilbert.</span></span><span class="sig-name descname"><span class="pre">generate_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lstring</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em><span class="sig-paren">)</span></dt>
-<dd></dd></dl>
+<dd><p>Generate a path from an l-string</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lstring</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – lstring describing path</p></li>
+<li><p><strong>n</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – steps on path between forward movements</p></li>
+<li><p><strong>distance</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – distance between points forward movements</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>list of XYZ points</p>
+</dd>
+</dl>
+</dd></dl>
 
 </section>
 <section id="voxelising-fractals">
 <h2>Voxelising Fractals<a class="headerlink" href="#voxelising-fractals" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">fractaldna.structure_models.voxelisation.</span></span><span class="sig-name descname"><span class="pre">VoxelisedFractal</span></span></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">fractaldna.structure_models.voxelisation.</span></span><span class="sig-name descname"><span class="pre">VoxelisedFractal</span></span></dt>
 <dd><p>Class containing a voxelised representation of a fractal</p>
 <p>Typically created using the VoxelisedFractal.fromSeed class method</p>
 <p>fractal = VoxelisedFractal.fromSeed(‘X’, 1)
@@ -108,7 +124,7 @@ fractal.fractal contains a list of ‘Voxels’ representing the DNA Path</p>
 
 <dl class="py method">
 <dt class="sig sig-object py">
-<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">fromLString</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lstring</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fromLString</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lstring</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span></dt>
 <dd><p>Convert an L-String into a VoxelisedFractal</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -125,7 +141,7 @@ fractal.fractal contains a list of ‘Voxels’ representing the DNA Path</p>
 
 <dl class="py method">
 <dt class="sig sig-object py">
-<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">fromSeed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iterations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fromSeed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iterations</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span></dt>
 <dd><p>Make a voxelised fractal from an L-String seed.</p>
 <p>The available L-Strings are described in fractaldna.structure_models.hilbert</p>
 <dl class="field-list simple">
@@ -140,6 +156,12 @@ fractal.fractal contains a list of ‘Voxels’ representing the DNA Path</p>
 <dd class="field-even"><p>Voxelised Fractal representation</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">to_frame</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd><p>Convert voxelised representation to data frame</p>
 </dd></dl>
 
 <dl class="py method">

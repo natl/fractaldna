@@ -18,6 +18,7 @@ fractaldna.dna\_models.dnachain.DNAChain
    
       ~DNAChain.__init__
       ~DNAChain.center_in_z
+      ~DNAChain.to_frame
       ~DNAChain.to_line_plot
       ~DNAChain.to_plot
       ~DNAChain.to_strand_plot

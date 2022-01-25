@@ -18,6 +18,7 @@ fractaldna.dna\_models.dnachain.EightStrandDNAChain
    
       ~EightStrandDNAChain.__init__
       ~EightStrandDNAChain.center_in_z
+      ~EightStrandDNAChain.to_frame
       ~EightStrandDNAChain.to_line_plot
       ~EightStrandDNAChain.to_plot
       ~EightStrandDNAChain.to_strand_plot

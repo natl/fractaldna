@@ -18,6 +18,7 @@ fractaldna.dna\_models.molecules.Triphosphate
    
       ~Triphosphate.__init__
       ~Triphosphate.rotate
+      ~Triphosphate.to_series
       ~Triphosphate.to_text
       ~Triphosphate.translate
    

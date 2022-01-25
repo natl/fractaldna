@@ -22,6 +22,7 @@ fractaldna.dna\_models.basepair.BasePair
       ~BasePair.rotate
       ~BasePair.setNewChain
       ~BasePair.set_bp_index
+      ~BasePair.to_frame
       ~BasePair.to_text
       ~BasePair.translate
    
