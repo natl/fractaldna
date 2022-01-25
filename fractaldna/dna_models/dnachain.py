@@ -1145,7 +1145,7 @@ class MultiSolenoidVolume(PlottableSequence):
                 little_height,
             ]
         else:
-            lengths = [self.voxelheight] * 8
+            lengths = [self.voxelheight] * 9
 
         translations = [
             np.array([0, 0, 0]),

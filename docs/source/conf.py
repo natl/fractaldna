@@ -47,7 +47,11 @@ extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.autosummary",
     "sphinx_autodoc_typehints",
+    "nbsphinx"
 ]
+
+# Allow nbsphinx to have errors
+nbsphinx_allow_errors = True
 
 # set_type_checking_flag = True
 
