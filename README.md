@@ -3,6 +3,22 @@ fractaldna
 Python routines for generating simple models of DNA
 ---
 
+*FractalDNA is being converted to a package, it is under active developmemt*
+
+<div align="center">
+
+[![Build status](https://github.com/fractaldna/fractaldna/workflows/build/badge.svg?branch=master&event=push)](https://github.com/fractaldna/fractaldna/actions?query=workflow%3Abuild)
+[![Python Version](https://img.shields.io/pypi/pyversions/fractaldna.svg)](https://pypi.org/project/fractaldna/)
+[![Dependencies Status](https://img.shields.io/badge/dependencies-up%20to%20date-brightgreen.svg)](https://github.com/fractaldna/fractaldna/pulls?utf8=%E2%9C%93&q=is%3Apr%20author%3Aapp%2Fdependabot)
+
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![Security: bandit](https://img.shields.io/badge/security-bandit-green.svg)](https://github.com/PyCQA/bandit)
+[![Pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/fractaldna/fractaldna/blob/master/.pre-commit-config.yaml)
+[![Semantic Versions](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--versions-e10079.svg)](https://github.com/fractaldna/fractaldna/releases)
+[![License](https://img.shields.io/github/license/fractaldna/fractaldna)](https://github.com/fractaldna/fractaldna/blob/master/LICENSE)
+
+</div>
+
 This repository is an offshoot of my thesis work, where I simulate the impact
 of ionising radiation on DNA. For this, I need to model and visualise very
 large DNA structures
