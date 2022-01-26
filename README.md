@@ -1,6 +1,6 @@
-fractaldna
+FractalDNA
 ===
-Python routines for generating simple models of DNA
+Python routines for generating geometric models of DNA
 ---
 
 *FractalDNA is being converted to a package, it is under active developmemt*
@@ -48,9 +48,40 @@ scripts. Though at the moment you can get some decent still results from the
 visualisation tools:
 
 ![DNA in Blender](https://cloud.githubusercontent.com/assets/2887977/22364140/936c16d0-e46f-11e6-9e71-ed8c512663ea.png)
+### List of labels and corresponding titles
 
-_____
+|               **Label**               |  **Title in Releases**  |
+| :-----------------------------------: | :---------------------: |
+|       `enhancement`, `feature`        |       🚀 Features       |
+| `bug`, `refactoring`, `bugfix`, `fix` | 🔧 Fixes & Refactoring  |
+|       `build`, `ci`, `testing`        | 📦 Build System & CI/CD |
+|              `breaking`               |   💥 Breaking Changes   |
+|            `documentation`            |    📝 Documentation     |
+|            `dependencies`             | ⬆️ Dependencies updates |
 
-Also, a shout out to the blender DNA example by George Lydecker where
-I first saw Blender being used to render DNA, and whose example code
-inspired some of what is here. (https://github.com/glydeck/MoloculeParser)
+You can update it in [`release-drafter.yml`](https://github.com/fractaldna/fractaldna/blob/master/.github/release-drafter.yml).
+
+GitHub creates the `bug`, `enhancement`, and `documentation` labels for you. Dependabot creates the `dependencies` label. Create the remaining labels on the Issues tab of your GitHub repository, when you need them.
+
+## 🛡 License
+
+[![License](https://img.shields.io/github/license/fractaldna/fractaldna)](https://github.com/fractaldna/fractaldna/blob/master/LICENSE)
+
+This project is licensed under the terms of the `MIT` license. See [LICENSE](https://github.com/fractaldna/fractaldna/blob/master/LICENSE) for more details.
+
+## 📃 Citation
+
+```bibtex
+@misc{fractaldna,
+  author = {Nathanael Lampe},
+  title = {FractalDNA},
+  year = {2021},
+  publisher = {GitHub},
+  journal = {GitHub repository},
+  howpublished = {\url{https://github.com/natl/fractaldna}}
+}
+```
+
+## Credits [![🚀 Your next Python package needs a bleeding-edge project structure.](https://img.shields.io/badge/python--package--template-%F0%9F%9A%80-brightgreen)](https://github.com/TezRomacH/python-package-template)
+
+This project was generated with [`python-package-template`](https://github.com/TezRomacH/python-package-template)

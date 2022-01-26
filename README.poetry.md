@@ -367,12 +367,12 @@ This project is licensed under the terms of the `MIT` license. See [LICENSE](htt
 
 ```bibtex
 @misc{fractaldna,
-  author = {fractaldna},
-  title = {Awesome `fractaldna` is a Python cli/package created with https://github.com/TezRomacH/python-package-template},
+  author = {Nathanael Lampe},
+  title = {FractalDNA},
   year = {2021},
   publisher = {GitHub},
   journal = {GitHub repository},
-  howpublished = {\url{https://github.com/fractaldna/fractaldna}}
+  howpublished = {\url{https://github.com/natl/fractaldna}}
 }
 ```
 

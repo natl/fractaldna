@@ -36,7 +36,7 @@ jobs:
     - name: Install dependencies
       run: |
         poetry config virtualenvs.in-project true
-        poetry install --no-dev
+        poetry install
 
     - name: Run style checks
       run: |
