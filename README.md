@@ -27,12 +27,16 @@ module was built to enable DNA-level simulations to be run in [Geant4-DNA](http:
 Structure models define the large scale structure of DNA,
 seeded from fractals. An example seeding fractal is below:
 
-![A 3-D iterated Hilbert Curve](https://github.com/natl/fractaldna/blob/master/docs/source/images/fractal-path.svg)
+<p align="center">
+  <img width="460" height="300" src="https://github.com/natl/fractaldna/blob/master/docs/source/images/fractal-path.svg" alt="A 3-D iterated Hilbert Curve">
+</p>
 
 DNA Models provide straight and curved segments that can come together to
 make DNA for use in simulations.
 
-![A straight solenoidal DNA segment](https://github.com/natl/fractaldna/blob/master/docs/source/images/single_solenoid_line_plot.jpg)
+<p align="center">
+  <img width="460" height="300" src="https://github.com/natl/fractaldna/blob/master/docs/source/images/single_solenoid_line_plot.jpg" alt="A straight solenoidal DNA segment">
+</p>
 
 Project documentation is available [here](http://natl.github.io/fractaldna/) alongside [notebook examples](http://natl.github.io/fractaldna/examples.html)
 
@@ -50,9 +54,23 @@ or install with `Poetry`
 poetry add fractaldna
 ```
 
+## 🧬 Make some DNA
+
+```py
+from fractaldna.dna_models import dnachain as dna
+
+# Make a DNA Chain 40 base pairs long (repeating GATC).
+chain = dna.DNAChain("GTAC" * 10)
+
+# Export it to a DataFrame for use in another program
+df = chain.to_frame()
+```
+
+For more, check out the [notebook examples](http://natl.github.io/fractaldna/examples.html) in the project documentation.
+
 ## 🛡 License
 
-[![License](https://img.shields.io/github/license/fractaldna/fractaldna)](https://github.com/natl/fractaldna/blob/master/LICENSE)
+[![License](https://img.shields.io/github/license/natl/fractaldna)](https://github.com/natl/fractaldna/blob/master/LICENSE)
 
 This project is licensed under the terms of the `GPL-3` license. See [LICENSE](https://github.com/natl/fractaldna/blob/master/LICENSE) for more details.
 
