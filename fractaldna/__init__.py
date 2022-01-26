@@ -1,5 +1,5 @@
 # type: ignore[attr-defined]
-"""Awesome `fractaldna` is a Python cli/package created with https://github.com/TezRomacH/python-package-template"""
+"""FractalDNA is a Python package built to generate DNA geometries for simulations"""
 
 import sys
 

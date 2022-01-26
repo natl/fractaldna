@@ -23,7 +23,7 @@ class Color(str, Enum):
 
 app = typer.Typer(
     name="fractaldna",
-    help="Awesome `fractaldna` is a Python cli/package created with https://github.com/TezRomacH/python-package-template",
+    help="FractalDNA is a Python package built to generate DNA geometries for simulations",
     add_completion=False,
 )
 console = Console()

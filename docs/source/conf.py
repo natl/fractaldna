@@ -47,7 +47,11 @@ extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.autosummary",
     "sphinx_autodoc_typehints",
+    "nbsphinx",
 ]
+
+# Notebooks should be pre-executed
+nbsphinx_execute = "never"
 
 # set_type_checking_flag = True
 
