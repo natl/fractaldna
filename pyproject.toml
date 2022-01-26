@@ -5,21 +5,25 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "fractaldna"
-version = "0.3.0"
+version = "0.3.1"
 description = "FractalDNA is a Python package built to generate DNA geometries for simulations"
 readme = "README.md"
-authors = ["fractaldna <hello@fractaldna.com>"]
+authors = ["Nathanael Lampe"]
 license = "MIT"
-repository = "https://github.com/fractaldna/fractaldna"
-homepage = "https://github.com/fractaldna/fractaldna"
+repository = "https://github.com/natl/fractaldna"
+homepage = "https://github.com/natl/fractaldna"
+documentation = "natl.github.io/fractaldna/"
 
 # Keywords description https://python-poetry.org/docs/pyproject/#keywords
-keywords = []  #! Update me
+keywords = ["dna", "geant4", "simulation", "modelling"]  #! Update me
 
 # Pypi classifiers: https://pypi.org/classifiers/
-classifiers = [  #! Update me
-  "Development Status :: 3 - Alpha",
+classifiers = [
+  "Development Status :: 4 - Beta",
   "Intended Audience :: Developers",
+  "Intended Audience :: Science/Research",
+  "Topic :: Scientific/Engineering :: Medical Science Apps.",
+  "Topic :: Scientific/Engineering :: Bio-Informatics",
   "Operating System :: OS Independent",
   "Topic :: Software Development :: Libraries :: Python Modules",
   "License :: OSI Approved :: MIT License",

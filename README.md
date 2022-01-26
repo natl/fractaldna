@@ -7,15 +7,15 @@ Python routines for generating geometric models of DNA
 
 <div align="center">
 
-[![Build status](https://github.com/natl/fractaldna/workflows/build/badge.svg?branch=master&event=push)](https://github.com/fractaldna/fractaldna/actions?query=workflow%3Abuild)
+[![Build status](https://github.com/natl/fractaldna/workflows/build/badge.svg?branch=master&event=push)](https://github.com/natl/fractaldna/actions?query=workflow%3Abuild)
 [![Python Version](https://img.shields.io/pypi/pyversions/fractaldna.svg)](https://pypi.org/project/fractaldna/)
-[![Dependencies Status](https://img.shields.io/badge/dependencies-up%20to%20date-brightgreen.svg)](https://github.com/fractaldna/fractaldna/pulls?utf8=%E2%9C%93&q=is%3Apr%20author%3Aapp%2Fdependabot)
+[![Dependencies Status](https://img.shields.io/badge/dependencies-up%20to%20date-brightgreen.svg)](https://github.com/natl/fractaldna/pulls?utf8=%E2%9C%93&q=is%3Apr%20author%3Aapp%2Fdependabot)
 
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Security: bandit](https://img.shields.io/badge/security-bandit-green.svg)](https://github.com/PyCQA/bandit)
-[![Pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/fractaldna/fractaldna/blob/master/.pre-commit-config.yaml)
-[![Semantic Versions](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--versions-e10079.svg)](https://github.com/fractaldna/fractaldna/releases)
-[![License](https://img.shields.io/github/license/natl/fractaldna)](https://github.com/fractaldna/fractaldna/blob/master/LICENSE)
+[![Pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/natl/fractaldna/blob/master/.pre-commit-config.yaml)
+[![Semantic Versions](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--versions-e10079.svg)](https://github.com/natl/fractaldna/releases)
+[![License](https://img.shields.io/github/license/natl/fractaldna)](https://github.com/natl/fractaldna/blob/master/LICENSE)
 
 </div>
 
@@ -54,7 +54,7 @@ poetry add fractaldna
 
 [![License](https://img.shields.io/github/license/fractaldna/fractaldna)](https://github.com/natl/fractaldna/blob/master/LICENSE)
 
-This project is licensed under the terms of the `GPL-3` license. See [LICENSE](https://github.com/natl/fractaldna/blob/master/LICENSE) for more details.
+This project is licensed under the terms of the `MIT` license. See [LICENSE](https://github.com/natl/fractaldna/blob/master/LICENSE) for more details.
 
 ## 📃 Citation
 
