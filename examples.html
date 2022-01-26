@@ -15,11 +15,12 @@
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="examples" href="generated/examples.html" />
-    <link rel="prev" title="Structure Models" href="structure_models.html" /> 
+    <link rel="next" title="How to make a Voxelised DNA Structure" href="examples/structure-models.html" />
+    <link rel="prev" title="DNA Models" href="dna_models.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -38,10 +39,14 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="dna_models.html">DNA Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="structure_models.html">Structure Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dna_models.html">DNA Models</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Examples</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="generated/examples.html">examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/structure-models.html">How to make a Voxelised DNA Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/single-strand.html">Making Single Strand DNA Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/multiple-strands.html">Make and visualise DNA Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/single-solenoids.html">Single DNA Solenoids</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/multiple-solenoids.html">Placing volumes that contain multiple DNA solenoids</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
@@ -71,27 +76,76 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="examples">
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="examples">
 <h1>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h1>
-<table class="longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/examples.html#module-examples" title="examples"><code class="xref py py-obj docutils literal notranslate"><span class="pre">examples</span></code></a></p></td>
-<td><p></p></td>
-</tr>
-</tbody>
-</table>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/structure-models.html">How to make a Voxelised DNA Structure</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/structure-models.html#Producing-L-Strings">Producing L-Strings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="examples/structure-models.html#Drawing-Fractals">Drawing Fractals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples/structure-models.html#Making-Voxelised-representations.">Making Voxelised representations.</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples/single-strand.html">Making Single Strand DNA Models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/single-strand.html#Making-and-plotting-a-single-DNA-strand">Making and plotting a single DNA strand</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/single-strand.html#Generating-pretty-plots-with-MayaVI">Generating pretty plots with MayaVI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/single-strand.html#Exporting-a-DNA-strand-as-text">Exporting a DNA strand as text</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples/multiple-strands.html">Make and visualise DNA Models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/multiple-strands.html#Making-Multi-Strand-DNA">Making Multi-Strand DNA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/multiple-strands.html#Generating-nicer-plots-with-MayaVI">Generating nicer plots with MayaVI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/multiple-strands.html#Generating-curved-strands">Generating curved strands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/multiple-strands.html#Exporting-to-dataframe-or-text">Exporting to dataframe or text</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples/single-solenoids.html">Single DNA Solenoids</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/single-solenoids.html#Making-a-straight-Solenoidal-DNA-strand">Making a straight Solenoidal DNA strand</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/single-solenoids.html#Making-a-turned-Solenoidal-DNA-Strand">Making a turned Solenoidal DNA Strand</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/single-solenoids.html#Exporting-Solenoidal-DNA-to-CSV">Exporting Solenoidal DNA to CSV</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples/multiple-solenoids.html">Placing volumes that contain multiple DNA solenoids</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/multiple-solenoids.html#Making-Multiple-Solenoids">Making Multiple Solenoids</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/multiple-solenoids.html#Exporting-multiple-solenoids-as-text">Exporting multiple solenoids as text</a></li>
+</ul>
+</li>
+</ul>
+</div>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="structure_models.html" class="btn btn-neutral float-left" title="Structure Models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="generated/examples.html" class="btn btn-neutral float-right" title="examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="dna_models.html" class="btn btn-neutral float-left" title="DNA Models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="examples/structure-models.html" class="btn btn-neutral float-right" title="How to make a Voxelised DNA Structure" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

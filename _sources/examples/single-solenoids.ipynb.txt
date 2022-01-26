@@ -1,0 +1,170 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Single DNA Solenoids\n",
+    "\n",
+    "This example shows how to generate single DNA Solenoids, and either plot them in MayaVI\n",
+    "or export them to text\n",
+    "\n",
+    "*It is recommended that you run this example inside a Jupyter environment*\n",
+    "*rather than a VSCode or similar environment*\n",
+    "\n",
+    "This requires the mayavi jupyter extension\n",
+    "`jupyter nbextension install --py mayavi --user`"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import sys\n",
+    "from pathlib import Path\n",
+    "\n",
+    "try:\n",
+    "    from fractaldna.dna_models import dnachain as dna\n",
+    "except (ImportError, ModuleNotFoundError):\n",
+    "    sys.path.append(str(Path.cwd().parent.parent.parent))\n",
+    "    from fractaldna.dna_models import dnachain as dna\n",
+    "\n",
+    "import matplotlib.pyplot as plt\n",
+    "from mayavi import mlab\n",
+    "\n",
+    "# Disable this option for interactive rendering\n",
+    "mlab.options.offscreen = True\n",
+    "\n",
+    "# Enable this option for an interactive notebook\n",
+    "# mlab.init_notebook()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Making a straight Solenoidal DNA strand"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Make a straight solenoid in a 750 Å box\n",
+    "chain = dna.Solenoid(voxelheight=750)\n",
+    "# MayaVI plots are best for visualisation here\n",
+    "plot = chain.to_strand_plot()\n",
+    "\n",
+    "# Save the figure\n",
+    "plot.scene.save_jpg(\"single_solenoid_strand_plot.jpg\")\n",
+    "\n",
+    "# In an interactive notebook, you can refer to the figure to\n",
+    "# interact with it.\n",
+    "# plot"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plot = chain.to_line_plot()\n",
+    "plot.scene.save_jpg(\"single_solenoid_line_plot.jpg\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "![](single_solenoid_strand_plot.jpg) ![](single_solenoid_line_plot.jpg)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Making a turned Solenoidal DNA Strand"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Make a turned solenoid in a 750 Å box\n",
+    "chain = dna.TurnedSolenoid(voxelheight=750)\n",
+    "# MayaVI plots are best for visualisation here\n",
+    "plot = chain.to_strand_plot()\n",
+    "plot.scene.save_jpg(\"single_solenoid_strand_plot_turned.jpg\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "![](single_solenoid_strand_plot_turned.jpg)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# The line plot method is well adapted to plotting chromatin\n",
+    "plot = chain.to_line_plot()\n",
+    "plot.scene.save_jpg(\"single_solenoid_line_plot_turned.jpg\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "![](single_solenoid_line_plot_turned.jpg)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Exporting Solenoidal DNA to CSV"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# This too can be exported to a dataframe of basepairs\n",
+    "chain.to_frame()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# And a second data frame of histones\n",
+    "# This can be joined to the base pairs frame, assuming a sufficient handling of\n",
+    "# the missing strand index, and the relation between the base pair and histone index.\n",
+    "chain.histones_to_frame()"
+   ]
+  }
+ ],
+ "metadata": {
+  "language_info": {
+   "name": "python",
+   "pygments_lexer": "ipython3"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 4
+}

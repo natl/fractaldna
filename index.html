@@ -15,10 +15,11 @@
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="DNA Models" href="dna_models.html" /> 
+    <link rel="next" title="Structure Models" href="structure_models.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -37,8 +38,8 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="dna_models.html">DNA Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="structure_models.html">Structure Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dna_models.html">DNA Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
 </ul>
@@ -67,16 +68,48 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="fractaldna">
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="fractaldna">
 <h1>FractalDNA<a class="headerlink" href="#fractaldna" title="Permalink to this headline">¶</a></h1>
 <p>FractalDNA is a Python package to make DNA geometries that can be joined together like
-jigsaw puzzles. Both simple, sections of DNA and Solenoidal DNA can be built.</p>
+jigsaw puzzles. Both simple, sections of DNA and Solenoidal DNA can be built. This
+module was built to enable DNA-level simulations to be run in <a class="reference external" href="http://geant4-dna.in2p3.fr/">Geant4-DNA</a>, part of the
+<a class="reference external" href="geant4.cern.ch/">Geant4</a> project.</p>
+<p><a class="reference internal" href="structure_models.html"><span class="doc">Structure models</span></a> define the large scale structure of DNA,
+seeded from fractals. An example seeding fractal is below:</p>
+<img alt="A 3-D iterated Hilbert Curve" class="align-center" src="_images/fractal-path.svg" /><p><a class="reference internal" href="dna_models.html"><span class="doc">DNA Models</span></a> provide straight and curved segments that can come together to
+make DNA for use in simulations.</p>
+<img alt="A straight solenoidal DNA segment" class="align-center" src="_images/single_solenoid_line_plot1.jpg" />
 <p>Documentation is divided into three main sections, focused on <a class="reference internal" href="dna_models.html"><span class="doc">building DNA models</span></a>,
-<a class="reference internal" href="structure_models.html"><span class="doc">high level structure models</span></a>, and explaining <a class="reference internal" href="examples.html"><span class="doc">examples</span></a>.</p>
+<a class="reference internal" href="structure_models.html"><span class="doc">high level structure models</span></a>, and then some notebook  <a class="reference internal" href="examples.html"><span class="doc">examples</span></a>. showing
+how the code works.</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="dna_models.html">DNA Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="structure_models.html">Structure Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dna_models.html">DNA Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
 </ul>
@@ -95,7 +128,7 @@ jigsaw puzzles. Both simple, sections of DNA and Solenoidal DNA can be built.</p
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="dna_models.html" class="btn btn-neutral float-right" title="DNA Models" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="structure_models.html" class="btn btn-neutral float-right" title="Structure Models" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
