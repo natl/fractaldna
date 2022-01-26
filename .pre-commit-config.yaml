@@ -34,3 +34,9 @@ repos:
         entry: poetry run black --config pyproject.toml
         types: [python]
         language: system
+
+  - repo: local
+    hooks:
+      - id: requirements
+        name: generate requirements.txt
+        entry: poetry export -f requirements.txt --output requirements.txt --without-hashes && poetry export --dev -f requirements.txt --output requirements-dev.txt --without-hashes

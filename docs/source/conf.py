@@ -50,8 +50,8 @@ extensions = [
     "nbsphinx"
 ]
 
-# Allow nbsphinx to have errors
-nbsphinx_allow_errors = True
+# Notebooks should be pre-executed
+nbsphinx_execute = 'never'
 
 # set_type_checking_flag = True
 
