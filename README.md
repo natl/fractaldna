@@ -19,35 +19,36 @@ Python routines for generating geometric models of DNA
 
 </div>
 
-This repository is an offshoot of my thesis work, where I simulate the impact
-of ionising radiation on DNA. For this, I need to model and visualise very
-large DNA structures
+FractalDNA is a Python package to make DNA geometries that can be joined together like
+jigsaw puzzles. Both simple, sections of DNA and Solenoidal DNA can be built. This
+module was built to enable DNA-level simulations to be run in [Geant4-DNA](http://geant4-dna.in2p3.fr/), part of the
+[Geant4](geant4.cern.ch/) project.
 
-Modelling DNA geometries computationally can be done very crudely based on
-a few DNA motifs and a fractal geometry. It provides a memory efficient way of
-ensuring that an appropriate density of DNA is placed in a sample volume. The
-idea is to use a fractal as a seed for a collection of turned and straight
-geometries, and then place repeating turned and straight DNA segments inside
-these geometries.
+Structure models define the large scale structure of DNA,
+seeded from fractals. An example seeding fractal is below:
 
-Here you can see the idea being applied to the first few iterations of a Hilbert
-curve.
+![A 3-D iterated Hilbert Curve](https://github.com/natl/fractaldna/blob/master/docs/source/images/fractal-path.svg)
 
-![Fractal DNA](https://cloud.githubusercontent.com/assets/2887977/22364141/936da1ee-e46f-11e6-9c56-ee4e0dcb8d0f.png)
+DNA Models provide straight and curved segments that can come together to
+make DNA for use in simulations.
 
-The project is divided into three sections, each with their own Readme:
-* `hilbert3d` provides routines for generating 3D fractals from L-systems.
-* `simpledna` has some routines for generating simple turned and straight
-DNA models.
-* `vis` contains some Python routines that work in Blender to visualise the
-whole DNA structure.
+![A straight solenoidal DNA segment](https://github.com/natl/fractaldna/blob/master/docs/source/images/single_solenoid_line_plot.jpg)
 
-This project is currently in a beta form, I'm working on documentation and
-the ability to generate videos of DNA procedurally in Blender from Python
-scripts. Though at the moment you can get some decent still results from the
-visualisation tools:
+Project documentation is available [here](http://natl.github.io/fractaldna/) alongside [notebook examples](http://natl.github.io/fractaldna/examples.html)
 
-![DNA in Blender](https://cloud.githubusercontent.com/assets/2887977/22364140/936c16d0-e46f-11e6-9e71-ed8c512663ea.png)
+## ⚙️ Installation
+
+Install FractalDNA with `pip`
+
+```bash
+pip install fractaldna
+```
+
+or install with `Poetry`
+
+```bash
+poetry add fractaldna
+```
 
 ## 🛡 License
 
