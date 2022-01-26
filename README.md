@@ -48,26 +48,12 @@ scripts. Though at the moment you can get some decent still results from the
 visualisation tools:
 
 ![DNA in Blender](https://cloud.githubusercontent.com/assets/2887977/22364140/936c16d0-e46f-11e6-9e71-ed8c512663ea.png)
-### List of labels and corresponding titles
-
-|               **Label**               |  **Title in Releases**  |
-| :-----------------------------------: | :---------------------: |
-|       `enhancement`, `feature`        |       🚀 Features       |
-| `bug`, `refactoring`, `bugfix`, `fix` | 🔧 Fixes & Refactoring  |
-|       `build`, `ci`, `testing`        | 📦 Build System & CI/CD |
-|              `breaking`               |   💥 Breaking Changes   |
-|            `documentation`            |    📝 Documentation     |
-|            `dependencies`             | ⬆️ Dependencies updates |
-
-You can update it in [`release-drafter.yml`](https://github.com/fractaldna/fractaldna/blob/master/.github/release-drafter.yml).
-
-GitHub creates the `bug`, `enhancement`, and `documentation` labels for you. Dependabot creates the `dependencies` label. Create the remaining labels on the Issues tab of your GitHub repository, when you need them.
 
 ## 🛡 License
 
-[![License](https://img.shields.io/github/license/fractaldna/fractaldna)](https://github.com/fractaldna/fractaldna/blob/master/LICENSE)
+[![License](https://img.shields.io/github/license/fractaldna/fractaldna)](https://github.com/natl/fractaldna/blob/master/LICENSE)
 
-This project is licensed under the terms of the `MIT` license. See [LICENSE](https://github.com/fractaldna/fractaldna/blob/master/LICENSE) for more details.
+This project is licensed under the terms of the `GPL-3` license. See [LICENSE](https://github.com/natl/fractaldna/blob/master/LICENSE) for more details.
 
 ## 📃 Citation
 
