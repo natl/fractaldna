@@ -27,12 +27,12 @@ module was built to enable DNA-level simulations to be run in [Geant4-DNA](http:
 Structure models define the large scale structure of DNA,
 seeded from fractals. An example seeding fractal is below:
 
-![A 3-D iterated Hilbert Curve](https://github.com/natl/fractaldna/blob/master/docs/source/images/fractal-path.svg)
+![A 3-D iterated Hilbert Curve](https://raw.githubusercontent.com/natl/fractaldna/master/docs/source/images/fractal-path.svg)
 
 DNA Models provide straight and curved segments that can come together to
 make DNA for use in simulations.
 
-![A straight solenoidal DNA segment](https://github.com/natl/fractaldna/blob/master/docs/source/images/single_solenoid_line_plot.jpg)
+![A straight solenoidal DNA segment](https://raw.githubusercontent.com/natl/fractaldna/master/docs/source/images/single_solenoid_line_plot.jpg)
 
 Project documentation is available [here](http://natl.github.io/fractaldna/) alongside [notebook examples](http://natl.github.io/fractaldna/examples.html)
 
@@ -52,7 +52,7 @@ poetry add fractaldna
 
 ## 🛡 License
 
-[![License](https://img.shields.io/github/license/fractaldna/fractaldna)](https://github.com/natl/fractaldna/blob/master/LICENSE)
+[![License](https://img.shields.io/github/license/natl/fractaldna)](https://github.com/natl/fractaldna/blob/master/LICENSE)
 
 This project is licensed under the terms of the `MIT` license. See [LICENSE](https://github.com/natl/fractaldna/blob/master/LICENSE) for more details.
 

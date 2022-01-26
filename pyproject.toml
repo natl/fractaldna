@@ -12,7 +12,7 @@ authors = ["Nathanael Lampe"]
 license = "MIT"
 repository = "https://github.com/natl/fractaldna"
 homepage = "https://github.com/natl/fractaldna"
-documentation = "natl.github.io/fractaldna/"
+documentation = "https://natl.github.io/fractaldna"
 
 # Keywords description https://python-poetry.org/docs/pyproject/#keywords
 keywords = ["dna", "geant4", "simulation", "modelling"]  #! Update me
