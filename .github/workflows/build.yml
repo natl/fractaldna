@@ -18,7 +18,7 @@ jobs:
     #     apt-get install -y libglu1-mesa libqt5x11extras5
 
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2.3.1
+      uses: actions/setup-python@v2.3.2
       with:
         python-version: ${{ matrix.python-version }}
 
