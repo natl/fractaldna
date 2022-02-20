@@ -120,16 +120,13 @@ def iterate_lstring(inString: str):
 
 
 def generate_path(
-    lstring: str,
-    n: int = 2,
-    distance: float = 10.0,
-    rounding: int = 0
+    lstring: str, n: int = 2, distance: float = 10.0, rounding: int = 0
 ) -> List[np.array]:
     """
     Generate a path from an l-string
 
     When moving a distance smaller than 1, ensure that rounding is set correctly.
-    
+
     This algorithm works best when moving in integer steps and applying any scaling
     after generating the path.
 
@@ -139,7 +136,7 @@ def generate_path(
     :param rounding: rounding to apply to each position
     :return: list of XYZ points
     """
-    if distance < 10**(-1*rounding):
+    if distance < 10 ** (-1 * rounding):
         raise ValueError(
             f"Decimal place rounding is too large {rounding} places "
             f"for the distance moved forward {distance} units"

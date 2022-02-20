@@ -90,14 +90,14 @@ class TestFractalCreation(unittest.TestCase):
                     (1 - nreps) / nreps * countsExpected,
                     f"Counts were low for seed {seed}\n"
                     f"N_iterations: {nreps}\n"
-                    f"Counts/Expected: {count}/{countsExpected}"
+                    f"Counts/Expected: {count}/{countsExpected}",
                 )
                 self.assertLess(
                     count,
                     (1 + nreps) / nreps * countsExpected,
                     f"Counts were high for seed {seed}\n"
                     f"N_iterations: {nreps}\n"
-                    f"Counts/Expected: {count}/{countsExpected}"
+                    f"Counts/Expected: {count}/{countsExpected}",
                 )
 
         return None

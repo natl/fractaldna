@@ -490,7 +490,7 @@ class VoxelisedFractal:
         path = np.asarray(path)
         if path.shape[1] != 3:
             raise ValueError("Positions in path require 3 elements (xyz)")
-        
+
         # Check that we only ever move in the six principal directions
         for this_pos, next_pos in zip(path, np.roll(path, -1, axis=0)[:-1]):
             absdiff = np.abs(this_pos - next_pos)
