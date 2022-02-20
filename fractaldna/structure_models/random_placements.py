@@ -369,8 +369,7 @@ def get_euler_angles(rotmatrix):
 
 
 class Arrow3D(FancyArrowPatch):
-    """Helper class to plot arrows
-    """
+    """Helper class to plot arrows"""
 
     def __init__(self, start, end, *args, **kwargs):
         FancyArrowPatch.__init__(self, (0, 0), (0, 0), *args, **kwargs)
