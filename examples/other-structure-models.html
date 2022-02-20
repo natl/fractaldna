@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Placing volumes that contain multiple DNA solenoids &mdash; FractalDNA 0.1 documentation</title>
+  <title>How to make a Other DNA Structure &mdash; FractalDNA 0.1 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -21,8 +21,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="API Reference" href="../api.html" />
-    <link rel="prev" title="Single DNA Solenoids" href="single-solenoids.html" /> 
+    <link rel="next" title="Making Single Strand DNA Models" href="single-strand.html" />
+    <link rel="prev" title="How to make a Voxelised DNA Structure" href="fractal-structure-models.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -45,15 +45,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../dna_models.html">DNA Models</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../examples.html">Examples</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="fractal-structure-models.html">How to make a Voxelised DNA Structure</a></li>
-<li class="toctree-l2"><a class="reference internal" href="other-structure-models.html">How to make a Other DNA Structure</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">How to make a Other DNA Structure</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Producing-Voxels-from-Random-Placements">Producing Voxels from Random Placements</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="single-strand.html">Making Single Strand DNA Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="multiple-strands.html">Make and visualise DNA Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="single-solenoids.html">Single DNA Solenoids</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Placing volumes that contain multiple DNA solenoids</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#Making-Multiple-Solenoids">Making Multiple Solenoids</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Exporting-multiple-solenoids-as-text">Exporting multiple solenoids as text</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="multiple-solenoids.html">Placing volumes that contain multiple DNA solenoids</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../api.html">API Reference</a></li>
@@ -74,9 +73,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="../examples.html">Examples</a> &raquo;</li>
-      <li>Placing volumes that contain multiple DNA solenoids</li>
+      <li>How to make a Other DNA Structure</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/examples/multiple-solenoids.ipynb.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/examples/other-structure-models.ipynb.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -354,12 +353,10 @@ div.rendered_html tbody tr:hover {
     text-align: unset;
 }
 </style>
-<section id="Placing-volumes-that-contain-multiple-DNA-solenoids">
-<h1>Placing volumes that contain multiple DNA solenoids<a class="headerlink" href="#Placing-volumes-that-contain-multiple-DNA-solenoids" title="Permalink to this headline">¶</a></h1>
-<p>Multiple solenoid volumes allow for the densest DNA geometries we generate here.</p>
-<p>Up to 9 solenoids can be placed in a voxel by the methods shown in this example.</p>
-<p><em>It is recommended that you run this example inside a Jupyter environment</em> <em>rather than a VSCode or similar environment</em></p>
-<p>This requires the mayavi jupyter extension <code class="docutils literal notranslate"><span class="pre">jupyter</span> <span class="pre">nbextension</span> <span class="pre">install</span> <span class="pre">--py</span> <span class="pre">mayavi</span> <span class="pre">--user</span></code></p>
+<section id="How-to-make-a-Other-DNA-Structure">
+<h1>How to make a Other DNA Structure<a class="headerlink" href="#How-to-make-a-Other-DNA-Structure" title="Permalink to this headline">¶</a></h1>
+<p>Structures can also be built from paths, or as random placements.</p>
+<p>Paths can be used to seed a measured geometry, while random placements serve well when generating isotropic DNA damage measurements</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
@@ -368,59 +365,32 @@ div.rendered_html tbody tr:hover {
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 
 <span class="k">try</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">fractaldna.dna_models</span> <span class="kn">import</span> <span class="n">dnachain</span> <span class="k">as</span> <span class="n">dna</span>
+    <span class="c1"># The voxelisation library produces the cubic voxelisation that</span>
+    <span class="c1"># can be used to build DNA</span>
+    <span class="kn">from</span> <span class="nn">fractaldna.structure_models</span> <span class="kn">import</span> <span class="n">voxelisation</span> <span class="k">as</span> <span class="n">v</span>
+    <span class="kn">from</span> <span class="nn">fractaldna.structure_models</span> <span class="kn">import</span> <span class="n">random_placements</span> <span class="k">as</span> <span class="n">rp</span>
+
 <span class="k">except</span> <span class="p">(</span><span class="ne">ImportError</span><span class="p">,</span> <span class="ne">ModuleNotFoundError</span><span class="p">):</span>
     <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span><span class="p">))</span>
-    <span class="kn">from</span> <span class="nn">fractaldna.dna_models</span> <span class="kn">import</span> <span class="n">dnachain</span> <span class="k">as</span> <span class="n">dna</span>
+    <span class="kn">from</span> <span class="nn">fractaldna.structure_models</span> <span class="kn">import</span> <span class="n">voxelisation</span> <span class="k">as</span> <span class="n">v</span>
+    <span class="kn">from</span> <span class="nn">fractaldna.structure_models</span> <span class="kn">import</span> <span class="n">random_placements</span> <span class="k">as</span> <span class="n">rp</span>
 
-<span class="kn">from</span> <span class="nn">mayavi</span> <span class="kn">import</span> <span class="n">mlab</span>
-
-<span class="c1"># Disable this option for interactive rendering</span>
-<span class="n">mlab</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">offscreen</span> <span class="o">=</span> <span class="kc">True</span>
-
-<span class="c1"># Enable this option for an interactive notebook</span>
-<span class="c1"># mlab.init_notebook()</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span>
 </pre></div>
 </div>
 </div>
-<section id="Making-Multiple-Solenoids">
-<h2>Making Multiple Solenoids<a class="headerlink" href="#Making-Multiple-Solenoids" title="Permalink to this headline">¶</a></h2>
+<section id="Producing-Voxels-from-Random-Placements">
+<h2>Producing Voxels from Random Placements<a class="headerlink" href="#Producing-Voxels-from-Random-Placements" title="Permalink to this headline">¶</a></h2>
+<p>This method generates a random collection of prisms inside a ball. It places candidate prisms in the volume of interest, ensuring there are no overlaps.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Multi-Solenoidal Volumes contain 8 chromatin strands.</span>
-<span class="n">chain</span> <span class="o">=</span> <span class="n">dna</span><span class="o">.</span><span class="n">MultiSolenoidVolume</span><span class="p">(</span><span class="n">voxelheight</span><span class="o">=</span><span class="mi">750</span><span class="p">)</span>
-<span class="c1"># MayaVI plots are best for visualisation here</span>
-<span class="n">plot</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">to_strand_plot</span><span class="p">()</span>
-<span class="n">plot</span><span class="o">.</span><span class="n">scene</span><span class="o">.</span><span class="n">save_jpg</span><span class="p">(</span><span class="s2">&quot;multi_solenoid_strand_plot.jpg&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<p><img alt="image0" src="../_images/multi_solenoid_turned_plot.jpg" /></p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># They can be turned, and only select chains can be generated</span>
-<span class="n">chain</span> <span class="o">=</span> <span class="n">dna</span><span class="o">.</span><span class="n">MultiSolenoidVolume</span><span class="p">(</span>
-    <span class="n">voxelheight</span><span class="o">=</span><span class="mi">1500</span><span class="p">,</span> <span class="n">separation</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">turn</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">chains</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">placements</span> <span class="o">=</span> <span class="n">rp</span><span class="o">.</span><span class="n">generate_non_overlapping_prisms</span><span class="p">(</span>
+    <span class="mi">10</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">]),</span> <span class="mi">500</span><span class="p">,</span> <span class="n">early_exit</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span>
 <span class="p">)</span>
-<span class="n">plot</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">to_line_plot</span><span class="p">()</span>
-<span class="n">plot</span><span class="o">.</span><span class="n">scene</span><span class="o">.</span><span class="n">save_jpg</span><span class="p">(</span><span class="s2">&quot;multi_solenoid_turned_plot.jpg&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<p><img alt="image0" src="../_images/multi_solenoid_turned_plot.jpg" /></p>
-</section>
-<section id="Exporting-multiple-solenoids-as-text">
-<h2>Exporting multiple solenoids as text<a class="headerlink" href="#Exporting-multiple-solenoids-as-text" title="Permalink to this headline">¶</a></h2>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This too can be exported to a dataframe of basepairs</span>
-<span class="n">chain</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -428,8 +398,33 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># And a second base pair of histones</span>
-<span class="n">chain</span><span class="o">.</span><span class="n">histones_to_frame</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># A single prism can be plotted as a diagnostic,</span>
+<span class="c1"># using random points inside the prism</span>
+<span class="c1"># Arrows show the cardinal axes of the prism</span>
+
+<span class="n">placements</span><span class="o">.</span><span class="n">prisms</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">to_plot</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">arrows</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Multiple prisms can be plotted together</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s2">&quot;3d&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">prism</span> <span class="ow">in</span> <span class="n">placements</span><span class="o">.</span><span class="n">prisms</span><span class="p">:</span>
+    <span class="n">prism</span><span class="o">.</span><span class="n">to_plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># And the output can be extracted as a Data Frame</span>
+<span class="n">placements</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -448,8 +443,8 @@ div.rendered_html tbody tr:hover {
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="single-solenoids.html" class="btn btn-neutral float-left" title="Single DNA Solenoids" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../api.html" class="btn btn-neutral float-right" title="API Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="fractal-structure-models.html" class="btn btn-neutral float-left" title="How to make a Voxelised DNA Structure" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="single-strand.html" class="btn btn-neutral float-right" title="Making Single Strand DNA Models" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Making Single Strand DNA Models &mdash; FractalDNA 0.1 documentation</title>
+  <title>How to make a Voxelised DNA Structure &mdash; FractalDNA 0.1 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -21,8 +21,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Make and visualise DNA Models" href="multiple-strands.html" />
-    <link rel="prev" title="How to make a Other DNA Structure" href="other-structure-models.html" /> 
+    <link rel="next" title="How to make a Other DNA Structure" href="other-structure-models.html" />
+    <link rel="prev" title="Examples" href="../examples.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -44,14 +44,19 @@
 <li class="toctree-l1"><a class="reference internal" href="../structure_models.html">Structure Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dna_models.html">DNA Models</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../examples.html">Examples</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="fractal-structure-models.html">How to make a Voxelised DNA Structure</a></li>
-<li class="toctree-l2"><a class="reference internal" href="other-structure-models.html">How to make a Other DNA Structure</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Making Single Strand DNA Models</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#Making-and-plotting-a-single-DNA-strand">Making and plotting a single DNA strand</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Generating-pretty-plots-with-MayaVI">Generating pretty plots with MayaVI</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Exporting-a-DNA-strand-as-text">Exporting a DNA strand as text</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">How to make a Voxelised DNA Structure</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Producing-L-Strings">Producing L-Strings</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Drawing-Fractals">Drawing Fractals</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#Making-voxelised-representations.">Making voxelised representations.</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Exporting-large-scale-structures-to-text.">Exporting large-scale structures to text.</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="other-structure-models.html">How to make a Other DNA Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="single-strand.html">Making Single Strand DNA Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="multiple-strands.html">Make and visualise DNA Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="single-solenoids.html">Single DNA Solenoids</a></li>
 <li class="toctree-l2"><a class="reference internal" href="multiple-solenoids.html">Placing volumes that contain multiple DNA solenoids</a></li>
@@ -75,9 +80,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="../examples.html">Examples</a> &raquo;</li>
-      <li>Making Single Strand DNA Models</li>
+      <li>How to make a Voxelised DNA Structure</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/examples/single-strand.ipynb.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/examples/fractal-structure-models.ipynb.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -355,10 +360,10 @@ div.rendered_html tbody tr:hover {
     text-align: unset;
 }
 </style>
-<section id="Making-Single-Strand-DNA-Models">
-<h1>Making Single Strand DNA Models<a class="headerlink" href="#Making-Single-Strand-DNA-Models" title="Permalink to this headline">¶</a></h1>
-<p><em>It is recommended that you run this example inside a Jupyter environment</em> <em>rather than a VSCode or similar environment</em></p>
-<p>This requires the mayavi jupyter extension <code class="docutils literal notranslate"><span class="pre">jupyter</span> <span class="pre">nbextension</span> <span class="pre">install</span> <span class="pre">--py</span> <span class="pre">mayavi</span> <span class="pre">--user</span></code></p>
+<section id="How-to-make-a-Voxelised-DNA-Structure">
+<h1>How to make a Voxelised DNA Structure<a class="headerlink" href="#How-to-make-a-Voxelised-DNA-Structure" title="Permalink to this headline">¶</a></h1>
+<p>DNA Structures are built from <a class="reference external" href="https://en.wikipedia.org/wiki/L-system">L-string</a> seeded fractals.</p>
+<p>L-strings and L-systems provide a grammar that can be used to generate a fractal. In this work, Hilbert curves are generated that are then converted into cubic placement ‘voxels’ for use in modelling.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
@@ -367,99 +372,126 @@ div.rendered_html tbody tr:hover {
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 
 <span class="k">try</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">fractaldna.dna_models</span> <span class="kn">import</span> <span class="n">dnachain</span> <span class="k">as</span> <span class="n">dna</span>
+    <span class="c1"># The voxelisation library produces the cubic voxelisation that</span>
+    <span class="c1"># can be used to build DNA</span>
+    <span class="kn">from</span> <span class="nn">fractaldna.structure_models</span> <span class="kn">import</span> <span class="n">voxelisation</span> <span class="k">as</span> <span class="n">v</span>
+
+    <span class="c1"># The hilbert module produces and handles L-Strings</span>
+    <span class="kn">from</span> <span class="nn">fractaldna.structure_models</span> <span class="kn">import</span> <span class="n">hilbert</span> <span class="k">as</span> <span class="n">h</span>
 <span class="k">except</span> <span class="p">(</span><span class="ne">ImportError</span><span class="p">,</span> <span class="ne">ModuleNotFoundError</span><span class="p">):</span>
-    <span class="c1"># Path modifications if working straight out of the git repo.</span>
     <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span><span class="p">))</span>
-    <span class="kn">from</span> <span class="nn">fractaldna.dna_models</span> <span class="kn">import</span> <span class="n">dnachain</span> <span class="k">as</span> <span class="n">dna</span>
+    <span class="kn">from</span> <span class="nn">fractaldna.structure_models</span> <span class="kn">import</span> <span class="n">voxelisation</span> <span class="k">as</span> <span class="n">v</span>
+    <span class="kn">from</span> <span class="nn">fractaldna.structure_models</span> <span class="kn">import</span> <span class="n">hilbert</span> <span class="k">as</span> <span class="n">h</span>
 
-<span class="kn">from</span> <span class="nn">mayavi</span> <span class="kn">import</span> <span class="n">mlab</span>
-
-<span class="c1"># Disable this option for interactive rendering</span>
-<span class="n">mlab</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">offscreen</span> <span class="o">=</span> <span class="kc">True</span>
-
-<span class="c1"># Enable this option for an interactive notebook</span>
-<span class="c1"># mlab.init_notebook()</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span>
 </pre></div>
 </div>
 </div>
-<section id="Making-and-plotting-a-single-DNA-strand">
-<h2>Making and plotting a single DNA strand<a class="headerlink" href="#Making-and-plotting-a-single-DNA-strand" title="Permalink to this headline">¶</a></h2>
+<section id="Producing-L-Strings">
+<h2>Producing L-Strings<a class="headerlink" href="#Producing-L-Strings" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">hilbert</span></code> model encodes a few basic fractals which can create Hilbert curves. These are</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>h.X: n&lt;XFn&lt;XFX-Fn&gt;&gt;XFX&amp;F+&gt;&gt;XFX-F&gt;X-&gt;
+h.A: B-F+CFC+F-D&amp;FnD-F+&amp;&amp;CFC+F+B&lt;&lt;
+h.B: A&amp;FnCFBnFnDnn-F-Dn|FnB|FCnFnA&lt;&lt;
+h.C: |Dn|FnB-F+CnFnA&amp;&amp;FA&amp;FnC+F+BnFnD&lt;&lt;
+h.D: |CFB-F+B|FA&amp;FnA&amp;&amp;FB-F+B|FC&lt;&lt;
+</pre></div>
+</div>
+<p>Reference to these are all stored in <code class="docutils literal notranslate"><span class="pre">hilbert.SUBSTITIONS</span></code>.</p>
+<p>The L-String language works as follows:</p>
+<ul class="simple">
+<li><p>interpret <code class="docutils literal notranslate"><span class="pre">F</span></code> as DrawForward(1);</p></li>
+<li><p>interpret <code class="docutils literal notranslate"><span class="pre">+</span></code> as Yaw(90);</p></li>
+<li><p>interpret <code class="docutils literal notranslate"><span class="pre">-</span></code> as Yaw(-90);</p></li>
+<li><p>interpret <code class="docutils literal notranslate"><span class="pre">n</span></code> as Pitch(90);</p></li>
+<li><p>interpret <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> as Pitch(-90);</p></li>
+<li><p>interpret <code class="docutils literal notranslate"><span class="pre">&gt;</span></code> as Roll(90);</p></li>
+<li><p>interpret <code class="docutils literal notranslate"><span class="pre">&lt;</span></code> as Roll(-90);</p></li>
+<li><p>interpret <code class="docutils literal notranslate"><span class="pre">|</span></code> as Yaw(180);</p></li>
+</ul>
+<p>To ‘iterate’ an L-String, replace any reference to a subsititution with its value.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make a 40 base pair long DNA Strand</span>
-<span class="n">chain</span> <span class="o">=</span> <span class="n">dna</span><span class="o">.</span><span class="n">DNAChain</span><span class="p">(</span><span class="s2">&quot;GTAC&quot;</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span>
-<span class="c1"># Generate a simple Matplotlib visualisation</span>
-<span class="c1"># The basic plot shows each molecule as a point</span>
-<span class="n">plot</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">to_plot</span><span class="p">()</span>
-<span class="n">plot</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Basic Plot&quot;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;h.X:&quot;</span><span class="p">,</span> <span class="n">h</span><span class="o">.</span><span class="n">X</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;h.A:&quot;</span><span class="p">,</span> <span class="n">h</span><span class="o">.</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;h.B:&quot;</span><span class="p">,</span> <span class="n">h</span><span class="o">.</span><span class="n">B</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;h.C:&quot;</span><span class="p">,</span> <span class="n">h</span><span class="o">.</span><span class="n">C</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;h.D:&quot;</span><span class="p">,</span> <span class="n">h</span><span class="o">.</span><span class="n">D</span><span class="p">)</span>
 
-<span class="c1"># You can also hide certain molecules (b = base, s=sugar, p=phosphate)</span>
-<span class="n">plot_phosphate</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">to_plot</span><span class="p">(</span><span class="n">plot_b</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">plot_s</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">plot_p</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">plot_phosphate</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Phosptate Only Plot&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">h.X iterated once:&quot;</span><span class="p">,</span> <span class="n">h</span><span class="o">.</span><span class="n">iterate_lstring</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">X</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<section id="Drawing-Fractals">
+<h3>Drawing Fractals<a class="headerlink" href="#Drawing-Fractals" title="Permalink to this headline">¶</a></h3>
+<p>The function <code class="docutils literal notranslate"><span class="pre">generate_path</span></code> will generate a list of XYZ-points for a fractal L-String as below, which can then be plotted in matplotlib</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Points seperated by 1 unit, no intermediate points&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">generate_path</span><span class="p">(</span><span class="s2">&quot;F&quot;</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Points seperated by 1 unit, 2 intermediate points&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">generate_path</span><span class="p">(</span><span class="s2">&quot;F&quot;</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_curve</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">generate_path</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span>
 
-<span class="c1"># The surface plot plots each DNA molecule as a ball</span>
-<span class="n">plot_surface</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">to_surface_plot</span><span class="p">()</span>
-<span class="n">plot_surface</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Surface Plot&quot;</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s2">&quot;3d&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_curve</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x_curve</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">x_curve</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_iterated</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">iterate_lstring</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">X</span><span class="p">)</span>
+<span class="n">x_curve2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">generate_path</span><span class="p">(</span><span class="n">x_iterated</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s2">&quot;3d&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_curve2</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x_curve2</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">x_curve2</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 </section>
-<section id="Generating-pretty-plots-with-MayaVI">
-<h2>Generating pretty plots with MayaVI<a class="headerlink" href="#Generating-pretty-plots-with-MayaVI" title="Permalink to this headline">¶</a></h2>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># MayaVI can generate nicer plots, joining the strands together</span>
-<span class="n">plot</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">to_strand_plot</span><span class="p">()</span>
-<span class="n">plot</span><span class="o">.</span><span class="n">scene</span><span class="o">.</span><span class="n">save_jpg</span><span class="p">(</span><span class="s2">&quot;single_strand_strand_plot.jpg&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<p><img alt="image0" src="../_images/single_turned_strand_strand_plot.jpg" /></p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Or you can just plot the path of the entire block of dna, which looks better for a curved chain</span>
-<span class="n">chain</span> <span class="o">=</span> <span class="n">dna</span><span class="o">.</span><span class="n">TurnedDNAChain</span><span class="p">(</span><span class="s2">&quot;GATC&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
-<span class="n">plot</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">to_line_plot</span><span class="p">()</span>
-<span class="n">plot</span><span class="o">.</span><span class="n">scene</span><span class="o">.</span><span class="n">save_jpg</span><span class="p">(</span><span class="s2">&quot;single_turned_strand_line_plot.jpg&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<p><img alt="image0" src="../_images/single_turned_strand_strand_plot.jpg" /></p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">to_strand_plot</span><span class="p">()</span>
-<span class="n">plot</span><span class="o">.</span><span class="n">scene</span><span class="o">.</span><span class="n">save_jpg</span><span class="p">(</span><span class="s2">&quot;single_turned_strand_strand_plot.jpg&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<p><img alt="image0" src="../_images/single_turned_strand_strand_plot.jpg" /></p>
 </section>
-<section id="Exporting-a-DNA-strand-as-text">
-<h2>Exporting a DNA strand as text<a class="headerlink" href="#Exporting-a-DNA-strand-as-text" title="Permalink to this headline">¶</a></h2>
+<section id="Making-voxelised-representations.">
+<h2>Making voxelised representations.<a class="headerlink" href="#Making-voxelised-representations." title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">voxelisation</span></code> model can convert the path of this curve to a voxelised representation, of straight and curved boxes.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The chain can be converted to a text stream for saving</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">chain</span><span class="o">.</span><span class="n">to_text</span><span class="p">()[:</span><span class="mi">1000</span><span class="p">],</span> <span class="s2">&quot;...&quot;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">voxelised_fractal</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">VoxelisedFractal</span><span class="o">.</span><span class="n">fromLString</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">X</span><span class="p">)</span>
+
+<span class="c1"># This can be plotted</span>
+<span class="n">voxelised_fractal</span><span class="o">.</span><span class="n">to_pretty_plot</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
+<section id="Exporting-large-scale-structures-to-text.">
+<h3>Exporting large-scale structures to text.<a class="headerlink" href="#Exporting-large-scale-structures-to-text." title="Permalink to this headline">¶</a></h3>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Or a DataFrame</span>
-<span class="n">chain</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># And this can be returned as a data frame, or as text</span>
+<span class="n">voxelised_fractal</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -473,13 +505,14 @@ div.rendered_html tbody tr:hover {
 </div>
 </section>
 </section>
+</section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="other-structure-models.html" class="btn btn-neutral float-left" title="How to make a Other DNA Structure" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="multiple-strands.html" class="btn btn-neutral float-right" title="Make and visualise DNA Models" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../examples.html" class="btn btn-neutral float-left" title="Examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="other-structure-models.html" class="btn btn-neutral float-right" title="How to make a Other DNA Structure" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

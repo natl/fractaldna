@@ -20,6 +20,7 @@ fractaldna.structure\_models.voxelisation.VoxelisedFractal
       ~VoxelisedFractal.center_fractal
       ~VoxelisedFractal.fromLString
       ~VoxelisedFractal.fromSeed
+      ~VoxelisedFractal.from_path
       ~VoxelisedFractal.to_frame
       ~VoxelisedFractal.to_plot
       ~VoxelisedFractal.to_pretty_plot
