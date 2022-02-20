@@ -119,18 +119,34 @@ def iterate_lstring(inString: str):
     return "".join(outString)
 
 
-def generate_path(lstring: str, n: int = 2, distance: float = 10.0) -> List[np.array]:
+def generate_path(
+    lstring: str, n: int = 2, distance: float = 10.0, rounding: int = 0
+) -> List[np.array]:
     """
     Generate a path from an l-string
+
+    When moving a distance smaller than 1, ensure that rounding is set correctly.
+
+    This algorithm works best when moving in integer steps and applying any scaling
+    after generating the path.
 
     :param lstring: lstring describing path
     :param n: steps on path between forward movements
     :param distance: distance between points forward movements
+    :param rounding: rounding to apply to each position
     :return: list of XYZ points
     """
+    if distance < 10 ** (-1 * rounding):
+        raise ValueError(
+            f"Decimal place rounding is too large {rounding} places "
+            f"for the distance moved forward {distance} units"
+        )
+
     axis = np.eye(3)
     pos = [np.array([0, 0, 0])]
 
+    # Fuction to move a distance in a set direction
+    # taking n steps
     def forward(axis, n=n, distance=distance):
         heading = np.dot(axis, np.array([1, 0, 0]))
         return [(ii + 1) * distance * heading / n for ii in range(0, n)]
@@ -149,7 +165,10 @@ def generate_path(lstring: str, n: int = 2, distance: float = 10.0) -> List[np.a
         if char == r"F":
             lastpos = pos[len(pos) - 1]
             for point in forward(axis):
-                pos.append(lastpos + point)
+                if rounding is None:
+                    pos.append(lastpos + point)
+                else:
+                    pos.append(np.round(lastpos + point, decimals=rounding))
         elif char in charFunctions.keys():
             axis = charFunctions[char](axis)
         else:

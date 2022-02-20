@@ -480,15 +480,75 @@ class VoxelisedFractal:
         return cls.fromLString(seed, distance=distance)
 
     @classmethod
-    def fromLString(cls, lstring, distance=1):
-        """Convert an L-String into a VoxelisedFractal
+    def from_path(cls, path: Union[List[np.array], List[List], np.array]):
+        """Convert a path (a list of xyz positions) to a voxelised representation
 
-        :param lstring: L-String to convert
-        :param distance: distance between voxels
+        :param path: path to convert
 
         :returns: Voxelised Fractal representation
         """
-        path = hilbert.generate_path(lstring, n=1, distance=distance)
+        path = np.asarray(path)
+        if path.shape[1] != 3:
+            raise ValueError("Positions in path require 3 elements (xyz)")
+
+        # Check that we only ever move in the six principal directions
+        for this_pos, next_pos in zip(path, np.roll(path, -1, axis=0)[:-1]):
+            absdiff = np.abs(this_pos - next_pos)
+            if np.sum(absdiff) != 1:
+                raise ValueError(
+                    f"Going from {this_pos} to {next_pos} is not valid. "
+                    "Points should move by one unit in one direction only."
+                )
+
+        lastpos = np.array([2 * path[len(path) - 1] - path[len(path) - 2]])
+        path = np.concatenate([path, lastpos])
+
+        vf = cls()
+
+        arrpath = np.array(path)
+
+        mins = np.zeros(3)  # array [xmin, ymin, zmin]
+        maxs = np.zeros(3)  # array [xmax, ymax, zmax]
+        lens = np.zeros(3)
+
+        for ii in range(3):
+            mins[ii] = min(arrpath[:, ii])
+            maxs[ii] = max(arrpath[:, ii])
+            lens[ii] = maxs[ii] - mins[ii]
+
+        first = arrpath[0]
+        second = arrpath[1]
+        zeroheading = second - first
+        zeroposition = first - zeroheading
+        zeroprincipal = np.array([1, 0, 0])
+        if (np.around(zeroheading, 8) == zeroprincipal).all():
+            zeroprincipal = np.array([0, 1, 0])
+        zeroVoxel = Voxel(
+            zeroposition, zeroheading, zeroprincipal, zeroheading, zeroprincipal
+        )
+
+        vf.fractal = [cls._makeVoxel(zeroVoxel, first, second)]
+
+        for ii in range(1, len(path) - 1):
+            vf.fractal.append(
+                cls._makeVoxel(vf.fractal[ii - 1], arrpath[ii], arrpath[ii + 1])
+            )
+            # print np.around(arrpath[ii], 3)
+        # print "Path Length: ", len(vf.fractal)
+
+        return vf
+
+    @classmethod
+    def fromLString(cls, lstring):
+        """Convert an L-String into a VoxelisedFractal
+
+        :param lstring: L-String to convert
+
+        :returns: Voxelised Fractal representation
+        """
+        path = hilbert.generate_path(lstring, n=1, distance=1)
+
+        return cls.from_path(path)
         lastpos = 2 * path[len(path) - 1] - path[len(path) - 2]
         path.append(lastpos)
 
