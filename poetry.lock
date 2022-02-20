@@ -974,7 +974,7 @@ virtualenv = ">=20.0.8"
 
 [[package]]
 name = "prometheus-client"
-version = "0.13.0"
+version = "0.13.1"
 description = "Python client for the Prometheus monitoring system."
 category = "dev"
 optional = false
@@ -2276,8 +2276,8 @@ pre-commit = [
     {file = "pre_commit-2.17.0.tar.gz", hash = "sha256:c1a8040ff15ad3d648c70cc3e55b93e4d2d5b687320955505587fd79bbaed06a"},
 ]
 prometheus-client = [
-    {file = "prometheus_client-0.13.0-py3-none-any.whl", hash = "sha256:70782d19ea1a3aeb8523aa07780dbee6a595e566198ab4ed7fdc32b53b5fa1d1"},
-    {file = "prometheus_client-0.13.0.tar.gz", hash = "sha256:3fdc6fc5b03a9eaee44d015e2913b496864b9ad6557013f23e28f926d7b62913"},
+    {file = "prometheus_client-0.13.1-py3-none-any.whl", hash = "sha256:357a447fd2359b0a1d2e9b311a0c5778c330cfbe186d880ad5a6b39884652316"},
+    {file = "prometheus_client-0.13.1.tar.gz", hash = "sha256:ada41b891b79fca5638bd5cfe149efa86512eaa55987893becd2c6d8d0a5dfc5"},
 ]
 prompt-toolkit = [
     {file = "prompt_toolkit-3.0.24-py3-none-any.whl", hash = "sha256:e56f2ff799bacecd3e88165b1e2f5ebf9bcd59e80e06d395fa0cc4b8bd7bb506"},
