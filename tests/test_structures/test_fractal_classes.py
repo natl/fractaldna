@@ -62,6 +62,7 @@ class TestFractalCreation(unittest.TestCase):
                 maxs[ii] = max(arrpath[:, ii])
             counts = []
             boxsize = (maxs - mins) / nreps
+            # Bottom Corner Range
             botCorRange = maxs - mins - boxsize
             for ii in range(10):
                 botCor = np.array(
@@ -74,7 +75,7 @@ class TestFractalCreation(unittest.TestCase):
                 topCor = botCor + boxsize
                 count = 0
                 for point in arrpath:
-                    if (point > botCor).all() and (point < topCor).all():
+                    if (point >= botCor).all() and (point <= topCor).all():
                         count = count + 1
                 counts.append(count)
 
@@ -87,26 +88,16 @@ class TestFractalCreation(unittest.TestCase):
                 self.assertGreater(
                     count,
                     (1 - nreps) / nreps * countsExpected,
-                    "Counts were low for seed "
-                    + seed
-                    + "\nN_iterations: "
-                    + str(nreps)
-                    + "\nCounts/Expected: "
-                    + str(count)
-                    + "/"
-                    + str(countsExpected),
+                    f"Counts were low for seed {seed}\n"
+                    f"N_iterations: {nreps}\n"
+                    f"Counts/Expected: {count}/{countsExpected}",
                 )
                 self.assertLess(
                     count,
                     (1 + nreps) / nreps * countsExpected,
-                    "Counts were high for seed "
-                    + seed
-                    + "\nN_iterations: "
-                    + str(nreps)
-                    + "\nCounts/Expected: "
-                    + str(count)
-                    + "/"
-                    + str(countsExpected),
+                    f"Counts were high for seed {seed}\n"
+                    f"N_iterations: {nreps}\n"
+                    f"Counts/Expected: {count}/{countsExpected}",
                 )
 
         return None
