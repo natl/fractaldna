@@ -348,8 +348,12 @@ class PrismList(object):
         )  # NOQA
 
 
-def get_euler_angles(rotmatrix):
-    """ """
+def get_euler_angles(rotmatrix: np.array) -> np.array:
+    """Get Euler Angles from Rotation Matrix
+
+    :param rotmatrix: Rotation Matrix
+    :returns: Euler Angles
+    """
     sintheta = rotmatrix[2, 0]
     if abs(sintheta) != 1:
         theta = -np.arcsin(rotmatrix[2, 0])
