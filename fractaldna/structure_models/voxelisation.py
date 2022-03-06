@@ -33,17 +33,17 @@ def rot_ax_angle(axis: Union[List, np.array], angle: float) -> np.array:
     c = np.cos(angle)
     s = np.sin(angle)
 
-    xx = c + ux ** 2 * (1 - c)
+    xx = c + ux**2 * (1 - c)
     xy = ux * uy * (1 - c) - uz * s
     xz = ux * uz * (1 - c) + uy * s
 
     yx = uy * ux * (1 - c) + uz * s
-    yy = c + uy ** 2 * (1 - c)
+    yy = c + uy**2 * (1 - c)
     yz = uy * uz * (1 - c) - ux * s
 
     zx = uz * ux * (1 - c) - uy * s
     zy = uz * uy * (1 - c) + ux * s
-    zz = c + uz ** 2 * (1 - c)
+    zz = c + uz**2 * (1 - c)
 
     return np.array([[xx, xy, xz], [yx, yy, yz], [zx, zy, zz]])
 
