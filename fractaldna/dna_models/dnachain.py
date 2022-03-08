@@ -464,7 +464,7 @@ class SplineLinker(PlottableSequence):
         dx = xx[1:] - xx[: (len(xx) - 1)]
         dy = yy[1:] - yy[: (len(yy) - 1)]
         dz = zz[1:] - zz[: (len(zz) - 1)]
-        length = sum((dx ** 2 + dy ** 2 + dz ** 2) ** 0.5)
+        length = sum((dx**2 + dy**2 + dz**2) ** 0.5)
         n = length // self.linker_bp_spacing
         self.spacing = length / n
         # print(self.spacing)
@@ -942,11 +942,11 @@ class TurnedSolenoid(Solenoid):
         """
         Constructor
         """
-        self.nhistones = int(nhistones / 2 ** 0.5)
+        self.nhistones = int(nhistones / 2**0.5)
         self.box_width = voxelheight / 2.0
         self.radius = radius
         self.chain = chain
-        self.strand_length = voxelheight / 2 ** 0.5
+        self.strand_length = voxelheight / 2**0.5
         self.zshift = (
             self.strand_length - 4.0 * Histone.radius_histone
         ) / self.nhistones

@@ -158,14 +158,14 @@ def overlap_volume(pos1: List, pos2: List, r1: float, r2: float) -> float:
         return 0
     # check if one entirely holds the other
     if r1 > (d + r2):  # 2 is entirely contained in one
-        return 4.0 / 3.0 * np.pi * r2 ** 3
+        return 4.0 / 3.0 * np.pi * r2**3
     if r2 > (d + r1):  # 1 is entirely contained in one
-        return 4.0 / 3.0 * np.pi * r1 ** 3
+        return 4.0 / 3.0 * np.pi * r1**3
 
     vol = (
         np.pi
         * (r1 + r2 - d) ** 2
-        * (d ** 2 + (2 * d * r1 - 3 * r1 ** 2 + 2 * d * r2 - 3 * r2 ** 2) + 6 * r1 * r2)
+        * (d**2 + (2 * d * r1 - 3 * r1**2 + 2 * d * r2 - 3 * r2**2) + 6 * r1 * r2)
     ) / (12 * d)
     return vol
 
@@ -182,16 +182,16 @@ def get_p_values(a, b, c, alpha, beta, gamma):
         * (a + beta - gamma)
     )
 
-    t = t2 ** 0.5
-    tabg = tabg2 ** 0.5
+    t = t2**0.5
+    tabg = tabg2**0.5
 
-    a2 = a ** 2
-    b2 = b ** 2
-    c2 = c ** 2
+    a2 = a**2
+    b2 = b**2
+    c2 = c**2
 
-    alpha2 = alpha ** 2
-    beta2 = beta ** 2
-    gamma2 = gamma ** 2
+    alpha2 = alpha**2
+    beta2 = beta**2
+    gamma2 = gamma**2
 
     p1 = ((b2 - c2 + beta2 - gamma2) ** 2 + (t - tabg) ** 2) / (4 * a2) - alpha2  # NOQA
     p2 = ((b2 - c2 + beta2 - gamma2) ** 2 + (t + tabg) ** 2) / (4 * a2) - alpha2  # NOQA
@@ -252,13 +252,13 @@ def triple_overlap_volume(pos1, pos2, pos3, r1, r2, r3):
     beta = r2
     gamma = r3
 
-    a2 = a ** 2
-    b2 = b ** 2
-    c2 = c ** 2
+    a2 = a**2
+    b2 = b**2
+    c2 = c**2
 
-    alpha2 = alpha ** 2
-    beta2 = beta ** 2
-    gamma2 = gamma ** 2
+    alpha2 = alpha**2
+    beta2 = beta**2
+    gamma2 = gamma**2
 
     eps1 = (beta2 - gamma2) / a2
     eps2 = (gamma2 - alpha2) / b2
@@ -266,19 +266,19 @@ def triple_overlap_volume(pos1, pos2, pos3, r1, r2, r3):
 
     w2 = (
         (alpha2 * a2 + beta2 * b2 + gamma2 * c2) * (a2 + b2 + c2)
-        - 2 * (alpha2 * a2 ** 2 + beta2 * b2 ** 2 + gamma2 * c2 ** 2)
+        - 2 * (alpha2 * a2**2 + beta2 * b2**2 + gamma2 * c2**2)
         + (a2 * b2 * c2) * (eps1 * eps2 + eps2 * eps3 + eps3 * eps1 - 1)
     )
 
     if w2 > 0:
-        w = w2 ** 0.5
+        w = w2**0.5
         q1 = a * (b2 + c2 - a2 + beta2 + gamma2 - 2.0 * alpha2 + eps1 * (b2 - c2))
         q2 = b * (c2 + a2 - b2 + gamma2 + alpha2 - 2.0 * beta2 + eps2 * (c2 - a2))
         q3 = c * (a2 + b2 - c2 + alpha2 + beta2 - 2.0 * gamma2 + eps3 * (a2 - b2))
 
-        alpha3 = alpha ** 3.0
-        beta3 = beta ** 3.0
-        gamma3 = gamma ** 3.0
+        alpha3 = alpha**3.0
+        beta3 = beta**3.0
+        gamma3 = gamma**3.0
         aw = a * w
         bw = b * w
         cw = c * w
@@ -287,15 +287,15 @@ def triple_overlap_volume(pos1, pos2, pos3, r1, r2, r3):
             w / 6.0
             - a
             / 2.0
-            * (beta2 + gamma2 - a2 * (1.0 / 6.0 - eps1 ** 2 / 2.0))
+            * (beta2 + gamma2 - a2 * (1.0 / 6.0 - eps1**2 / 2.0))
             * atanpi(2 * w / q1)  # NOQA
             - b
             / 2.0
-            * (gamma2 + alpha2 - b2 * (1.0 / 6.0 - eps2 ** 2 / 2.0))
+            * (gamma2 + alpha2 - b2 * (1.0 / 6.0 - eps2**2 / 2.0))
             * atanpi(2 * w / q2)  # NOQA
             - c
             / 2.0
-            * (alpha2 + beta2 - c2 * (1.0 / 6.0 - eps3 ** 2 / 2.0))
+            * (alpha2 + beta2 - c2 * (1.0 / 6.0 - eps3**2 / 2.0))
             * atanpi(2 * w / q3)  # NOQA
             + (2.0 / 3.0)
             * alpha3
@@ -341,19 +341,19 @@ def triple_overlap_volume(pos1, pos2, pos3, r1, r2, r3):
             vol = (
                 overlap_volume(pos1, pos2, r1, r2)
                 + overlap_volume(pos1, pos3, r1, r3)
-                - 4.0 / 3.0 * np.pi * r1 ** 3.0
+                - 4.0 / 3.0 * np.pi * r1**3.0
             )
         elif (p1 < 0) and (p3 > 0) and (p5 < 0):  # NOQA
             vol = (
                 overlap_volume(pos1, pos2, r1, r2)
                 + overlap_volume(pos2, pos3, r2, r3)
-                - 4.0 / 3.0 * np.pi * r2 ** 3.0
+                - 4.0 / 3.0 * np.pi * r2**3.0
             )
         elif (p1 < 0) and (p3 < 0) and (p5 > 0):  # NOQA
             vol = (
                 overlap_volume(pos1, pos3, r1, r3)
                 + overlap_volume(pos2, pos3, r2, r3)
-                - 4.0 / 3.0 * np.pi * r3 ** 3.0
+                - 4.0 / 3.0 * np.pi * r3**3.0
             )
         else:
             # Fall back to MCMC calculation
@@ -496,7 +496,7 @@ class MoleculeFromAtoms:
         vol = 0
         for (atom, pos) in self.atoms.items():
             rad = RADIUS[LETTERS.match(atom).group()]
-            vol += 4.0 / 3.0 * np.pi * rad ** 3
+            vol += 4.0 / 3.0 * np.pi * rad**3
         # subtract double overlaps
         for ((a1, p1), (a2, p2)) in combinations(self.atoms.items(), 2):
             r1 = RADIUS[LETTERS.match(a1).group()]
