@@ -1703,7 +1703,7 @@ mayavi = []
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.8,<3.11"
-content-hash = "cc0b1c4fd882d2c3732335732e644ab008dc8609cee64ab6340a56f5ef099464"
+content-hash = "8beb3356fed4050601b5afb3417461a19ed6dee9285e5e493fcd519a08441a5c"
 
 [metadata.files]
 alabaster = [
