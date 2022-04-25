@@ -13,7 +13,7 @@ bleach==4.1.0; python_version >= "3.7"
 certifi==2021.10.8; python_version >= "3.5" and python_full_version < "3.0.0" or python_full_version >= "3.6.0" and python_version >= "3.5"
 cffi==1.15.0; python_full_version >= "3.6.1" and python_version >= "3.7" and implementation_name == "pypy"
 cfgv==3.3.1; python_full_version >= "3.6.1"
-charset-normalizer==2.0.10; python_full_version >= "3.6.0" and python_version >= "3.5"
+charset-normalizer==2.0.12; python_full_version >= "3.6.0" and python_version >= "3.5"
 click==8.0.3; python_version >= "3.6" and python_full_version >= "3.6.2"
 colorama==0.4.4
 commonmark==0.9.1; python_full_version >= "3.6.2" and python_full_version < "4.0.0"
