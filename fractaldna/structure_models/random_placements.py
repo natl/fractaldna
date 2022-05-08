@@ -163,7 +163,7 @@ class Prism(object):
         assert isinstance(other, type(self)), "argument must be a object"
 
         d = sum((self.center - other.center) ** 2)
-        sum_rads = sum(self.size ** 2) + sum(other.size ** 2)
+        sum_rads = sum(self.size**2) + sum(other.size**2)
 
         if d > sum_rads:
             return False
@@ -249,7 +249,7 @@ class PrismList(object):
         # If we denote a cell in the x direction by i, a cell in the y direction
         # by j, and a cell in the z-direction by k, the unique index in the
         # prism grid of the ijk-th cell is int(i + j*divisions + k*divisions^2)
-        self.prism_grid = [[] for ii in range(int(self.divisions ** 3))]
+        self.prism_grid = [[] for ii in range(int(self.divisions**3))]
         self.prisms = []
 
     def append(self, prism: Prism) -> bool:
@@ -334,8 +334,8 @@ class PrismList(object):
         where i,j,k < divisions
         """
         ii = index % self.divisions
-        jj = ((index - ii) % self.divisions ** 2) / self.divisions
-        kk = (index - ii - self.divisions * jj) / self.divisions ** 2
+        jj = ((index - ii) % self.divisions**2) / self.divisions
+        kk = (index - ii - self.divisions * jj) / self.divisions**2
         return np.array([ii, jj, kk])
 
     def _ijk_to_index(self, ijk: Union[np.array, List]) -> int:
@@ -344,7 +344,7 @@ class PrismList(object):
         The ijk-th cell is in the grid is int(i + j*divisions + k*divisions^2)
         """
         return int(
-            ijk[0] + self.divisions * ijk[1] + self.divisions ** 2 * ijk[2]
+            ijk[0] + self.divisions * ijk[1] + self.divisions**2 * ijk[2]
         )  # NOQA
 
 
@@ -396,7 +396,7 @@ def random_point_in_ball(rad=1) -> np.array:
     :returns: 3-vector array
     """
     p = 2 * (np.random.rand(3) - 0.5)
-    while sum(p ** 2) > 1:
+    while sum(p**2) > 1:
         p = 2 * (np.random.rand(3) - 0.5)
     return rad * p
 
