@@ -3,6 +3,8 @@ DNA Models
 
 FractalDNA provides a number of models for building DNA.
 
+Example notebooks are available under :doc:`Examples <examples>`.
+
 Base and Helper Classes
 -----------------------
 
