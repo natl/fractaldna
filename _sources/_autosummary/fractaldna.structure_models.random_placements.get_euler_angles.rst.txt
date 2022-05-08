@@ -1,0 +1,6 @@
+fractaldna.structure\_models.random\_placements.get\_euler\_angles
+==================================================================
+
+.. currentmodule:: fractaldna.structure_models.random_placements
+
+.. autofunction:: get_euler_angles

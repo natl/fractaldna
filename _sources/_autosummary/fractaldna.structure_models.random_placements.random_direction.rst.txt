@@ -1,0 +1,6 @@
+fractaldna.structure\_models.random\_placements.random\_direction
+=================================================================
+
+.. currentmodule:: fractaldna.structure_models.random_placements
+
+.. autofunction:: random_direction

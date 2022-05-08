@@ -1,0 +1,44 @@
+fractaldna.structure\_models.random\_placements
+===============================================
+
+.. automodule:: fractaldna.structure_models.random_placements
+  
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:                                          
+   
+      generate_non_overlapping_prisms
+      get_euler_angles
+      is_separating_axis
+      random_direction
+      random_point_in_ball
+   
+   
+
+   
+   
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:                                          
+      :template: custom-class-template.rst               
+   
+      Arrow3D
+      Prism
+      PrismList
+   
+   
+
+   
+   
+   
+
+
+

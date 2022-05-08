@@ -1,0 +1,6 @@
+fractaldna.structure\_models.random\_placements.is\_separating\_axis
+====================================================================
+
+.. currentmodule:: fractaldna.structure_models.random_placements
+
+.. autofunction:: is_separating_axis

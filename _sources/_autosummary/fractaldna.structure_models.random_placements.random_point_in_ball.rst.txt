@@ -1,0 +1,6 @@
+fractaldna.structure\_models.random\_placements.random\_point\_in\_ball
+=======================================================================
+
+.. currentmodule:: fractaldna.structure_models.random_placements
+
+.. autofunction:: random_point_in_ball

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Getting Started with DNA Models &mdash; FractalDNA 0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> FractalDNA
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="structure_models.html">Structure Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dna_models.html">DNA Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">FractalDNA</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Getting Started with DNA Models</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/getting_started_dna.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="getting-started-with-dna-models">
+<h1>Getting Started with DNA Models<a class="headerlink" href="#getting-started-with-dna-models" title="Permalink to this headline">¶</a></h1>
+<p>This is a guide that explores how the Fractal DNA module works to make DNA models.
+It complements the example notebooks found in <a class="reference internal" href="examples.html"><span class="doc">Examples</span></a>.</p>
+<section id="step-1-what-this-module-does-and-doesn-t-do">
+<h2>Step 1: What this module does and doesn’t do<a class="headerlink" href="#step-1-what-this-module-does-and-doesn-t-do" title="Permalink to this headline">¶</a></h2>
+<p>Fractal DNA was built to enable researchers to build models of DNA easily in Python.
+It’s aim is to take a few general types of DNA structure and make them accessible
+in Python in a ‘building-block’ style form, so that multiple segments can be
+joined together to make larger DNA sections.</p>
+<p>It was originally built to provide the raw data that powered Geant4 simulations of
+radiation-induced DNA damage.</p>
+<p>The aim is to allow users to build straight and turned sections of DNA that are either
+entirely unpacked, or packed as chromatin. When denser DNA is needed, the program
+allows up to 9 parallel DNA segments of DNA to be generated (depending on the packing).</p>
+<p>It then allows a researcher to export the sugar, phosphate and base pair locations needed
+for simulation.</p>
+<p>It was not intended to export the locations of every single atom within DNA, though you
+might be able to extend the package towards this with some hackery.</p>
+<p>It was not intended to export the locations in a format that is adapted to arbitrary
+modelling or simulation platforms, <em>however</em>, you should be able to take the output
+this package provides and then transform it to your needs.</p>
+</section>
+<section id="step-2-great-let-s-make-some-dna">
+<h2>Step 2: Great, let’s make some DNA<a class="headerlink" href="#step-2-great-let-s-make-some-dna" title="Permalink to this headline">¶</a></h2>
+<p>Once you’ve got fractaldna installed (<cite>pip install fractaldna</cite>), it’s time
+to make some DNA. The interface for making DNA is very simple, it takes a base
+pair sequence, written as a string, and then builds the DNA chain corresponding
+to that sequence.</p>
+<p>So let’s imagine you want to replicate the sequence <cite>GATTACA</cite>, you would want to call</p>
+<p><code class="docutils literal notranslate"><span class="pre">`.py</span>
+<span class="pre">from</span> <span class="pre">fractaldna.dna_models</span> <span class="pre">import</span> <span class="pre">dnachain</span>
+<span class="pre">chain</span> <span class="pre">=</span> <span class="pre">dnachain.DNAChain('GATTACA')</span>
+<span class="pre">`</span></code></p>
+<p>This will make a DNA Chain 7 base pairs long. Note that in the above, we imported the
+<cite>dnachain</cite> submodule. This is where all of the routines to build DNA segments live.</p>
+<p>You can plot this DNA chain pretty easily, by calling:</p>
+<p><code class="docutils literal notranslate"><span class="pre">`.py</span>
+<span class="pre">fig</span> <span class="pre">=</span> <span class="pre">chain.to_plot()</span>
+<span class="pre">fig.savefig('docs/source/images/gattaca_plot.png',</span> <span class="pre">bbox_inches='tight')</span>
+<span class="pre">`</span></code></p>
+<p>Which will produce the below figure:</p>
+<img alt="A basic DNA plot of 7 base pairs" class="align-center" src="_images/gattaca_plot.png" />
+<p>Yellow shows the locations of phosphate molecules, red shows the location of
+sugar molecules, and grey shows where the base pairs are.</p>
+<p>Depending on what you want to plot, this basic plot might not give you enough
+detail about what is going on. You can also generate a surface plot which shows
+the rough surface of these DNA molecules:</p>
+<p><code class="docutils literal notranslate"><span class="pre">`.py</span>
+<span class="pre">fig</span> <span class="pre">=</span> <span class="pre">chain.to_surface_plot()</span>
+<span class="pre">fig.savefig('docs/source/images/gattaca_plot_surface.png',</span> <span class="pre">bbox_inches='tight')</span>
+<span class="pre">`</span></code></p>
+<img alt="A DNA surface plot of 7 base pairs" class="align-center" src="_images/gattaca_plot_surface.png" />
+<p>DNA basepairs are in general 3.32Å apart, so if you want to generate a DNA strand
+100nm long, the way to do this is to work out the number of basepairs that you
+need, and then generate a chain that is long enough.</p>
+<p><a href="#id1"><span class="problematic" id="id2">``</span></a>`
+import numpy as np
+bp_separation  = dnachain.BP_SEPARATION  # 3.32Å
+length_nm = 100  # nm
+num_basepairs = int( length_nm / (0.1*bp_separation) )
+basepairs = np.random.choice([‘G’, ‘A’, ‘T’, ‘C’], num_basepairs)</p>
+<p>chain = dnachain.DNAChain(‘’.join(basepairs))
+<a href="#id3"><span class="problematic" id="id4">``</span></a><a href="#id5"><span class="problematic" id="id6">`</span></a></p>
+</section>
+<section id="step-3-straight-dna-is-great-and-all-but-i-want-more-variety">
+<h2>Step 3: Straight DNA is great and all, but I want more variety<a class="headerlink" href="#step-3-straight-dna-is-great-and-all-but-i-want-more-variety" title="Permalink to this headline">¶</a></h2>
+<p>So you have worked out by now how to make a DNA chain from a
+collection of base pairs. Now you want to generate, let’s say,
+a curved section of DNA. That’s easy:</p>
+<p><code class="docutils literal notranslate"><span class="pre">`.py</span>
+<span class="pre">from</span> <span class="pre">fractaldna.dna_models</span> <span class="pre">import</span> <span class="pre">dnachain</span>
+<span class="pre">chain</span> <span class="pre">=</span> <span class="pre">dnachain.DNAChain('GATTACA'*100)</span>
+<span class="pre">`</span></code></p>
+<p>(to be continued)</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Nathanael Lampe.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

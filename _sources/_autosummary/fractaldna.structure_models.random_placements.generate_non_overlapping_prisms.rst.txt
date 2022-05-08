@@ -1,0 +1,6 @@
+fractaldna.structure\_models.random\_placements.generate\_non\_overlapping\_prisms
+==================================================================================
+
+.. currentmodule:: fractaldna.structure_models.random_placements
+
+.. autofunction:: generate_non_overlapping_prisms

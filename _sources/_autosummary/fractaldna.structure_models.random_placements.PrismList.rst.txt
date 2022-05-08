@@ -1,0 +1,28 @@
+fractaldna.structure\_models.random\_placements.PrismList
+=========================================================
+
+.. currentmodule:: fractaldna.structure_models.random_placements
+
+.. autoclass:: PrismList
+   :members:                                    
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~PrismList.__init__
+      ~PrismList.append
+      ~PrismList.get_prism_grid_indices
+      ~PrismList.to_frame
+   
+   
+
+   
+   
+   

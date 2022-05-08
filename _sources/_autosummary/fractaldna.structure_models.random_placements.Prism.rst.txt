@@ -1,0 +1,31 @@
+fractaldna.structure\_models.random\_placements.Prism
+=====================================================
+
+.. currentmodule:: fractaldna.structure_models.random_placements
+
+.. autoclass:: Prism
+   :members:                                    
+   :show-inheritance:                           
+   :inherited-members:                          
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Prism.__init__
+      ~Prism.contains_point
+      ~Prism.does_overlap
+      ~Prism.get_point
+      ~Prism.to_plot
+      ~Prism.to_series
+      ~Prism.to_text
+   
+   
+
+   
+   
+   
