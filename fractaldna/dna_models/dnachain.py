@@ -1195,7 +1195,7 @@ class MultiSolenoidVolume(PlottableSequence):
             np.array([-self.sep, -self.sep, 0]),
             np.array([self.sep, -self.sep, 0]),
         ]
-        solenoids = []
+        self.solenoids = []
         for ii in chains:
             if self.turn is True:
                 nhistones = int(self.nhistones * lengths[ii] / self.voxelheight)
@@ -1218,9 +1218,9 @@ class MultiSolenoidVolume(PlottableSequence):
                 )
             # s.setChain(ii)
             s.translate(translations[ii])
-            solenoids.append(s)
+            self.solenoids.append(s)
 
-        for s in solenoids:
+        for s in self.solenoids:
             self.basepairs.extend(s.basepairs)
             self.linkers.extend(s.linkers)
             self.histones.extend(s.histones)
@@ -1234,8 +1234,6 @@ class MultiSolenoidVolume(PlottableSequence):
         """
         for solenoid in self.solenoids:
             solenoid.translate(translation)
-        for linker in self.linkers:
-            linker.translate(translation)
         return None
 
     def histones_to_frame(self) -> pd.DataFrame:
