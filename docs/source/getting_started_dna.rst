@@ -83,7 +83,6 @@ DNA basepairs are in general 3.32Å apart, so if you want to generate a DNA stra
 need, and then generate a chain that is long enough.
 
 ```
-from fractaldna.dna_models import dnachain
 import numpy as np
 bp_separation  = dnachain.BP_SEPARATION  # 3.32Å
 length_nm = 100  # nm
