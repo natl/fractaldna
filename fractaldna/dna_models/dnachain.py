@@ -799,9 +799,13 @@ class Solenoid(PlottableSequence):
         )
         self.basepairs = []
         self.positions = [
-            np.array([0, -self.radius, 0.5 * (self.voxelheight - self.height)])
+            np.array([0, +self.radius, 0.5 * (self.voxelheight - self.height)])
         ]
-        rm = r.eulerMatrix(np.pi / 2.0, -np.pi / 2.0, np.pi / 2.0)
+        # histone rotation matrix (based on initial position)
+        # histones by default are orientated as wrapping around the positive
+        # axis
+        rm = r.eulerMatrix(np.pi / 2.0, +np.pi / 2.0, np.pi / 2.0)
+        # apply tilt
         rm = np.dot(r.roty(self.tilt), rm)
         self.rotations = [r.getEulerAngles(rm)]
         for ii in range(self.nhistones - 1):
@@ -921,7 +925,6 @@ class TurnedSolenoid(Solenoid):
     per rotation) and then joining them together using SplineLinkers
 
     :param voxelheight: Height of 'voxel' in angstrom
-    :param radius: Radius of circle the solenoid is turning around (angstrom)
     :param radius: Radius from Solenoid centre to histone centre
     :param nhistones: Number of histones to place
     :param histone_angle: tilt of histones from axis in degrees
@@ -980,10 +983,14 @@ class TurnedSolenoid(Solenoid):
             index=1001,
         )
         self.basepairs = []
-        # print(self.height, self.zshift, self.nhistones)
-        pos1 = np.array([0, -self.radius, 0.5 * (self.strand_length - self.height)])
+        # make first histone position
+        pos1 = np.array([0, +self.radius, 0.5 * (self.strand_length - self.height)])
+        # Don't actually rotate it - this is just to establish the pattern
         self.positions = [np.dot(r.rotz(0 * np.pi / 3.0), pos1)]  # start at 2pi/3
-        rm = r.eulerMatrix(np.pi / 2.0, -np.pi / 2.0, np.pi / 2.0 + 0 * np.pi / 3.0)
+        # Initial rotation of histone to wrap around the y-axis with
+        # the right entry/exit points
+        rm = r.eulerMatrix(np.pi / 2.0, np.pi / 2.0, np.pi / 2.0 + 0 * np.pi / 3.0)
+        # Now tilt the histone
         rm = np.dot(r.roty(self.tilt), rm)
         self.rotations = [r.getEulerAngles(rm)]
         for ii in range(self.nhistones - 1):
@@ -1099,10 +1106,34 @@ class MultiSolenoidVolume(PlottableSequence):
     voxelheight: size of placement volume
     separation: separation between DNA strands
 
+    The class can contain up to 9 strands with indices as follows
+
+    0: central strand
+    1: x = separation,  y = 0
+    2: x = 0,           y = separation
+    3: x = -separation, y = 0
+    4: x = separation,  y = separation
+    5: x = separation,  y = separation
+    6: x = -separation, y = separation
+    7: x = -separation, y = -separation
+    8: x = separation,  y = -seperation
+
     Try:
     dna = MultiSolenoidVolume()
     dna.to_line_plot()
     dna.to_text()
+
+    :param voxelheight: Height of 'voxel' in angstrom
+    :param separation: separation between DNA strands
+    :param twist: whether the DNA exiting the final spine should be
+        rotated an extra pi/2.
+    :param turn: make a turned volume (turn strand 90°)
+    :param chains: List of chains to plot, e.g. [0, 1, 2, 3, 4] for a 
+        central strand (0) and 4 strands along the X/Y axes.
+    :param radius: Radius from Solenoid centre to histone centre
+    :param nhistones: Number of histones to place (if None, will default)
+        to int(38 * voxelheight / 750.0)
+    :param histone_angle: tilt of histones from axis in degrees
     """
 
     def __init__(
@@ -1112,15 +1143,21 @@ class MultiSolenoidVolume(PlottableSequence):
         twist: bool = False,
         turn: bool = False,
         chains: List = list(range(9)),
+        nhistones: int=None,
+        radius: float=100,
+        histone_angle: float=50
     ):
         if not (len(chains) == len(set(chains))):
             raise ValueError("The same chain cannot be generated twice")
         if not set(chains).issubset(set(range(9))):
             raise ValueError(f"Valid Chains are {set(range(9))} and must be ints")
         self.voxelheight = voxelheight
-        self.radius = 100
-        self.nhistones = int(38 * voxelheight / 750.0)
-        self.histone_angle = 50
+        self.radius = radius
+        if nhistones is None:
+            self.nhistones = int(38 * voxelheight / 750.0)
+        else:
+            self.nhistones = nhistones
+        self.histone_angle = histone_angle
         self.sep = separation
         self.twist = twist
 
@@ -1189,6 +1226,36 @@ class MultiSolenoidVolume(PlottableSequence):
             self.histones.extend(s.histones)
 
         return None
+
+    def translate(self, translation: Union[List, np.array]) -> None:
+        """Translate the solenoid spatially
+
+        :param translation: 3-vector for translation
+        """
+        for solenoid in self.solenoids:
+            solenoid.translate(translation)
+        for linker in self.linkers:
+            linker.translate(translation)
+        return None
+
+    def histones_to_frame(self) -> pd.DataFrame:
+        """Get Histones in Solenoid as a dataframe of their positions
+
+        :return: DataFrame of Histones
+        """
+        return pd.concat(
+            [s.histones_to_frame() for s in self.solenoids]
+        )
+
+    def to_frame(self) -> pd.DataFrame:
+        """
+        Return the molecules as a pandas data frame
+
+        :return: Pandas data frame with molecule information
+        """
+        return pd.concat(
+            [s.to_frame() for s in self.solenoids]
+        )
 
 
 class DNAChain(PlottableSequence):

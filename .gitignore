@@ -1,4 +1,6 @@
 notebooks/*
+docs/source/examples/results/.ipynb_checkpoints/*
+docs/source/examples/.ipynb_checkpoints/*
 
 ### Python ###
 =======
