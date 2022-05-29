@@ -1128,7 +1128,7 @@ class MultiSolenoidVolume(PlottableSequence):
     :param twist: whether the DNA exiting the final spine should be
         rotated an extra pi/2.
     :param turn: make a turned volume (turn strand 90°)
-    :param chains: List of chains to plot, e.g. [0, 1, 2, 3, 4] for a 
+    :param chains: List of chains to plot, e.g. [0, 1, 2, 3, 4] for a
         central strand (0) and 4 strands along the X/Y axes.
     :param radius: Radius from Solenoid centre to histone centre
     :param nhistones: Number of histones to place (if None, will default)
@@ -1143,9 +1143,9 @@ class MultiSolenoidVolume(PlottableSequence):
         twist: bool = False,
         turn: bool = False,
         chains: List = list(range(9)),
-        nhistones: int=None,
-        radius: float=100,
-        histone_angle: float=50
+        nhistones: int = None,
+        radius: float = 100,
+        histone_angle: float = 50,
     ):
         if not (len(chains) == len(set(chains))):
             raise ValueError("The same chain cannot be generated twice")
@@ -1241,9 +1241,7 @@ class MultiSolenoidVolume(PlottableSequence):
 
         :return: DataFrame of Histones
         """
-        return pd.concat(
-            [s.histones_to_frame() for s in self.solenoids]
-        )
+        return pd.concat([s.histones_to_frame() for s in self.solenoids])
 
     def to_frame(self) -> pd.DataFrame:
         """
@@ -1251,9 +1249,7 @@ class MultiSolenoidVolume(PlottableSequence):
 
         :return: Pandas data frame with molecule information
         """
-        return pd.concat(
-            [s.to_frame() for s in self.solenoids]
-        )
+        return pd.concat([s.to_frame() for s in self.solenoids])
 
 
 class DNAChain(PlottableSequence):
