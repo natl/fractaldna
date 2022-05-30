@@ -9,4 +9,6 @@ Examples
    examples/multiple-strands
    examples/single-solenoids
    examples/multiple-solenoids
+   examples/modifying-solenoids
+   examples/generating-geometries-for-geant
    
