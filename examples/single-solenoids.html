@@ -51,10 +51,13 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Single DNA Solenoids</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#Making-a-straight-Solenoidal-DNA-strand">Making a straight Solenoidal DNA strand</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Making-a-turned-Solenoidal-DNA-Strand">Making a turned Solenoidal DNA Strand</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Centering-the-DNA">Centering the DNA</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#Exporting-Solenoidal-DNA-to-CSV">Exporting Solenoidal DNA to CSV</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="multiple-solenoids.html">Placing volumes that contain multiple DNA solenoids</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modifying-solenoids.html">Modifying Solenoids</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generating-geometries-for-geant.html">Generating Geometries for Geant4</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../api.html">API Reference</a></li>
@@ -359,7 +362,8 @@ div.rendered_html tbody tr:hover {
 <h1>Single DNA Solenoids<a class="headerlink" href="#Single-DNA-Solenoids" title="Permalink to this headline">¶</a></h1>
 <p>This example shows how to generate single DNA Solenoids, and either plot them in MayaVI or export them to text</p>
 <p><em>It is recommended that you run this example inside a Jupyter environment</em> <em>rather than a VSCode or similar environment</em></p>
-<p>This requires the mayavi jupyter extension <code class="docutils literal notranslate"><span class="pre">jupyter</span> <span class="pre">nbextension</span> <span class="pre">install</span> <span class="pre">--py</span> <span class="pre">mayavi</span> <span class="pre">--user</span></code></p>
+<p>This requires the mayavi jupyter extension <code class="docutils literal notranslate"><span class="pre">jupyter</span> <span class="pre">nbextension</span> <span class="pre">install</span> <span class="pre">--py</span> <span class="pre">mayavi</span> <span class="pre">--user</span></code># Generating Geometries for Geant4</p>
+<p>This notebook contains code blocks used to generate sample geometries used in Geant4 simulations.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
@@ -441,6 +445,23 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <p><img alt="image0" src="../_images/single_solenoid_line_plot_turned.jpg" /></p>
+</section>
+<section id="Centering-the-DNA">
+<h2>Centering the DNA<a class="headerlink" href="#Centering-the-DNA" title="Permalink to this headline">¶</a></h2>
+<p>By default, solenoids are generated starting near (0, 0, 0). If you are running a simulation in Geant4, you will want to use the chain.translate method to move the whole unit down.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Default bounds&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">chain</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()[[</span><span class="s2">&quot;pos_x&quot;</span><span class="p">,</span> <span class="s2">&quot;pos_y&quot;</span><span class="p">,</span> <span class="s2">&quot;pos_z&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After Translation&quot;</span><span class="p">)</span>
+<span class="n">chain</span><span class="o">.</span><span class="n">translate</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">750.0</span> <span class="o">/</span> <span class="mi">2</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">chain</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()[[</span><span class="s2">&quot;pos_x&quot;</span><span class="p">,</span> <span class="s2">&quot;pos_y&quot;</span><span class="p">,</span> <span class="s2">&quot;pos_z&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
 </section>
 <section id="Exporting-Solenoidal-DNA-to-CSV">
 <h2>Exporting Solenoidal DNA to CSV<a class="headerlink" href="#Exporting-Solenoidal-DNA-to-CSV" title="Permalink to this headline">¶</a></h2>

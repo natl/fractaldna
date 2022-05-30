@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Placing volumes that contain multiple DNA solenoids &mdash; FractalDNA 0.1 documentation</title>
+  <title>Modifying Solenoids &mdash; FractalDNA 0.1 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -21,8 +21,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Modifying Solenoids" href="modifying-solenoids.html" />
-    <link rel="prev" title="Single DNA Solenoids" href="single-solenoids.html" /> 
+    <link rel="next" title="Generating Geometries for Geant4" href="generating-geometries-for-geant.html" />
+    <link rel="prev" title="Placing volumes that contain multiple DNA solenoids" href="multiple-solenoids.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -49,12 +49,14 @@
 <li class="toctree-l2"><a class="reference internal" href="single-strand.html">Making Single Strand DNA Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="multiple-strands.html">Make and visualise DNA Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="single-solenoids.html">Single DNA Solenoids</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Placing volumes that contain multiple DNA solenoids</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#Making-Multiple-Solenoids">Making Multiple Solenoids</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Exporting-multiple-solenoids-as-text">Exporting multiple solenoids as text</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multiple-solenoids.html">Placing volumes that contain multiple DNA solenoids</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Modifying Solenoids</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Varying-Voxel-Height">Varying Voxel Height</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Changing-the-number-of-Histones">Changing the number of Histones</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Turned-Solenoids-follow-the-same-principles">Turned Solenoids follow the same principles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Exporting-Solenoidal-DNA-to-CSV">Exporting Solenoidal DNA to CSV</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="modifying-solenoids.html">Modifying Solenoids</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generating-geometries-for-geant.html">Generating Geometries for Geant4</a></li>
 </ul>
 </li>
@@ -76,9 +78,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="../examples.html">Examples</a> &raquo;</li>
-      <li>Placing volumes that contain multiple DNA solenoids</li>
+      <li>Modifying Solenoids</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/examples/multiple-solenoids.ipynb.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/examples/modifying-solenoids.ipynb.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -356,10 +358,23 @@ div.rendered_html tbody tr:hover {
     text-align: unset;
 }
 </style>
-<section id="Placing-volumes-that-contain-multiple-DNA-solenoids">
-<h1>Placing volumes that contain multiple DNA solenoids<a class="headerlink" href="#Placing-volumes-that-contain-multiple-DNA-solenoids" title="Permalink to this headline">¶</a></h1>
-<p>Multiple solenoid volumes allow for the densest DNA geometries we generate here.</p>
-<p>Up to 9 solenoids can be placed in a voxel by the methods shown in this example.</p>
+<section id="Modifying-Solenoids">
+<h1>Modifying Solenoids<a class="headerlink" href="#Modifying-Solenoids" title="Permalink to this headline">¶</a></h1>
+<p>Solenoids can be modified to change the density of the DNA. Here we explore how this works.</p>
+<p>The call to the Solenoid function is as follows:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>dna.Solenoid(
+    voxelheight: float = 750,
+    radius: float = 100,
+    nhistones: int = 38,
+    histone_angle: float = 50,
+    twist: bool = False,
+    chain: int = 0,
+)
+</pre></div>
+</div>
+<p>These numbers are a realistic model for how much Solenoidal DNA packs.</p>
+<p>Unchanged, this will build a solenoid - 750 nm tall - histones centered 100A from the central axis - 38 histones - histones tilted at 50°.</p>
+<p>Histones are always placed 60° apart going around the circle</p>
 <p><em>It is recommended that you run this example inside a Jupyter environment</em> <em>rather than a VSCode or similar environment</em></p>
 <p>This requires the mayavi jupyter extension <code class="docutils literal notranslate"><span class="pre">jupyter</span> <span class="pre">nbextension</span> <span class="pre">install</span> <span class="pre">--py</span> <span class="pre">mayavi</span> <span class="pre">--user</span></code></p>
 <div class="nbinput nblast docutils container">
@@ -375,6 +390,7 @@ div.rendered_html tbody tr:hover {
     <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span><span class="p">))</span>
     <span class="kn">from</span> <span class="nn">fractaldna.dna_models</span> <span class="kn">import</span> <span class="n">dnachain</span> <span class="k">as</span> <span class="n">dna</span>
 
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">mayavi</span> <span class="kn">import</span> <span class="n">mlab</span>
 
 <span class="c1"># Disable this option for interactive rendering</span>
@@ -385,43 +401,158 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<section id="Making-Multiple-Solenoids">
-<h2>Making Multiple Solenoids<a class="headerlink" href="#Making-Multiple-Solenoids" title="Permalink to this headline">¶</a></h2>
+<section id="Varying-Voxel-Height">
+<h2>Varying Voxel Height<a class="headerlink" href="#Varying-Voxel-Height" title="Permalink to this headline">¶</a></h2>
+<p>Varying the voxel height will compact and extend the DNA.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Multi-Solenoidal Volumes contain 8 chromatin strands.</span>
-<span class="n">chain</span> <span class="o">=</span> <span class="n">dna</span><span class="o">.</span><span class="n">MultiSolenoidVolume</span><span class="p">(</span><span class="n">voxelheight</span><span class="o">=</span><span class="mi">750</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chain_750</span> <span class="o">=</span> <span class="n">dna</span><span class="o">.</span><span class="n">Solenoid</span><span class="p">(</span><span class="n">voxelheight</span><span class="o">=</span><span class="mi">750</span><span class="p">)</span>
 <span class="c1"># MayaVI plots are best for visualisation here</span>
-<span class="n">plot</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">to_strand_plot</span><span class="p">()</span>
-<span class="n">plot</span><span class="o">.</span><span class="n">scene</span><span class="o">.</span><span class="n">save_jpg</span><span class="p">(</span><span class="s2">&quot;multi_solenoid_strand_plot.jpg&quot;</span><span class="p">)</span>
+<span class="n">plot</span> <span class="o">=</span> <span class="n">chain_750</span><span class="o">.</span><span class="n">to_line_plot</span><span class="p">()</span>
+
+<span class="c1"># Save the figure</span>
+<span class="n">plot</span><span class="o">.</span><span class="n">scene</span><span class="o">.</span><span class="n">save_jpg</span><span class="p">(</span><span class="s2">&quot;single_solenoid_750A.jpg&quot;</span><span class="p">)</span>
+
+<span class="c1"># In an interactive notebook, you can refer to the figure to</span>
+<span class="c1"># interact with it.</span>
+<span class="n">plot</span>
 </pre></div>
 </div>
 </div>
-<p><img alt="image0" src="../_images/multi_solenoid_turned_plot.jpg" /></p>
+<p>750 Å section, 38 histones</p>
+<p><img alt="image0" src="../_images/turned_solenoid_750A_42histones.jpg" /></p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># They can be turned, and only select chains can be generated</span>
-<span class="n">chain</span> <span class="o">=</span> <span class="n">dna</span><span class="o">.</span><span class="n">MultiSolenoidVolume</span><span class="p">(</span>
-    <span class="n">voxelheight</span><span class="o">=</span><span class="mi">1500</span><span class="p">,</span> <span class="n">separation</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">turn</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">chains</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
-<span class="p">)</span>
-<span class="n">plot</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">to_line_plot</span><span class="p">()</span>
-<span class="n">plot</span><span class="o">.</span><span class="n">scene</span><span class="o">.</span><span class="n">save_jpg</span><span class="p">(</span><span class="s2">&quot;multi_solenoid_turned_plot.jpg&quot;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make a straight solenoid in a 500 Å box</span>
+<span class="n">chain_500</span> <span class="o">=</span> <span class="n">dna</span><span class="o">.</span><span class="n">Solenoid</span><span class="p">(</span><span class="n">voxelheight</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+<span class="c1"># MayaVI plots are best for visualisation here</span>
+<span class="n">plot</span> <span class="o">=</span> <span class="n">chain_500</span><span class="o">.</span><span class="n">to_line_plot</span><span class="p">()</span>
+
+<span class="c1"># Save the figure</span>
+<span class="n">plot</span><span class="o">.</span><span class="n">scene</span><span class="o">.</span><span class="n">save_jpg</span><span class="p">(</span><span class="s2">&quot;single_solenoid_500A.jpg&quot;</span><span class="p">)</span>
+
+<span class="c1"># In an interactive notebook, you can refer to the figure to</span>
+<span class="c1"># interact with it.</span>
+<span class="n">plot</span>
 </pre></div>
 </div>
 </div>
-<p><img alt="image0" src="../_images/multi_solenoid_turned_plot.jpg" /></p>
+<p>500 Å section, 38 histones - the DNA is more compacted (and the DNA could have overlaps.</p>
+<p><img alt="image0" src="../_images/turned_solenoid_750A_42histones.jpg" /></p>
 </section>
-<section id="Exporting-multiple-solenoids-as-text">
-<h2>Exporting multiple solenoids as text<a class="headerlink" href="#Exporting-multiple-solenoids-as-text" title="Permalink to this headline">¶</a></h2>
+<section id="Changing-the-number-of-Histones">
+<h2>Changing the number of Histones<a class="headerlink" href="#Changing-the-number-of-Histones" title="Permalink to this headline">¶</a></h2>
+<p>When making DNA shorter (or longer), you should change the number of histones appropriately.</p>
+<p>In general, you’ll want to keep the linear density of histones roughly constant (around 51/1000Å)</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make a turned solenoid in a 750 Å box</span>
+<span class="n">chain</span> <span class="o">=</span> <span class="n">dna</span><span class="o">.</span><span class="n">Solenoid</span><span class="p">(</span><span class="n">voxelheight</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">nhistones</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+<span class="c1"># MayaVI plots are best for visualisation here</span>
+<span class="n">plot</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">to_line_plot</span><span class="p">()</span>
+<span class="n">plot</span><span class="o">.</span><span class="n">scene</span><span class="o">.</span><span class="n">save_jpg</span><span class="p">(</span><span class="s2">&quot;single_solenoid_500A_25histones.jpg&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>A 500Å long solenoid</p>
+<p><img alt="image0" src="../_images/turned_solenoid_750A_42histones.jpg" /></p>
+<p><em>If you need to make DNA a little denser, try increasing the linear density of DNA</em></p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make a turned solenoid in a 750 Å box</span>
+<span class="n">chain</span> <span class="o">=</span> <span class="n">dna</span><span class="o">.</span><span class="n">Solenoid</span><span class="p">(</span><span class="n">voxelheight</span><span class="o">=</span><span class="mi">750</span><span class="p">,</span> <span class="n">nhistones</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="c1"># MayaVI plots are best for visualisation here</span>
+<span class="n">plot</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">to_line_plot</span><span class="p">()</span>
+<span class="n">plot</span><span class="o">.</span><span class="n">scene</span><span class="o">.</span><span class="n">save_jpg</span><span class="p">(</span><span class="s2">&quot;single_solenoid_750A_42histones.jpg&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>750Å strand, 42 histones</p>
+<p><img alt="image0" src="../_images/turned_solenoid_750A_42histones.jpg" /></p>
+</section>
+<section id="Turned-Solenoids-follow-the-same-principles">
+<h2>Turned Solenoids follow the same principles<a class="headerlink" href="#Turned-Solenoids-follow-the-same-principles" title="Permalink to this headline">¶</a></h2>
+<p>They are actually based on the spacing that a straight solenoid would have, so the <code class="docutils literal notranslate"><span class="pre">voxelheight</span></code> and <code class="docutils literal notranslate"><span class="pre">nhistones</span></code> correspond to their straightened equivalents, and the linear density of histones is what is conserved.</p>
+<p>The radius of curvature is <em>half the voxel height</em>.</p>
+<p>Be particularly careful to ensure there are no overlapping molecules on the internal curve.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chain</span> <span class="o">=</span> <span class="n">dna</span><span class="o">.</span><span class="n">TurnedSolenoid</span><span class="p">(</span><span class="n">voxelheight</span><span class="o">=</span><span class="mi">750</span><span class="p">,</span> <span class="n">nhistones</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="c1"># MayaVI plots are best for visualisation here</span>
+<span class="n">plot</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">to_line_plot</span><span class="p">()</span>
+<span class="n">plot</span><span class="o">.</span><span class="n">scene</span><span class="o">.</span><span class="n">save_jpg</span><span class="p">(</span><span class="s2">&quot;turned_solenoid_750A_42histones.jpg&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>750Å strand, 42 histones</p>
+<p><img alt="image0" src="../_images/turned_solenoid_750A_42histones.jpg" /></p>
+<p><em>It is important to inspect the result to make sure there aren’t placements where you don’t expect</em></p>
+<p>With a voxelheight of 750Å, we expect bounds in the range</p>
+<p>-375 &lt; X &lt; 375 -375 &lt; Y &lt; 375 0 &lt; Z &lt; 750</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chain_df</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chain_df</span><span class="p">[</span><span class="s2">&quot;max_extent&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">chain_df</span><span class="p">[[</span><span class="s2">&quot;size_x&quot;</span><span class="p">,</span> <span class="s2">&quot;size_y&quot;</span><span class="p">,</span> <span class="s2">&quot;size_z&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># What are the bounds of the box?</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="s2">&quot;X Bounds:&quot;</span><span class="p">,</span>
+    <span class="p">(</span><span class="n">chain_df</span><span class="p">[</span><span class="s2">&quot;pos_x&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">chain_df</span><span class="p">[</span><span class="s2">&quot;max_extent&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span>
+    <span class="p">(</span><span class="n">chain_df</span><span class="p">[</span><span class="s2">&quot;pos_x&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">chain_df</span><span class="p">[</span><span class="s2">&quot;max_extent&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="s2">&quot;Y Bounds:&quot;</span><span class="p">,</span>
+    <span class="p">(</span><span class="n">chain_df</span><span class="p">[</span><span class="s2">&quot;pos_y&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">chain_df</span><span class="p">[</span><span class="s2">&quot;max_extent&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span>
+    <span class="p">(</span><span class="n">chain_df</span><span class="p">[</span><span class="s2">&quot;pos_y&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">chain_df</span><span class="p">[</span><span class="s2">&quot;max_extent&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="s2">&quot;Z Bounds:&quot;</span><span class="p">,</span>
+    <span class="p">(</span><span class="n">chain_df</span><span class="p">[</span><span class="s2">&quot;pos_z&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">chain_df</span><span class="p">[</span><span class="s2">&quot;max_extent&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span>
+    <span class="p">(</span><span class="n">chain_df</span><span class="p">[</span><span class="s2">&quot;pos_z&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">chain_df</span><span class="p">[</span><span class="s2">&quot;max_extent&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Exporting-Solenoidal-DNA-to-CSV">
+<h2>Exporting Solenoidal DNA to CSV<a class="headerlink" href="#Exporting-Solenoidal-DNA-to-CSV" title="Permalink to this headline">¶</a></h2>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This too can be exported to a dataframe of basepairs</span>
+
+<span class="c1"># let&#39;s shift in so that it starts at z=-750/2, not at z=0</span>
+<span class="n">chain</span><span class="o">.</span><span class="n">translate</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">750.0</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">])</span>
+
+<span class="c1"># and then make it into a data frame</span>
 <span class="n">chain</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -430,7 +561,9 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># And a second base pair of histones</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># And a second data frame of histones</span>
+<span class="c1"># This can be joined to the base pairs frame, assuming a sufficient handling of</span>
+<span class="c1"># the missing strand index, and the relation between the base pair and histone index.</span>
 <span class="n">chain</span><span class="o">.</span><span class="n">histones_to_frame</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -450,8 +583,8 @@ div.rendered_html tbody tr:hover {
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="single-solenoids.html" class="btn btn-neutral float-left" title="Single DNA Solenoids" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="modifying-solenoids.html" class="btn btn-neutral float-right" title="Modifying Solenoids" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="multiple-solenoids.html" class="btn btn-neutral float-left" title="Placing volumes that contain multiple DNA solenoids" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="generating-geometries-for-geant.html" class="btn btn-neutral float-right" title="Generating Geometries for Geant4" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

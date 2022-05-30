@@ -17,12 +17,14 @@ fractaldna.dna\_models.dnachain.MultiSolenoidVolume
    .. autosummary::
    
       ~MultiSolenoidVolume.__init__
+      ~MultiSolenoidVolume.histones_to_frame
       ~MultiSolenoidVolume.to_frame
       ~MultiSolenoidVolume.to_line_plot
       ~MultiSolenoidVolume.to_plot
       ~MultiSolenoidVolume.to_strand_plot
       ~MultiSolenoidVolume.to_surface_plot
       ~MultiSolenoidVolume.to_text
+      ~MultiSolenoidVolume.translate
    
    
 

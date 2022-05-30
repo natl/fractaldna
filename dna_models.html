@@ -576,8 +576,7 @@ per rotation) and then joining them together using SplineLinkers</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>voxelheight</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – Height of ‘voxel’ in angstrom</p></li>
-<li><p><strong>radius</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – Radius of circle the solenoid is turning around (angstrom)</p></li>
-<li><p><strong>radius</strong> – Radius from Solenoid centre to histone centre</p></li>
+<li><p><strong>radius</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – Radius from Solenoid centre to histone centre</p></li>
 <li><p><strong>nhistones</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – Number of histones to place</p></li>
 <li><p><strong>histone_angle</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – tilt of histones from axis in degrees</p></li>
 <li><p><strong>twist</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – whether the DNA exiting the final spine should be
@@ -590,7 +589,7 @@ rotated an extra pi/2.</p></li>
 
 <dl class="py class">
 <dt class="sig sig-object py">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">fractaldna.dna_models.dnachain.</span></span><span class="sig-name descname"><span class="pre">MultiSolenoidVolume</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">voxelheight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1500.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">400</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">twist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">turn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chains</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[0,</span> <span class="pre">1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">4,</span> <span class="pre">5,</span> <span class="pre">6,</span> <span class="pre">7,</span> <span class="pre">8]</span></span></em><span class="sig-paren">)</span></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">fractaldna.dna_models.dnachain.</span></span><span class="sig-name descname"><span class="pre">MultiSolenoidVolume</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">voxelheight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1500.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">400</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">twist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">turn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chains</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[0,</span> <span class="pre">1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">4,</span> <span class="pre">5,</span> <span class="pre">6,</span> <span class="pre">7,</span> <span class="pre">8]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nhistones</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">histone_angle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span></dt>
 <dd><p>Class to build placement volumes that contain multiple solenoidal DNA
 strands.</p>
 <p>Constructor:</p>
@@ -600,10 +599,79 @@ strands.</p>
 </dl>
 <p>voxelheight: size of placement volume
 separation: separation between DNA strands</p>
+<p>The class can contain up to 9 strands with indices as follows</p>
+<p>0: central strand
+1: x = separation,  y = 0
+2: x = 0,           y = separation
+3: x = -separation, y = 0
+4: x = separation,  y = separation
+5: x = separation,  y = separation
+6: x = -separation, y = separation
+7: x = -separation, y = -separation
+8: x = separation,  y = -seperation</p>
 <p>Try:
 dna = MultiSolenoidVolume()
 dna.to_line_plot()
 dna.to_text()</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>voxelheight</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – Height of ‘voxel’ in angstrom</p></li>
+<li><p><strong>separation</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – separation between DNA strands</p></li>
+<li><p><strong>twist</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – whether the DNA exiting the final spine should be
+rotated an extra pi/2.</p></li>
+<li><p><strong>turn</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – make a turned volume (turn strand 90°)</p></li>
+<li><p><strong>chains</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>) – List of chains to plot, e.g. [0, 1, 2, 3, 4] for a
+central strand (0) and 4 strands along the X/Y axes.</p></li>
+<li><p><strong>radius</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – Radius from Solenoid centre to histone centre</p></li>
+<li><p><strong>nhistones</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]) – Number of histones to place (if None, will default)
+to int(38 * voxelheight / 750.0)</p></li>
+<li><p><strong>histone_angle</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – tilt of histones from axis in degrees</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">histones_to_frame</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd><p>Get Histones in Solenoid as a dataframe of their positions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>DataFrame of Histones</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">to_frame</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd><p>Return the molecules as a pandas data frame</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Pandas data frame with molecule information</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">translate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">translation</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Translate the solenoid spatially</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>translation</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code>]) – 3-vector for translation</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </section>
