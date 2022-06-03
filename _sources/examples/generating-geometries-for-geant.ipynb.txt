@@ -64,13 +64,13 @@
     "    \"\".join(np.random.choice([\"G\", \"A\", \"T\", \"C\"], num_basepairs_turned))\n",
     ")\n",
     "\n",
-    "chain_straight.to_frame().to_csv(\"results/50nm_straight.csv\", sep=\" \")\n",
-    "chain_turned.to_frame().to_csv(\"results/50nm_turn.csv\", sep=\" \")\n",
-    "chain_turned_twisted.to_frame().to_csv(\"results/50nm_turn_twist.csv\", sep=\" \")\n",
+    "chain_straight.to_frame().to_csv(\"results/50nm_straight.csv\", sep=' ', index=False)\n",
+    "chain_turned.to_frame().to_csv(\"results/50nm_turn.csv\", sep=' ', index=False)\n",
+    "chain_turned_twisted.to_frame().to_csv(\"results/50nm_turn_twist.csv\", sep=' ', index=False)\n",
     "\n",
-    "chain_straight.to_plot().savefig(\"results/50nm_straight.png\", sep=\" \")\n",
-    "chain_turned.to_plot().savefig(\"results/50nm_turn.png\", sep=\" \")\n",
-    "chain_turned_twisted.to_plot().savefig(\"results/50nm_turn_twist.png\", sep=\" \")"
+    "chain_straight.to_plot().savefig(\"results/50nm_straight.png\", sep=' ', index=False)\n",
+    "chain_turned.to_plot().savefig(\"results/50nm_turn.png\", sep=' ', index=False)\n",
+    "chain_turned_twisted.to_plot().savefig(\"results/50nm_turn_twist.png\", sep=' ', index=False)"
    ]
   },
   {
@@ -84,7 +84,8 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "## Multi Strand straight and turned segments"
+    "\n",
+    "### Multi Strand straight and turned segments"
    ]
   },
   {
@@ -116,9 +117,9 @@
     "    twist=True,\n",
     ")\n",
     "\n",
-    "chain4_straight.to_frame().to_csv(\"results/50nm_4_straight.csv\", sep=\" \")\n",
-    "chain4_turned.to_frame().to_csv(\"results/50nm_4_turn.csv\", sep=\" \")\n",
-    "chain4_turned_twisted.to_frame().to_csv(\"results/50nm_4_turn_twist.csv\", sep=\" \")\n",
+    "chain4_straight.to_frame().to_csv(\"results/50nm_4_straight.csv\", sep=\" \", index=False)\n",
+    "chain4_turned.to_frame().to_csv(\"results/50nm_4_turn.csv\", sep=\" \", index=False)\n",
+    "chain4_turned_twisted.to_frame().to_csv(\"results/50nm_4_turn_twist.csv\", sep=\" \", index=False)\n",
     "\n",
     "chain4_straight.to_plot().savefig(\"results/50nm_4_straight.png\")\n",
     "chain4_turned.to_plot().savefig(\"results/50nm_4_turn.png\")\n",
@@ -136,7 +137,10 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "## Making Solenoidal DNA"
+    "\n",
+    "## Making Solenoidal DNA\n",
+    "\n",
+    "### Single Solenoids"
    ]
   },
   {
@@ -147,7 +151,7 @@
    "source": [
     "side_length = 750  # angstrom\n",
     "radius_solenoid = 100  # angstrom\n",
-    "nhistones = 42  # histones\n",
+    "nhistones = 38  # histones\n",
     "\n",
     "solenoid_straight = dnachain.Solenoid(\n",
     "    voxelheight=side_length, radius=radius_solenoid, nhistones=nhistones\n",
@@ -164,10 +168,10 @@
     "solenoid_turned.translate([0, 0, -side_length / 2.0])\n",
     "solenoid_turned_twisted.translate([0, 0, -side_length / 2.0])\n",
     "\n",
-    "solenoid_straight.to_frame().to_csv(\"results/solenoid_straight.csv\", sep=\" \")\n",
-    "solenoid_turned.to_frame().to_csv(\"results/solenoid_turned.csv\", sep=\" \")\n",
+    "solenoid_straight.to_frame().to_csv(\"results/solenoid_straight.csv\", sep=\" \", index=False)\n",
+    "solenoid_turned.to_frame().to_csv(\"results/solenoid_turned.csv\", sep=\" \", index=False)\n",
     "solenoid_turned_twisted.to_frame().to_csv(\n",
-    "    \"results/solenoid_turned_twisted.csv\", sep=\" \"\n",
+    "    \"results/solenoid_turned_twisted.csv\", sep=\" \", index=False\n",
     ")\n",
     "\n",
     "plot = solenoid_straight.to_line_plot()\n",
@@ -198,7 +202,7 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "## Generating multiple solenoids in a Volume\n"
+    "### Generating multiple solenoids in a Volume\n"
    ]
   },
   {
@@ -209,8 +213,8 @@
    "source": [
     "side_length = 1000  # angstrom\n",
     "radius_solenoid = 100  # angstrom\n",
-    "nhistones = 42  # histones\n",
-    "separation = 300  # angstroms\n",
+    "nhistones = 51 # histones\n",
+    "separation = 250  # angstroms\n",
     "\n",
     "solenoid4_straight = dnachain.MultiSolenoidVolume(\n",
     "    voxelheight=side_length,\n",
@@ -247,10 +251,10 @@
     "solenoid4_turned.translate([0, 0, -side_length / 2.0])\n",
     "solenoid4_turned_twisted.translate([0, 0, -side_length / 2.0])\n",
     "\n",
-    "solenoid4_straight.to_frame().to_csv(\"results/solenoid4_straight.csv\", sep=\" \")\n",
-    "solenoid4_turned.to_frame().to_csv(\"results/solenoid4_turned.csv\", sep=\" \")\n",
+    "solenoid4_straight.to_frame().to_csv(\"results/solenoid4_straight.csv\", sep=\" \", index=False)\n",
+    "solenoid4_turned.to_frame().to_csv(\"results/solenoid4_turned.csv\", sep=\" \", index=False)\n",
     "solenoid4_turned_twisted.to_frame().to_csv(\n",
-    "    \"results/solenoid4_turned_twisted.csv\", sep=\" \"\n",
+    "    \"results/solenoid4_turned_twisted.csv\", sep=\" \", index=False\n",
     ")\n",
     "\n",
     "plot = solenoid4_straight.to_line_plot()\n",
