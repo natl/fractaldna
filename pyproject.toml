@@ -67,7 +67,7 @@ sphinx-rtd-theme = "^1.0.0"
 sphinx-autodoc-typehints = "^1.17.0"
 ipykernel = "^6.6.0"
 ipyevents = "^2.0.1"
-nbsphinx = "^0.8.8"
+nbsphinx = "^0.8.9"
 
 [tool.poetry.extras]
 mayavi = ["mayavi", "PyQt5", "vtk"]
