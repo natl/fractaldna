@@ -502,7 +502,7 @@ test = ["pytest", "pytest-cov", "nbval"]
 
 [[package]]
 name = "ipykernel"
-version = "6.13.0"
+version = "6.14.0"
 description = "IPython Kernel for Jupyter"
 category = "dev"
 optional = false
@@ -521,7 +521,7 @@ tornado = ">=6.1"
 traitlets = ">=5.1.0"
 
 [package.extras]
-test = ["pytest (>=6.0)", "pytest-cov", "flaky", "ipyparallel", "pre-commit", "pytest-timeout"]
+test = ["flaky", "ipyparallel", "pre-commit", "pytest-cov", "pytest-timeout", "pytest (>=6.0)"]
 
 [[package]]
 name = "ipython"
@@ -1781,7 +1781,7 @@ mayavi = []
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.8,<3.11"
-content-hash = "92ccd8d6d036da245b4c6ca9a4030bed6c758f3722fdfbac6ca5d3ec59d8efd0"
+content-hash = "a578f4c8ad6001f8ea69912ae016b56df010bf67e46f70087328ff498da4fe44"
 
 [metadata.files]
 alabaster = [
@@ -2065,8 +2065,8 @@ ipyevents = [
     {file = "ipyevents-2.0.1.tar.gz", hash = "sha256:23eb2afab13d9056397f120a88051dd3beb067b698d08b33adffc9e077f019cb"},
 ]
 ipykernel = [
-    {file = "ipykernel-6.13.0-py3-none-any.whl", hash = "sha256:2b0987af43c0d4b62cecb13c592755f599f96f29aafe36c01731aaa96df30d39"},
-    {file = "ipykernel-6.13.0.tar.gz", hash = "sha256:0e28273e290858393e86e152b104e5506a79c13d25b951ac6eca220051b4be60"},
+    {file = "ipykernel-6.14.0-py3-none-any.whl", hash = "sha256:cbf50ed3dc9998d4077d8cd263275f232cbe67dbd2e79cd6d2644f3a4418148b"},
+    {file = "ipykernel-6.14.0.tar.gz", hash = "sha256:720f2a07aadf70ca05b034f2cdd0590a8bd56581ddf3b7ec4a37075366270e89"},
 ]
 ipython = [
     {file = "ipython-8.4.0-py3-none-any.whl", hash = "sha256:7ca74052a38fa25fe9bedf52da0be7d3fdd2fb027c3b778ea78dfe8c212937d1"},
