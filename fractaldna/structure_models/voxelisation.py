@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from mpl_toolkits.mplot3d import Axes3D  # NOQA
+from tqdm import tqdm
 
 from . import hilbert
 
@@ -480,10 +481,13 @@ class VoxelisedFractal:
         return cls.fromLString(seed, distance=distance)
 
     @classmethod
-    def from_path(cls, path: Union[List[np.array], List[List], np.array]):
+    def from_path(
+        cls, path: Union[List[np.array], List[List], np.array], pbar: bool = False
+    ):
         """Convert a path (a list of xyz positions) to a voxelised representation
 
         :param path: path to convert
+        :param pbar: show a progress bar if true
 
         :returns: Voxelised Fractal representation
         """
@@ -529,7 +533,11 @@ class VoxelisedFractal:
 
         vf.fractal = [cls._makeVoxel(zeroVoxel, first, second)]
 
-        for ii in range(1, len(path) - 1):
+        stop = len(path) - 1
+        iters = tqdm(
+            range(1, stop), disable=(not pbar), total=stop - 1, desc="Building Voxels"
+        )
+        for ii in iters:
             vf.fractal.append(
                 cls._makeVoxel(vf.fractal[ii - 1], arrpath[ii], arrpath[ii + 1])
             )
@@ -539,50 +547,14 @@ class VoxelisedFractal:
         return vf
 
     @classmethod
-    def fromLString(cls, lstring):
+    def fromLString(cls, lstring: str, pbar: bool = False):
         """Convert an L-String into a VoxelisedFractal
 
         :param lstring: L-String to convert
+        :param pbar: Show a progress bar for generating path and voxels
 
         :returns: Voxelised Fractal representation
         """
-        path = hilbert.generate_path(lstring, n=1, distance=1)
+        path = hilbert.generate_path(lstring, n=1, distance=1, pbar=pbar)
 
-        return cls.from_path(path)
-        lastpos = 2 * path[len(path) - 1] - path[len(path) - 2]
-        path.append(lastpos)
-
-        vf = cls()
-
-        arrpath = np.array(path)
-
-        mins = np.zeros(3)  # array [xmin, ymin, zmin]
-        maxs = np.zeros(3)  # array [xmax, ymax, zmax]
-        lens = np.zeros(3)
-
-        for ii in range(3):
-            mins[ii] = min(arrpath[:, ii])
-            maxs[ii] = max(arrpath[:, ii])
-            lens[ii] = maxs[ii] - mins[ii]
-
-        first = arrpath[0]
-        second = arrpath[1]
-        zeroheading = second - first
-        zeroposition = first - distance * zeroheading
-        zeroprincipal = np.array([1, 0, 0])
-        if (np.around(zeroheading, 8) == zeroprincipal).all():
-            zeroprincipal = np.array([0, 1, 0])
-        zeroVoxel = Voxel(
-            zeroposition, zeroheading, zeroprincipal, zeroheading, zeroprincipal
-        )
-
-        vf.fractal = [cls._makeVoxel(zeroVoxel, first, second)]
-
-        for ii in range(1, len(path) - 1):
-            vf.fractal.append(
-                cls._makeVoxel(vf.fractal[ii - 1], arrpath[ii], arrpath[ii + 1])
-            )
-            # print np.around(arrpath[ii], 3)
-        # print "Path Length: ", len(vf.fractal)
-
-        return vf
+        return cls.from_path(path, pbar=pbar)

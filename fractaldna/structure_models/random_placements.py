@@ -477,9 +477,6 @@ def generate_non_overlapping_prisms(
     if verbose is True:
         pbar = tqdm(iterable=None, total=n_prisms)
     while n_prisms_placed < n_prisms:
-        if (n_prisms // 10000) * 10000 == n_prisms_placed:
-            sys.stderr.write(f"Generating prism {n_prisms_placed} of {n_prisms}")
-
         if attempts >= early_exit and early_exit >= 0:
             sys.stderr.write(
                 f"Too many failed prism placements, stopped after {n_prisms_placed} placements."
@@ -494,8 +491,8 @@ def generate_non_overlapping_prisms(
             n_prisms_placed += 1
         else:
             attempts += 1
-
-    pbar.close()
+    if verbose is True:
+        pbar.close()
     return prisms
 
 
