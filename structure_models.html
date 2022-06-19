@@ -107,7 +107,7 @@ turned into a voxelised representation using the methods in
 <h2>Generating Hilbert Curves using L-Strings<a class="headerlink" href="#generating-hilbert-curves-using-l-strings" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py">
-<span class="sig-prename descclassname"><span class="pre">fractaldna.structure_models.hilbert.</span></span><span class="sig-name descname"><span class="pre">generate_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lstring</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rounding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span></dt>
+<span class="sig-prename descclassname"><span class="pre">fractaldna.structure_models.hilbert.</span></span><span class="sig-name descname"><span class="pre">generate_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lstring</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rounding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pbar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span></dt>
 <dd><p>Generate a path from an l-string</p>
 <p>When moving a distance smaller than 1, ensure that rounding is set correctly.</p>
 <p>This algorithm works best when moving in integer steps and applying any scaling
@@ -119,6 +119,7 @@ after generating the path.</p>
 <li><p><strong>n</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – steps on path between forward movements</p></li>
 <li><p><strong>distance</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – distance between points forward movements</p></li>
 <li><p><strong>rounding</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – rounding to apply to each position</p></li>
+<li><p><strong>pbar</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – display a progress bar</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
@@ -153,11 +154,14 @@ fractal.fractal contains a list of ‘Voxels’ representing the DNA Path</p>
 
 <dl class="py method">
 <dt class="sig sig-object py">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fromLString</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lstring</span></span></em><span class="sig-paren">)</span></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fromLString</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lstring</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pbar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span></dt>
 <dd><p>Convert an L-String into a VoxelisedFractal</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>lstring</strong> – L-String to convert</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lstring</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – L-String to convert</p></li>
+<li><p><strong>pbar</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – Show a progress bar for generating path and voxels</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Voxelised Fractal representation</p>
@@ -186,11 +190,14 @@ fractal.fractal contains a list of ‘Voxels’ representing the DNA Path</p>
 
 <dl class="py method">
 <dt class="sig sig-object py">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pbar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span></dt>
 <dd><p>Convert a path (a list of xyz positions) to a voxelised representation</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>path</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code>], <code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>], <code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code>]) – path to convert</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code>], <code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>], <code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code>]) – path to convert</p></li>
+<li><p><strong>pbar</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – show a progress bar if true</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Voxelised Fractal representation</p>

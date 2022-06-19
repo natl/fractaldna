@@ -11,4 +11,5 @@ Examples
    examples/multiple-solenoids
    examples/modifying-solenoids
    examples/generating-geometries-for-geant
+   examples/generating-structures-for-geant
    

@@ -142,13 +142,13 @@ fractal.fractal contains a list of ‘Voxels’ representing the DNA Path</p>
 <tr class="row-even"><td><p><a class="reference internal" href="#fractaldna.structure_models.voxelisation.VoxelisedFractal.center_fractal" title="fractaldna.structure_models.voxelisation.VoxelisedFractal.center_fractal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">center_fractal</span></code></a>()</p></td>
 <td><p>Center the fractal around (x, y, z) = (0, 0, 0)</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#fractaldna.structure_models.voxelisation.VoxelisedFractal.fromLString" title="fractaldna.structure_models.voxelisation.VoxelisedFractal.fromLString"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fromLString</span></code></a>(lstring)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#fractaldna.structure_models.voxelisation.VoxelisedFractal.fromLString" title="fractaldna.structure_models.voxelisation.VoxelisedFractal.fromLString"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fromLString</span></code></a>(lstring[, pbar])</p></td>
 <td><p>Convert an L-String into a VoxelisedFractal</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#fractaldna.structure_models.voxelisation.VoxelisedFractal.fromSeed" title="fractaldna.structure_models.voxelisation.VoxelisedFractal.fromSeed"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fromSeed</span></code></a>(seed, iterations[, distance])</p></td>
 <td><p>Make a voxelised fractal from an L-String seed.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#fractaldna.structure_models.voxelisation.VoxelisedFractal.from_path" title="fractaldna.structure_models.voxelisation.VoxelisedFractal.from_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_path</span></code></a>(path)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#fractaldna.structure_models.voxelisation.VoxelisedFractal.from_path" title="fractaldna.structure_models.voxelisation.VoxelisedFractal.from_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_path</span></code></a>(path[, pbar])</p></td>
 <td><p>Convert a path (a list of xyz positions) to a voxelised representation</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#fractaldna.structure_models.voxelisation.VoxelisedFractal.to_frame" title="fractaldna.structure_models.voxelisation.VoxelisedFractal.to_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_frame</span></code></a>()</p></td>
@@ -178,11 +178,14 @@ fractal.fractal contains a list of ‘Voxels’ representing the DNA Path</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="fractaldna.structure_models.voxelisation.VoxelisedFractal.fromLString">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fromLString</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lstring</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.structure_models.voxelisation.VoxelisedFractal.fromLString" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fromLString</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lstring</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pbar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.structure_models.voxelisation.VoxelisedFractal.fromLString" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert an L-String into a VoxelisedFractal</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>lstring</strong> – L-String to convert</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lstring</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – L-String to convert</p></li>
+<li><p><strong>pbar</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – Show a progress bar for generating path and voxels</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Voxelised Fractal representation</p>
@@ -211,11 +214,14 @@ fractal.fractal contains a list of ‘Voxels’ representing the DNA Path</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="fractaldna.structure_models.voxelisation.VoxelisedFractal.from_path">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.structure_models.voxelisation.VoxelisedFractal.from_path" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pbar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.structure_models.voxelisation.VoxelisedFractal.from_path" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert a path (a list of xyz positions) to a voxelised representation</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>path</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code>], <code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>], <code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code>]) – path to convert</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code>], <code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>], <code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code>]) – path to convert</p></li>
+<li><p><strong>pbar</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – show a progress bar if true</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Voxelised Fractal representation</p>

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>How to make a Voxelised DNA Structure &mdash; FractalDNA 0.1 documentation</title>
+  <title>Making large scale structures in Geant4 &mdash; FractalDNA 0.1 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -21,8 +21,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="How to make a Other DNA Structure" href="other-structure-models.html" />
-    <link rel="prev" title="Examples" href="../examples.html" /> 
+    <link rel="next" title="API Reference" href="../api.html" />
+    <link rel="prev" title="Generating Geometries for Geant4" href="generating-geometries-for-geant.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -44,17 +44,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../structure_models.html">Structure Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dna_models.html">DNA Models</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../examples.html">Examples</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">How to make a Voxelised DNA Structure</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#Producing-L-Strings">Producing L-Strings</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#Drawing-Fractals">Drawing Fractals</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#Making-voxelised-representations.">Making voxelised representations.</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#Exporting-large-scale-structures-to-text.">Exporting large-scale structures to text.</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="fractal-structure-models.html">How to make a Voxelised DNA Structure</a></li>
 <li class="toctree-l2"><a class="reference internal" href="other-structure-models.html">How to make a Other DNA Structure</a></li>
 <li class="toctree-l2"><a class="reference internal" href="single-strand.html">Making Single Strand DNA Models</a></li>
 <li class="toctree-l2"><a class="reference internal" href="multiple-strands.html">Make and visualise DNA Models</a></li>
@@ -62,7 +52,16 @@
 <li class="toctree-l2"><a class="reference internal" href="multiple-solenoids.html">Placing volumes that contain multiple DNA solenoids</a></li>
 <li class="toctree-l2"><a class="reference internal" href="modifying-solenoids.html">Modifying Solenoids</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generating-geometries-for-geant.html">Generating Geometries for Geant4</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generating-structures-for-geant.html">Making large scale structures in Geant4</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Making large scale structures in Geant4</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Fractal-Cell-Shapes">Fractal Cell Shapes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Generating-a-square-shape">Generating a square shape</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Generating-a-Rectangular-Shape">Generating a Rectangular Shape</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#Importing-a-shape-from-a-path">Importing a shape from a path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Generating-Random-Volumes">Generating Random Volumes</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../api.html">API Reference</a></li>
@@ -83,9 +82,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="../examples.html">Examples</a> &raquo;</li>
-      <li>How to make a Voxelised DNA Structure</li>
+      <li>Making large scale structures in Geant4</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/examples/fractal-structure-models.ipynb.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/examples/generating-structures-for-geant.ipynb.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -371,10 +370,9 @@ div.rendered_html tbody tr:hover {
     text-align: unset;
 }
 </style>
-<section id="How-to-make-a-Voxelised-DNA-Structure">
-<h1>How to make a Voxelised DNA Structure<a class="headerlink" href="#How-to-make-a-Voxelised-DNA-Structure" title="Permalink to this headline">¶</a></h1>
-<p>DNA Structures are built from <a class="reference external" href="https://en.wikipedia.org/wiki/L-system">L-string</a> seeded fractals.</p>
-<p>L-strings and L-systems provide a grammar that can be used to generate a fractal. In this work, Hilbert curves are generated that are then converted into cubic placement ‘voxels’ for use in modelling.</p>
+<section id="Making-large-scale-structures-in-Geant4">
+<h1>Making large scale structures in Geant4<a class="headerlink" href="#Making-large-scale-structures-in-Geant4" title="Permalink to this headline">¶</a></h1>
+<p>Geant4 simulations use a large scale structure</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
@@ -395,126 +393,134 @@ div.rendered_html tbody tr:hover {
     <span class="kn">from</span> <span class="nn">fractaldna.structure_models</span> <span class="kn">import</span> <span class="n">hilbert</span> <span class="k">as</span> <span class="n">h</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span>
 </pre></div>
 </div>
 </div>
-<section id="Producing-L-Strings">
-<h2>Producing L-Strings<a class="headerlink" href="#Producing-L-Strings" title="Permalink to this headline">¶</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">hilbert</span></code> model encodes a few basic fractals which can create Hilbert curves. These are</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>h.X: n&lt;XFn&lt;XFX-Fn&gt;&gt;XFX&amp;F+&gt;&gt;XFX-F&gt;X-&gt;
-h.A: B-F+CFC+F-D&amp;FnD-F+&amp;&amp;CFC+F+B&lt;&lt;
-h.B: A&amp;FnCFBnFnDnn-F-Dn|FnB|FCnFnA&lt;&lt;
-h.C: |Dn|FnB-F+CnFnA&amp;&amp;FA&amp;FnC+F+BnFnD&lt;&lt;
-h.D: |CFB-F+B|FA&amp;FnA&amp;&amp;FB-F+B|FC&lt;&lt;
-</pre></div>
-</div>
-<p>Reference to these are all stored in <code class="docutils literal notranslate"><span class="pre">hilbert.SUBSTITIONS</span></code>.</p>
-<p>The L-String language works as follows:</p>
-<ul class="simple">
-<li><p>interpret <code class="docutils literal notranslate"><span class="pre">F</span></code> as DrawForward(1);</p></li>
-<li><p>interpret <code class="docutils literal notranslate"><span class="pre">+</span></code> as Yaw(90);</p></li>
-<li><p>interpret <code class="docutils literal notranslate"><span class="pre">-</span></code> as Yaw(-90);</p></li>
-<li><p>interpret <code class="docutils literal notranslate"><span class="pre">n</span></code> as Pitch(90);</p></li>
-<li><p>interpret <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> as Pitch(-90);</p></li>
-<li><p>interpret <code class="docutils literal notranslate"><span class="pre">&gt;</span></code> as Roll(90);</p></li>
-<li><p>interpret <code class="docutils literal notranslate"><span class="pre">&lt;</span></code> as Roll(-90);</p></li>
-<li><p>interpret <code class="docutils literal notranslate"><span class="pre">|</span></code> as Yaw(180);</p></li>
-</ul>
-<p>To ‘iterate’ an L-String, replace any reference to a subsititution with its value.</p>
+<section id="Fractal-Cell-Shapes">
+<h2>Fractal Cell Shapes<a class="headerlink" href="#Fractal-Cell-Shapes" title="Permalink to this headline">¶</a></h2>
+<section id="Generating-a-square-shape">
+<h3>Generating a square shape<a class="headerlink" href="#Generating-a-square-shape" title="Permalink to this headline">¶</a></h3>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;h.X:&quot;</span><span class="p">,</span> <span class="n">h</span><span class="o">.</span><span class="n">X</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;h.A:&quot;</span><span class="p">,</span> <span class="n">h</span><span class="o">.</span><span class="n">A</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;h.B:&quot;</span><span class="p">,</span> <span class="n">h</span><span class="o">.</span><span class="n">B</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;h.C:&quot;</span><span class="p">,</span> <span class="n">h</span><span class="o">.</span><span class="n">C</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;h.D:&quot;</span><span class="p">,</span> <span class="n">h</span><span class="o">.</span><span class="n">D</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Start with the initial L-String X for a Hilbert Curve</span>
+<span class="n">initial_string</span> <span class="o">=</span> <span class="s2">&quot;X&quot;</span>
+<span class="c1"># Iterate it as required (here, nn=3)</span>
+<span class="c1"># for nn = 8, this takes about two hours on my 16GB RAM Mac</span>
+<span class="n">nn</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">iterated_lstring</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">iterate_lstring</span><span class="p">(</span><span class="n">initial_string</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nn</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">iterated_lstring</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">iterate_lstring</span><span class="p">(</span><span class="n">iterated_lstring</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">h.X iterated once:&quot;</span><span class="p">,</span> <span class="n">h</span><span class="o">.</span><span class="n">iterate_lstring</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">X</span><span class="p">))</span>
+<span class="n">vf</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">VoxelisedFractal</span><span class="o">.</span><span class="n">fromLString</span><span class="p">(</span><span class="n">iterated_lstring</span><span class="p">,</span> <span class="n">pbar</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">vf</span><span class="o">.</span><span class="n">center_fractal</span><span class="p">()</span>
+<span class="c1"># fig = vf.to_plot()</span>
+<span class="c1"># fig.savefig(&#39;results/fractal-X-3-centred.svg&#39;)</span>
+
+<span class="c1"># If you are saving a BIG fractal, try using the to_text() method instead</span>
+<span class="c1"># as large dataframes are very slow to generate beyond 6 iterations.</span>
+<span class="c1"># (Very slow as in multiple hours slow!)</span>
+<span class="c1"># with open(f&#39;results/fractal-X-{nn}-centred.csv&#39;, &#39;w&#39;) as ff:</span>
+<span class="c1">#     ff.write(vf.to_text())</span>
+<span class="n">vf</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;results/fractal-X-</span><span class="si">{</span><span class="n">nn</span><span class="si">}</span><span class="s2">-centred.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<section id="Drawing-Fractals">
-<h3>Drawing Fractals<a class="headerlink" href="#Drawing-Fractals" title="Permalink to this headline">¶</a></h3>
-<p>The function <code class="docutils literal notranslate"><span class="pre">generate_path</span></code> will generate a list of XYZ-points for a fractal L-String as below, which can then be plotted in matplotlib</p>
+<p><img alt="b00398b67ee6400a8e95803773b41549" src="examples/results/fractal-X-3-centred.svg" /></p>
+</section>
+<section id="Generating-a-Rectangular-Shape">
+<h3>Generating a Rectangular Shape<a class="headerlink" href="#Generating-a-Rectangular-Shape" title="Permalink to this headline">¶</a></h3>
+<p>The seed <code class="docutils literal notranslate"><span class="pre">XFXFX</span></code> will generate a rectangular shape with aspect ratio 1:1:3</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Points seperated by 1 unit, no intermediate points&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">generate_path</span><span class="p">(</span><span class="s2">&quot;F&quot;</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Points seperated by 1 unit, 2 intermediate points&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">generate_path</span><span class="p">(</span><span class="s2">&quot;F&quot;</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_curve</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">generate_path</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Start with the initial L-String XFXFX for a Hilbert Curve</span>
+<span class="n">initial_string</span> <span class="o">=</span> <span class="s2">&quot;XFXFX&quot;</span>
+<span class="c1"># Iterate it as required (here, nn=4)</span>
+<span class="n">nn</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">iterated_lstring</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">iterate_lstring</span><span class="p">(</span><span class="n">initial_string</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nn</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">iterated_lstring</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">iterate_lstring</span><span class="p">(</span><span class="n">iterated_lstring</span><span class="p">)</span>
 
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s2">&quot;3d&quot;</span><span class="p">)</span>
+<span class="n">vf</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">VoxelisedFractal</span><span class="o">.</span><span class="n">fromLString</span><span class="p">(</span><span class="n">iterated_lstring</span><span class="p">,</span> <span class="n">pbar</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">vf</span><span class="o">.</span><span class="n">center_fractal</span><span class="p">()</span>
+<span class="c1"># fig = vf.to_plot()</span>
+<span class="c1"># fig.savefig(f&#39;results/fractal-XFXFX-{nn}-centred.svg&#39;)</span>
 
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_curve</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x_curve</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">x_curve</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="n">vf</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;results/fractal-XFXFX-</span><span class="si">{</span><span class="n">nn</span><span class="si">}</span><span class="s2">-centred.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_iterated</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">iterate_lstring</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">X</span><span class="p">)</span>
-<span class="n">x_curve2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">generate_path</span><span class="p">(</span><span class="n">x_iterated</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span>
-
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s2">&quot;3d&quot;</span><span class="p">)</span>
-
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_curve2</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">x_curve2</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">x_curve2</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
+<p><em>Note that the x-axis is compressed relative to the others in the below image</em></p>
+<p><img alt="841da36594ba47449f089dc5f496c4c0" src="examples/results/fractal-XFXFX-2-centred.svg" /></p>
 </section>
 </section>
-<section id="Making-voxelised-representations.">
-<h2>Making voxelised representations.<a class="headerlink" href="#Making-voxelised-representations." title="Permalink to this headline">¶</a></h2>
+<section id="Importing-a-shape-from-a-path">
+<h2>Importing a shape from a path<a class="headerlink" href="#Importing-a-shape-from-a-path" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">voxelisation</span></code> model can convert the path of this curve to a voxelised representation, of straight and curved boxes.</p>
+<p>In this example we perform this on a text file with X/Y/Z columns:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>X   Y   Z
+-22 -106    216
+-22 -107    216
+-22 -107    215
+-22 -108    215
+-22 -108    214
+-23 -108    214
+-23 -109    214
+</pre></div>
+</div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">voxelised_fractal</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">VoxelisedFractal</span><span class="o">.</span><span class="n">fromLString</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">X</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;results/example-path.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s2">&quot;3d&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">Y</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">Z</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;example-path.svg&quot;</span><span class="p">)</span>
 
-<span class="c1"># This can be plotted</span>
-<span class="n">voxelised_fractal</span><span class="o">.</span><span class="n">to_pretty_plot</span><span class="p">()</span>
+<span class="n">vf</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">VoxelisedFractal</span><span class="o">.</span><span class="n">from_path</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="n">fig_fractal</span> <span class="o">=</span> <span class="n">vf</span><span class="o">.</span><span class="n">to_plot</span><span class="p">()</span>
+<span class="n">fig_fractal</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;example-path-voxels.svg&quot;</span><span class="p">)</span>
+
+<span class="n">vf</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;results/example-path-voxels.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<section id="Exporting-large-scale-structures-to-text.">
-<h3>Exporting large-scale structures to text.<a class="headerlink" href="#Exporting-large-scale-structures-to-text." title="Permalink to this headline">¶</a></h3>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># And this can be returned as a data frame, or as text</span>
-<span class="n">voxelised_fractal</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-</div>
+<p>Left: Source Plot, Right:Voxelised Plot</p>
+<p><img alt="9cbf5282382048ffa89142b5698a00b2" class="no-scaled-link" src="examples/results/example-path.svg" width="45%" /> <img alt="b4e61f1800774088aab375bcb4f947d4" class="no-scaled-link" src="examples/results/example-path-voxels.svg" width="45%" /></p>
 </section>
+<section id="Generating-Random-Volumes">
+<h2>Generating Random Volumes<a class="headerlink" href="#Generating-Random-Volumes" title="Permalink to this headline">¶</a></h2>
+<p>It can be useful to generate randomised volumes for testing a simulation. This was the subject of (this article)[<a class="reference external" href="https://doi.org/10.1016/j.ejmp.2018.02.011">https://doi.org/10.1016/j.ejmp.2018.02.011</a>].</p>
+<p>To generate a randomised volume, the <code class="docutils literal notranslate"><span class="pre">fractaldna.structure_models.random_placements</span></code> is available.</p>
+<p>In that paper, 200,000 non overlapping prisms were simulated in a r=3000nm ball. The prisms had dimensions 30x30x100nm</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">fractaldna.structure_models</span> <span class="kn">import</span> <span class="n">random_placements</span> <span class="k">as</span> <span class="n">rp</span>
+
+<span class="c1"># Generating 200,000 prisms can take around 4-5 hours</span>
+<span class="n">prisms</span> <span class="o">=</span> <span class="n">rp</span><span class="o">.</span><span class="n">generate_non_overlapping_prisms</span><span class="p">(</span>
+    <span class="n">n_prisms</span><span class="o">=</span><span class="mi">200_000</span><span class="p">,</span>
+    <span class="n">size</span><span class="o">=</span><span class="p">[</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span>  <span class="c1"># nanometres</span>
+    <span class="n">rad</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span>  <span class="c1"># nanometres</span>
+    <span class="n">early_exit</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">prisms</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;results/prisms_200k_r3000.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
 </section>
 </section>
 
@@ -522,8 +528,8 @@ h.D: |CFB-F+B|FA&amp;FnA&amp;&amp;FB-F+B|FC&lt;&lt;
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../examples.html" class="btn btn-neutral float-left" title="Examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="other-structure-models.html" class="btn btn-neutral float-right" title="How to make a Other DNA Structure" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="generating-geometries-for-geant.html" class="btn btn-neutral float-left" title="Generating Geometries for Geant4" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../api.html" class="btn btn-neutral float-right" title="API Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

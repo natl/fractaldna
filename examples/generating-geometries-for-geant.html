@@ -21,7 +21,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="API Reference" href="../api.html" />
+    <link rel="next" title="Making large scale structures in Geant4" href="generating-structures-for-geant.html" />
     <link rel="prev" title="Modifying Solenoids" href="modifying-solenoids.html" /> 
 </head>
 
@@ -64,6 +64,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="generating-structures-for-geant.html">Making large scale structures in Geant4</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../api.html">API Reference</a></li>
@@ -309,6 +310,7 @@ div.nboutput.container div.output_area > div[class^='highlight']{
 }
 
 /* Some additional styling taken form the Jupyter notebook CSS */
+.jp-RenderedHTMLCommon table,
 div.rendered_html table {
   border: none;
   border-collapse: collapse;
@@ -317,10 +319,14 @@ div.rendered_html table {
   font-size: 12px;
   table-layout: fixed;
 }
+.jp-RenderedHTMLCommon thead,
 div.rendered_html thead {
   border-bottom: 1px solid black;
   vertical-align: bottom;
 }
+.jp-RenderedHTMLCommon tr,
+.jp-RenderedHTMLCommon th,
+.jp-RenderedHTMLCommon td,
 div.rendered_html tr,
 div.rendered_html th,
 div.rendered_html td {
@@ -332,12 +338,15 @@ div.rendered_html td {
   max-width: none;
   border: none;
 }
+.jp-RenderedHTMLCommon th,
 div.rendered_html th {
   font-weight: bold;
 }
+.jp-RenderedHTMLCommon tbody tr:nth-child(odd),
 div.rendered_html tbody tr:nth-child(odd) {
   background: #f5f5f5;
 }
+.jp-RenderedHTMLCommon tbody tr:hover,
 div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
@@ -413,17 +422,21 @@ div.rendered_html tbody tr:hover {
     <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s2">&quot;G&quot;</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;T&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">],</span> <span class="n">num_basepairs_turned</span><span class="p">))</span>
 <span class="p">)</span>
 
-<span class="n">chain_straight</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;results/50nm_straight.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">chain_turned</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;results/50nm_turn.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">chain_turned_twisted</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;results/50nm_turn_twist.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">chain_straight</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;results/50nm_straight.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">chain_turned</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;results/50nm_turn.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">chain_turned_twisted</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+    <span class="s2">&quot;results/50nm_turn_twist.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
 
-<span class="n">chain_straight</span><span class="o">.</span><span class="n">to_plot</span><span class="p">()</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;results/50nm_straight.png&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">chain_turned</span><span class="o">.</span><span class="n">to_plot</span><span class="p">()</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;results/50nm_turn.png&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">chain_turned_twisted</span><span class="o">.</span><span class="n">to_plot</span><span class="p">()</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;results/50nm_turn_twist.png&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">chain_straight</span><span class="o">.</span><span class="n">to_plot</span><span class="p">()</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;results/50nm_straight.png&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">chain_turned</span><span class="o">.</span><span class="n">to_plot</span><span class="p">()</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;results/50nm_turn.png&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">chain_turned_twisted</span><span class="o">.</span><span class="n">to_plot</span><span class="p">()</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span>
+    <span class="s2">&quot;results/50nm_turn_twist.png&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<p><img alt="37edd1d115d541b3a718a74829f9452b" class="no-scaled-link" src="../_images/50nm_straight.png" style="width: 30%;" /> <img alt="1bb926fb52c84bc9aa506861f977c3f3" class="no-scaled-link" src="../_images/50nm_turn.png" style="width: 30%;" /> <img alt="8dcef6229af0452e9c577f646edc4188" class="no-scaled-link" src="../_images/50nm_turn_twist.png" style="width: 30%;" /></p>
+<p><img alt="1b72ab4af8d94667a21835f16b769ef2" class="no-scaled-link" src="../_images/50nm_straight.png" style="width: 30%;" /> <img alt="dd23312411434b2292dbc55c9aa54391" class="no-scaled-link" src="../_images/50nm_turn.png" style="width: 30%;" /> <img alt="fa018b66abc6475cacc3c8989d16c651" class="no-scaled-link" src="../_images/50nm_turn_twist.png" style="width: 30%;" /></p>
 </section>
 <section id="Multi-Strand-straight-and-turned-segments">
 <h3>Multi Strand straight and turned segments<a class="headerlink" href="#Multi-Strand-straight-and-turned-segments" title="Permalink to this headline">¶</a></h3>
@@ -456,7 +469,9 @@ div.rendered_html tbody tr:hover {
 
 <span class="n">chain4_straight</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;results/50nm_4_straight.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">chain4_turned</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;results/50nm_4_turn.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">chain4_turned_twisted</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;results/50nm_4_turn_twist.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">chain4_turned_twisted</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+    <span class="s2">&quot;results/50nm_4_turn_twist.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
 
 <span class="n">chain4_straight</span><span class="o">.</span><span class="n">to_plot</span><span class="p">()</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;results/50nm_4_straight.png&quot;</span><span class="p">)</span>
 <span class="n">chain4_turned</span><span class="o">.</span><span class="n">to_plot</span><span class="p">()</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;results/50nm_4_turn.png&quot;</span><span class="p">)</span>
@@ -464,7 +479,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<p><img alt="53448b5f6b41451da1e67214f80c6840" class="no-scaled-link" src="../_images/50nm_4_straight.png" style="width: 30%;" /> <img alt="abe95ee91d7648abaf2f89768cc37a77" class="no-scaled-link" src="../_images/50nm_4_turn.png" style="width: 30%;" /> <img alt="2f84e239b0304a24a719bdb15119d474" class="no-scaled-link" src="../_images/50nm_4_turn_twist.png" style="width: 30%;" /></p>
+<p><img alt="271dabdf9d624d2a826ac98be2217644" class="no-scaled-link" src="../_images/50nm_4_straight.png" style="width: 30%;" /> <img alt="d1c09196e52f4897b2e9a7cb2a4b558b" class="no-scaled-link" src="../_images/50nm_4_turn.png" style="width: 30%;" /> <img alt="eba02f7c21b84c84b258240afea900ae" class="no-scaled-link" src="../_images/50nm_4_turn_twist.png" style="width: 30%;" /></p>
 </section>
 </section>
 <section id="Making-Solenoidal-DNA">
@@ -494,7 +509,9 @@ div.rendered_html tbody tr:hover {
 <span class="n">solenoid_turned</span><span class="o">.</span><span class="n">translate</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">side_length</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">])</span>
 <span class="n">solenoid_turned_twisted</span><span class="o">.</span><span class="n">translate</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">side_length</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">])</span>
 
-<span class="n">solenoid_straight</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;results/solenoid_straight.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">solenoid_straight</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+    <span class="s2">&quot;results/solenoid_straight.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
 <span class="n">solenoid_turned</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;results/solenoid_turned.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">solenoid_turned_twisted</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
     <span class="s2">&quot;results/solenoid_turned_twisted.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span>
@@ -518,7 +535,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<p><img alt="522d69c0d63f4c24a2e564a2d3449ce0" class="no-scaled-link" src="../_images/solenoid_straight.jpg" style="width: 30%;" /> <img alt="3380c6afaa224d02b103d143b215bb84" class="no-scaled-link" src="../_images/solenoid_turned.jpg" style="width: 30%;" /> <img alt="bff2e939c0da42d4b13b755c760fb6c0" class="no-scaled-link" src="../_images/solenoid_turned_twisted.jpg" style="width: 30%;" /></p>
+<p><img alt="731f80fad56d420982c7a3f386d7a0d6" class="no-scaled-link" src="../_images/solenoid_straight.jpg" style="width: 30%;" /> <img alt="2aba805eb5fe4535aa5a1a2560b6720e" class="no-scaled-link" src="../_images/solenoid_turned.jpg" style="width: 30%;" /> <img alt="f7fb15a244c24ceeb89dc8075623696a" class="no-scaled-link" src="../_images/solenoid_turned_twisted.jpg" style="width: 30%;" /></p>
 </section>
 <section id="Generating-multiple-solenoids-in-a-Volume">
 <h3>Generating multiple solenoids in a Volume<a class="headerlink" href="#Generating-multiple-solenoids-in-a-Volume" title="Permalink to this headline">¶</a></h3>
@@ -528,7 +545,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">side_length</span> <span class="o">=</span> <span class="mi">1000</span>  <span class="c1"># angstrom</span>
 <span class="n">radius_solenoid</span> <span class="o">=</span> <span class="mi">100</span>  <span class="c1"># angstrom</span>
-<span class="n">nhistones</span> <span class="o">=</span> <span class="mi">51</span> <span class="c1"># histones</span>
+<span class="n">nhistones</span> <span class="o">=</span> <span class="mi">51</span>  <span class="c1"># histones</span>
 <span class="n">separation</span> <span class="o">=</span> <span class="mi">250</span>  <span class="c1"># angstroms</span>
 
 <span class="n">solenoid4_straight</span> <span class="o">=</span> <span class="n">dnachain</span><span class="o">.</span><span class="n">MultiSolenoidVolume</span><span class="p">(</span>
@@ -566,7 +583,9 @@ div.rendered_html tbody tr:hover {
 <span class="n">solenoid4_turned</span><span class="o">.</span><span class="n">translate</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">side_length</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">])</span>
 <span class="n">solenoid4_turned_twisted</span><span class="o">.</span><span class="n">translate</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">side_length</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">])</span>
 
-<span class="n">solenoid4_straight</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;results/solenoid4_straight.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">solenoid4_straight</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+    <span class="s2">&quot;results/solenoid4_straight.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
 <span class="n">solenoid4_turned</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;results/solenoid4_turned.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">solenoid4_turned_twisted</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
     <span class="s2">&quot;results/solenoid4_turned_twisted.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span>
@@ -590,7 +609,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<p><img alt="e9be704b164e4bf4b72ae29cc7f2b6a7" class="no-scaled-link" src="../_images/solenoid4_straight.jpg" style="width: 40%;" /> <img alt="6f50707723be4864b04baa827f4c3ec0" class="no-scaled-link" src="../_images/solenoid4_turned.jpg" style="width: 40%;" /></p>
+<p><img alt="71ed607d46704a748d75d0e063c71f32" class="no-scaled-link" src="../_images/solenoid4_straight.jpg" style="width: 40%;" /> <img alt="4082686c141f4367920162c19abd2e52" class="no-scaled-link" src="../_images/solenoid4_turned.jpg" style="width: 40%;" /></p>
 </section>
 </section>
 </section>
@@ -600,7 +619,7 @@ div.rendered_html tbody tr:hover {
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="modifying-solenoids.html" class="btn btn-neutral float-left" title="Modifying Solenoids" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../api.html" class="btn btn-neutral float-right" title="API Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="generating-structures-for-geant.html" class="btn btn-neutral float-right" title="Making large scale structures in Geant4" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
