@@ -3,6 +3,7 @@ from typing import List
 import matplotlib.pyplot as plt
 import numpy as np
 from mpl_toolkits.mplot3d import Axes3D  # NOQA
+from tqdm import tqdm
 
 # interpret F as DrawForward(1);
 # interpret + as Yaw(90);
@@ -120,7 +121,11 @@ def iterate_lstring(inString: str):
 
 
 def generate_path(
-    lstring: str, n: int = 2, distance: float = 10.0, rounding: int = 0
+    lstring: str,
+    n: int = 2,
+    distance: float = 10.0,
+    rounding: int = 0,
+    pbar: bool = False,
 ) -> List[np.array]:
     """
     Generate a path from an l-string
@@ -134,6 +139,7 @@ def generate_path(
     :param n: steps on path between forward movements
     :param distance: distance between points forward movements
     :param rounding: rounding to apply to each position
+    :param pbar: display a progress bar
     :return: list of XYZ points
     """
     if distance < 10 ** (-1 * rounding):
@@ -161,7 +167,10 @@ def generate_path(
         r"|": lambda axis: np.dot(rotu(axis, np.pi), axis),
     }
 
-    for char in lstring:
+    pbar_lstring = tqdm(
+        lstring, total=len(lstring), disable=(not pbar), desc="Generating Path"
+    )
+    for char in pbar_lstring:
         if char == r"F":
             lastpos = pos[len(pos) - 1]
             for point in forward(axis):
