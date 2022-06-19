@@ -5,7 +5,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "fractaldna"
-version = "v0.5.0"
+version = "v0.5.1"
 description = "FractalDNA is a Python package built to generate DNA geometries for simulations"
 readme = "README.md"
 authors = ["Nathanael Lampe"]
