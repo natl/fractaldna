@@ -47,7 +47,7 @@ scipy = "^1.8.0"
 pytest = ">=6.2.5,<8.0.0"
 importlib-metadata = "^4.8.2"
 tqdm = "^4.62.3"
-mistune = "0.8.4"
+mistune = "2.0.4"
 
 [tool.poetry.dev-dependencies]
 bandit = "^1.7.0"
