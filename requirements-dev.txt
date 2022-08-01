@@ -29,7 +29,7 @@ distlib==0.3.4; python_version >= "3.7" and python_full_version < "3.0.0" or pyt
 docutils==0.17.1; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.5.0" and python_version >= "3.6"
 dparse==0.5.1; python_version >= "3.5"
 entrypoints==0.4; python_version >= "3.7"
-executing==0.8.3; python_version >= "3.8"
+executing==0.9.1; python_version >= "3.8"
 fastjsonschema==2.15.3; python_version >= "3.7"
 filelock==3.7.1; python_version >= "3.7" and python_full_version < "3.0.0" or python_full_version >= "3.5.0" and python_version >= "3.7"
 fonttools==4.33.3; python_version >= "3.7"
