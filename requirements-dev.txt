@@ -123,7 +123,7 @@ sphinxcontrib-htmlhelp==2.0.0; python_version >= "3.6" and python_full_version <
 sphinxcontrib-jsmath==1.0.1; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.4.0" and python_version >= "3.6"
 sphinxcontrib-qthelp==1.0.3; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.4.0" and python_version >= "3.6"
 sphinxcontrib-serializinghtml==1.1.5; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.4.0" and python_version >= "3.6"
-stack-data==0.3.0; python_version >= "3.8"
+stack-data==0.5.0; python_version >= "3.8"
 stevedore==3.5.0; python_version >= "3.7"
 terminado==0.15.0; python_version >= "3.7"
 tinycss2==1.1.1; python_version >= "3.7"
