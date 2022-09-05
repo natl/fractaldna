@@ -12,7 +12,7 @@ matplotlib==3.5.2; python_version >= "3.7"
 mistune==0.8.4
 numpy==1.22.4; python_version >= "3.8"
 packaging==21.3; python_version >= "3.7"
-pandas==1.4.2; python_version >= "3.8"
+pandas==1.4.4; python_version >= "3.8"
 pillow==9.1.1; python_version >= "3.7"
 pluggy==1.0.0; python_version >= "3.6"
 py==1.11.0; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.5.0" and python_version >= "3.6"
