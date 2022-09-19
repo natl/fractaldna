@@ -8,7 +8,7 @@ fonttools==4.33.3; python_version >= "3.7"
 importlib-metadata==4.11.4; python_version >= "3.7"
 iniconfig==1.1.1; python_version >= "3.6"
 kiwisolver==1.4.3; python_version >= "3.7"
-matplotlib==3.5.2; python_version >= "3.7"
+matplotlib==3.6.0; python_version >= "3.7"
 mistune==0.8.4
 numpy==1.22.4; python_version >= "3.8"
 packaging==21.3; python_version >= "3.7"
