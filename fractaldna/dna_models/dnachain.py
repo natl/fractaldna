@@ -49,15 +49,22 @@ class PlottableSequence:
 
         return "".join(output)
 
-    def to_frame(self) -> pd.DataFrame:
+    def to_frame(self, suppress_hash: bool=False) -> pd.DataFrame:
         """
         Return the molecules as a pandas data frame
 
+        :param suppress_hash: Hide the hash in front of the 'name' column
+            which is kept for compatibiilty with the Geant4
+            DNA simulation format
+
         :return: Pandas data frame with molecule information
         """
-        return pd.concat(
+        df = pd.concat(
             [pair.to_frame() for pair in self.basepairs], ignore_index=False, sort=False
         )
+        if not suppress_hash:
+            df = df.rename(columns={"name": "#name"}, errors='raise')
+        return df
 
     def to_plot(
         self, plot_p: bool = True, plot_b: bool = True, plot_s: bool = True
