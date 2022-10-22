@@ -241,17 +241,26 @@ class VoxelisedFractal:
         ]
         return "\n".join(text)
 
-    def to_frame(self):
-        """Convert voxelised representation to data frame"""
+    def to_frame(self, suppress_hash: bool = False):
+        """Convert voxelised representation to data frame
+
+        :param suppress_hash: Hide the hash in front of the 'IDX' column
+            which is kept for compatibiilty with the Geant4
+            DNA simulation format
+
+        :returns: Voxelised fractal as a data frame
+
+        """
         rows = []
+        hash_option = "" if suppress_hash else "#"
         for idx, voxel in enumerate(self.fractal):
             ss = voxel.to_series()
-            ss["IDX"] = idx
+            ss[hash_option + "IDX"] = idx
             rows.append(ss)
         df = pd.DataFrame(rows)
         return df[
             [
-                "IDX",
+                hash_option + "IDX",
                 "KIND",
                 "POS_X",
                 "POS_Y",
