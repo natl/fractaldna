@@ -166,7 +166,7 @@ of all prisms to be placed.</p></li>
 <tr class="row-odd"><td><p><a class="reference internal" href="#fractaldna.structure_models.random_placements.PrismList.get_prism_grid_indices" title="fractaldna.structure_models.random_placements.PrismList.get_prism_grid_indices"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_prism_grid_indices</span></code></a>(prism)</p></td>
 <td><p>Get the prism grid indices</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#fractaldna.structure_models.random_placements.PrismList.to_frame" title="fractaldna.structure_models.random_placements.PrismList.to_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_frame</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#fractaldna.structure_models.random_placements.PrismList.to_frame" title="fractaldna.structure_models.random_placements.PrismList.to_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_frame</span></code></a>([suppress_hash])</p></td>
 <td><p>Generate a Data Frame describing the prisms</p></td>
 </tr>
 </tbody>
@@ -201,11 +201,19 @@ of all prisms to be placed.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="fractaldna.structure_models.random_placements.PrismList.to_frame">
-<span class="sig-name descname"><span class="pre">to_frame</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.structure_models.random_placements.PrismList.to_frame" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">to_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">suppress_hash</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.structure_models.random_placements.PrismList.to_frame" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate a Data Frame describing the prisms</p>
 <dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>suppress_hash</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – Hide the hash in front of the ‘IDX’ column
+which is kept for compatibiilty with the Geant4
+DNA simulation format</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Voxelised fractal as a data frame</p>
 </dd>
 </dl>
 </dd></dl>

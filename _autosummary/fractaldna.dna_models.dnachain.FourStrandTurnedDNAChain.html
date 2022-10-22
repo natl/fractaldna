@@ -163,7 +163,7 @@ Chain indices are assigned anticlockwise starting from the +y strand.</p>
 <tr class="row-even"><td><p><a class="reference internal" href="#fractaldna.dna_models.dnachain.FourStrandTurnedDNAChain.center_in_z" title="fractaldna.dna_models.dnachain.FourStrandTurnedDNAChain.center_in_z"><code class="xref py py-obj docutils literal notranslate"><span class="pre">center_in_z</span></code></a>()</p></td>
 <td><p>Center the molecule around the z=0 plane</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#fractaldna.dna_models.dnachain.FourStrandTurnedDNAChain.to_frame" title="fractaldna.dna_models.dnachain.FourStrandTurnedDNAChain.to_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_frame</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#fractaldna.dna_models.dnachain.FourStrandTurnedDNAChain.to_frame" title="fractaldna.dna_models.dnachain.FourStrandTurnedDNAChain.to_frame"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_frame</span></code></a>([suppress_hash])</p></td>
 <td><p>Return the molecules as a pandas data frame</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#fractaldna.dna_models.dnachain.FourStrandTurnedDNAChain.to_line_plot" title="fractaldna.dna_models.dnachain.FourStrandTurnedDNAChain.to_line_plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_line_plot</span></code></a>([size])</p></td>
@@ -191,14 +191,19 @@ Chain indices are assigned anticlockwise starting from the +y strand.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="fractaldna.dna_models.dnachain.FourStrandTurnedDNAChain.to_frame">
-<span class="sig-name descname"><span class="pre">to_frame</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.dna_models.dnachain.FourStrandTurnedDNAChain.to_frame" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">to_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">suppress_hash</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.dna_models.dnachain.FourStrandTurnedDNAChain.to_frame" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the molecules as a pandas data frame</p>
 <dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>suppress_hash</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – Hide the hash in front of the ‘name’ column
+which is kept for compatibiilty with the Geant4
+DNA simulation format</p>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Pandas data frame with molecule information</p>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Pandas data frame with molecule information</p>
 </dd>
 </dl>
 </dd></dl>
