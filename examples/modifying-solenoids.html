@@ -14,6 +14,7 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
@@ -368,7 +369,7 @@ div.rendered_html tbody tr:hover {
 }
 </style>
 <section id="Modifying-Solenoids">
-<h1>Modifying Solenoids<a class="headerlink" href="#Modifying-Solenoids" title="Permalink to this headline">¶</a></h1>
+<h1>Modifying Solenoids<a class="headerlink" href="#Modifying-Solenoids" title="Permalink to this heading">¶</a></h1>
 <p>Solenoids can be modified to change the density of the DNA. Here we explore how this works.</p>
 <p>The call to the Solenoid function is as follows:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>dna.Solenoid(
@@ -411,7 +412,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <section id="Varying-Voxel-Height">
-<h2>Varying Voxel Height<a class="headerlink" href="#Varying-Voxel-Height" title="Permalink to this headline">¶</a></h2>
+<h2>Varying Voxel Height<a class="headerlink" href="#Varying-Voxel-Height" title="Permalink to this heading">¶</a></h2>
 <p>Varying the voxel height will compact and extend the DNA.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
@@ -454,7 +455,7 @@ div.rendered_html tbody tr:hover {
 <p><img alt="image0" src="../_images/turned_solenoid_750A_42histones.jpg" /></p>
 </section>
 <section id="Changing-the-number-of-Histones">
-<h2>Changing the number of Histones<a class="headerlink" href="#Changing-the-number-of-Histones" title="Permalink to this headline">¶</a></h2>
+<h2>Changing the number of Histones<a class="headerlink" href="#Changing-the-number-of-Histones" title="Permalink to this heading">¶</a></h2>
 <p>When making DNA shorter (or longer), you should change the number of histones appropriately.</p>
 <p>In general, you’ll want to keep the linear density of histones roughly constant (around 51/1000Å)</p>
 <div class="nbinput nblast docutils container">
@@ -488,7 +489,7 @@ div.rendered_html tbody tr:hover {
 <p><img alt="image0" src="../_images/turned_solenoid_750A_42histones.jpg" /></p>
 </section>
 <section id="Turned-Solenoids-follow-the-same-principles">
-<h2>Turned Solenoids follow the same principles<a class="headerlink" href="#Turned-Solenoids-follow-the-same-principles" title="Permalink to this headline">¶</a></h2>
+<h2>Turned Solenoids follow the same principles<a class="headerlink" href="#Turned-Solenoids-follow-the-same-principles" title="Permalink to this heading">¶</a></h2>
 <p>They are actually based on the spacing that a straight solenoid would have, so the <code class="docutils literal notranslate"><span class="pre">voxelheight</span></code> and <code class="docutils literal notranslate"><span class="pre">nhistones</span></code> correspond to their straightened equivalents, and the linear density of histones is what is conserved.</p>
 <p>The radius of curvature is <em>half the voxel height</em>.</p>
 <p>Be particularly careful to ensure there are no overlapping molecules on the internal curve.</p>
@@ -549,7 +550,7 @@ Z Bounds: 0.04677445755690002 483.71674638609016
 </div>
 </section>
 <section id="Exporting-Solenoidal-DNA-to-CSV">
-<h2>Exporting Solenoidal DNA to CSV<a class="headerlink" href="#Exporting-Solenoidal-DNA-to-CSV" title="Permalink to this headline">¶</a></h2>
+<h2>Exporting Solenoidal DNA to CSV<a class="headerlink" href="#Exporting-Solenoidal-DNA-to-CSV" title="Permalink to this heading">¶</a></h2>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>

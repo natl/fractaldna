@@ -14,6 +14,7 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
@@ -372,7 +373,7 @@ div.rendered_html tbody tr:hover {
 }
 </style>
 <section id="How-to-make-a-Voxelised-DNA-Structure">
-<h1>How to make a Voxelised DNA Structure<a class="headerlink" href="#How-to-make-a-Voxelised-DNA-Structure" title="Permalink to this headline">¶</a></h1>
+<h1>How to make a Voxelised DNA Structure<a class="headerlink" href="#How-to-make-a-Voxelised-DNA-Structure" title="Permalink to this heading">¶</a></h1>
 <p>DNA Structures are built from <a class="reference external" href="https://en.wikipedia.org/wiki/L-system">L-string</a> seeded fractals.</p>
 <p>L-strings and L-systems provide a grammar that can be used to generate a fractal. In this work, Hilbert curves are generated that are then converted into cubic placement ‘voxels’ for use in modelling.</p>
 <div class="nbinput nblast docutils container">
@@ -401,7 +402,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <section id="Producing-L-Strings">
-<h2>Producing L-Strings<a class="headerlink" href="#Producing-L-Strings" title="Permalink to this headline">¶</a></h2>
+<h2>Producing L-Strings<a class="headerlink" href="#Producing-L-Strings" title="Permalink to this heading">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">hilbert</span></code> model encodes a few basic fractals which can create Hilbert curves. These are</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>h.X: n&lt;XFn&lt;XFX-Fn&gt;&gt;XFX&amp;F+&gt;&gt;XFX-F&gt;X-&gt;
 h.A: B-F+CFC+F-D&amp;FnD-F+&amp;&amp;CFC+F+B&lt;&lt;
@@ -438,7 +439,7 @@ h.D: |CFB-F+B|FA&amp;FnA&amp;&amp;FB-F+B|FC&lt;&lt;
 </div>
 </div>
 <section id="Drawing-Fractals">
-<h3>Drawing Fractals<a class="headerlink" href="#Drawing-Fractals" title="Permalink to this headline">¶</a></h3>
+<h3>Drawing Fractals<a class="headerlink" href="#Drawing-Fractals" title="Permalink to this heading">¶</a></h3>
 <p>The function <code class="docutils literal notranslate"><span class="pre">generate_path</span></code> will generate a list of XYZ-points for a fractal L-String as below, which can then be plotted in matplotlib</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
@@ -482,7 +483,7 @@ h.D: |CFB-F+B|FA&amp;FnA&amp;&amp;FB-F+B|FC&lt;&lt;
 </section>
 </section>
 <section id="Making-voxelised-representations.">
-<h2>Making voxelised representations.<a class="headerlink" href="#Making-voxelised-representations." title="Permalink to this headline">¶</a></h2>
+<h2>Making voxelised representations.<a class="headerlink" href="#Making-voxelised-representations." title="Permalink to this heading">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">voxelisation</span></code> model can convert the path of this curve to a voxelised representation, of straight and curved boxes.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
@@ -496,7 +497,7 @@ h.D: |CFB-F+B|FA&amp;FnA&amp;&amp;FB-F+B|FC&lt;&lt;
 </div>
 </div>
 <section id="Exporting-large-scale-structures-to-text.">
-<h3>Exporting large-scale structures to text.<a class="headerlink" href="#Exporting-large-scale-structures-to-text." title="Permalink to this headline">¶</a></h3>
+<h3>Exporting large-scale structures to text.<a class="headerlink" href="#Exporting-large-scale-structures-to-text." title="Permalink to this heading">¶</a></h3>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>

@@ -14,6 +14,7 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
@@ -371,7 +372,7 @@ div.rendered_html tbody tr:hover {
 }
 </style>
 <section id="Making-large-scale-structures-in-Geant4">
-<h1>Making large scale structures in Geant4<a class="headerlink" href="#Making-large-scale-structures-in-Geant4" title="Permalink to this headline">¶</a></h1>
+<h1>Making large scale structures in Geant4<a class="headerlink" href="#Making-large-scale-structures-in-Geant4" title="Permalink to this heading">¶</a></h1>
 <p>Geant4 simulations use a large scale structure</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
@@ -400,9 +401,9 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <section id="Fractal-Cell-Shapes">
-<h2>Fractal Cell Shapes<a class="headerlink" href="#Fractal-Cell-Shapes" title="Permalink to this headline">¶</a></h2>
+<h2>Fractal Cell Shapes<a class="headerlink" href="#Fractal-Cell-Shapes" title="Permalink to this heading">¶</a></h2>
 <section id="Generating-a-square-shape">
-<h3>Generating a square shape<a class="headerlink" href="#Generating-a-square-shape" title="Permalink to this headline">¶</a></h3>
+<h3>Generating a square shape<a class="headerlink" href="#Generating-a-square-shape" title="Permalink to this heading">¶</a></h3>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
@@ -430,10 +431,10 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<p><img alt="5a11f3e2c9aa401b98540f1eacefefd1" src="examples/results/fractal-X-3-centred.svg" /></p>
+<p><img alt="762f89eb38794987860224cec2164d58" src="examples/results/fractal-X-3-centred.svg" /></p>
 </section>
 <section id="Generating-a-Rectangular-Shape">
-<h3>Generating a Rectangular Shape<a class="headerlink" href="#Generating-a-Rectangular-Shape" title="Permalink to this headline">¶</a></h3>
+<h3>Generating a Rectangular Shape<a class="headerlink" href="#Generating-a-Rectangular-Shape" title="Permalink to this heading">¶</a></h3>
 <p>The seed <code class="docutils literal notranslate"><span class="pre">XFXFX</span></code> will generate a rectangular shape with aspect ratio 1:1:3</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
@@ -457,11 +458,11 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <p><em>Note that the x-axis is compressed relative to the others in the below image</em></p>
-<p><img alt="ea753bc1a87c4685ae7b289918064b30" src="examples/results/fractal-XFXFX-2-centred.svg" /></p>
+<p><img alt="2fdb50730e604a5eb5dc3d7eeafc1147" src="examples/results/fractal-XFXFX-2-centred.svg" /></p>
 </section>
 </section>
 <section id="Importing-a-shape-from-a-path">
-<h2>Importing a shape from a path<a class="headerlink" href="#Importing-a-shape-from-a-path" title="Permalink to this headline">¶</a></h2>
+<h2>Importing a shape from a path<a class="headerlink" href="#Importing-a-shape-from-a-path" title="Permalink to this heading">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">voxelisation</span></code> model can convert the path of this curve to a voxelised representation, of straight and curved boxes.</p>
 <p>In this example we perform this on a text file with X/Y/Z columns:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>X   Y   Z
@@ -494,10 +495,10 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <p>Left: Source Plot, Right:Voxelised Plot</p>
-<p><img alt="4cf340e83d1a488a9c70fe13cd72977d" class="no-scaled-link" src="examples/results/example-path.svg" width="45%" /> <img alt="6cd7415344d941f8a0dae981806cba46" class="no-scaled-link" src="examples/results/example-path-voxels.svg" width="45%" /></p>
+<p><img alt="681657df6f174d5a83e0022e8fb21d4a" class="no-scaled-link" src="examples/results/example-path.svg" width="45%" /> <img alt="bf2b3fcc152c47898b985bd5b1113036" class="no-scaled-link" src="examples/results/example-path-voxels.svg" width="45%" /></p>
 </section>
 <section id="Generating-Random-Volumes">
-<h2>Generating Random Volumes<a class="headerlink" href="#Generating-Random-Volumes" title="Permalink to this headline">¶</a></h2>
+<h2>Generating Random Volumes<a class="headerlink" href="#Generating-Random-Volumes" title="Permalink to this heading">¶</a></h2>
 <p>It can be useful to generate randomised volumes for testing a simulation. This was the subject of (this article)[<a class="reference external" href="https://doi.org/10.1016/j.ejmp.2018.02.011">https://doi.org/10.1016/j.ejmp.2018.02.011</a>].</p>
 <p>To generate a randomised volume, the <code class="docutils literal notranslate"><span class="pre">fractaldna.structure_models.random_placements</span></code> is available.</p>
 <p>In that paper, 200,000 non overlapping prisms were simulated in a r=3000nm ball. The prisms had dimensions 30x30x100nm</p>
