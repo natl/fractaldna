@@ -49,7 +49,7 @@ class PlottableSequence:
 
         return "".join(output)
 
-    def to_frame(self, suppress_hash: bool=False) -> pd.DataFrame:
+    def to_frame(self, suppress_hash: bool = False) -> pd.DataFrame:
         """
         Return the molecules as a pandas data frame
 
@@ -63,7 +63,7 @@ class PlottableSequence:
             [pair.to_frame() for pair in self.basepairs], ignore_index=False, sort=False
         )
         if not suppress_hash:
-            df = df.rename(columns={"name": "#name"}, errors='raise')
+            df = df.rename(columns={"name": "#name"}, errors="raise")
         return df
 
     def to_plot(

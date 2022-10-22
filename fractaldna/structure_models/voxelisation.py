@@ -241,13 +241,13 @@ class VoxelisedFractal:
         ]
         return "\n".join(text)
 
-    def to_frame(self, suppress_hash:bool =False):
+    def to_frame(self, suppress_hash: bool = False):
         """Convert voxelised representation to data frame
-        
+
         :param suppress_hash: Hide the hash in front of the 'IDX' column
             which is kept for compatibiilty with the Geant4
             DNA simulation format
-        
+
         :returns: Voxelised fractal as a data frame
 
         """

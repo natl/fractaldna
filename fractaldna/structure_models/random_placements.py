@@ -276,13 +276,13 @@ class PrismList(object):
 
         return True
 
-    def to_frame(self, suppress_hash:bool=False) -> pd.DataFrame:
+    def to_frame(self, suppress_hash: bool = False) -> pd.DataFrame:
         """Generate a Data Frame describing the prisms
-        
+
         :param suppress_hash: Hide the hash in front of the 'IDX' column
             which is kept for compatibiilty with the Geant4
             DNA simulation format
-        
+
         :returns: Voxelised fractal as a data frame
         """
         series_list = []
