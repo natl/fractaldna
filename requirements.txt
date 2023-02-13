@@ -32,4 +32,4 @@ tomli==2.0.1; python_version >= "3.8"
 tqdm==4.64.1; (python_version >= "2.7" and python_full_version < "3.0.0") or (python_full_version >= "3.4.0")
 typer==0.4.2; python_version >= "3.6"
 typing-extensions==4.4.0; python_full_version >= "3.6.3" and python_full_version < "4.0.0" and python_version < "3.9" and python_version >= "3.8"
-zipp==3.9.0; python_version >= "3.7"
+zipp==3.13.0; python_version >= "3.7"
