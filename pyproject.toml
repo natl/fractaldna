@@ -67,7 +67,7 @@ ipykernel = "^6.6.0"
 ipyevents = "^2.0.1"
 nbsphinx = "^0.8.8"
 
-tool.poetry.extras]
+[tool.poetry.extras]
 mayavi = ["mayavi", "PyQt5", "vtk"]
 
 [tool.black]
