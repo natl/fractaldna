@@ -47,6 +47,9 @@ scipy = "^1.8.0"
 pytest = ">=6.2.5,<8.0.0"
 importlib-metadata = "^4.8.2"
 tqdm = "^4.62.3"
+mayavi = "^4.8.1"
+PyQt5 = "^5.15.9"
+vtk = "^9.2.6"
 
 [tool.poetry.dev-dependencies]
 bandit = "^1.7.0"
