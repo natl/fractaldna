@@ -46,9 +46,6 @@ matplotlib = "^3.4.3"
 scipy = "^1.8.0"
 importlib-metadata = "^4.8.2"
 tqdm = "^4.62.3"
-mayavi = "^4.8.1"
-PyQt5 = "^5.15.9"
-vtk = "^9.2.6"
 
 [tool.poetry.dev-dependencies]
 bandit = "^1.7.0"
@@ -69,6 +66,9 @@ sphinx-autodoc-typehints = "^1.17.0"
 ipykernel = "^6.6.0"
 ipyevents = "^2.0.1"
 nbsphinx = "^0.8.8"
+
+tool.poetry.extras]
+mayavi = ["mayavi", "PyQt5", "vtk"]
 
 [tool.black]
 # https://github.com/psf/black
@@ -107,7 +107,7 @@ color_output = true
 
 [tool.mypy]
 # https://mypy.readthedocs.io/en/latest/config_file.html#using-a-pyproject-toml-file
-python_version = 3.8
+python_version = 3.9
 pretty = true
 show_traceback = true
 color_output = true
@@ -145,5 +145,3 @@ addopts = [
   "--doctest-modules",
   "--doctest-continue-on-failure",
 ]
-
-qt_api = "pyqt5"
