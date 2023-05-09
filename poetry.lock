@@ -15,26 +15,6 @@ optional = false
 python-versions = "*"
 
 [[package]]
-name = "apptools"
-version = "5.2.0"
-description = "application tools"
-category = "main"
-optional = false
-python-versions = ">=3.6"
-
-[package.dependencies]
-configobj = "*"
-traits = ">=6.2.0"
-traitsui = "*"
-
-[package.extras]
-docs = ["enthought-sphinx-theme", "sphinx"]
-h5 = ["numpy", "pandas", "tables"]
-persistence = ["numpy"]
-preferences = ["configobj"]
-test = ["importlib-resources (>=1.1.0)"]
-
-[[package]]
 name = "astroid"
 version = "2.15.4"
 description = "An abstract syntax tree for Python with inference support."
@@ -249,17 +229,6 @@ python-versions = "*"
 test = ["flake8 (==3.7.8)", "hypothesis (==3.55.3)"]
 
 [[package]]
-name = "configobj"
-version = "5.0.8"
-description = "Config file reading, writing and validation."
-category = "main"
-optional = false
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
-
-[package.dependencies]
-six = "*"
-
-[[package]]
 name = "contourpy"
 version = "1.0.7"
 description = "Python library for calculating contours of 2D quadrilateral grids"
@@ -359,21 +328,6 @@ toml = "*"
 [package.extras]
 pipenv = ["pipenv"]
 conda = ["pyyaml"]
-
-[[package]]
-name = "envisage"
-version = "7.0.3"
-description = "Extensible application framework"
-category = "main"
-optional = false
-python-versions = ">=3.7"
-
-[package.dependencies]
-apptools = "*"
-importlib-resources = {version = ">=1.1.0", markers = "python_version < \"3.9\""}
-pyface = "*"
-traits = ">=6.2"
-traitsui = "*"
 
 [[package]]
 name = "exceptiongroup"
@@ -804,28 +758,6 @@ python-versions = ">=3.5"
 traitlets = "*"
 
 [[package]]
-name = "mayavi"
-version = "4.8.1"
-description = "3D scientific data visualization library and application"
-category = "main"
-optional = false
-python-versions = ">=3.7"
-
-[package.dependencies]
-apptools = "*"
-envisage = "*"
-numpy = "*"
-packaging = "*"
-pyface = ">=6.1.1"
-pygments = "*"
-traits = ">=6.0.0"
-traitsui = ">=7.0.0"
-vtk = "*"
-
-[package.extras]
-app = ["envisage"]
-
-[[package]]
 name = "mccabe"
 version = "0.7.0"
 description = "McCabe checker, plugin for flake8"
@@ -1184,32 +1116,6 @@ snowballstemmer = ">=2.2.0"
 toml = ["tomli (>=1.2.3)"]
 
 [[package]]
-name = "pyface"
-version = "8.0.0"
-description = "Traits-capable windowing framework"
-category = "main"
-optional = false
-python-versions = ">=3.7"
-
-[package.dependencies]
-importlib-metadata = {version = ">=3.6", markers = "python_version < \"3.10\""}
-importlib-resources = {version = ">=1.1.0", markers = "python_version < \"3.9\""}
-traits = ">=6.2"
-
-[package.extras]
-docs = ["enthought-sphinx-theme", "sphinx", "sphinx-copybutton"]
-examples = ["traitsui", "numpy"]
-numpy = ["numpy"]
-pillow = ["pillow"]
-pyqt5 = ["pyqt5", "pygments"]
-pyqt6 = ["pyqt6", "pygments"]
-pyside2 = ["pyside2", "pygments"]
-pyside6 = ["pyside6", "pygments"]
-test = ["packaging"]
-traitsui = ["traitsui"]
-wx = ["wxPython (>=4)", "numpy"]
-
-[[package]]
 name = "pygments"
 version = "2.15.1"
 description = "Pygments is a syntax highlighting package written in Python."
@@ -1253,34 +1159,6 @@ python-versions = ">=3.6.8"
 
 [package.extras]
 diagrams = ["railroad-diagrams", "jinja2"]
-
-[[package]]
-name = "pyqt5"
-version = "5.15.9"
-description = "Python bindings for the Qt cross platform application toolkit"
-category = "main"
-optional = false
-python-versions = ">=3.7"
-
-[package.dependencies]
-PyQt5-Qt5 = ">=5.15.2"
-PyQt5-sip = ">=12.11,<13"
-
-[[package]]
-name = "pyqt5-qt5"
-version = "5.15.2"
-description = "The subset of a Qt installation needed by PyQt5."
-category = "main"
-optional = false
-python-versions = "*"
-
-[[package]]
-name = "pyqt5-sip"
-version = "12.12.1"
-description = "The sip module support for PyQt5"
-category = "main"
-optional = false
-python-versions = ">=3.7"
 
 [[package]]
 name = "pyrsistent"
@@ -1745,43 +1623,6 @@ docs = ["myst-parser", "pydata-sphinx-theme", "sphinx"]
 test = ["argcomplete (>=2.0)", "pre-commit", "pytest", "pytest-mock"]
 
 [[package]]
-name = "traits"
-version = "6.4.1"
-description = "Observable typed attributes for Python classes"
-category = "main"
-optional = false
-python-versions = ">=3.6"
-
-[package.extras]
-docs = ["enthought-sphinx-theme", "Sphinx (>=2.1.0)", "sphinx-copybutton"]
-examples = ["numpy", "pillow"]
-test = ["cython", "flake8", "flake8-ets", "mypy", "numpy", "pyface", "setuptools", "Sphinx (>=2.1.0)", "traitsui", "pyside2", "pyside6"]
-
-[[package]]
-name = "traitsui"
-version = "7.4.3"
-description = "traitsui: traits-capable user interfaces"
-category = "main"
-optional = false
-python-versions = ">=3.6"
-
-[package.dependencies]
-pyface = ">=7.4.1"
-traits = ">=6.2.0"
-
-[package.extras]
-demo = ["configobj", "docutils"]
-docs = ["enthought-sphinx-theme", "sphinx", "sphinx-copybutton"]
-editors = ["numpy", "pandas"]
-examples = ["apptools", "h5py", "numpy", "pandas", "pillow", "tables"]
-pyqt = ["pyqt (>=4.10)", "pygments"]
-pyqt5 = ["pyqt5", "pygments"]
-pyside2 = ["pyside2", "pygments"]
-pyside6 = ["pygments", "pyside6 (<6.2.2 || >6.2.2.1,!=6.2.3,!=6.2.4,!=6.3.0,<6.4.0)", "pyside6 (<6.4.0)"]
-test = ["packaging", "numpy"]
-wx = ["wxpython (>=4)", "numpy"]
-
-[[package]]
 name = "typer"
 version = "0.4.2"
 description = "Typer, build great CLIs. Easy to code. Based on Python type hints."
@@ -1840,21 +1681,6 @@ docs = ["furo (>=2023.3.27)", "proselint (>=0.13)", "sphinx-argparse (>=0.4)", "
 test = ["covdefaults (>=2.3)", "coverage-enable-subprocess (>=1)", "coverage (>=7.2.3)", "flaky (>=3.7)", "packaging (>=23.1)", "pytest-env (>=0.8.1)", "pytest-freezegun (>=0.4.2)", "pytest-mock (>=3.10)", "pytest-randomly (>=3.12)", "pytest-timeout (>=2.1)", "pytest (>=7.3.1)", "setuptools (>=67.7.1)", "time-machine (>=2.9)"]
 
 [[package]]
-name = "vtk"
-version = "9.2.6"
-description = "VTK is an open-source toolkit for 3D computer graphics, image processing, and visualization"
-category = "main"
-optional = false
-python-versions = "*"
-
-[package.dependencies]
-matplotlib = ">=2.0.0"
-
-[package.extras]
-numpy = ["numpy (>=1.9)"]
-web = ["wslink (>=1.0.4)"]
-
-[[package]]
 name = "wcwidth"
 version = "0.2.6"
 description = "Measures the displayed width of unicode strings in a terminal"
@@ -1898,10 +1724,13 @@ python-versions = ">=3.7"
 docs = ["sphinx (>=3.5)", "jaraco.packaging (>=9)", "rst.linker (>=1.9)", "furo", "sphinx-lint", "jaraco.tidelift (>=1.4)"]
 testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "flake8 (<5)", "pytest-cov", "pytest-enabler (>=1.3)", "jaraco.itertools", "jaraco.functools", "more-itertools", "big-o", "pytest-black (>=0.3.7)", "pytest-mypy (>=0.9.1)", "pytest-flake8"]
 
+[extras]
+mayavi = []
+
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.8,<3.11"
-content-hash = "2e282258cdc28ae6c948c5f3ab32ea2baa3b268eb17ebaf8d793af7e82049ee6"
+content-hash = "1fa1ed522ae1529482ecd7cdb0e87d400c32826f3b9da789379be3a5d10c1c25"
 
 [metadata.files]
 alabaster = []
@@ -1909,7 +1738,6 @@ appnope = [
     {file = "appnope-0.1.3-py2.py3-none-any.whl", hash = "sha256:265a455292d0bd8a72453494fa24df5a11eb18373a60c7c0430889f22548605e"},
     {file = "appnope-0.1.3.tar.gz", hash = "sha256:02bd91c4de869fbb1e1c50aafc4098827a7a54ab2f39d9dcba6c9547ed920e24"},
 ]
-apptools = []
 astroid = []
 asttokens = []
 attrs = []
@@ -1939,7 +1767,6 @@ commonmark = [
     {file = "commonmark-0.9.1-py2.py3-none-any.whl", hash = "sha256:da2f38c92590f83de410ba1a3cbceafbc74fee9def35f9251ba9a971d6d66fd9"},
     {file = "commonmark-0.9.1.tar.gz", hash = "sha256:452f9dc859be7f06631ddcb328b6919c67984aca654e5fefb3914d54691aed60"},
 ]
-configobj = []
 contourpy = []
 cycler = [
     {file = "cycler-0.11.0-py3-none-any.whl", hash = "sha256:3a27e95f763a428a739d2add979fa7494c912a32c17c4c38c4d5f082cad165a3"},
@@ -1962,7 +1789,6 @@ dill = []
 distlib = []
 docutils = []
 dparse = []
-envisage = []
 exceptiongroup = []
 executing = []
 fastjsonschema = []
@@ -2002,7 +1828,6 @@ lazy-object-proxy = []
 markupsafe = []
 matplotlib = []
 matplotlib-inline = []
-mayavi = []
 mccabe = [
     {file = "mccabe-0.7.0-py2.py3-none-any.whl", hash = "sha256:6c2d30ab6be0e4a46919781807b4f0d834ebdd6c6e3dca0bda5a15f863427b6e"},
     {file = "mccabe-0.7.0.tar.gz", hash = "sha256:348e0240c33b60bbdf4e523192ef919f28cb2c3d7d5c7794f74009290f236325"},
@@ -2060,21 +1885,12 @@ pycparser = [
     {file = "pycparser-2.21.tar.gz", hash = "sha256:e644fdec12f7872f86c58ff790da456218b10f863970249516d60a5eaca77206"},
 ]
 pydocstyle = []
-pyface = []
 pygments = []
 pylint = []
 pyparsing = [
     {file = "pyparsing-3.0.9-py3-none-any.whl", hash = "sha256:5026bae9a10eeaefb61dab2f09052b9f4307d44aee4eda64b309723d8d206bbc"},
     {file = "pyparsing-3.0.9.tar.gz", hash = "sha256:2b020ecf7d21b687f219b71ecad3631f644a47f01403fa1d1036b0c6416d70fb"},
 ]
-pyqt5 = []
-pyqt5-qt5 = [
-    {file = "PyQt5_Qt5-5.15.2-py3-none-macosx_10_13_intel.whl", hash = "sha256:76980cd3d7ae87e3c7a33bfebfaee84448fd650bad6840471d6cae199b56e154"},
-    {file = "PyQt5_Qt5-5.15.2-py3-none-manylinux2014_x86_64.whl", hash = "sha256:1988f364ec8caf87a6ee5d5a3a5210d57539988bf8e84714c7d60972692e2f4a"},
-    {file = "PyQt5_Qt5-5.15.2-py3-none-win32.whl", hash = "sha256:9cc7a768b1921f4b982ebc00a318ccb38578e44e45316c7a4a850e953e1dd327"},
-    {file = "PyQt5_Qt5-5.15.2-py3-none-win_amd64.whl", hash = "sha256:750b78e4dba6bdf1607febedc08738e318ea09e9b10aea9ff0d73073f11f6962"},
-]
-pyqt5-sip = []
 pyrsistent = []
 pytest = []
 python-dateutil = [
@@ -2183,13 +1999,10 @@ tomlkit = []
 tornado = []
 tqdm = []
 traitlets = []
-traits = []
-traitsui = []
 typer = []
 typing-extensions = []
 urllib3 = []
 virtualenv = []
-vtk = []
 wcwidth = []
 webencodings = [
     {file = "webencodings-0.5.1-py2.py3-none-any.whl", hash = "sha256:a0af1213f3c2226497a97e2b3aa01a7e4bee4f403f95be16fc9acd2947514a78"},

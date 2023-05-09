@@ -48,4 +48,5 @@ jobs:
 
     - name: Run safety checks
       run: |
+        poetry install --extras mayavi
         make check-safety
