@@ -17,6 +17,7 @@ fractaldna.dna\_models.molecules.Cytosine
    .. autosummary::
    
       ~Cytosine.__init__
+      ~Cytosine.point_in_molecule
       ~Cytosine.rotate
       ~Cytosine.to_series
       ~Cytosine.to_text

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Structure Models &mdash; FractalDNA 0.1 documentation</title>
@@ -16,6 +16,7 @@
         <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -29,11 +30,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> FractalDNA
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            FractalDNA
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -63,8 +68,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Structure Models</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Structure Models</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/structure_models.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -114,7 +119,7 @@ turned into a voxelised representation using the methods in
 <p>This algorithm works best when moving in integer steps and applying any scaling
 after generating the path.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>lstring</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – lstring describing path</p></li>
 <li><p><strong>n</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – steps on path between forward movements</p></li>
@@ -123,10 +128,10 @@ after generating the path.</p>
 <li><p><strong>pbar</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – display a progress bar</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code>]</p>
 </dd>
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>list of XYZ points</p>
 </dd>
 </dl>
@@ -147,7 +152,7 @@ fractal.fractal contains a list of ‘Voxels’ representing the DNA Path</p>
 <span class="sig-name descname"><span class="pre">center_fractal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
 <dd><p>Center the fractal around (x, y, z) = (0, 0, 0)</p>
 <dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
 </dd>
 </dl>
@@ -158,13 +163,13 @@ fractal.fractal contains a list of ‘Voxels’ representing the DNA Path</p>
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fromLString</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lstring</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pbar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span></dt>
 <dd><p>Convert an L-String into a VoxelisedFractal</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>lstring</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – L-String to convert</p></li>
 <li><p><strong>pbar</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – Show a progress bar for generating path and voxels</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Voxelised Fractal representation</p>
 </dd>
 </dl>
@@ -176,14 +181,14 @@ fractal.fractal contains a list of ‘Voxels’ representing the DNA Path</p>
 <dd><p>Make a voxelised fractal from an L-String seed.</p>
 <p>The available L-Strings are described in fractaldna.structure_models.hilbert</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>seed</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – Seed L-String</p></li>
 <li><p><strong>iterations</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of times to iterate seed</p></li>
 <li><p><strong>distance</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – distance between voxels</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Voxelised Fractal representation</p>
 </dd>
 </dl>
@@ -194,13 +199,13 @@ fractal.fractal contains a list of ‘Voxels’ representing the DNA Path</p>
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pbar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span></dt>
 <dd><p>Convert a path (a list of xyz positions) to a voxelised representation</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>path</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code>], <code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>], <code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code>]) – path to convert</p></li>
 <li><p><strong>pbar</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – show a progress bar if true</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Voxelised Fractal representation</p>
 </dd>
 </dl>
@@ -211,12 +216,12 @@ fractal.fractal contains a list of ‘Voxels’ representing the DNA Path</p>
 <span class="sig-name descname"><span class="pre">to_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">suppress_hash</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span></dt>
 <dd><p>Convert voxelised representation to data frame</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>suppress_hash</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – Hide the hash in front of the ‘IDX’ column
 which is kept for compatibiilty with the Geant4
 DNA simulation format</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Voxelised fractal as a data frame</p>
 </dd>
 </dl>
@@ -232,7 +237,7 @@ DNA simulation format</p>
 :type batch: <code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>
 :param batch: True to suppress automatic display of the figure</p>
 <dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">figure</span></code></p>
 </dd>
 </dl>
@@ -245,7 +250,7 @@ DNA simulation format</p>
 rather than hard corners</p>
 <p>fig = to_pretty_plot(refine=10, batch=False)</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>refine</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – points to plot in between voxels (more points = clearer path)</p></li>
 <li><p><strong>mayavi</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – make plot with MayaVI</p></li>
@@ -265,7 +270,7 @@ return boolean True/False for any position.</p></li>
 </dd>
 </dl>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>sep</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – string to use to separate fields (default space)</p></li>
 <li><p><strong>comment</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – string to use to denote comment in first line

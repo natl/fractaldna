@@ -138,7 +138,6 @@ fractaldna.structure\_models.random\_placements.Arrow3D
    
       ~Arrow3D.axes
       ~Arrow3D.fill
-      ~Arrow3D.get_path_in_displaycoord
       ~Arrow3D.mouseover
       ~Arrow3D.stale
       ~Arrow3D.sticky_edges

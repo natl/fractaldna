@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>fractaldna.dna_models.dnachain.FourStrandDNAChain &mdash; FractalDNA 0.1 documentation</title>
@@ -16,6 +16,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -29,11 +30,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> FractalDNA
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            FractalDNA
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -88,11 +93,11 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../api.html">API Reference</a> &raquo;</li>
-          <li><a href="fractaldna.dna_models.html">fractaldna.dna_models</a> &raquo;</li>
-          <li><a href="fractaldna.dna_models.dnachain.html">fractaldna.dna_models.dnachain</a> &raquo;</li>
-      <li>fractaldna.dna_models.dnachain.FourStrandDNAChain</li>
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../api.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="fractaldna.dna_models.html">fractaldna.dna_models</a></li>
+          <li class="breadcrumb-item"><a href="fractaldna.dna_models.dnachain.html">fractaldna.dna_models.dnachain</a></li>
+      <li class="breadcrumb-item active">fractaldna.dna_models.dnachain.FourStrandDNAChain</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/_autosummary/fractaldna.dna_models.dnachain.FourStrandDNAChain.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -137,7 +142,7 @@
 Construct four straight DNA chains
 Chain indices are assigned anticlockwise starting from the +y strand.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>genome</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – string of GATC specifying genome order</p></li>
 <li><p><strong>separation</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – separation of each strand from the center in angstroms</p></li>
@@ -152,10 +157,6 @@ Chain indices are assigned anticlockwise starting from the +y strand.</p>
 
 <p class="rubric">Methods</p>
 <table class="autosummary longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#fractaldna.dna_models.dnachain.FourStrandDNAChain.__init__" title="fractaldna.dna_models.dnachain.FourStrandDNAChain.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(genome, separation)</p></td>
 <td><p>constructor</p></td>
@@ -197,15 +198,15 @@ Chain indices are assigned anticlockwise starting from the +y strand.</p>
 <span class="sig-name descname"><span class="pre">to_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">suppress_hash</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.dna_models.dnachain.FourStrandDNAChain.to_frame" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the molecules as a pandas data frame</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>suppress_hash</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – Hide the hash in front of the ‘name’ column
 which is kept for compatibiilty with the Geant4
 DNA simulation format</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></p>
 </dd>
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Pandas data frame with molecule information</p>
 </dd>
 </dl>
@@ -216,13 +217,13 @@ DNA simulation format</p>
 <span class="sig-name descname"><span class="pre">to_line_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(400,</span> <span class="pre">350)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.dna_models.dnachain.FourStrandDNAChain.to_line_plot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a mayavi figure instance with histone and linkers shown</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>size</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]) – Figure size (width, height)</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>mayavi figure</p>
 </dd>
-<dt class="field-odd">Raises</dt>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>ImportError</strong> – MayaVi likely Not installed</p>
 </dd>
 </dl>
@@ -233,17 +234,17 @@ DNA simulation format</p>
 <span class="sig-name descname"><span class="pre">to_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plot_p</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_b</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_s</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.dna_models.dnachain.FourStrandDNAChain.to_plot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a matplotlib.Figure instance with molecules plotted</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>plot_p</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – Show Phosphates in plot</p></li>
 <li><p><strong>plot_b</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – Show Bases in plot</p></li>
 <li><p><strong>plot_s</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – Show sugars in plot</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Figure</span></code></p>
 </dd>
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Matplotlib Figure</p>
 </dd>
 </dl>
@@ -258,10 +259,10 @@ DNA simulation format</p>
 :param plot_b : plot base strands
 :param plot_bp : join base pairs together</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Mayavi Figure</p>
 </dd>
-<dt class="field-even">Raises</dt>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>ImportError</strong> – MayaVi not imported</p>
 </dd>
 </dl>
@@ -273,10 +274,10 @@ DNA simulation format</p>
 <dd><p>Plot the surfaces of each molecule in the chain.
 Avoid this with large chains, this assumes each molecule is an ellipse</p>
 <dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Figure</span></code></p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Matplotlib figure (contour plot)</p>
 </dd>
 </dl>
@@ -287,10 +288,10 @@ Avoid this with large chains, this assumes each molecule is an ellipse</p>
 <span class="sig-name descname"><span class="pre">to_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seperator</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'</span> <span class="pre">'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.dna_models.dnachain.FourStrandDNAChain.to_text" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a description of the molecules in the chain as text</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>seperator</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – column seperator</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
 </dd>
 </dl>

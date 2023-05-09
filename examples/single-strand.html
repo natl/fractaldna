@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Making Single Strand DNA Models &mdash; FractalDNA 0.1 documentation</title>
@@ -16,6 +16,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -31,11 +32,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> FractalDNA
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            FractalDNA
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -77,9 +82,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../examples.html">Examples</a> &raquo;</li>
-      <li>Making Single Strand DNA Models</li>
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../examples.html">Examples</a></li>
+      <li class="breadcrumb-item active">Making Single Strand DNA Models</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/examples/single-strand.ipynb.txt" rel="nofollow"> View page source</a>
       </li>
@@ -199,10 +204,11 @@ div.nboutput.container div.prompt > div {
     }
 }
 
-/* disable scrollbars on prompts */
+/* disable scrollbars and line breaks on prompts */
 div.nbinput.container div.prompt pre,
 div.nboutput.container div.prompt pre {
     overflow: hidden;
+    white-space: pre;
 }
 
 /* input/output area */
@@ -372,7 +378,7 @@ div.rendered_html tbody tr:hover {
 <p><em>It is recommended that you run this example inside a Jupyter environment</em> <em>rather than a VSCode or similar environment</em></p>
 <p>This requires the mayavi jupyter extension <code class="docutils literal notranslate"><span class="pre">jupyter</span> <span class="pre">nbextension</span> <span class="pre">install</span> <span class="pre">--py</span> <span class="pre">mayavi</span> <span class="pre">--user</span></code></p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
@@ -397,8 +403,8 @@ div.rendered_html tbody tr:hover {
 </div>
 <section id="Making-and-plotting-a-single-DNA-strand">
 <h2>Making and plotting a single DNA strand<a class="headerlink" href="#Making-and-plotting-a-single-DNA-strand" title="Permalink to this heading">¶</a></h2>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make a 40 base pair long DNA Strand</span>
@@ -418,11 +424,41 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Text(0.5, 0.92, &#39;Surface Plot&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_single-strand_3_1.png" src="../_images/examples_single-strand_3_1.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_single-strand_3_2.png" src="../_images/examples_single-strand_3_2.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_single-strand_3_3.png" src="../_images/examples_single-strand_3_3.png" />
+</div>
+</div>
 </section>
 <section id="Generating-pretty-plots-with-MayaVI">
 <h2>Generating pretty plots with MayaVI<a class="headerlink" href="#Generating-pretty-plots-with-MayaVI" title="Permalink to this heading">¶</a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># MayaVI can generate nicer plots, joining the strands together</span>
@@ -431,9 +467,9 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<p><img alt="image0" src="../_images/single_turned_strand_strand_plot.jpg" /></p>
+<p><img alt="single_strand_strand_plot" src="../_images/single_strand_strand_plot.jpg" /></p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Or you can just plot the path of the entire block of dna, which looks better for a curved chain</span>
@@ -443,9 +479,9 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<p><img alt="image0" src="../_images/single_turned_strand_strand_plot.jpg" /></p>
+<p><img alt="single_turned_strand_line_plot" src="../_images/single_turned_strand_line_plot.jpg" /></p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">to_strand_plot</span><span class="p">()</span>
@@ -453,12 +489,12 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<p><img alt="image0" src="../_images/single_turned_strand_strand_plot.jpg" /></p>
+<p><img alt="single_turned_strand_strand_plot" src="../_images/single_turned_strand_strand_plot.jpg" /></p>
 </section>
 <section id="Exporting-a-DNA-strand-as-text">
 <h2>Exporting a DNA strand as text<a class="headerlink" href="#Exporting-a-DNA-strand-as-text" title="Permalink to this heading">¶</a></h2>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The chain can be converted to a text stream for saving</span>
@@ -466,14 +502,261 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+#NAME SHAPE CHAIN_ID STRAND_ID BP_INDEX SIZE_X SIZE_Y SIZE_Z POS_X POS_Y POS_Z ROT_X ROT_Y ROT_Z
+Phosphate sphere 0 0 0 2.2823538668497223 2.2823538668497223 2.2823538668497223 -0.779890171626023 8.815584979134911 -333.92471210406507 0.0 -0.0 0.0
+Sugar sphere 0 0 0 2.632139825596463 2.632139825596463 2.632139825596463 2.2598223909714656 6.737434473918255 -334.824704023257 0.0 -0.0 0.0
+Guanine ellipse 0 0 0 3.6315030254147858 3.799953276546786 1.8872880374815397 0.6081393104497743 2.3215301459187865 -335.84706382820303 0.0 -0.0 0.0
+Phosphate sphere 0 1 0 2.2823538668497223 2.2823538668497223 2.2823538668497223 -0.779890171626023 -8.815584979134911 -338.19297877073177 0.0 -0.0 0.0
+Sugar sphere 0 1 0 2.632139825596463 2.632139825596463 2.632139825596463 2.2598223909714656 -6.737434473918255 -337.2929868515398 0.0 -0.0 0.0
+Cytosine ellipse 0 1 0 3.597341307934331 3.066331331321459 1.7793608554794114 0.035998166959542686 -3.3433274569807168 -336.3976643350362 0.0 -0.0 0.0
+Phosphate sphere 0 ...
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Or a DataFrame</span>
 <span class="n">chain</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>shape</th>
+      <th>chain_idx</th>
+      <th>strand_idx</th>
+      <th>bp_idx</th>
+      <th>size_x</th>
+      <th>size_y</th>
+      <th>size_z</th>
+      <th>pos_x</th>
+      <th>pos_y</th>
+      <th>pos_z</th>
+      <th>rot_x</th>
+      <th>rot_y</th>
+      <th>rot_z</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Phosphate</td>
+      <td>sphere</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2.282354</td>
+      <td>2.282354</td>
+      <td>2.282354</td>
+      <td>-0.779890</td>
+      <td>8.815585</td>
+      <td>-333.924712</td>
+      <td>0.000000</td>
+      <td>-0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Sugar</td>
+      <td>sphere</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2.632140</td>
+      <td>2.632140</td>
+      <td>2.632140</td>
+      <td>2.259822</td>
+      <td>6.737434</td>
+      <td>-334.824704</td>
+      <td>0.000000</td>
+      <td>-0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Guanine</td>
+      <td>ellipse</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>3.631503</td>
+      <td>3.799953</td>
+      <td>1.887288</td>
+      <td>0.608139</td>
+      <td>2.321530</td>
+      <td>-335.847064</td>
+      <td>0.000000</td>
+      <td>-0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Phosphate</td>
+      <td>sphere</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>2.282354</td>
+      <td>2.282354</td>
+      <td>2.282354</td>
+      <td>-0.779890</td>
+      <td>-8.815585</td>
+      <td>-338.192979</td>
+      <td>0.000000</td>
+      <td>-0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Sugar</td>
+      <td>sphere</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>2.632140</td>
+      <td>2.632140</td>
+      <td>2.632140</td>
+      <td>2.259822</td>
+      <td>-6.737434</td>
+      <td>-337.292987</td>
+      <td>0.000000</td>
+      <td>-0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Sugar</td>
+      <td>sphere</td>
+      <td>0</td>
+      <td>0</td>
+      <td>159</td>
+      <td>2.632140</td>
+      <td>2.632140</td>
+      <td>2.632140</td>
+      <td>337.292987</td>
+      <td>5.809905</td>
+      <td>4.092044</td>
+      <td>1.570796</td>
+      <td>0.633555</td>
+      <td>1.570796</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Cytosine</td>
+      <td>ellipse</td>
+      <td>0</td>
+      <td>0</td>
+      <td>159</td>
+      <td>3.597341</td>
+      <td>3.066331</td>
+      <td>1.779361</td>
+      <td>336.397664</td>
+      <td>2.008306</td>
+      <td>2.673171</td>
+      <td>1.570796</td>
+      <td>0.633555</td>
+      <td>1.570796</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Phosphate</td>
+      <td>sphere</td>
+      <td>0</td>
+      <td>1</td>
+      <td>159</td>
+      <td>2.282354</td>
+      <td>2.282354</td>
+      <td>2.282354</td>
+      <td>333.924712</td>
+      <td>-5.847478</td>
+      <td>-6.643024</td>
+      <td>1.570796</td>
+      <td>0.633555</td>
+      <td>1.570796</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Sugar</td>
+      <td>sphere</td>
+      <td>0</td>
+      <td>1</td>
+      <td>159</td>
+      <td>2.632140</td>
+      <td>2.632140</td>
+      <td>2.632140</td>
+      <td>334.824704</td>
+      <td>-2.167395</td>
+      <td>-6.767734</td>
+      <td>1.570796</td>
+      <td>0.633555</td>
+      <td>1.570796</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Guanine</td>
+      <td>ellipse</td>
+      <td>0</td>
+      <td>1</td>
+      <td>159</td>
+      <td>3.631503</td>
+      <td>3.799953</td>
+      <td>1.887288</td>
+      <td>335.847064</td>
+      <td>-0.884260</td>
+      <td>-2.231013</td>
+      <td>1.570796</td>
+      <td>0.633555</td>
+      <td>1.570796</td>
+    </tr>
+  </tbody>
+</table>
+<p>960 rows × 14 columns</p>
+</div></div>
 </div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:

@@ -17,6 +17,7 @@ fractaldna.dna\_models.molecules.DNASugar
    .. autosummary::
    
       ~DNASugar.__init__
+      ~DNASugar.point_in_molecule
       ~DNASugar.rotate
       ~DNASugar.to_series
       ~DNASugar.to_text

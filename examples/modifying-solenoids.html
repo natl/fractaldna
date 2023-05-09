@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Modifying Solenoids &mdash; FractalDNA 0.1 documentation</title>
@@ -16,6 +16,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -31,11 +32,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> FractalDNA
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            FractalDNA
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -78,9 +83,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../examples.html">Examples</a> &raquo;</li>
-      <li>Modifying Solenoids</li>
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../examples.html">Examples</a></li>
+      <li class="breadcrumb-item active">Modifying Solenoids</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/examples/modifying-solenoids.ipynb.txt" rel="nofollow"> View page source</a>
       </li>
@@ -200,10 +205,11 @@ div.nboutput.container div.prompt > div {
     }
 }
 
-/* disable scrollbars on prompts */
+/* disable scrollbars and line breaks on prompts */
 div.nbinput.container div.prompt pre,
 div.nboutput.container div.prompt pre {
     overflow: hidden;
+    white-space: pre;
 }
 
 /* input/output area */
@@ -432,7 +438,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <p>750 Å section, 38 histones</p>
-<p><img alt="image0" src="../_images/turned_solenoid_750A_42histones.jpg" /></p>
+<p><img alt="Single 750A solenoid" src="../_images/single_solenoid_750A.jpg" /></p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
@@ -451,8 +457,8 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<p>500 Å section, 38 histones - the DNA is more compacted (and the DNA could have overlaps.</p>
-<p><img alt="image0" src="../_images/turned_solenoid_750A_42histones.jpg" /></p>
+<p>500 Å section, 38 histones - the DNA is more compacted (and the DNA could have overlaps).</p>
+<p><img alt="Shorter Solenoid" src="../_images/single_solenoid_500A.jpg" /></p>
 </section>
 <section id="Changing-the-number-of-Histones">
 <h2>Changing the number of Histones<a class="headerlink" href="#Changing-the-number-of-Histones" title="Permalink to this heading">¶</a></h2>
@@ -471,7 +477,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <p>A 500Å long solenoid</p>
-<p><img alt="image0" src="../_images/turned_solenoid_750A_42histones.jpg" /></p>
+<p><img alt="500A Solenoid with 25 histones" src="../_images/single_solenoid_500A_25histones.jpg" /></p>
 <p><em>If you need to make DNA a little denser, try increasing the linear density of DNA</em></p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
@@ -486,7 +492,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <p>750Å strand, 42 histones</p>
-<p><img alt="image0" src="../_images/turned_solenoid_750A_42histones.jpg" /></p>
+<p><img alt="Straight Single Solenoid" src="../_images/single_solenoid_750A_42histones.jpg" /></p>
 </section>
 <section id="Turned-Solenoids-follow-the-same-principles">
 <h2>Turned Solenoids follow the same principles<a class="headerlink" href="#Turned-Solenoids-follow-the-same-principles" title="Permalink to this heading">¶</a></h2>
@@ -505,7 +511,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <p>750Å strand, 42 histones</p>
-<p><img alt="image0" src="../_images/turned_solenoid_750A_42histones.jpg" /></p>
+<p><img alt="Turned Solenoid 750A, 42 histones" src="../_images/turned_solenoid_750A_42histones.jpg" /></p>
 <p><em>It is important to inspect the result to make sure there aren’t placements where you don’t expect</em></p>
 <p>With a voxelheight of 750Å, we expect bounds in the range</p>
 <p>-375 &lt; X &lt; 375 -375 &lt; Y &lt; 375 0 &lt; Z &lt; 750</p>

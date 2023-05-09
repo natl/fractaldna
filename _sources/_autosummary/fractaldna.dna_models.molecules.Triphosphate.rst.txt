@@ -17,6 +17,7 @@ fractaldna.dna\_models.molecules.Triphosphate
    .. autosummary::
    
       ~Triphosphate.__init__
+      ~Triphosphate.point_in_molecule
       ~Triphosphate.rotate
       ~Triphosphate.to_series
       ~Triphosphate.to_text

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>fractaldna.structure_models.random_placements.Prism &mdash; FractalDNA 0.1 documentation</title>
@@ -16,6 +16,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -29,11 +30,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> FractalDNA
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            FractalDNA
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -80,11 +85,11 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../api.html">API Reference</a> &raquo;</li>
-          <li><a href="fractaldna.structure_models.html">fractaldna.structure_models</a> &raquo;</li>
-          <li><a href="fractaldna.structure_models.random_placements.html">fractaldna.structure_models.random_placements</a> &raquo;</li>
-      <li>fractaldna.structure_models.random_placements.Prism</li>
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../api.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="fractaldna.structure_models.html">fractaldna.structure_models</a></li>
+          <li class="breadcrumb-item"><a href="fractaldna.structure_models.random_placements.html">fractaldna.structure_models.random_placements</a></li>
+      <li class="breadcrumb-item active">fractaldna.structure_models.random_placements.Prism</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/_autosummary/fractaldna.structure_models.random_placements.Prism.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -135,10 +140,6 @@ rotation is the rotation of the shape around the x-axis</p>
 
 <p class="rubric">Methods</p>
 <table class="autosummary longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#fractaldna.structure_models.random_placements.Prism.__init__" title="fractaldna.structure_models.random_placements.Prism.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(center, size, axis[, rotation])</p></td>
 <td><p>Prism(center, size, axis, rotation=0)</p></td>
@@ -194,7 +195,7 @@ the axes of each wall, using all the corners.</p>
 <span class="sig-name descname"><span class="pre">to_series</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.structure_models.random_placements.Prism.to_series" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the prism as a pandas series object.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></p>
 </dd>
 </dl>
@@ -206,7 +207,7 @@ the axes of each wall, using all the corners.</p>
 <dd><p>Describe prism according to the following text specification:
 POS_X POS_Y POS_Z EUL_PSI EUL_THETA EUL_PHI</p>
 <dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
 </dd>
 </dl>

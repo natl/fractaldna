@@ -17,6 +17,7 @@ fractaldna.dna\_models.molecules.Molecule
    .. autosummary::
    
       ~Molecule.__init__
+      ~Molecule.point_in_molecule
       ~Molecule.rotate
       ~Molecule.to_series
       ~Molecule.to_text

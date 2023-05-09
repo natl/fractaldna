@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Generating Geometries for Geant4 &mdash; FractalDNA 0.1 documentation</title>
@@ -16,6 +16,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -31,11 +32,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> FractalDNA
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            FractalDNA
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -84,9 +89,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../examples.html">Examples</a> &raquo;</li>
-      <li>Generating Geometries for Geant4</li>
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../examples.html">Examples</a></li>
+      <li class="breadcrumb-item active">Generating Geometries for Geant4</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/examples/generating-geometries-for-geant.ipynb.txt" rel="nofollow"> View page source</a>
       </li>
@@ -206,10 +211,11 @@ div.nboutput.container div.prompt > div {
     }
 }
 
-/* disable scrollbars on prompts */
+/* disable scrollbars and line breaks on prompts */
 div.nbinput.container div.prompt pre,
 div.nboutput.container div.prompt pre {
     overflow: hidden;
+    white-space: pre;
 }
 
 /* input/output area */
@@ -437,7 +443,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<p><img alt="31e4d1271f6f4553a7498f3a60a0c19d" class="no-scaled-link" src="../_images/50nm_straight.png" style="width: 30%;" /> <img alt="c440a031c760444590f6ae3e148881a7" class="no-scaled-link" src="../_images/50nm_turn.png" style="width: 30%;" /> <img alt="4479ba81bff74c2588d2501d2e83d8e4" class="no-scaled-link" src="../_images/50nm_turn_twist.png" style="width: 30%;" /></p>
+<p><img alt="4d2916bbe49046f18ba2e8ffb6f083e9" class="no-scaled-link" src="../_images/50nm_straight.png" style="width: 30%;" /> <img alt="6e76b629cae7432dbfd78200b3c562f0" class="no-scaled-link" src="../_images/50nm_turn.png" style="width: 30%;" /> <img alt="f4b81f02cad24f36ad8a9507aefba85e" class="no-scaled-link" src="../_images/50nm_turn_twist.png" style="width: 30%;" /></p>
 </section>
 <section id="Multi-Strand-straight-and-turned-segments">
 <h3>Multi Strand straight and turned segments<a class="headerlink" href="#Multi-Strand-straight-and-turned-segments" title="Permalink to this heading">¶</a></h3>
@@ -480,7 +486,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<p><img alt="c251fa32bc6945efbefa8699edc90708" class="no-scaled-link" src="../_images/50nm_4_straight.png" style="width: 30%;" /> <img alt="f15b6eed38ec48e6ac03aff8f44f10e4" class="no-scaled-link" src="../_images/50nm_4_turn.png" style="width: 30%;" /> <img alt="0b26e986fb3145a4a05c801c77ba740e" class="no-scaled-link" src="../_images/50nm_4_turn_twist.png" style="width: 30%;" /></p>
+<p><img alt="80e042f30d0840a3bf34f28b0112ed06" class="no-scaled-link" src="../_images/50nm_4_straight.png" style="width: 30%;" /> <img alt="e5f2f087af5a4c45a7ba97c316c85f93" class="no-scaled-link" src="../_images/50nm_4_turn.png" style="width: 30%;" /> <img alt="569be4fb5fc647e799ae2e7c23f54c7d" class="no-scaled-link" src="../_images/50nm_4_turn_twist.png" style="width: 30%;" /></p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
@@ -533,7 +539,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<p><img alt="731af43725e1414e9096041afd4c2c26" class="no-scaled-link" src="../_images/50nm_8_straight.png" style="width: 30%;" /> <img alt="8a9e77d5044441b791d6793db447fa54" class="no-scaled-link" src="../_images/50nm_8_turn.png" style="width: 30%;" /> <img alt="95351207be06429ca6c446c4ba2eedb9" class="no-scaled-link" src="../_images/50nm_8_turn_twist.png" style="width: 30%;" /></p>
+<p><img alt="82972b899c7a4c0281a0b8e2c8f28b4a" class="no-scaled-link" src="../_images/50nm_8_straight.png" style="width: 30%;" /> <img alt="41686fe67dec4248b6f58394844a2243" class="no-scaled-link" src="../_images/50nm_8_turn.png" style="width: 30%;" /> <img alt="35bb6aaa028847289afaa7a656468ae8" class="no-scaled-link" src="../_images/50nm_8_turn_twist.png" style="width: 30%;" /></p>
 </section>
 </section>
 <section id="Making-Solenoidal-DNA">
@@ -589,7 +595,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<p><img alt="1ba0c4b970aa49e988ec406f88e8f7de" class="no-scaled-link" src="../_images/solenoid_straight.jpg" style="width: 30%;" /> <img alt="1a9afcb302344870a778d984021f14a6" class="no-scaled-link" src="../_images/solenoid_turned.jpg" style="width: 30%;" /> <img alt="920719ee796e459c98cb92d16efa3978" class="no-scaled-link" src="../_images/solenoid_turned_twisted.jpg" style="width: 30%;" /></p>
+<p><img alt="a2db11ef268745969b867984db4ff466" class="no-scaled-link" src="../_images/solenoid_straight.jpg" style="width: 30%;" /> <img alt="c5eb1ef663ff469399f0b3733ecfc2ef" class="no-scaled-link" src="../_images/solenoid_turned.jpg" style="width: 30%;" /> <img alt="119cbb617a4f442fa001b9d2b5ce96db" class="no-scaled-link" src="../_images/solenoid_turned_twisted.jpg" style="width: 30%;" /></p>
 </section>
 <section id="Generating-multiple-solenoids-in-a-Volume">
 <h3>Generating multiple solenoids in a Volume<a class="headerlink" href="#Generating-multiple-solenoids-in-a-Volume" title="Permalink to this heading">¶</a></h3>
@@ -663,7 +669,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<p><img alt="e577106742b349c0ad57dd1e6f5cdd77" class="no-scaled-link" src="../_images/solenoid4_straight.jpg" style="width: 40%;" /> <img alt="773d321a860249c5b91a8a9886a20afc" class="no-scaled-link" src="../_images/solenoid4_turned.jpg" style="width: 40%;" /></p>
+<p><img alt="04854aa8672c453f900583d1b292cc7e" class="no-scaled-link" src="../_images/solenoid4_straight.jpg" style="width: 40%;" /> <img alt="ca642c873ffb4df4a418ea0ae85b8b2c" class="no-scaled-link" src="../_images/solenoid4_turned.jpg" style="width: 40%;" /></p>
 </section>
 </section>
 </section>

@@ -65,7 +65,7 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "![](multi_solenoid_strand_plot.jpg)"
+    "![multi_solenoid_strand_plot](multi_solenoid_strand_plot.jpg)"
    ]
   },
   {
@@ -86,7 +86,7 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "![](multi_solenoid_turned_plot.jpg)"
+    "![multi_solenoid_turned_plot](multi_solenoid_turned_plot.jpg)"
    ]
   },
   {

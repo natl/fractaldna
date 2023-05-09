@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>fractaldna.structure_models.random_placements.PrismList &mdash; FractalDNA 0.1 documentation</title>
@@ -16,6 +16,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -29,11 +30,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> FractalDNA
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            FractalDNA
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -80,11 +85,11 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../api.html">API Reference</a> &raquo;</li>
-          <li><a href="fractaldna.structure_models.html">fractaldna.structure_models</a> &raquo;</li>
-          <li><a href="fractaldna.structure_models.random_placements.html">fractaldna.structure_models.random_placements</a> &raquo;</li>
-      <li>fractaldna.structure_models.random_placements.PrismList</li>
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../api.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="fractaldna.structure_models.html">fractaldna.structure_models</a></li>
+          <li class="breadcrumb-item"><a href="fractaldna.structure_models.random_placements.html">fractaldna.structure_models.random_placements</a></li>
+      <li class="breadcrumb-item active">fractaldna.structure_models.random_placements.PrismList</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/_autosummary/fractaldna.structure_models.random_placements.PrismList.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -137,7 +142,7 @@ specified by ‘resolution’. This helper grid is used so that
 the routine only needs to see if the prism being placed overlaps
 local prisms.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>center</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>) – XYZ-position where the prism should be centered</p></li>
 <li><p><strong>extent</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>) – XYZ-half lengths for the maximum bounding cube
@@ -153,10 +158,6 @@ of all prisms to be placed.</p></li>
 
 <p class="rubric">Methods</p>
 <table class="autosummary longtable docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#fractaldna.structure_models.random_placements.PrismList.__init__" title="fractaldna.structure_models.random_placements.PrismList.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(center, extent, resolution)</p></td>
 <td><p></p></td>
@@ -177,13 +178,13 @@ of all prisms to be placed.</p></li>
 <span class="sig-name descname"><span class="pre">append</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prism</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.structure_models.random_placements.PrismList.append" title="Permalink to this definition">¶</a></dt>
 <dd><p>Append a new prism to the Prism list</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>prism</strong> (<a class="reference internal" href="fractaldna.structure_models.random_placements.Prism.html#fractaldna.structure_models.random_placements.Prism" title="fractaldna.structure_models.random_placements.Prism"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prism</span></code></a>) – prism to be appended.</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></p>
 </dd>
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>True if a prism is placed, else False</p>
 </dd>
 </dl>
@@ -194,7 +195,7 @@ of all prisms to be placed.</p></li>
 <span class="sig-name descname"><span class="pre">get_prism_grid_indices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prism</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.structure_models.random_placements.PrismList.get_prism_grid_indices" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the prism grid indices</p>
 <dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Set</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]</p>
 </dd>
 </dl>
@@ -205,15 +206,15 @@ of all prisms to be placed.</p></li>
 <span class="sig-name descname"><span class="pre">to_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">suppress_hash</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.structure_models.random_placements.PrismList.to_frame" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate a Data Frame describing the prisms</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>suppress_hash</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – Hide the hash in front of the ‘IDX’ column
 which is kept for compatibiilty with the Geant4
 DNA simulation format</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></p>
 </dd>
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Voxelised fractal as a data frame</p>
 </dd>
 </dl>
