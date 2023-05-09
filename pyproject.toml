@@ -145,3 +145,5 @@ addopts = [
   "--doctest-modules",
   "--doctest-continue-on-failure",
 ]
+
+qt_api=pyqt5
