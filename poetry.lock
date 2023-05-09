@@ -577,7 +577,7 @@ test = ["flaky", "ipyparallel", "pre-commit", "pytest-asyncio", "pytest-cov", "p
 
 [[package]]
 name = "ipython"
-version = "8.13.0"
+version = "8.12.0"
 description = "IPython: Productive Interactive Computing"
 category = "dev"
 optional = false
@@ -1441,7 +1441,7 @@ jupyter = ["ipywidgets (>=7.5.1,<8.0.0)"]
 
 [[package]]
 name = "ruamel.yaml"
-version = "0.17.24"
+version = "0.17.26"
 description = "ruamel.yaml is a YAML parser/emitter that supports roundtrip preservation of comments, seq/map flow style, and map key order"
 category = "dev"
 optional = false
@@ -1971,7 +1971,7 @@ mayavi = ["mayavi", "PyQt5", "vtk"]
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.8,<3.11"
-content-hash = "00e36a683ad0b489faa520933a44f4c807a17955b14a9ed77fa48c939e2bb833"
+content-hash = "229e2df856d81308b09c0e99186637a909e8c83023832001a350584deb7f8e2e"
 
 [metadata.files]
 alabaster = []
