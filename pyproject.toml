@@ -46,6 +46,9 @@ matplotlib = "^3.4.3"
 scipy = "^1.8.0"
 importlib-metadata = "^4.8.2"
 tqdm = "^4.62.3"
+mayavi = { version = "^4.8.1", optional = true }
+PyQt5 = { version = "^5.15.9", optional = true }
+vtk = { version = "^9.2.6", optional = true }
 
 [tool.poetry.dev-dependencies]
 bandit = "^1.7.0"
