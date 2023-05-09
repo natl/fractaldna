@@ -151,6 +151,30 @@ class Molecule:
             }
         )
 
+    def point_in_molecule(self, point: np.array) -> bool:
+        """
+        Assert whether a point (x, y, z) is inside the molecule.
+
+        :param: point (x, y, z)
+        :return: True/False point in molecule
+        """
+        point_ = np.asarray(point)
+        if point_.shape != (3,):
+            raise ValueError("Point should have shape (3, ). That is [1,2,3]")
+        # Step 1: assume molecule at (0, 0, 0)
+        point_ = point_ - self.position
+        # Step 2: We are going to treat the ellipse as un-rotated, so we apply
+        #         an inverse rotation to the point
+        rot_matrix = rot.eulerMatrix(*self.rotation)
+        point_ = np.matmul(np.linalg.inv(rot_matrix), point_.reshape(3, 1))
+
+        test = (
+            (point_[0] / self.dimensions[0]) ** 2.0
+            + (point_[1] / self.dimensions[1]) ** 2.0
+            + (point_[2] / self.dimensions[2]) ** 2.0
+        )
+        return test < 1
+
 
 # Define some standard molecules
 class Guanine(Molecule):

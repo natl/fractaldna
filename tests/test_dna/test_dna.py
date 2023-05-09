@@ -3,7 +3,7 @@ import unittest
 import numpy as np
 from mpl_toolkits.mplot3d import Axes3D  # NOQA
 
-from fractaldna.dna_models import basepair, dnachain, dnapositions
+from fractaldna.dna_models import basepair, dnachain, dnapositions, molecules
 from fractaldna.utils import rotations as rots
 
 
@@ -111,6 +111,115 @@ class TestRotationModule(unittest.TestCase):
                 + "Instead, I got: "
                 + str(newangles),
             )
+
+
+class TestMolecules(unittest.TestCase):
+    def test_sphere_untranslated(self):
+        for _ in range(10):
+            rotation = np.random.rand(3) * 2 * np.pi
+            mol = molecules.Molecule(
+                "Sphere",
+                "sphere",
+                [1, 1, 1],
+                rotation=rotation,
+            )
+            self.assertTrue(mol.point_in_molecule([0, 0, 0]))
+            self.assertFalse(mol.point_in_molecule([1, 1, 1]))
+            self.assertFalse(mol.point_in_molecule([0.99, 0.99, 0.99]))
+            self.assertTrue(mol.point_in_molecule([0.56, 0.56, 0.56]))
+            self.assertFalse(mol.point_in_molecule([0.58, 0.58, 0.58]))
+
+    def test_sphere_translated(self):
+        for _ in range(10):
+            rotation = np.random.rand(3) * 2 * np.pi
+            translation = (np.random.rand(3) - 0.5) * 100
+            mol = molecules.Molecule(
+                "Sphere", "sphere", [1, 1, 1], rotation=rotation, position=translation
+            )
+            self.assertTrue(mol.point_in_molecule(translation))
+            self.assertFalse(mol.point_in_molecule(translation + np.array([1, 1, 1])))
+            self.assertFalse(
+                mol.point_in_molecule(translation + np.array([0.99, 0.99, 0.99]))
+            )
+            self.assertTrue(
+                mol.point_in_molecule(translation + np.array([0.56, 0.56, 0.56]))
+            )
+            self.assertFalse(
+                mol.point_in_molecule(translation + np.array([0.58, 0.58, 0.58]))
+            )
+
+    def test_large_sphere_translated(self):
+        for _ in range(10):
+            rotation = np.random.rand(3) * 2 * np.pi
+            translation = (np.random.rand(3) - 0.5) * 100
+            mol = molecules.Molecule(
+                "Sphere",
+                "sphere",
+                [10, 10, 10],
+                rotation=rotation,
+                position=translation,
+            )
+            self.assertTrue(mol.point_in_molecule(translation))
+            self.assertFalse(
+                mol.point_in_molecule(translation + 10 * np.array([1, 1, 1]))
+            )
+            self.assertFalse(
+                mol.point_in_molecule(translation + 10 * np.array([0.99, 0.99, 0.99]))
+            )
+            self.assertTrue(
+                mol.point_in_molecule(translation + 10 * np.array([0.56, 0.56, 0.56]))
+            )
+            self.assertFalse(
+                mol.point_in_molecule(translation + 10 * np.array([0.58, 0.58, 0.58]))
+            )
+
+    def test_ellipse_unrotated(self):
+        """Test an ellipse centered at (10, 10, 10) with no rotation
+        and semi-axes (5, 1, 3)
+        """
+        size = np.random.rand(3) * 10
+        mol = molecules.Molecule("Ellipse", "ellipse", [5, 1, 3], position=[10, 10, 10])
+        self.assertTrue(mol.point_in_molecule([10, 10, 10]))
+
+        self.assertTrue(mol.point_in_molecule([14.99, 10, 10]))
+        self.assertFalse(mol.point_in_molecule([15.01, 10, 10]))
+        self.assertFalse(mol.point_in_molecule([4.99, 10, 10]))
+        self.assertTrue(mol.point_in_molecule([5.01, 10, 10]))
+
+        self.assertTrue(mol.point_in_molecule([10, 10.99, 10]))
+        self.assertFalse(mol.point_in_molecule([10, 11.01, 10]))
+        self.assertFalse(mol.point_in_molecule([10, 8.99, 10]))
+        self.assertTrue(mol.point_in_molecule([10, 9.01, 10]))
+
+        self.assertTrue(mol.point_in_molecule([10, 10, 12.99]))
+        self.assertFalse(mol.point_in_molecule([10, 10, 13.01]))
+        self.assertFalse(mol.point_in_molecule([10, 10, 6.99]))
+        self.assertTrue(mol.point_in_molecule([10, 10, 7.01]))
+
+        self.assertFalse(mol.point_in_molecule([10, 10.5, 12.99]))
+        # self.assertFalse(mol.point_in_molecule())
+        # self.assertTrue(mol.point_in_molecule())
+        # self.assertFalse(mol.point_in_molecule())
+
+    def test_ellipse_rotated(self):
+        """Test an ellipse centered at (10, 10, 0)
+        with semi-axes (14.8, 1, 3) rotated 45 degrees around the z-axis (CCW).
+
+        Should approximate the line running from (0, 0, 0) to (20, 20, 0)
+        """
+        mol = molecules.Molecule(
+            "Ellipse",
+            "ellipse",
+            [14.8, 1, 3],
+            position=[10, 10, 0],
+            rotation=[0, 0, np.pi / 4.0],
+        )
+        self.assertTrue(mol.point_in_molecule([10, 10, 0]))
+
+        self.assertTrue(mol.point_in_molecule([0, 0, 0]))
+        self.assertTrue(mol.point_in_molecule([20, 20, 0]))
+        self.assertFalse(mol.point_in_molecule([-1, -1, 0]))
+        self.assertFalse(mol.point_in_molecule([21, 21, 0]))
 
 
 if __name__ == "__main__":

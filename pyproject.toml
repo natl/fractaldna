@@ -44,10 +44,11 @@ numpy = "^1.22.0"
 pandas = "^1.3.3"
 matplotlib = "^3.4.3"
 scipy = "^1.8.0"
-pytest = ">=6.2.5,<8.0.0"
 importlib-metadata = "^4.8.2"
 tqdm = "^4.62.3"
-mistune = "0.8.4"
+mayavi = { version = "^4.8.1", optional = true }
+PyQt5 = { version = "^5.15.9", optional = true }
+vtk = { version = "^9.2.6", optional = true }
 
 [tool.poetry.dev-dependencies]
 bandit = "^1.7.0"
@@ -59,22 +60,24 @@ mypy-extensions = "^0.4.3"
 pre-commit = "^2.14.0"
 pydocstyle = "^6.1.1"
 pylint = "^2.14.3"
-pytest = "^6.2.5"
+pytest = "^7.2.0"
 pyupgrade = "^2.24.0"
-safety = "^1.10.3"
+safety = "^2.3.5"
 Sphinx = "^5.0.2"
 sphinx-rtd-theme = "^1.0.0"
 sphinx-autodoc-typehints = "^1.17.0"
 ipykernel = "^6.6.0"
+ipython = "<=8.12"
 ipyevents = "^2.0.1"
 nbsphinx = "^0.8.8"
+pandoc = "^2.3"
 
 [tool.poetry.extras]
 mayavi = ["mayavi", "PyQt5", "vtk"]
 
 [tool.black]
 # https://github.com/psf/black
-target-version = ["py38"]
+target-version = ["py39"]
 line-length = 88
 color = true
 
@@ -109,7 +112,7 @@ color_output = true
 
 [tool.mypy]
 # https://mypy.readthedocs.io/en/latest/config_file.html#using-a-pyproject-toml-file
-python_version = 3.8
+python_version = 3.9
 pretty = true
 show_traceback = true
 color_output = true
