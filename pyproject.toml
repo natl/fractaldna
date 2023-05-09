@@ -69,6 +69,7 @@ sphinx-autodoc-typehints = "^1.17.0"
 ipykernel = "^6.6.0"
 ipyevents = "^2.0.1"
 nbsphinx = "^0.8.8"
+pandoc = "^2.3"
 
 [tool.poetry.extras]
 mayavi = ["mayavi", "PyQt5", "vtk"]
