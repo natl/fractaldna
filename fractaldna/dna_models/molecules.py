@@ -150,7 +150,7 @@ class Molecule:
                 "rot_z": self.rotation[2],
             }
         )
-    
+
     def point_in_molecule(self, point: np.array) -> bool:
         """
         Assert whether a point (x, y, z) is inside the molecule.
@@ -159,7 +159,7 @@ class Molecule:
         :return: True/False point in molecule
         """
         point_ = np.asarray(point)
-        if point_.shape != (3, ):
+        if point_.shape != (3,):
             raise ValueError("Point should have shape (3, ). That is [1,2,3]")
         # Step 1: assume molecule at (0, 0, 0)
         point_ = point_ - self.position
@@ -169,12 +169,11 @@ class Molecule:
         point_ = np.matmul(np.linalg.inv(rot_matrix), point_.reshape(3, 1))
 
         test = (
-            (point_[0]/self.dimensions[0]) ** 2.
-            + (point_[1]/self.dimensions[1]) ** 2.
-            + (point_[2]/self.dimensions[2]) ** 2.
+            (point_[0] / self.dimensions[0]) ** 2.0
+            + (point_[1] / self.dimensions[1]) ** 2.0
+            + (point_[2] / self.dimensions[2]) ** 2.0
         )
         return test < 1
-
 
 
 # Define some standard molecules
