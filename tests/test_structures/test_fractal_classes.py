@@ -142,7 +142,7 @@ class TestVoxelCreation(unittest.TestCase):
                 10 * (random.random() - 0.5),
             ]
         )
-        for (heading, principal) in permutations(self.dirs, 2):
+        for heading, principal in permutations(self.dirs, 2):
             if heading != principal:
                 vox = vxl.Voxel(
                     pos,
@@ -161,7 +161,7 @@ class TestVoxelCreation(unittest.TestCase):
                 10 * (random.random() - 0.5),
             ]
         )
-        for (heading, principal) in permutations(self.dirs, 2):
+        for heading, principal in permutations(self.dirs, 2):
             if heading != principal:
                 d = "xyz".replace(heading, "").replace(principal, "")
                 outPrincipal = self.dirs[d]
@@ -182,7 +182,7 @@ class TestVoxelCreation(unittest.TestCase):
                 10 * (random.random() - 0.5),
             ]
         )
-        for (inh, inp, outh, outp) in permutations(self.dirs, 4):
+        for inh, inp, outh, outp in permutations(self.dirs, 4):
             valid = (inh != outh) and (inh != inp) and (outh != outp)
             if valid:
                 vox = vxl.Voxel(
@@ -672,7 +672,7 @@ class TestTextOutput(unittest.TestCase):
         frac = vxl.VoxelisedFractal.fromLString(s)
         text = frac.to_text()
         text = text.split("\n")[1:]
-        for (vtext, voxel) in zip(text, frac.fractal):
+        for vtext, voxel in zip(text, frac.fractal):
             vtext = " ".join(vtext.split(" ")[1:])  # remove index
             self.assertEqual(vtext, voxel.to_text(), "voxel text output incorrect")
             self.assertEqual(

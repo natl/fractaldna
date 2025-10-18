@@ -8,7 +8,12 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - name: Install Poetry
+      uses: abatilo/actions-poetry@v3
+      with:
+        poetry-version: latest
+
     - uses: ammaraskar/sphinx-action@master
       with:
         docs-folder: "docs/"
-        pre-build-command: apt-get install -y pandoc && python -m pip install -r requirements-dev.txt
+        pre-build-command: apt-get install -y pandoc && python -m poetry install --group dev

@@ -1,2 +1,1 @@
-"""FractalDNA Utility Functions.
-"""
+"""FractalDNA Utility Functions."""

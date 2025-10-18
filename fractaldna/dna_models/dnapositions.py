@@ -415,7 +415,7 @@ class MoleculeFromAtoms:
         cylindrical = deepcopy(atoms)
         cartesian = {}
         sgn = 1 if inverse is False else -1
-        for (name, pos) in cylindrical.items():
+        for name, pos in cylindrical.items():
             z = sgn * pos[2]  # NOQA
             y = pos[0] * np.sin(sgn * np.pi * pos[1] / 180.0)
             x = pos[0] * np.cos(sgn * np.pi * pos[1] / 180.0)
@@ -431,7 +431,7 @@ class MoleculeFromAtoms:
         """
         c = np.zeros([3])
         denom = 0
-        for (atom, pos) in self.atoms.items():
+        for atom, pos in self.atoms.items():
             r = RADIUS[LETTERS.match(atom).group()]
             c += pos * r
             denom += r
@@ -446,7 +446,7 @@ class MoleculeFromAtoms:
         """
         c = self.find_center()
         extents = []
-        for (atom, pos) in self.atoms.items():
+        for atom, pos in self.atoms.items():
             pos -= c
             rad = RADIUS[LETTERS.match(atom).group()]
             x = (pos[0] - rad) if pos[0] <= 0 else (pos[0] + rad)
@@ -479,7 +479,7 @@ class MoleculeFromAtoms:
         """
         c = self.find_center()
         radii = []
-        for (atom, pos) in self.atoms.items():
+        for atom, pos in self.atoms.items():
             pos -= c
             rad = RADIUS[LETTERS.match(atom).group()]
             rad += np.sqrt(np.sum(pos * pos))
@@ -494,15 +494,15 @@ class MoleculeFromAtoms:
         Return the radius that yields the same volume occupied by all atoms
         """
         vol = 0
-        for (atom, pos) in self.atoms.items():
+        for atom, pos in self.atoms.items():
             rad = RADIUS[LETTERS.match(atom).group()]
             vol += 4.0 / 3.0 * np.pi * rad**3
         # subtract double overlaps
-        for ((a1, p1), (a2, p2)) in combinations(self.atoms.items(), 2):
+        for (a1, p1), (a2, p2) in combinations(self.atoms.items(), 2):
             r1 = RADIUS[LETTERS.match(a1).group()]
             r2 = RADIUS[LETTERS.match(a2).group()]
             vol -= overlap_volume(p1, p2, r1, r2)
-        for ((a1, p1), (a2, p2), (a3, p3)) in combinations(self.atoms.items(), 3):
+        for (a1, p1), (a2, p2), (a3, p3) in combinations(self.atoms.items(), 3):
             # pdb.set_trace()
             r1 = RADIUS[LETTERS.match(a1).group()]
             r2 = RADIUS[LETTERS.match(a2).group()]
@@ -517,7 +517,7 @@ class MoleculeFromAtoms:
         Returns a matplotlib figure instance of the molecule.
         """
         atomsets = {}
-        for (atom, pos) in self.atoms.items():
+        for atom, pos in self.atoms.items():
             a = LETTERS.match(atom).group()
             if a not in atomsets:
                 rad = RADIUS[a] if a in RADIUS else 2
@@ -567,37 +567,37 @@ class DoubleStrand(MoleculeDictionary):
         super().__init__()
         sequence = [THYMINE, GUANINE, ADENINE, CYTOSINE, THYMINE] * 2
         for ii in range(len(sequence)):
-            for (k, v) in sequence[ii].items():
+            for k, v in sequence[ii].items():
                 x = v[0]
                 y = v[1] + 36 * ii
                 z = v[2] + 3.4 * ii
                 self.atoms[k + "_LEFTBP" + str(ii)] = np.array([x, y, z])
 
-            for (k, v) in DEOXYRIBOSE.items():
+            for k, v in DEOXYRIBOSE.items():
                 x = v[0]
                 y = v[1] + 36 * ii
                 z = v[2] + 3.4 * ii
                 self.atoms[k + "_LEFTDO" + str(ii)] = np.array([x, y, z])
 
-            for (k, v) in PHOSPHATE.items():
+            for k, v in PHOSPHATE.items():
                 x = v[0]
                 y = v[1] + 36 * ii
                 z = v[2] + 3.4 * ii
                 self.atoms[k + "_LEFTPO" + str(ii)] = np.array([x, y, z])
 
-            for (k, v) in opposite_pair(sequence[ii]).items():
+            for k, v in opposite_pair(sequence[ii]).items():
                 x = v[0]
                 y = -v[1] + 36 * ii
                 z = -v[2] + 3.4 * ii
                 self.atoms[k + "_RIGHTBP" + str(ii)] = np.array([x, y, z])
 
-            for (k, v) in DEOXYRIBOSE.items():
+            for k, v in DEOXYRIBOSE.items():
                 x = v[0]
                 y = -v[1] + 36 * ii
                 z = -v[2] + 3.4 * ii
                 self.atoms[k + "_RIGHTDO" + str(ii)] = np.array([x, y, z])
 
-            for (k, v) in PHOSPHATE.items():
+            for k, v in PHOSPHATE.items():
                 x = v[0]
                 y = -v[1] + 36 * ii
                 z = -v[2] + 3.4 * ii

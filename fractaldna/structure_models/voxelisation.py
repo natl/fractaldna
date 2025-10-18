@@ -394,7 +394,7 @@ class VoxelisedFractal:
 
         # identify max/min values
         for voxel in self.fractal:
-            for (ii, (minv, v, maxv)) in enumerate(zip(minvals, voxel.pos, maxvals)):
+            for ii, (minv, v, maxv) in enumerate(zip(minvals, voxel.pos, maxvals)):
                 if v < minv:
                     minvals[ii] = v
                 elif v > maxv:
