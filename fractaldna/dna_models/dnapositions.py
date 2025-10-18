@@ -387,7 +387,7 @@ def mc_triple_volume(p1, p2, p3, r1, r2, r3, n=1e5):
         in3 = in_circle(position, p3, r3)
         if in1 and in2 and in3:
             in_overlap += 1
-    vol_total = np.product(ranges)
+    vol_total = np.prod(ranges)
     return vol_total * in_overlap / n
 
 
@@ -467,7 +467,7 @@ class MoleculeFromAtoms:
         constituent molecules occupy
         """
         half_lengths = self.find_half_lengths()
-        max_volume = 4.0 / 3.0 * np.pi * np.product(half_lengths)
+        max_volume = 4.0 / 3.0 * np.pi * np.prod(half_lengths)
         equiv_volume = 4.0 / 3.0 * np.pi * self.find_equivalent_radius() ** 3.0
         return half_lengths * (equiv_volume / max_volume) ** (1.0 / 3.0)
 
