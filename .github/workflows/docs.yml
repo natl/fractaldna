@@ -26,11 +26,11 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt update
-        sudo apt-get install -y python3-sphinx pandoc
-        python -m poetry install --with dev
+        sudo apt-get install -y pandoc
+        python -m poetry install --with dev --with docs
     - name: Build sphinx documentation
       run: |
-        cd docs && make html
+        cd docs && poetry run make html
     - uses: actions/upload-artifact@v3
       with:
         name: DocumentationHTML

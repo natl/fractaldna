@@ -16,4 +16,4 @@ jobs:
     - uses: ammaraskar/sphinx-action@master
       with:
         docs-folder: "docs/"
-        pre-build-command: apt-get install -y pandoc && python -m poetry install --with dev
+        pre-build-command: apt-get install -y pandoc && python -m poetry install --with dev --with docs

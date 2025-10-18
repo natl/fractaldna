@@ -61,14 +61,13 @@ safety = ">2.3.5"
 ipykernel = "^6.6.0"
 ipython = "<=8.12"
 ipyevents = "^2.0.1"
-nbsphinx = "^0.8.8"
-pandoc = "^2.3"
+darglint = "^1.8.1"
 
 
 [tool.poetry.group.docs.dependencies]
-sphinx = "^8.2.3"
 sphinx-rtd-theme = "^3.0.2"
-sphinx-autodoc-typehints = "^3.5.2"
+nbsphinx = "^0.9.7"
+sphinx-autodoc-typehints = "~3"
 
 [tool.poetry.extras]
 mayavi = ["mayavi", "PyQt5", "vtk"]
