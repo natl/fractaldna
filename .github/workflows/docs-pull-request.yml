@@ -3,7 +3,7 @@ on:
 - pull_request
 
 jobs:
-  check_docs:
+  check_docs_can_build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -16,4 +16,4 @@ jobs:
     - uses: ammaraskar/sphinx-action@master
       with:
         docs-folder: "docs/"
-        pre-build-command: apt-get install -y pandoc && python -m poetry install --group dev
+        pre-build-command: apt-get install -y pandoc && python -m poetry install --with dev
