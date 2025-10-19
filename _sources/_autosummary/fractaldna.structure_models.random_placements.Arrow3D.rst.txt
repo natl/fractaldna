@@ -49,6 +49,7 @@ fractaldna.structure\_models.random\_placements.Arrow3D
       ~Arrow3D.get_fill
       ~Arrow3D.get_gid
       ~Arrow3D.get_hatch
+      ~Arrow3D.get_hatch_linewidth
       ~Arrow3D.get_in_layout
       ~Arrow3D.get_joinstyle
       ~Arrow3D.get_label
@@ -103,6 +104,7 @@ fractaldna.structure\_models.random\_placements.Arrow3D
       ~Arrow3D.set_fill
       ~Arrow3D.set_gid
       ~Arrow3D.set_hatch
+      ~Arrow3D.set_hatch_linewidth
       ~Arrow3D.set_in_layout
       ~Arrow3D.set_joinstyle
       ~Arrow3D.set_label
@@ -137,6 +139,7 @@ fractaldna.structure\_models.random\_placements.Arrow3D
    .. autosummary::
    
       ~Arrow3D.axes
+      ~Arrow3D.figure
       ~Arrow3D.fill
       ~Arrow3D.mouseover
       ~Arrow3D.stale

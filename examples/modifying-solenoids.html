@@ -1,25 +1,25 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Modifying Solenoids &mdash; FractalDNA 0.1 documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
+
   
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=2709fde1"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -95,287 +95,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  
-<style>
-/* CSS for nbsphinx extension */
-
-/* remove conflicting styling from Sphinx themes */
-div.nbinput.container div.prompt *,
-div.nboutput.container div.prompt *,
-div.nbinput.container div.input_area pre,
-div.nboutput.container div.output_area pre,
-div.nbinput.container div.input_area .highlight,
-div.nboutput.container div.output_area .highlight {
-    border: none;
-    padding: 0;
-    margin: 0;
-    box-shadow: none;
-}
-
-div.nbinput.container > div[class*=highlight],
-div.nboutput.container > div[class*=highlight] {
-    margin: 0;
-}
-
-div.nbinput.container div.prompt *,
-div.nboutput.container div.prompt * {
-    background: none;
-}
-
-div.nboutput.container div.output_area .highlight,
-div.nboutput.container div.output_area pre {
-    background: unset;
-}
-
-div.nboutput.container div.output_area div.highlight {
-    color: unset;  /* override Pygments text color */
-}
-
-/* avoid gaps between output lines */
-div.nboutput.container div[class*=highlight] pre {
-    line-height: normal;
-}
-
-/* input/output containers */
-div.nbinput.container,
-div.nboutput.container {
-    display: -webkit-flex;
-    display: flex;
-    align-items: flex-start;
-    margin: 0;
-    width: 100%;
-}
-@media (max-width: 540px) {
-    div.nbinput.container,
-    div.nboutput.container {
-        flex-direction: column;
-    }
-}
-
-/* input container */
-div.nbinput.container {
-    padding-top: 5px;
-}
-
-/* last container */
-div.nblast.container {
-    padding-bottom: 5px;
-}
-
-/* input prompt */
-div.nbinput.container div.prompt pre {
-    color: #307FC1;
-}
-
-/* output prompt */
-div.nboutput.container div.prompt pre {
-    color: #BF5B3D;
-}
-
-/* all prompts */
-div.nbinput.container div.prompt,
-div.nboutput.container div.prompt {
-    width: 4.5ex;
-    padding-top: 5px;
-    position: relative;
-    user-select: none;
-}
-
-div.nbinput.container div.prompt > div,
-div.nboutput.container div.prompt > div {
-    position: absolute;
-    right: 0;
-    margin-right: 0.3ex;
-}
-
-@media (max-width: 540px) {
-    div.nbinput.container div.prompt,
-    div.nboutput.container div.prompt {
-        width: unset;
-        text-align: left;
-        padding: 0.4em;
-    }
-    div.nboutput.container div.prompt.empty {
-        padding: 0;
-    }
-
-    div.nbinput.container div.prompt > div,
-    div.nboutput.container div.prompt > div {
-        position: unset;
-    }
-}
-
-/* disable scrollbars and line breaks on prompts */
-div.nbinput.container div.prompt pre,
-div.nboutput.container div.prompt pre {
-    overflow: hidden;
-    white-space: pre;
-}
-
-/* input/output area */
-div.nbinput.container div.input_area,
-div.nboutput.container div.output_area {
-    -webkit-flex: 1;
-    flex: 1;
-    overflow: auto;
-}
-@media (max-width: 540px) {
-    div.nbinput.container div.input_area,
-    div.nboutput.container div.output_area {
-        width: 100%;
-    }
-}
-
-/* input area */
-div.nbinput.container div.input_area {
-    border: 1px solid #e0e0e0;
-    border-radius: 2px;
-    /*background: #f5f5f5;*/
-}
-
-/* override MathJax center alignment in output cells */
-div.nboutput.container div[class*=MathJax] {
-    text-align: left !important;
-}
-
-/* override sphinx.ext.imgmath center alignment in output cells */
-div.nboutput.container div.math p {
-    text-align: left;
-}
-
-/* standard error */
-div.nboutput.container div.output_area.stderr {
-    background: #fdd;
-}
-
-/* ANSI colors */
-.ansi-black-fg { color: #3E424D; }
-.ansi-black-bg { background-color: #3E424D; }
-.ansi-black-intense-fg { color: #282C36; }
-.ansi-black-intense-bg { background-color: #282C36; }
-.ansi-red-fg { color: #E75C58; }
-.ansi-red-bg { background-color: #E75C58; }
-.ansi-red-intense-fg { color: #B22B31; }
-.ansi-red-intense-bg { background-color: #B22B31; }
-.ansi-green-fg { color: #00A250; }
-.ansi-green-bg { background-color: #00A250; }
-.ansi-green-intense-fg { color: #007427; }
-.ansi-green-intense-bg { background-color: #007427; }
-.ansi-yellow-fg { color: #DDB62B; }
-.ansi-yellow-bg { background-color: #DDB62B; }
-.ansi-yellow-intense-fg { color: #B27D12; }
-.ansi-yellow-intense-bg { background-color: #B27D12; }
-.ansi-blue-fg { color: #208FFB; }
-.ansi-blue-bg { background-color: #208FFB; }
-.ansi-blue-intense-fg { color: #0065CA; }
-.ansi-blue-intense-bg { background-color: #0065CA; }
-.ansi-magenta-fg { color: #D160C4; }
-.ansi-magenta-bg { background-color: #D160C4; }
-.ansi-magenta-intense-fg { color: #A03196; }
-.ansi-magenta-intense-bg { background-color: #A03196; }
-.ansi-cyan-fg { color: #60C6C8; }
-.ansi-cyan-bg { background-color: #60C6C8; }
-.ansi-cyan-intense-fg { color: #258F8F; }
-.ansi-cyan-intense-bg { background-color: #258F8F; }
-.ansi-white-fg { color: #C5C1B4; }
-.ansi-white-bg { background-color: #C5C1B4; }
-.ansi-white-intense-fg { color: #A1A6B2; }
-.ansi-white-intense-bg { background-color: #A1A6B2; }
-
-.ansi-default-inverse-fg { color: #FFFFFF; }
-.ansi-default-inverse-bg { background-color: #000000; }
-
-.ansi-bold { font-weight: bold; }
-.ansi-underline { text-decoration: underline; }
-
-
-div.nbinput.container div.input_area div[class*=highlight] > pre,
-div.nboutput.container div.output_area div[class*=highlight] > pre,
-div.nboutput.container div.output_area div[class*=highlight].math,
-div.nboutput.container div.output_area.rendered_html,
-div.nboutput.container div.output_area > div.output_javascript,
-div.nboutput.container div.output_area:not(.rendered_html) > img{
-    padding: 5px;
-    margin: 0;
-}
-
-/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
-div.nbinput.container div.input_area > div[class^='highlight'],
-div.nboutput.container div.output_area > div[class^='highlight']{
-    overflow-y: hidden;
-}
-
-/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
-.prompt .copybtn {
-    display: none;
-}
-
-/* Some additional styling taken form the Jupyter notebook CSS */
-.jp-RenderedHTMLCommon table,
-div.rendered_html table {
-  border: none;
-  border-collapse: collapse;
-  border-spacing: 0;
-  color: black;
-  font-size: 12px;
-  table-layout: fixed;
-}
-.jp-RenderedHTMLCommon thead,
-div.rendered_html thead {
-  border-bottom: 1px solid black;
-  vertical-align: bottom;
-}
-.jp-RenderedHTMLCommon tr,
-.jp-RenderedHTMLCommon th,
-.jp-RenderedHTMLCommon td,
-div.rendered_html tr,
-div.rendered_html th,
-div.rendered_html td {
-  text-align: right;
-  vertical-align: middle;
-  padding: 0.5em 0.5em;
-  line-height: normal;
-  white-space: normal;
-  max-width: none;
-  border: none;
-}
-.jp-RenderedHTMLCommon th,
-div.rendered_html th {
-  font-weight: bold;
-}
-.jp-RenderedHTMLCommon tbody tr:nth-child(odd),
-div.rendered_html tbody tr:nth-child(odd) {
-  background: #f5f5f5;
-}
-.jp-RenderedHTMLCommon tbody tr:hover,
-div.rendered_html tbody tr:hover {
-  background: rgba(66, 165, 245, 0.2);
-}
-
-/* CSS overrides for sphinx_rtd_theme */
-
-/* 24px margin */
-.nbinput.nblast.container,
-.nboutput.nblast.container {
-    margin-bottom: 19px;  /* padding has already 5px */
-}
-
-/* ... except between code cells! */
-.nblast.container + .nbinput.container {
-    margin-top: -19px;
-}
-
-.admonition > p:before {
-    margin-right: 4px;  /* make room for the exclamation icon */
-}
-
-/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
-.math {
-    text-align: unset;
-}
-</style>
-<section id="Modifying-Solenoids">
-<h1>Modifying Solenoids<a class="headerlink" href="#Modifying-Solenoids" title="Permalink to this heading">¶</a></h1>
+  <section id="Modifying-Solenoids">
+<h1>Modifying Solenoids<a class="headerlink" href="#Modifying-Solenoids" title="Link to this heading"></a></h1>
 <p>Solenoids can be modified to change the density of the DNA. Here we explore how this works.</p>
 <p>The call to the Solenoid function is as follows:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>dna.Solenoid(
@@ -389,7 +110,13 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <p>These numbers are a realistic model for how much Solenoidal DNA packs.</p>
-<p>Unchanged, this will build a solenoid - 750 nm tall - histones centered 100A from the central axis - 38 histones - histones tilted at 50°.</p>
+<p>Unchanged, this will build a solenoid</p>
+<ul class="simple">
+<li><p>750 nm tall</p></li>
+<li><p>histones centered 100A from the central axis</p></li>
+<li><p>38 histones</p></li>
+<li><p>histones tilted at 50°.</p></li>
+</ul>
 <p>Histones are always placed 60° apart going around the circle</p>
 <p><em>It is recommended that you run this example inside a Jupyter environment</em> <em>rather than a VSCode or similar environment</em></p>
 <p>This requires the mayavi jupyter extension <code class="docutils literal notranslate"><span class="pre">jupyter</span> <span class="pre">nbextension</span> <span class="pre">install</span> <span class="pre">--py</span> <span class="pre">mayavi</span> <span class="pre">--user</span></code></p>
@@ -397,17 +124,17 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 
 <span class="k">try</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">fractaldna.dna_models</span> <span class="kn">import</span> <span class="n">dnachain</span> <span class="k">as</span> <span class="n">dna</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">fractaldna.dna_models</span><span class="w"> </span><span class="kn">import</span> <span class="n">dnachain</span> <span class="k">as</span> <span class="n">dna</span>
 <span class="k">except</span> <span class="p">(</span><span class="ne">ImportError</span><span class="p">,</span> <span class="ne">ModuleNotFoundError</span><span class="p">):</span>
     <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span><span class="p">))</span>
-    <span class="kn">from</span> <span class="nn">fractaldna.dna_models</span> <span class="kn">import</span> <span class="n">dnachain</span> <span class="k">as</span> <span class="n">dna</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">fractaldna.dna_models</span><span class="w"> </span><span class="kn">import</span> <span class="n">dnachain</span> <span class="k">as</span> <span class="n">dna</span>
 
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">mayavi</span> <span class="kn">import</span> <span class="n">mlab</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mayavi</span><span class="w"> </span><span class="kn">import</span> <span class="n">mlab</span>
 
 <span class="c1"># Disable this option for interactive rendering</span>
 <span class="n">mlab</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">offscreen</span> <span class="o">=</span> <span class="kc">True</span>
@@ -418,7 +145,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <section id="Varying-Voxel-Height">
-<h2>Varying Voxel Height<a class="headerlink" href="#Varying-Voxel-Height" title="Permalink to this heading">¶</a></h2>
+<h2>Varying Voxel Height<a class="headerlink" href="#Varying-Voxel-Height" title="Link to this heading"></a></h2>
 <p>Varying the voxel height will compact and extend the DNA.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
@@ -438,7 +165,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <p>750 Å section, 38 histones</p>
-<p><img alt="Single 750A solenoid" src="../_images/single_solenoid_750A.jpg" /></p>
+<img alt="Single 750A solenoid" src="../_images/single_solenoid_750A.jpg" />
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
@@ -458,10 +185,10 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <p>500 Å section, 38 histones - the DNA is more compacted (and the DNA could have overlaps).</p>
-<p><img alt="Shorter Solenoid" src="../_images/single_solenoid_500A.jpg" /></p>
+<img alt="Shorter Solenoid" src="../_images/single_solenoid_500A.jpg" />
 </section>
 <section id="Changing-the-number-of-Histones">
-<h2>Changing the number of Histones<a class="headerlink" href="#Changing-the-number-of-Histones" title="Permalink to this heading">¶</a></h2>
+<h2>Changing the number of Histones<a class="headerlink" href="#Changing-the-number-of-Histones" title="Link to this heading"></a></h2>
 <p>When making DNA shorter (or longer), you should change the number of histones appropriately.</p>
 <p>In general, you’ll want to keep the linear density of histones roughly constant (around 51/1000Å)</p>
 <div class="nbinput nblast docutils container">
@@ -477,7 +204,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <p>A 500Å long solenoid</p>
-<p><img alt="500A Solenoid with 25 histones" src="../_images/single_solenoid_500A_25histones.jpg" /></p>
+<img alt="500A Solenoid with 25 histones" src="../_images/single_solenoid_500A_25histones.jpg" />
 <p><em>If you need to make DNA a little denser, try increasing the linear density of DNA</em></p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
@@ -492,10 +219,10 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <p>750Å strand, 42 histones</p>
-<p><img alt="Straight Single Solenoid" src="../_images/single_solenoid_750A_42histones.jpg" /></p>
+<img alt="Straight Single Solenoid" src="../_images/single_solenoid_750A_42histones.jpg" />
 </section>
 <section id="Turned-Solenoids-follow-the-same-principles">
-<h2>Turned Solenoids follow the same principles<a class="headerlink" href="#Turned-Solenoids-follow-the-same-principles" title="Permalink to this heading">¶</a></h2>
+<h2>Turned Solenoids follow the same principles<a class="headerlink" href="#Turned-Solenoids-follow-the-same-principles" title="Link to this heading"></a></h2>
 <p>They are actually based on the spacing that a straight solenoid would have, so the <code class="docutils literal notranslate"><span class="pre">voxelheight</span></code> and <code class="docutils literal notranslate"><span class="pre">nhistones</span></code> correspond to their straightened equivalents, and the linear density of histones is what is conserved.</p>
 <p>The radius of curvature is <em>half the voxel height</em>.</p>
 <p>Be particularly careful to ensure there are no overlapping molecules on the internal curve.</p>
@@ -511,7 +238,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <p>750Å strand, 42 histones</p>
-<p><img alt="Turned Solenoid 750A, 42 histones" src="../_images/turned_solenoid_750A_42histones.jpg" /></p>
+<img alt="Turned Solenoid 750A, 42 histones" src="../_images/turned_solenoid_750A_42histones.jpg" />
 <p><em>It is important to inspect the result to make sure there aren’t placements where you don’t expect</em></p>
 <p>With a voxelheight of 750Å, we expect bounds in the range</p>
 <p>-375 &lt; X &lt; 375 -375 &lt; Y &lt; 375 0 &lt; Z &lt; 750</p>
@@ -556,7 +283,7 @@ Z Bounds: 0.04677445755690002 483.71674638609016
 </div>
 </section>
 <section id="Exporting-Solenoidal-DNA-to-CSV">
-<h2>Exporting Solenoidal DNA to CSV<a class="headerlink" href="#Exporting-Solenoidal-DNA-to-CSV" title="Permalink to this heading">¶</a></h2>
+<h2>Exporting Solenoidal DNA to CSV<a class="headerlink" href="#Exporting-Solenoidal-DNA-to-CSV" title="Link to this heading"></a></h2>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>

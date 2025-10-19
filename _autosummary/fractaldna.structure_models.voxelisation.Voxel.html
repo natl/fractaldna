@@ -1,23 +1,22 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>fractaldna.structure_models.voxelisation.Voxel &mdash; FractalDNA 0.1 documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
   
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=2709fde1"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -95,35 +94,11 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  
-<style>
-/* CSS overrides for sphinx_rtd_theme */
-
-/* 24px margin */
-.nbinput.nblast.container,
-.nboutput.nblast.container {
-    margin-bottom: 19px;  /* padding has already 5px */
-}
-
-/* ... except between code cells! */
-.nblast.container + .nbinput.container {
-    margin-top: -19px;
-}
-
-.admonition > p:before {
-    margin-right: 4px;  /* make room for the exclamation icon */
-}
-
-/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
-.math {
-    text-align: unset;
-}
-</style>
-<section id="fractaldna-structure-models-voxelisation-voxel">
-<h1>fractaldna.structure_models.voxelisation.Voxel<a class="headerlink" href="#fractaldna-structure-models-voxelisation-voxel" title="Permalink to this heading">¶</a></h1>
+  <section id="fractaldna-structure-models-voxelisation-voxel">
+<h1>fractaldna.structure_models.voxelisation.Voxel<a class="headerlink" href="#fractaldna-structure-models-voxelisation-voxel" title="Link to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="fractaldna.structure_models.voxelisation.Voxel">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">fractaldna.structure_models.voxelisation.</span></span><span class="sig-name descname"><span class="pre">Voxel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inHeading</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inPrincipal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outHeading</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outPrincipal</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.structure_models.voxelisation.Voxel" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">fractaldna.structure_models.voxelisation.</span></span><span class="sig-name descname"><span class="pre">Voxel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inHeading</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inPrincipal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outHeading</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outPrincipal</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.structure_models.voxelisation.Voxel" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Position, rotation and form of a DNA placement voxel.</p>
 <p>The principal axes are used to determine if the DNA would
@@ -141,19 +116,19 @@ pos: XYZ position</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pos</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code>) – XYZ-position of voxel</p></li>
-<li><p><strong>inHeading</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code>) – vector of the DNA heading “into” the voxel.</p></li>
-<li><p><strong>inPrincipal</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code>) – vector of the DNA’s principal axis at the
+<li><p><strong>pos</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code></span>) – XYZ-position of voxel</p></li>
+<li><p><strong>inHeading</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code></span>) – vector of the DNA heading “into” the voxel.</p></li>
+<li><p><strong>inPrincipal</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code></span>) – vector of the DNA’s principal axis at the
 entrace to the voxel</p></li>
-<li><p><strong>outHeading</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code>) – vector of the DNA heading “out” of the voxel.</p></li>
-<li><p><strong>outPrincipal</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code>) – vector of the DNA’s principal axis at the
+<li><p><strong>outHeading</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code></span>) – vector of the DNA heading “out” of the voxel.</p></li>
+<li><p><strong>outPrincipal</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code></span>) – vector of the DNA’s principal axis at the
 exit to the voxel</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="fractaldna.structure_models.voxelisation.Voxel.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inHeading</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inPrincipal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outHeading</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outPrincipal</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.structure_models.voxelisation.Voxel.__init__" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pos</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inHeading</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inPrincipal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outHeading</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outPrincipal</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.structure_models.voxelisation.Voxel.__init__" title="Link to this definition"></a></dt>
 <dd><p>Constructor</p>
 </dd></dl>
 
@@ -199,18 +174,18 @@ exit to the voxel</p></li>
 </table>
 <dl class="py method">
 <dt class="sig sig-object py" id="fractaldna.structure_models.voxelisation.Voxel.to_series">
-<span class="sig-name descname"><span class="pre">to_series</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.structure_models.voxelisation.Voxel.to_series" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">to_series</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.structure_models.voxelisation.Voxel.to_series" title="Link to this definition"></a></dt>
 <dd><p>Return the voxel as a pandas series</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="fractaldna.structure_models.voxelisation.Voxel.to_text">
-<span class="sig-name descname"><span class="pre">to_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'</span> <span class="pre">'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.structure_models.voxelisation.Voxel.to_text" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">to_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'</span> <span class="pre">'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.structure_models.voxelisation.Voxel.to_text" title="Link to this definition"></a></dt>
 <dd><p>Print a textual representation of the voxel as
 KIND POS_X POS_Y POS_Z EUL_PSI EUL_THETA EUL_PHI</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span></p>
 </dd>
 </dl>
 </dd></dl>

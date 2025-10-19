@@ -1,23 +1,22 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DNA Models &mdash; FractalDNA 0.1 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2709fde1"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -80,36 +79,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  
-<style>
-/* CSS overrides for sphinx_rtd_theme */
-
-/* 24px margin */
-.nbinput.nblast.container,
-.nboutput.nblast.container {
-    margin-bottom: 19px;  /* padding has already 5px */
-}
-
-/* ... except between code cells! */
-.nblast.container + .nbinput.container {
-    margin-top: -19px;
-}
-
-.admonition > p:before {
-    margin-right: 4px;  /* make room for the exclamation icon */
-}
-
-/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
-.math {
-    text-align: unset;
-}
-</style>
-<section id="dna-models">
-<h1>DNA Models<a class="headerlink" href="#dna-models" title="Permalink to this heading">¶</a></h1>
+  <section id="dna-models">
+<h1>DNA Models<a class="headerlink" href="#dna-models" title="Link to this heading"></a></h1>
 <p>FractalDNA provides a number of models for building DNA.</p>
 <p>Example notebooks are available under <a class="reference internal" href="examples.html"><span class="doc">Examples</span></a>.</p>
 <section id="base-and-helper-classes">
-<h2>Base and Helper Classes<a class="headerlink" href="#base-and-helper-classes" title="Permalink to this heading">¶</a></h2>
+<h2>Base and Helper Classes<a class="headerlink" href="#base-and-helper-classes" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">fractaldna.dna_models.dnachain.</span></span><span class="sig-name descname"><span class="pre">PlottableSequence</span></span></dt>
@@ -121,12 +96,12 @@ output methods.</p>
 <dd><p>Return the molecules as a pandas data frame</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>suppress_hash</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – Hide the hash in front of the ‘name’ column
+<dd class="field-odd"><p><strong>suppress_hash</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – Hide the hash in front of the ‘name’ column
 which is kept for compatibiilty with the Geant4
 DNA simulation format</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></p>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></span></p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Pandas data frame with molecule information</p>
@@ -140,7 +115,7 @@ DNA simulation format</p>
 <dd><p>Return a mayavi figure instance with histone and linkers shown</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>size</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]) – Figure size (width, height)</p>
+<dd class="field-odd"><p><strong>size</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]</span>) – Figure size (width, height)</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>mayavi figure</p>
@@ -158,13 +133,13 @@ DNA simulation format</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>plot_p</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – Show Phosphates in plot</p></li>
-<li><p><strong>plot_b</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – Show Bases in plot</p></li>
-<li><p><strong>plot_s</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – Show sugars in plot</p></li>
+<li><p><strong>plot_p</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – Show Phosphates in plot</p></li>
+<li><p><strong>plot_b</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – Show Bases in plot</p></li>
+<li><p><strong>plot_s</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – Show sugars in plot</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Figure</span></code></p>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Figure</span></code></span></p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Matplotlib Figure</p>
@@ -197,7 +172,7 @@ DNA simulation format</p>
 Avoid this with large chains, this assumes each molecule is an ellipse</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Figure</span></code></p>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Figure</span></code></span></p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Matplotlib figure (contour plot)</p>
@@ -211,10 +186,10 @@ Avoid this with large chains, this assumes each molecule is an ellipse</p>
 <dd><p>Return a description of the molecules in the chain as text</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>seperator</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – column seperator</p>
+<dd class="field-odd"><p><strong>seperator</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – column seperator</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></p>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span></p>
 </dd>
 </dl>
 </dd></dl>
@@ -229,11 +204,11 @@ Avoid this with large chains, this assumes each molecule is an ellipse</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>position</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code>]) – 3-vector for histone position</p></li>
-<li><p><strong>rotation</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code>]) – 3-vector for histone rotation (euler angles)</p></li>
-<li><p><strong>genome</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – string defining the genome for the histone</p></li>
-<li><p><strong>chain</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – Chain index for histone and basepairs therein</p></li>
-<li><p><strong>histone_index</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – An index for the histone (by default, order in the solenoid)</p></li>
+<li><p><strong>position</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code>]</span>) – 3-vector for histone position</p></li>
+<li><p><strong>rotation</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code>]</span>) – 3-vector for histone rotation (euler angles)</p></li>
+<li><p><strong>genome</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – string defining the genome for the histone</p></li>
+<li><p><strong>chain</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>) – Chain index for histone and basepairs therein</p></li>
+<li><p><strong>histone_index</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>) – An index for the histone (by default, order in the solenoid)</p></li>
 </ul>
 </dd>
 </dl>
@@ -243,7 +218,7 @@ Avoid this with large chains, this assumes each molecule is an ellipse</p>
 <dd><p>Express the histone as a single molecule in a pandas series</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></p>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Series</span></code></span></p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Pandas Series for Histone</p>
@@ -257,10 +232,10 @@ Avoid this with large chains, this assumes each molecule is an ellipse</p>
 <dd><p>Set the Chain Index of all base pairs in the histone</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>chainIdx</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – Index for Chain</p>
+<dd class="field-odd"><p><strong>chainIdx</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>) – Index for Chain</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span></p>
 </dd>
 </dl>
 </dd></dl>
@@ -271,10 +246,10 @@ Avoid this with large chains, this assumes each molecule is an ellipse</p>
 <dd><p>Translate the histone spatially</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>translation</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code>]) – 3-vector for translation</p>
+<dd class="field-odd"><p><strong>translation</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code>]</span>) – 3-vector for translation</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span></p>
 </dd>
 </dl>
 </dd></dl>
@@ -296,7 +271,7 @@ high_curviness = smoother</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>zrot</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>]) – <dl class="simple">
+<li><p><strong>zrot</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></span>) – <dl class="simple">
 <dt>Describes the twist of bp3 relative to bp2</dt><dd><ul>
 <li><p>None: Determine automatically (experimental)</p></li>
 <li><p>double: rotation in radians (mod 2*pi)</p></li>
@@ -304,7 +279,7 @@ high_curviness = smoother</p>
 </dd>
 </dl>
 </p></li>
-<li><p><strong>startkey</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]) – <dl class="simple">
+<li><p><strong>startkey</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>) – <dl class="simple">
 <dt>Starting keyframe for rotations</dt><dd><ul>
 <li><p>key = i will start/stop rotations after the i-th base pair</p></li>
 <li><p>key = -i will start/stop rotations after the i-th last base pair</p></li>
@@ -312,7 +287,7 @@ high_curviness = smoother</p>
 </dd>
 </dl>
 </p></li>
-<li><p><strong>stopkey</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]) – <dl class="simple">
+<li><p><strong>stopkey</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>) – <dl class="simple">
 <dt>Ending keyframe for rotations</dt><dd><ul>
 <li><p>key = i will start/stop rotations after the i-th base pair</p></li>
 <li><p>key = -i will start/stop rotations after the i-th last base pair</p></li>
@@ -320,7 +295,7 @@ high_curviness = smoother</p>
 </dd>
 </dl>
 </p></li>
-<li><p><strong>method</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – <dl class="simple">
+<li><p><strong>method</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – <dl class="simple">
 <dt>Method to handle rotational interpolation</dt><dd><ul>
 <li><p>”quaternion”: Full use of quaternions</p></li>
 <li><p>”corrected_quaternion”: Full use of quaternions, with a correction
@@ -332,7 +307,7 @@ quaternions. Currently incorrect.</p></li>
 </dd>
 </dl>
 </p></li>
-<li><p><strong>chain</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – Chain index assigned to linker and basepairs created therein</p></li>
+<li><p><strong>chain</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>) – Chain index assigned to linker and basepairs created therein</p></li>
 </ul>
 </dd>
 </dl>
@@ -362,7 +337,7 @@ quaternions. Currently incorrect.</p></li>
 
 </section>
 <section id="unpacked-dna">
-<h2>Unpacked DNA<a class="headerlink" href="#unpacked-dna" title="Permalink to this heading">¶</a></h2>
+<h2>Unpacked DNA<a class="headerlink" href="#unpacked-dna" title="Link to this heading"></a></h2>
 <p><em>Single Strand</em></p>
 <dl class="py class">
 <dt class="sig sig-object py">
@@ -372,8 +347,8 @@ A single DNA Chain built from a genome specified.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>genome</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – A string specifying the genome, e.g. ‘AGTATC’</p></li>
-<li><p><strong>chain</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – The Chain index to label this strand</p></li>
+<li><p><strong>genome</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – A string specifying the genome, e.g. ‘AGTATC’</p></li>
+<li><p><strong>chain</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>) – The Chain index to label this strand</p></li>
 </ul>
 </dd>
 </dl>
@@ -450,8 +425,8 @@ Chain indices are assigned anticlockwise starting from the +y strand.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>genome</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – string of GATC specifying genome order</p></li>
-<li><p><strong>separation</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – separation of each strand from the center in angstroms</p></li>
+<li><p><strong>genome</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – string of GATC specifying genome order</p></li>
+<li><p><strong>separation</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></span>) – separation of each strand from the center in angstroms</p></li>
 </ul>
 </dd>
 </dl>
@@ -467,9 +442,9 @@ Chain indices are assigned anticlockwise starting from the +y strand.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>genome</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – string of GATC specifying genome order</p></li>
-<li><p><strong>separation</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – separation of each strand from the center in angstroms</p></li>
-<li><p><strong>twist</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – boolean, add a 90 deg twist to each chain</p></li>
+<li><p><strong>genome</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – string of GATC specifying genome order</p></li>
+<li><p><strong>separation</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></span>) – separation of each strand from the center in angstroms</p></li>
+<li><p><strong>twist</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – boolean, add a 90 deg twist to each chain</p></li>
 </ul>
 </dd>
 </dl>
@@ -498,11 +473,11 @@ Strands 4 and 6, 5 and 7 are separated by sep2</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>genome</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – string of GATC specifying genome order</p></li>
-<li><p><strong>sep1</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – separation of inner strands from the center in angstroms</p></li>
-<li><p><strong>sep2</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – separation of outer strands from the center in angstroms</p></li>
-<li><p><strong>turn</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – boolean, turn strands 90 degrees along box</p></li>
-<li><p><strong>twist</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – boolean, add a 90 deg twist to each chain</p></li>
+<li><p><strong>genome</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></span>) – string of GATC specifying genome order</p></li>
+<li><p><strong>sep1</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></span>) – separation of inner strands from the center in angstroms</p></li>
+<li><p><strong>sep2</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></span>) – separation of outer strands from the center in angstroms</p></li>
+<li><p><strong>turn</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – boolean, turn strands 90 degrees along box</p></li>
+<li><p><strong>twist</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – boolean, add a 90 deg twist to each chain</p></li>
 </ul>
 </dd>
 </dl>
@@ -510,7 +485,7 @@ Strands 4 and 6, 5 and 7 are separated by sep2</p>
 
 </section>
 <section id="solenoid-packed-dna">
-<h2>Solenoid-Packed DNA<a class="headerlink" href="#solenoid-packed-dna" title="Permalink to this heading">¶</a></h2>
+<h2>Solenoid-Packed DNA<a class="headerlink" href="#solenoid-packed-dna" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">fractaldna.dna_models.dnachain.</span></span><span class="sig-name descname"><span class="pre">Solenoid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">voxelheight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">750</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nhistones</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">38</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">histone_angle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">twist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span></dt>
@@ -521,13 +496,13 @@ per rotation) and then joining them together using SplineLinkers</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>voxelheight</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – Height of ‘voxel’ in angstrom</p></li>
-<li><p><strong>radius</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – Radius from Solenoid centre to histone centre</p></li>
-<li><p><strong>nhistones</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – Number of histones to place</p></li>
-<li><p><strong>histone_angle</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – tilt of histones from axis in degrees</p></li>
-<li><p><strong>twist</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – whether the DNA exiting the final spine should be
+<li><p><strong>voxelheight</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></span>) – Height of ‘voxel’ in angstrom</p></li>
+<li><p><strong>radius</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></span>) – Radius from Solenoid centre to histone centre</p></li>
+<li><p><strong>nhistones</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>) – Number of histones to place</p></li>
+<li><p><strong>histone_angle</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></span>) – tilt of histones from axis in degrees</p></li>
+<li><p><strong>twist</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – whether the DNA exiting the final spine should be
 rotated an extra pi/2.</p></li>
-<li><p><strong>chain</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – Chain index for solenoid and basepairs therein</p></li>
+<li><p><strong>chain</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>) – Chain index for solenoid and basepairs therein</p></li>
 </ul>
 </dd>
 </dl>
@@ -537,7 +512,7 @@ rotated an extra pi/2.</p></li>
 <dd><p>Get Histones in Solenoid as a dataframe of their positions</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></p>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></span></p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>DataFrame of Histones</p>
@@ -551,10 +526,10 @@ rotated an extra pi/2.</p></li>
 <dd><p>Set the Chain Index of all base pairs in the solenoid</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>chainIdx</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – Index for Chain</p>
+<dd class="field-odd"><p><strong>chainIdx</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>) – Index for Chain</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span></p>
 </dd>
 </dl>
 </dd></dl>
@@ -565,10 +540,10 @@ rotated an extra pi/2.</p></li>
 <dd><p>Translate the solenoid spatially</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>translation</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code>]) – 3-vector for translation</p>
+<dd class="field-odd"><p><strong>translation</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code>]</span>) – 3-vector for translation</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span></p>
 </dd>
 </dl>
 </dd></dl>
@@ -586,13 +561,13 @@ per rotation) and then joining them together using SplineLinkers</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>voxelheight</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – Height of ‘voxel’ in angstrom</p></li>
-<li><p><strong>radius</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – Radius from Solenoid centre to histone centre</p></li>
-<li><p><strong>nhistones</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – Number of histones to place</p></li>
-<li><p><strong>histone_angle</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – tilt of histones from axis in degrees</p></li>
-<li><p><strong>twist</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – whether the DNA exiting the final spine should be
+<li><p><strong>voxelheight</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></span>) – Height of ‘voxel’ in angstrom</p></li>
+<li><p><strong>radius</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></span>) – Radius from Solenoid centre to histone centre</p></li>
+<li><p><strong>nhistones</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>) – Number of histones to place</p></li>
+<li><p><strong>histone_angle</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></span>) – tilt of histones from axis in degrees</p></li>
+<li><p><strong>twist</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – whether the DNA exiting the final spine should be
 rotated an extra pi/2.</p></li>
-<li><p><strong>chain</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – Chain index for solenoid and basepairs therein</p></li>
+<li><p><strong>chain</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>) – Chain index for solenoid and basepairs therein</p></li>
 </ul>
 </dd>
 </dl>
@@ -627,17 +602,17 @@ dna.to_text()</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>voxelheight</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – Height of ‘voxel’ in angstrom</p></li>
-<li><p><strong>separation</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – separation between DNA strands</p></li>
-<li><p><strong>twist</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – whether the DNA exiting the final spine should be
+<li><p><strong>voxelheight</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></span>) – Height of ‘voxel’ in angstrom</p></li>
+<li><p><strong>separation</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></span>) – separation between DNA strands</p></li>
+<li><p><strong>twist</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – whether the DNA exiting the final spine should be
 rotated an extra pi/2.</p></li>
-<li><p><strong>turn</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – make a turned volume (turn strand 90°)</p></li>
-<li><p><strong>chains</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>) – List of chains to plot, e.g. [0, 1, 2, 3, 4] for a
+<li><p><strong>turn</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – make a turned volume (turn strand 90°)</p></li>
+<li><p><strong>chains</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></span>) – List of chains to plot, e.g. [0, 1, 2, 3, 4] for a
 central strand (0) and 4 strands along the X/Y axes.</p></li>
-<li><p><strong>radius</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – Radius from Solenoid centre to histone centre</p></li>
-<li><p><strong>nhistones</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]) – Number of histones to place (if None, will default)
+<li><p><strong>radius</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></span>) – Radius from Solenoid centre to histone centre</p></li>
+<li><p><strong>nhistones</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></span>) – Number of histones to place (if None, will default)
 to int(38 * voxelheight / 750.0)</p></li>
-<li><p><strong>histone_angle</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – tilt of histones from axis in degrees</p></li>
+<li><p><strong>histone_angle</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></span>) – tilt of histones from axis in degrees</p></li>
 </ul>
 </dd>
 </dl>
@@ -647,7 +622,7 @@ to int(38 * voxelheight / 750.0)</p></li>
 <dd><p>Get Histones in Solenoid as a dataframe of their positions</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></p>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></span></p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>DataFrame of Histones</p>
@@ -661,7 +636,7 @@ to int(38 * voxelheight / 750.0)</p></li>
 <dd><p>Return the molecules as a pandas data frame</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></p>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></span></p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Pandas data frame with molecule information</p>
@@ -675,10 +650,10 @@ to int(38 * voxelheight / 750.0)</p></li>
 <dd><p>Translate the solenoid spatially</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>translation</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code>]) – 3-vector for translation</p>
+<dd class="field-odd"><p><strong>translation</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code>]</span>) – 3-vector for translation</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></span></p>
 </dd>
 </dl>
 </dd></dl>

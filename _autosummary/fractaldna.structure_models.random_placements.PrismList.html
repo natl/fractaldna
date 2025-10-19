@@ -1,23 +1,22 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>fractaldna.structure_models.random_placements.PrismList &mdash; FractalDNA 0.1 documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
   
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=2709fde1"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -99,35 +98,11 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  
-<style>
-/* CSS overrides for sphinx_rtd_theme */
-
-/* 24px margin */
-.nbinput.nblast.container,
-.nboutput.nblast.container {
-    margin-bottom: 19px;  /* padding has already 5px */
-}
-
-/* ... except between code cells! */
-.nblast.container + .nbinput.container {
-    margin-top: -19px;
-}
-
-.admonition > p:before {
-    margin-right: 4px;  /* make room for the exclamation icon */
-}
-
-/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
-.math {
-    text-align: unset;
-}
-</style>
-<section id="fractaldna-structure-models-random-placements-prismlist">
-<h1>fractaldna.structure_models.random_placements.PrismList<a class="headerlink" href="#fractaldna-structure-models-random-placements-prismlist" title="Permalink to this heading">¶</a></h1>
+  <section id="fractaldna-structure-models-random-placements-prismlist">
+<h1>fractaldna.structure_models.random_placements.PrismList<a class="headerlink" href="#fractaldna-structure-models-random-placements-prismlist" title="Link to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="fractaldna.structure_models.random_placements.PrismList">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">fractaldna.structure_models.random_placements.</span></span><span class="sig-name descname"><span class="pre">PrismList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">center</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.structure_models.random_placements.PrismList" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">fractaldna.structure_models.random_placements.</span></span><span class="sig-name descname"><span class="pre">PrismList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">center</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.structure_models.random_placements.PrismList" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>A List of Non-Overlapping Rectangular Prisms</p>
 <p>This class facilitates generation of a set of prisms so that when a new
@@ -144,16 +119,16 @@ local prisms.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>center</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>) – XYZ-position where the prism should be centered</p></li>
-<li><p><strong>extent</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>) – XYZ-half lengths for the maximum bounding cube
+<li><p><strong>center</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></span>) – XYZ-position where the prism should be centered</p></li>
+<li><p><strong>extent</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></span>) – XYZ-half lengths for the maximum bounding cube
 of all prisms to be placed.</p></li>
-<li><p><strong>resolution</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – The size of a ‘cell’ in the prism grid.</p></li>
+<li><p><strong>resolution</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></span>) – The size of a ‘cell’ in the prism grid.</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="fractaldna.structure_models.random_placements.PrismList.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">center</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.structure_models.random_placements.PrismList.__init__" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">center</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extent</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.structure_models.random_placements.PrismList.__init__" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <p class="rubric">Methods</p>
@@ -175,14 +150,14 @@ of all prisms to be placed.</p></li>
 </table>
 <dl class="py method">
 <dt class="sig sig-object py" id="fractaldna.structure_models.random_placements.PrismList.append">
-<span class="sig-name descname"><span class="pre">append</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prism</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.structure_models.random_placements.PrismList.append" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">append</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prism</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.structure_models.random_placements.PrismList.append" title="Link to this definition"></a></dt>
 <dd><p>Append a new prism to the Prism list</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>prism</strong> (<a class="reference internal" href="fractaldna.structure_models.random_placements.Prism.html#fractaldna.structure_models.random_placements.Prism" title="fractaldna.structure_models.random_placements.Prism"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prism</span></code></a>) – prism to be appended.</p>
+<dd class="field-odd"><p><strong>prism</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="fractaldna.structure_models.random_placements.Prism.html#fractaldna.structure_models.random_placements.Prism" title="fractaldna.structure_models.random_placements.Prism"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prism</span></code></a></span>) – prism to be appended.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></p>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span></p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>True if a prism is placed, else False</p>
@@ -192,27 +167,27 @@ of all prisms to be placed.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="fractaldna.structure_models.random_placements.PrismList.get_prism_grid_indices">
-<span class="sig-name descname"><span class="pre">get_prism_grid_indices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prism</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.structure_models.random_placements.PrismList.get_prism_grid_indices" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_prism_grid_indices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prism</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.structure_models.random_placements.PrismList.get_prism_grid_indices" title="Link to this definition"></a></dt>
 <dd><p>Get the prism grid indices</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Set</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]</p>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">Set</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]</span></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="fractaldna.structure_models.random_placements.PrismList.to_frame">
-<span class="sig-name descname"><span class="pre">to_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">suppress_hash</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.structure_models.random_placements.PrismList.to_frame" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">to_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">suppress_hash</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fractaldna.structure_models.random_placements.PrismList.to_frame" title="Link to this definition"></a></dt>
 <dd><p>Generate a Data Frame describing the prisms</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>suppress_hash</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – Hide the hash in front of the ‘IDX’ column
+<dd class="field-odd"><p><strong>suppress_hash</strong> (<span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></span>) – Hide the hash in front of the ‘IDX’ column
 which is kept for compatibiilty with the Geant4
 DNA simulation format</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></p>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></span></p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Voxelised fractal as a data frame</p>

@@ -1,23 +1,22 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Getting Started with DNA Models &mdash; FractalDNA 0.1 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2709fde1"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" /> 
@@ -73,36 +72,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  
-<style>
-/* CSS overrides for sphinx_rtd_theme */
-
-/* 24px margin */
-.nbinput.nblast.container,
-.nboutput.nblast.container {
-    margin-bottom: 19px;  /* padding has already 5px */
-}
-
-/* ... except between code cells! */
-.nblast.container + .nbinput.container {
-    margin-top: -19px;
-}
-
-.admonition > p:before {
-    margin-right: 4px;  /* make room for the exclamation icon */
-}
-
-/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
-.math {
-    text-align: unset;
-}
-</style>
-<section id="getting-started-with-dna-models">
-<h1>Getting Started with DNA Models<a class="headerlink" href="#getting-started-with-dna-models" title="Permalink to this heading">¶</a></h1>
+  <section id="getting-started-with-dna-models">
+<h1>Getting Started with DNA Models<a class="headerlink" href="#getting-started-with-dna-models" title="Link to this heading"></a></h1>
 <p>This is a guide that explores how the Fractal DNA module works to make DNA models.
 It complements the example notebooks found in <a class="reference internal" href="examples.html"><span class="doc">Examples</span></a>.</p>
 <section id="step-1-what-this-module-does-and-doesn-t-do">
-<h2>Step 1: What this module does and doesn’t do<a class="headerlink" href="#step-1-what-this-module-does-and-doesn-t-do" title="Permalink to this heading">¶</a></h2>
+<h2>Step 1: What this module does and doesn’t do<a class="headerlink" href="#step-1-what-this-module-does-and-doesn-t-do" title="Link to this heading"></a></h2>
 <p>Fractal DNA was built to enable researchers to build models of DNA easily in Python.
 It’s aim is to take a few general types of DNA structure and make them accessible
 in Python in a ‘building-block’ style form, so that multiple segments can be
@@ -121,7 +96,7 @@ modelling or simulation platforms, <em>however</em>, you should be able to take 
 this package provides and then transform it to your needs.</p>
 </section>
 <section id="step-2-great-let-s-make-some-dna">
-<h2>Step 2: Great, let’s make some DNA<a class="headerlink" href="#step-2-great-let-s-make-some-dna" title="Permalink to this heading">¶</a></h2>
+<h2>Step 2: Great, let’s make some DNA<a class="headerlink" href="#step-2-great-let-s-make-some-dna" title="Link to this heading"></a></h2>
 <p>Once you’ve got fractaldna installed (<cite>pip install fractaldna</cite>), it’s time
 to make some DNA. The interface for making DNA is very simple, it takes a base
 pair sequence, written as a string, and then builds the DNA chain corresponding
@@ -163,7 +138,7 @@ basepairs = np.random.choice([‘G’, ‘A’, ‘T’, ‘C’], num_basepairs
 <a href="#id3"><span class="problematic" id="id4">``</span></a><a href="#id5"><span class="problematic" id="id6">`</span></a></p>
 </section>
 <section id="step-3-straight-dna-is-great-and-all-but-i-want-more-variety">
-<h2>Step 3: Straight DNA is great and all, but I want more variety<a class="headerlink" href="#step-3-straight-dna-is-great-and-all-but-i-want-more-variety" title="Permalink to this heading">¶</a></h2>
+<h2>Step 3: Straight DNA is great and all, but I want more variety<a class="headerlink" href="#step-3-straight-dna-is-great-and-all-but-i-want-more-variety" title="Link to this heading"></a></h2>
 <p>So you have worked out by now how to make a DNA chain from a
 collection of base pairs. Now you want to generate, let’s say,
 a curved section of DNA. That’s easy:</p>

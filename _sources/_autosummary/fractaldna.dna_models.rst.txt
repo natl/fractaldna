@@ -28,8 +28,8 @@
    :template: custom-module-template.rst                 
    :recursive:
 
-   fractaldna.dna_models.basepair
-   fractaldna.dna_models.dnachain
-   fractaldna.dna_models.dnapositions
-   fractaldna.dna_models.molecules
+   basepair
+   dnachain
+   dnapositions
+   molecules
 

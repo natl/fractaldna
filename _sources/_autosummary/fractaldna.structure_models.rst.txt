@@ -28,7 +28,7 @@
    :template: custom-module-template.rst                 
    :recursive:
 
-   fractaldna.structure_models.hilbert
-   fractaldna.structure_models.random_placements
-   fractaldna.structure_models.voxelisation
+   hilbert
+   random_placements
+   voxelisation
 
