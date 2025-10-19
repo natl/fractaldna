@@ -1,5 +1,5 @@
 default_language_version:
-  python: python3.8
+  python: python3.12
 
 default_stages: [commit, push]
 
@@ -10,14 +10,6 @@ repos:
       - id: check-yaml
       - id: end-of-file-fixer
         exclude: LICENSE
-
-  - repo: local
-    hooks:
-      - id: pyupgrade
-        name: pyupgrade
-        entry: poetry run pyupgrade --py38-plus
-        types: [python]
-        language: system
 
   - repo: local
     hooks:
@@ -34,9 +26,3 @@ repos:
         entry: poetry run black --config pyproject.toml
         types: [python]
         language: system
-
-  - repo: local
-    hooks:
-      - id: requirements
-        name: generate requirements.txt
-        entry: poetry export -f requirements.txt --output requirements.txt --without-hashes && poetry export --dev -f requirements.txt --output requirements-dev.txt --without-hashes

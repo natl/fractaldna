@@ -43,7 +43,7 @@ SUBSTITUTIONS = {
     "C": C,
     "D": D,
     "X": X,
-    "P": P
+    "P": P,
     # "P": P,
     # "Y": Y,
     # "Z": Z,

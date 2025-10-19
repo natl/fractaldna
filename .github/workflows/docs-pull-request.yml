@@ -3,12 +3,24 @@ on:
 - pull_request
 
 jobs:
-  check_docs:
+  check_docs_can_build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - name: Check out repository
+      uses: actions/checkout@v3
 
-    - uses: ammaraskar/sphinx-action@master
+    - name: Install Poetry
+      uses: abatilo/actions-poetry@v3
       with:
-        docs-folder: "docs/"
-        pre-build-command: apt-get install -y pandoc && python -m pip install -r requirements-dev.txt
+        poetry-version: latest
+
+    - name: Install dependencies
+      run: |
+        sudo apt update
+        sudo apt-get install -y pandoc
+        poetry config virtualenvs.in-project true
+        poetry install --with dev --with docs
+
+    - name: Build sphinx documentation
+      run: |
+        cd docs && poetry run make html

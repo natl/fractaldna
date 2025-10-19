@@ -7,7 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.9"]
+        python-version: ["3.12", "3.11", "3.13"]
+        poetry-version: ["latest"]
 
     steps:
     - uses: actions/checkout@v3
@@ -22,13 +23,13 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
 
-    - name: Install poetry and link it if it isn't automatically found
-      run: |
-        make poetry-download
-        if ! command -v poetry ; then ln -s /root/.local/bin/poetry /usr/bin/poetry ; fi
+    - name: Install Poetry
+      uses: abatilo/actions-poetry@v3
+      with:
+        poetry-version: ${{ matrix.poetry-version }}
 
     - name: Set up cache
-      uses: actions/cache@v2.1.7
+      uses: actions/cache@v4
       with:
         path: .venv
         key: venv-${{ matrix.python-version }}-${{ hashFiles('pyproject.toml') }}-${{ hashFiles('poetry.lock') }}

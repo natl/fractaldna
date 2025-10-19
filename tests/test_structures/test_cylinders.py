@@ -156,7 +156,7 @@ class TestPrismClass(unittest.TestCase):
         ax.set_ylabel("y")
         ax.set_zlabel("z")
 
-        for (axis, sz) in zip([prism1.axis, prism1.norm1, prism1.norm2], prism1.size):
+        for axis, sz in zip([prism1.axis, prism1.norm1, prism1.norm2], prism1.size):
             a = rp.Arrow3D(
                 prism1.center,
                 axis * sz + prism1.center,
@@ -180,7 +180,7 @@ class TestPrismClass(unittest.TestCase):
         ax.set_ylabel("y")
         ax.set_zlabel("z")
 
-        for (axis, sz) in zip([prism2.axis, prism2.norm1, prism2.norm2], prism2.size):
+        for axis, sz in zip([prism2.axis, prism2.norm1, prism2.norm2], prism2.size):
             a = rp.Arrow3D(
                 prism2.center,
                 axis * sz + prism2.center,

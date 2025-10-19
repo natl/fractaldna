@@ -138,7 +138,7 @@ class Prism(object):
         ax.set_zlabel("z")
 
         if arrows is True:
-            for (axis, sz) in zip([self.axis, self.norm1, self.norm2], self.size):
+            for axis, sz in zip([self.axis, self.norm1, self.norm2], self.size):
                 a = Arrow3D(
                     self.center,
                     axis * sz + self.center,

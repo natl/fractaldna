@@ -83,7 +83,7 @@ class PlottableSequence:
         bases = []
         bps = ["guanine", "adenine", "thymine", "cytosine"]
         for pair in self.basepairs:
-            for (name, molecule) in pair.iterMolecules():
+            for name, molecule in pair.iterMolecules():
                 if molecule.name.lower() == "sugar":
                     sugars.append(molecule.position)
                 elif molecule.name.lower() == "phosphate":
@@ -136,7 +136,7 @@ class PlottableSequence:
         bases = []
         bps = ["guanine", "adenine", "thymine", "cytosine"]
         for pair in self.basepairs:
-            for (name, molecule) in pair.iterMolecules():
+            for name, molecule in pair.iterMolecules():
                 if molecule.name.lower() == "sugar":
                     sugars.append(
                         (molecule.position, molecule.dimensions, molecule.rotation)
@@ -268,7 +268,7 @@ class PlottableSequence:
                 base_r = []
                 bps = ["guanine", "adenine", "thymine", "cytosine"]
                 for pair in basepairs:
-                    for (name, molecule) in pair.iterMolecules():
+                    for name, molecule in pair.iterMolecules():
                         if molecule.name.lower() == "sugar":
                             if molecule.strand == 0:
                                 sugar_l.append(molecule.position)
@@ -512,7 +512,7 @@ class SplineLinker(PlottableSequence):
         # print("Final rotation", ((rot_angle*n) % (2*np.pi))*180/np.pi)
 
         # Run one loop to generate a series of rotation matrices
-        for (ii, (_x, _y, _z)) in enumerate(zip(xx, yy, zz)):
+        for ii, (_x, _y, _z) in enumerate(zip(xx, yy, zz)):
             if ii != len(xx) - 1:
                 pos = np.array([_x, _y, _z])
                 bp = basepair.BasePair(
@@ -1341,7 +1341,7 @@ class DNAChain(PlottableSequence):
         minz = 0
         maxz = 0
         for bp in self.basepairs:
-            for (name, mol) in bp.iterMolecules():
+            for name, mol in bp.iterMolecules():
                 if mol.position[2] < minz:
                     minz = mol.position[2]
                 elif mol.position[2] > maxz:
@@ -1554,7 +1554,7 @@ class FourStrandTurnedDNAChain(DNAChain):
             ang + (2 * np.pi - BP_ROTATION * len(c) % (2 * np.pi)) for c in chains
         ]
 
-        for (ii, (c, t, a)) in enumerate(zip(chains, transforms, angles)):
+        for ii, (c, t, a) in enumerate(zip(chains, transforms, angles)):
             c = self._turnAndTwistChain(c, twist=a)
             for bp in c:
                 bp.translate(t)
@@ -1667,7 +1667,7 @@ class EightStrandDNAChain(DNAChain):
         ]
         # print(angles)
 
-        for (ii, (c, t, a)) in enumerate(zip(chains, transforms, angles)):
+        for ii, (c, t, a) in enumerate(zip(chains, transforms, angles)):
             if turn is True:
                 c = self._turnAndTwistChain(c, twist=a)
             for bp in c:

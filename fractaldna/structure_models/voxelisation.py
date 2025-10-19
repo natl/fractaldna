@@ -1,12 +1,14 @@
 from typing import Callable, List, Tuple, Union
 
+import sys
+
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from mpl_toolkits.mplot3d import Axes3D  # NOQA
 from tqdm import tqdm
 
-from . import hilbert
+from fractaldna.structure_models import hilbert
 
 try:
     from mayavi import mlab
@@ -14,8 +16,7 @@ try:
     maya_imported = True
 except ImportError:
     maya_imported = False
-    print("Could not import mayavi libraries, 3d plotting is disabled")
-    print("MayaVi may need Python2")
+    print("Could not import mayavi libraries, 3d plotting is disabled", file=sys.stderr)
 
 
 def rot_ax_angle(axis: Union[List, np.array], angle: float) -> np.array:
@@ -393,7 +394,7 @@ class VoxelisedFractal:
 
         # identify max/min values
         for voxel in self.fractal:
-            for (ii, (minv, v, maxv)) in enumerate(zip(minvals, voxel.pos, maxvals)):
+            for ii, (minv, v, maxv) in enumerate(zip(minvals, voxel.pos, maxvals)):
                 if v < minv:
                     minvals[ii] = v
                 elif v > maxv:
