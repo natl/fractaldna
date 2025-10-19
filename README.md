@@ -3,8 +3,6 @@ FractalDNA
 Python routines for generating geometric models of DNA
 ---
 
-*FractalDNA is being converted to a package, it is under active developmemt*
-
 <div align="center">
 
 [![Build status](https://github.com/natl/fractaldna/workflows/build/badge.svg?branch=master&event=push)](https://github.com/natl/fractaldna/actions?query=workflow%3Abuild)
