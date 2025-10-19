@@ -6,14 +6,21 @@ jobs:
   check_docs_can_build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - name: Check out repository
+      uses: actions/checkout@v3
 
     - name: Install Poetry
       uses: abatilo/actions-poetry@v3
       with:
         poetry-version: latest
 
-    - uses: ammaraskar/sphinx-action@master
-      with:
-        docs-folder: "docs/"
-        pre-build-command: apt-get install -y pandoc && python -m poetry install --with dev --with docs
+    - name: Install dependencies
+      run: |
+        sudo apt update
+        sudo apt-get install -y pandoc
+        poetry config virtualenvs.in-project true
+        poetry install --with dev --with docs
+
+    - name: Build sphinx documentation
+      run: |
+        cd docs && poetry run make html

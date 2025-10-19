@@ -27,7 +27,7 @@ jobs:
       run: |
         sudo apt update
         sudo apt-get install -y pandoc
-        python -m poetry install --with dev --with docs
+        poetry install --with dev --with docs
     - name: Build sphinx documentation
       run: |
         cd docs && poetry run make html
